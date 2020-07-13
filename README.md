@@ -25,3 +25,8 @@
     pip freeze > requirements.txt
     ```
 3. Put up a PR for review.
+
+
+### Version
+
+- Python 3.7.3

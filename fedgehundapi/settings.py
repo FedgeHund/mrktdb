@@ -25,7 +25,7 @@ else:
 
 # Define general behavior variables for DJANGO_HOST and all others
 if DJANGO_HOST == "production":
-    DEBUG = False
+    DEBUG = True #Change this to false when deploying final app
 else:
     DEBUG = True
 

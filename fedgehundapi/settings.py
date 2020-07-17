@@ -14,14 +14,14 @@ import os
 import socket
 
 # If the host name starts with 'live', DJANGO_HOST = "production"
-if socket.gethostname().startswith('live'):
-    DJANGO_HOST = "production"
+if socket.gethostname().endswith('local'):
+    DJANGO_HOST = "development"
 # Else if host name starts with 'test', set DJANGO_HOST = "test"
 elif socket.gethostname().startswith('test'): 
     DJANGO_HOST = "testing"
 else:
 # If host doesn't match, assume it's a development server, set DJANGO_HOST = "development"
-    DJANGO_HOST = "development"
+    DJANGO_HOST = "production"
 
 # Define general behavior variables for DJANGO_HOST and all others
 if DJANGO_HOST == "production":

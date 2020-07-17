@@ -11,6 +11,47 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import socket
+
+# If the host name starts with 'live', DJANGO_HOST = "production"
+if socket.gethostname().startswith('live'):
+    DJANGO_HOST = "production"
+# Else if host name starts with 'test', set DJANGO_HOST = "test"
+elif socket.gethostname().startswith('test'): 
+    DJANGO_HOST = "testing"
+else:
+# If host doesn't match, assume it's a development server, set DJANGO_HOST = "development"
+    DJANGO_HOST = "development"
+
+# Define general behavior variables for DJANGO_HOST and all others
+if DJANGO_HOST == "production":
+    DEBUG = False
+else:
+    DEBUG = True
+
+if DJANGO_HOST == "production":
+   # Use mysql for live host
+   DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'market-db',
+        'CLIENT': {
+            'host': '34.215.134.189',
+            'port': 27017,
+            'username': 'mrktdb_admin',
+            'password': 'm9a8r7k6e5t4-3d2b1',
+            'authSource': 'market-db',
+        },
+    }
+  }
+else: 
+   # Use sqlite for non live host
+   DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'market-db-local',
+    }
+  }
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +64,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f9y!yh1nb6lm5(o*)^(8+-dueu9_p=p$c$d-u8f(p=w+mtd%rx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
 
 ALLOWED_HOSTS = ['mrktdbapi-PROD.eba-ae6apzne.us-west-2.elasticbeanstalk.com','127.0.0.1']
@@ -75,19 +116,19 @@ WSGI_APPLICATION = 'fedgehundapi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'market-db',
-        'CLIENT': {
-            'host': '34.215.134.189',
-            'port': 27017,
-            'username': 'mrktdb_admin',
-            'password': 'm9a8r7k6e5t4-3d2b1',
-            'authSource': 'market-db',
-        },
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'market-db',
+#         'CLIENT': {
+#             'host': '34.215.134.189',
+#             'port': 27017,
+#             'username': 'mrktdb_admin',
+#             'password': 'm9a8r7k6e5t4-3d2b1',
+#             'authSource': 'market-db',
+#         },
+#     }
+# }
 
 
 # Password validation

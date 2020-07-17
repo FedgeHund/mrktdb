@@ -60,7 +60,6 @@
 
    db = database name that is hosted in EC2 
   
->>>>>>> master
 
 ### How to make a contribution ?
 

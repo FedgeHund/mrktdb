@@ -116,21 +116,6 @@ WSGI_APPLICATION = 'fedgehundapi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'djongo',
-#         'NAME': 'market-db',
-#         'CLIENT': {
-#             'host': '34.215.134.189',
-#             'port': 27017,
-#             'username': 'mrktdb_admin',
-#             'password': 'm9a8r7k6e5t4-3d2b1',
-#             'authSource': 'market-db',
-#         },
-#     }
-# }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 

@@ -61,6 +61,10 @@
    db = database name that is hosted in EC2 
   
 
+### Working of Database
+
+The application hits local MongoDB when running in our system and when it runs on AWS it uses the MongoDB in EC2 instance.
+
 ### How to make a contribution ?
 
 1. Create a new branch before making any change.

@@ -25,7 +25,8 @@ SECRET_KEY = 'f9y!yh1nb6lm5(o*)^(8+-dueu9_p=p$c$d-u8f(p=w+mtd%rx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mrktdbapi-prod.eba-gnwygjrs.us-west-2.elasticbeanstalk.com','127.0.0.1']
+
+ALLOWED_HOSTS = ['mrktdbapi-PROD.eba-ae6apzne.us-west-2.elasticbeanstalk.com','127.0.0.1']
 
 
 # Application definition
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'testapp',
 ]
 
 MIDDLEWARE = [
@@ -83,7 +85,7 @@ DATABASES = {
             'username': 'mrktdb_admin',
             'password': 'm9a8r7k6e5t4-3d2b1',
             'authSource': 'market-db',
-         }
+        },
     }
 }
 

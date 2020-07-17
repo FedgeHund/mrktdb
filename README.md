@@ -35,7 +35,32 @@
 
    https://www.youtube.com/watch?v=nJVbTnNdqL0
  
-7. You are ready to run the Django app. To run django app follow the django tutoral
+7. You are ready to run the Django app. To run django app follow the django tutorial
+
+
+### Check if the database is connected successfully (To test the mongo database in EC2)
+
+1. Go to the admin page and enter the login credentials.
+
+   http://mrktdbapi-prod.eba-ae6apzne.us-west-2.elasticbeanstalk.com/
+   
+2. Make an entry in the testapp.
+
+3. Run this command in the terminal to access the database hosted in EC2:
+   ```shell
+   mongo -u user -p pwd IP/db
+   ```   
+   where,
+
+   user = username for the database hosted in EC2
+
+   pwd = password for the database hosted in EC2
+
+   IP = IP of EC2 instance
+
+   db = database name that is hosted in EC2 
+  
+>>>>>>> master
 
 ### How to make a contribution ?
 

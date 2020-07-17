@@ -67,7 +67,7 @@
    db = database name that is hosted in EC2 
 
 
-   OR
+                                              OR
 
 
    Run 

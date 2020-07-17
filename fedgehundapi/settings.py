@@ -12,46 +12,55 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import socket
+import environ
 
-# If the host name starts with 'live', DJANGO_HOST = "production"
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
+
+# If the host name ends with 'local', DJANGO_ENV = "development"
 if socket.gethostname().endswith('local'):
-    DJANGO_HOST = "development"
-# Else if host name starts with 'test', set DJANGO_HOST = "test"
+    DJANGO_ENV = "development"
+# Else if host name starts with 'test', set DJANGO_ENV = "test"
 elif socket.gethostname().startswith('test'): 
-    DJANGO_HOST = "testing"
+    DJANGO_ENV = "testing"
 else:
-# If host doesn't match, assume it's a development server, set DJANGO_HOST = "development"
-    DJANGO_HOST = "production"
+# If host doesn't match, assume it's a production server, set DJANGO_ENV = "production"
+    DJANGO_ENV = "production"
 
-# Define general behavior variables for DJANGO_HOST and all others
-if DJANGO_HOST == "production":
+# Define general behavior variables for DJANGO_ENV and all others
+# SECURITY WARNING: don't run with debug turned on in production!
+if DJANGO_ENV == "production":
     DEBUG = True #Change this to false when deploying final app
 else:
     DEBUG = True
 
-if DJANGO_HOST == "production":
-   # Use mysql for live host
-   DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'market-db',
-        'CLIENT': {
-            'host': '34.215.134.189',
-            'port': 27017,
-            'username': 'mrktdb_admin',
-            'password': 'm9a8r7k6e5t4-3d2b1',
-            'authSource': 'market-db',
-        },
+# Database
+# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+
+if DJANGO_ENV == "production":
+# Use hosted remote DB in production
+    DATABASES = {
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': env("PRODUCTION_DB_NAME"),
+            'CLIENT': {
+                'host': env("HOST_IP"),
+                'port': env("HOST_PORT"),
+                'username': env("PRODUCTION_DB_USERNAME"),
+                'password': env("PRODUCTION_DB_PASSWORD"),
+                'authSource': env("PRODUCTION_DB_NAME"),
+            },
+        }
     }
-  }
 else: 
-   # Use sqlite for non live host
-   DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'market-db-local',
+# Use local DB in development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': env('LOCAL_DB_NAME'),
+        }
     }
-  }
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -61,10 +70,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'f9y!yh1nb6lm5(o*)^(8+-dueu9_p=p$c$d-u8f(p=w+mtd%rx'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
+SECRET_KEY = env('SECRET_KEY')
 
 
 ALLOWED_HOSTS = ['mrktdbapi-PROD.eba-ae6apzne.us-west-2.elasticbeanstalk.com','127.0.0.1']
@@ -112,9 +118,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'fedgehundapi.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

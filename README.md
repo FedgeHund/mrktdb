@@ -40,13 +40,19 @@
 
 ### Check if the database is connected successfully (To test the mongo database in EC2)
 
-1. Go to the admin page and enter the login credentials.
+1. Go to the admin page by using URL/admin as the url in the browser.
 
-   http://mrktdbapi-prod.eba-ae6apzne.us-west-2.elasticbeanstalk.com/
-   
-2. Make an entry in the testapp.
+   URL = http://mrktdbapi-prod.eba-ae6apzne.us-west-2.elasticbeanstalk.com for the deployed app
 
-3. Run this command in the terminal to access the database hosted in EC2:
+   URL = http://127.0.0.1:8000 if you're running the app locally
+
+2. Enter the login credentials
+
+3. Then you'll land on the site administration page. Look for the TESTAPP and click Add.
+
+4. Make an entry in the testapp and click SAVE. (testapp is an app made solely for checking the database connection)
+
+5. Run this command in your terminal to access the database hosted in EC2:
    ```shell
    mongo -u user -p pwd IP/db
    ```   
@@ -59,7 +65,16 @@
    IP = IP of EC2 instance
 
    db = database name that is hosted in EC2 
-  
+
+
+   OR
+
+
+   Run 
+   ```shell
+   mongo
+   ```  
+   in your terminal to enter the mongo console. Use the database: " market-db-local " and check for your entry.
 
 ### Working of Database
 

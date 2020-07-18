@@ -78,7 +78,9 @@ WSGI_APPLICATION = 'fedgehundapi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'market-db',
+        'NAME': 'marktdb',
+        'USER': 'shivansh',
+        'PASSWORD': '1234'
     }
 }
 

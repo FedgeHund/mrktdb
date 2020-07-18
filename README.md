@@ -37,6 +37,18 @@
  
 7. You are ready to run the Django app. To run django app follow the django tutorial
 
+### Setting env variables
+
+1. Create a .env file in the same directory as setting.py
+
+2. Enter the secret variables and their values that you want to use
+
+3. If you are using the application locally then set a variable LOCAL_DB_NAME in the .env file and give it the name of local database that you want to use
+
+4. Go to the directory containing the .env file and run this command in the terminal:
+   ```shell
+   eb setenv `cat .env | sed '/^#/ d' | sed '/^$/ d'`
+   ```
 
 ### Check if the database is connected successfully (To test the mongo database in EC2)
 

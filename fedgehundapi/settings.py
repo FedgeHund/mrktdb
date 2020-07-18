@@ -46,7 +46,7 @@ if DJANGO_ENV == "production":
             'NAME': env("PRODUCTION_DB_NAME"),
             'CLIENT': {
                 'host': env("HOST_IP"),
-                'port': env("HOST_PORT"),
+                'port': int(env("HOST_PORT")),
                 'username': env("PRODUCTION_DB_USERNAME"),
                 'password': env("PRODUCTION_DB_PASSWORD"),
                 'authSource': env("PRODUCTION_DB_NAME"),

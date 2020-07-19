@@ -22,36 +22,36 @@ DJANGO_ENV = env("ENV", default="development")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if DJANGO_ENV == "production":
-  DEBUG = True  # Change this to false when deploying final app
+    DEBUG = True  # Change this to false when deploying final app
 else:
-  DEBUG = True
+    DEBUG = True
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 if DJANGO_ENV == "production":
-  # Use hosted remote DB in production
-  DATABASES = {
-      'default': {
-          'ENGINE': 'djongo',
-          'NAME': env("PRODUCTION_DB_NAME"),
-          'CLIENT': {
-              'host': env("HOST_IP"),
-              'port': int(env("HOST_PORT")),
-              'username': env("PRODUCTION_DB_USERNAME"),
-              'password': env("PRODUCTION_DB_PASSWORD"),
-              'authSource': env("PRODUCTION_DB_NAME"),
-          },
-      }
-  }
+    # Use hosted remote DB in production
+    DATABASES = {
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': env("PRODUCTION_DB_NAME"),
+            'CLIENT': {
+                'host': env("HOST_IP"),
+                'port': int(env("HOST_PORT")),
+                'username': env("PRODUCTION_DB_USERNAME"),
+                'password': env("PRODUCTION_DB_PASSWORD"),
+                'authSource': env("PRODUCTION_DB_NAME"),
+            },
+        }
+    }
 else:
-  # Use local DB in development
-  DATABASES = {
-      'default': {
-          'ENGINE': 'djongo',
-          'NAME': env('LOCAL_DB_NAME', default=''),
-      }
-  }
+    # Use local DB in development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': env('LOCAL_DB_NAME', default=''),
+        }
+    }
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

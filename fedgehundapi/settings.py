@@ -18,17 +18,8 @@ env = environ.Env()
 # reading .env file
 environ.Env.read_env()
 
-# If the host name ends with 'local', DJANGO_ENV = "development"
-if socket.gethostname().endswith('local'):
-    DJANGO_ENV = "development"
-# Else if host name starts with 'test', set DJANGO_ENV = "test"
-elif socket.gethostname().startswith('test'): 
-    DJANGO_ENV = "testing"
-else:
-# If host doesn't match, assume it's a production server, set DJANGO_ENV = "production"
-    DJANGO_ENV = "production"
+DJANGO_ENV = env("ENV", default="development")
 
-# Define general behavior variables for DJANGO_ENV and all others
 # SECURITY WARNING: don't run with debug turned on in production!
 if DJANGO_ENV == "production":
     DEBUG = True #Change this to false when deploying final app
@@ -73,7 +64,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env('SECRET_KEY')
 
 
-ALLOWED_HOSTS = ['mrktdbapi-PROD.eba-ae6apzne.us-west-2.elasticbeanstalk.com','127.0.0.1']
+ALLOWED_HOSTS = ['mrktdbapi-prod.eba-tw27jjhn.us-west-2.elasticbeanstalk.com','127.0.0.1']
 
 
 # Application definition

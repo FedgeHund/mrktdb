@@ -79,8 +79,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'marktdb',
-        'USER': 'shivansh',
-        'PASSWORD': '1234'
     }
 }
 

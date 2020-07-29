@@ -11,6 +11,47 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import environ
+
+env = environ.Env()
+
+# reading .env file
+environ.Env.read_env()
+
+DJANGO_ENV = env("ENV", default="development")
+
+# SECURITY WARNING: don't run with debug turned on in production!
+if DJANGO_ENV == "production":
+    DEBUG = True  # Change this to false when deploying final app
+else:
+    DEBUG = True
+
+# Database
+# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+
+if DJANGO_ENV == "production":
+    # Use hosted remote DB in production
+    DATABASES = {
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': env("PRODUCTION_DB_NAME"),
+            'CLIENT': {
+                'host': env("HOST_IP"),
+                'port': int(env("HOST_PORT")),
+                'username': env("PRODUCTION_DB_USERNAME"),
+                'password': env("PRODUCTION_DB_PASSWORD"),
+                'authSource': env("PRODUCTION_DB_NAME"),
+            },
+        }
+    }
+else:
+    # Use local DB in development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': env('LOCAL_DB_NAME', default=''),
+        }
+    }
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +61,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'f9y!yh1nb6lm5(o*)^(8+-dueu9_p=p$c$d-u8f(p=w+mtd%rx'
+SECRET_KEY = env(
+    'SECRET_KEY', default='f9y!yh1nb6lm5(o*)^(8+-dueu9_p=p$c$d-u8f(p=w+mtd%rx')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'mrktdbapi-prod.eba-tw27jjhn.us-west-2.elasticbeanstalk.com', '127.0.0.1']
 
 
 # Application definition
@@ -38,7 +79,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'edgar.apps.EdgarConfig'
+    'edgar.apps.EdgarConfig',
+    'testapp',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +162,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'

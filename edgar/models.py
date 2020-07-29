@@ -2,9 +2,9 @@ from django.db import models
 
 class Company(models.Model):
     COMPANY_TYPES = (
-        ('F', 'Hedge Fund'),
-        ('I', 'Investment Advisor'),
-        ('H', 'Holdings Company'),
+        ('HF', 'Hedge Fund'),
+        ('IA', 'Investment Advisor'),
+        ('HC', 'Holdings Company'),
     )
     name = models.TextField(max_length=80)
     createdAt = models.DateTimeField(auto_now_add=True)
@@ -12,16 +12,16 @@ class Company(models.Model):
     deletedAt = models.DateTimeField(default=None, blank=True)
     companyId = models.AutoField(primary_key=True)
     address = models.TextField(max_length=120)
-    companyType = models.CharField(max_length=1, choices=COMPANY_TYPES, default=None)
+    companyType = models.CharField(max_length=2, choices=COMPANY_TYPES, default=None)
 
     class Meta:
         ordering = ['createdAt']
 
 class Filer(models.Model):
     FILE_TYPES = (
-        ('F', '13F'),
-        ('G', '13G'),
-        ('D', '13D'),
+        ('13F', '13F'),
+        ('13G', '13G'),
+        ('13D', '13D'),
     )
     companyId = models.ForeignKey(Company, on_delete=models.CASCADE)
     fileNumber = models.CharField(max_length=10)
@@ -29,20 +29,20 @@ class Filer(models.Model):
     updatedAt = models.DateTimeField(default=None, blank=True)
     deletedAt = models.DateTimeField(default=None, blank=True)
     filerId = models.AutoField(primary_key=True)
-    fileType = models.CharField(max_length=1, choices=FILE_TYPES)
+    fileType = models.CharField(max_length=3, choices=FILE_TYPES)
 
     class Meta:
         ordering = ['companyId']
 
 class QuarterlyHolding(models.Model):
     FILING_TYPES = (
-        ('C', 'Combined Report'),
-        ('N', 'Notice'),
-        ('H', 'Holdings Report'),
+        ('CR', 'Combined Report'),
+        ('NT', 'Notice'),
+        ('HR', 'Holdings Report'),
     )
     filerId = models.ForeignKey(Filer, on_delete=models.CASCADE)
     quarter = models.IntegerField()
-    filingType = models.CharField(max_length=1, choices=FILING_TYPES)
+    filingType = models.CharField(max_length=2, choices=FILING_TYPES)
     filedOn = models.IntegerField()
     acceptedAt = models.IntegerField()
     totalValue = models.FloatField()
@@ -85,22 +85,22 @@ class Security(models.Model):
 
 class QuarterlySecurityHolding(models.Model):
     HOLDING_TYPES = (
-        ('S', 'SH'),
-        ('P', 'PRN'),
-        ('U', 'PUT'),
-        ('C', 'CALL'),
+        ('SHR', 'SH'),
+        ('PRN', 'PRN'),
+        ('PUT', 'PUT'),
+        ('CAL', 'CALL'),
     )
     DISCRETION_TYPES = (
-        ('S', 'SOLE'),
-        ('D', 'DFND'),
-        ('O', 'OTHER'),
+        ('SOLE', 'SOLE'),
+        ('DFND', 'DFND'),
+        ('OTHR', 'OTHER'),
     )
     securityId = models.ForeignKey(Security, on_delete=models.CASCADE)
     quarterlyHoldingId = models.ForeignKey(QuarterlyHolding, on_delete=models.CASCADE)
     value = models.FloatField()
     amount = models.FloatField()
-    holdingType = models.CharField(max_length=1, choices=HOLDING_TYPES)
-    investmentDiscretion = models.CharField(max_length=5)
+    holdingType = models.CharField(max_length=3, choices=HOLDING_TYPES)
+    investmentDiscretion = models.CharField(max_length=4, choices=DISCRETION_TYPES)
     sole = models.IntegerField()
     shared = models.IntegerField()
     none = models.IntegerField()

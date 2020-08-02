@@ -20,7 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('api/auth/', include('rest_auth.urls')),
-    # path('auth/', include('fedgehund_auth.urls')),
     path('api/profile/', include('fedgehund_profile.urls')),
-    path('api/auth/registration/', include('rest_auth.registration.urls')),
+    path('api/auth/registration/', include('fedgehund_auth.urls')),
 ]

@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import socket
 import environ
 
 env = environ.Env()
+
 # reading .env file
 environ.Env.read_env()
 
@@ -22,7 +22,7 @@ DJANGO_ENV = env("ENV", default="development")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if DJANGO_ENV == "production":
-    DEBUG = True #Change this to false when deploying final app
+    DEBUG = True  # Change this to false when deploying final app
 else:
     DEBUG = True
 
@@ -30,7 +30,7 @@ else:
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 if DJANGO_ENV == "production":
-# Use hosted remote DB in production
+    # Use hosted remote DB in production
     DATABASES = {
         'default': {
             'ENGINE': 'djongo',
@@ -44,12 +44,12 @@ if DJANGO_ENV == "production":
             },
         }
     }
-else: 
-# Use local DB in development
+else:
+    # Use local DB in development
     DATABASES = {
         'default': {
             'ENGINE': 'djongo',
-            'NAME': env('LOCAL_DB_NAME'),
+            'NAME': env('LOCAL_DB_NAME', default=''),
         }
     }
 
@@ -57,7 +57,8 @@ else:
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env(
+    'SECRET_KEY', default='f9y!yh1nb6lm5(o*)^(8+-dueu9_p=p$c$d-u8f(p=w+mtd%rx')
 
 ALLOWED_HOSTS = ['mrktdbapi-prod.eba-tw27jjhn.us-west-2.elasticbeanstalk.com','127.0.0.1']
 
@@ -85,6 +86,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'fedgehund_auth',
     'fedgehund_profile.apps.FedgehundProfileConfig',
+    'edgar.apps.EdgarConfig',
     'testapp',
 ]
 
@@ -137,6 +139,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'fedgehundapi.wsgi.application'
+
+
+# Database
+# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'mrktdb',
+    }
+}
 
 
 # Password validation

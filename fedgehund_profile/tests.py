@@ -6,8 +6,9 @@ class ProfileTest(TestCase):
 	def test_user_model_has_profile(self):
 		user = User(
 			email = "newuser@gmail.com",
-			username = "newuser",
-			password = "qp10al29zm38"
+			password = "qp10al29zm38",
+			first_name = "MrktDB",
+			last_name = "Admin"
 		)
 		user.save()
 

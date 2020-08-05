@@ -56,21 +56,20 @@ else:
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env(
     'SECRET_KEY', default='f9y!yh1nb6lm5(o*)^(8+-dueu9_p=p$c$d-u8f(p=w+mtd%rx')
 
+ALLOWED_HOSTS = ['mrktdbapi-prod.eba-tw27jjhn.us-west-2.elasticbeanstalk.com','127.0.0.1']
 
-ALLOWED_HOSTS = [
-    'mrktdbapi-prod.eba-tw27jjhn.us-west-2.elasticbeanstalk.com', '127.0.0.1']
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -78,10 +77,38 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
+    'fedgehund_auth',
+    'fedgehund_profile.apps.FedgehundProfileConfig',
     'edgar.apps.EdgarConfig',
     'testapp',
 ]
+
+SITE_ID = 1
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+#The username field is optional and we will hide it in the registration page
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
+ACCOUNT_UNIQUE_EMAIL = True
+
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -90,7 +90,7 @@ INSTALLED_APPS = [
     'testapp',
 ]
 
-SITE_ID = 1
+SITE_ID = 2
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

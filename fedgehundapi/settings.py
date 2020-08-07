@@ -86,7 +86,6 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'fedgehund_auth',
     'fedgehund_profile.apps.FedgehundProfileConfig',
-    'rest_framework',
     'edgar.apps.EdgarConfig',
     'testapp',
 ]

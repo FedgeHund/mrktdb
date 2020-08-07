@@ -1,8 +1,10 @@
 from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
+from fedgehund_profile.models import Profile
+from django.contrib.auth.models import User
+from fedgehund_profile.serializers import ProfileSerializer
 
-
-class MyRegisterSerializer(RegisterSerializer):
+class UserRegisterSerializer(RegisterSerializer):
     first_name = serializers.CharField(required=True, write_only=True)
     last_name = serializers.CharField(required=True, write_only=True)
 
@@ -15,3 +17,8 @@ class MyRegisterSerializer(RegisterSerializer):
         }
 
 
+class UserSerializer(serializers.ModelSerializer):
+	profile = ProfileSerializer()
+	class Meta:
+		model = User
+		fields = ('id', 'email', 'first_name', 'last_name', 'profile')

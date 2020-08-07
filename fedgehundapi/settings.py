@@ -90,7 +90,7 @@ INSTALLED_APPS = [
     'testapp',
 ]
 
-SITE_ID = 2
+SITE_ID=1
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -139,17 +139,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'fedgehundapi.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'mrktdb',
-    }
-}
 
 
 # Password validation

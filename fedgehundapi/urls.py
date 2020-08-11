@@ -20,4 +20,9 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('fedgehund_auth.urls')),
+
+    path('profile/', include('fedgehund_profile.urls')),
+    #to rectify 'NoReverseMatch at /auth/registration/' issue
+    re_path(r'^account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'),
+	re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(), name='account_confirm_email'),
 ]

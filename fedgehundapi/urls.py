@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path, re_path
-from rest_auth.registration.views import VerifyEmailView, RegisterView
+from rest_auth.registration.views import VerifyEmailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),

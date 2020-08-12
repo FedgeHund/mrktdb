@@ -14,10 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
-
+from django.urls import include, path, re_path
+from rest_auth.registration.views import VerifyEmailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('fedgehund_auth.urls')),
+
+    #to rectify 'NoReverseMatch at /auth/registration/' issue
+    re_path(r'^account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'),
+	re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(), name='account_confirm_email'),
 ]

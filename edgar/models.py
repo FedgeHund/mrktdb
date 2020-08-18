@@ -124,3 +124,13 @@ class QuarterlyOtherManagerDistribution(models.Model):
         ordering = ['createdAt']
 
 
+class FailsToDeliver(models.Model):
+    settlementDate = models.PositiveIntegerField(validators=[MaxValueValidator(99999999)])
+    createdAt = models.DateTimeField(auto_now_add=True)
+    cusip = models.TextField()
+    ticker = models.CharField(max_length=7)
+    quantity = models.IntegerField()
+    description = models.TextField()
+
+    class Meta:
+        ordering = ['createdAt']

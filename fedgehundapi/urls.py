@@ -18,6 +18,7 @@ from django.urls import include, path, re_path
 from rest_auth.registration.views import VerifyEmailView, RegisterView
 
 urlpatterns = [
+    path('', include('fedgehundui.urls')),
     path('admin/', admin.site.urls),
     path('auth/', include('fedgehund_auth.urls')),
     path('profile/', include('fedgehund_profile.urls')),

@@ -88,6 +88,7 @@ INSTALLED_APPS = [
     'fedgehund_profile.apps.FedgehundProfileConfig',
     'edgar.apps.EdgarConfig',
     'testapp',
+    'fedgehundui',
 ]
 
 SITE_ID=1

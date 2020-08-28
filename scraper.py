@@ -241,7 +241,7 @@ class HoldingsScraper:
 
         for items in range(len(data1)):    
             try:
-                Security.objects.get_or_create(cusip = data1['cusip'],securityName = data1['nameOfIssuer'] ,securityType = 'STOCK',titleOfClass = data1['titleOfClass'])
+                Security.objects.get_or_create(cusip = data1[items]['cusip'],securityName = data1[items]['nameOfIssuer'] ,securityType = 'STOCK',titleOfClass = data1[items]['titleOfClass'])
             except:
                 pass
             data1.append(d)

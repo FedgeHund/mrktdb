@@ -141,7 +141,7 @@ class HoldingsScraper:
             holdings2 = self.get_holdings_xml2(xml_file2)
             col_headers2 = holdings2[0]
             data2 = holdings2[1]
-            self.save_holdings_xml(file_name, report_headers, col_headers, data, col_headers2, data2)
+            # self.save_holdings_xml(file_name, report_headers, col_headers, data, col_headers2, data2)
 
 
 
@@ -238,9 +238,12 @@ class HoldingsScraper:
                 d['votingAuthorityNone'] = holdings[i].find('votingAuthority').find('None').text
             except:
                 pass
-            data.append(d)
-            Security.objects.get_or_create(cusip = d['cusip'],securityName = d['nameOfIssuer'] ,securityType = 'STOCK',titleOfClass = d['titleOfClass'])
-            
+
+        for items in range(len(data1)):    
+            try:
+                Security.objects.get_or_create(cusip = data1['cusip'],securityName = data1['nameOfIssuer'] ,securityType = 'STOCK',titleOfClass = data1['titleOfClass'])
+            except:
+                pass
             data1.append(d)
         col_headers = list(d.keys())
         return(col_headers, data)
@@ -257,6 +260,10 @@ class HoldingsScraper:
             d2 = {}
             try:
                 d2['reportCalendarOrQuarter'] = holdings2[i].find('reportCalendarOrQuarter').text
+            except:
+                pass
+            try:
+                d2['isAmendment'] = holdings2[i].find('isAmendment').text
             except:
                 pass
             try:
@@ -339,24 +346,57 @@ class HoldingsScraper:
             except:
                 pass
 
-
+          
             data2.append(d2)
+
             
             ad=d2['filingManager_address1_street1']+', '+d2['filingManager_address3_city']+', '+d2['filingManager_address4_state-or-country']+', '+d2['filingManager_address5_zipCode']
             
-            Company.objects.get_or_create(name=d2['filing_manager_name'].lower(),address=ad.lower(),companyType='HF')
-        
+            Company.objects.get_or_create(name=d2['filing_manager_name'].lower(),address=ad.lower(),companyType='HF',cik=self.ticker)
+
+
+            filenumber=''
+            if(d2['form13FFileNumber'][0]=='0'):
+                filenumber=d2['form13FFileNumber']
+            else:
+                filenumber='0'+d2['form13FFileNumber']
+
+            
+            
+            if(filenumber[4]!='0' and len(filenumber)==8):
+                finalfilenumber=filenumber[0:4]+'0'+filenumber[4:10]
+            else:
+                finalfilenumber=filenumber
+
+
             # =========================================================================================================================
-            cc = Company.objects.get(name=d2['filing_manager_name'].lower(),address=ad.lower(),companyType='HF')
-            Filer.objects.get_or_create(companyId=cc,fileNumber=d2['form13FFileNumber'],fileType='13F')
-            ff = Filer.objects.get(fileNumber=d2['form13FFileNumber'],companyId=cc)  
+            cc = Company.objects.get(cik=self.ticker)
+            Filer.objects.get_or_create(companyId=cc,fileNumber=finalfilenumber,fileType='13F')
+            ff = Filer.objects.get(fileNumber=finalfilenumber,companyId=cc)  
             
             try:
-                Filer.objects.get_or_create(fileNumber=d2['otherManager_form13fFileNumber'])
+                otherparentfilenumber=''
+                if(d2['otherManager_form13fFileNumber'][0]=='0'):
+                    otherparentfilenumber=d2['otherManager_form13fFileNumber']
+                else:
+                    otherparentfilenumber='0'+d2['otherManager_form13fFileNumber']
+
+                
+                if(otherparentfilenumber[4]!='0' and len(otherparentfilenumber)==8):
+                    otherparentfinalfilenumber=otherparentfilenumber[0:4]+'0'+otherparentfilenumber[4:10]
+                else:
+                    otherparentfinalfilenumber=otherparentfilenumber
+
+            except:
+                pass
+
+
+            try:
+                Filer.objects.get_or_create(fileNumber=otherparentfinalfilenumber)
             except:
                 pass
             try:
-                ffp = Filer.objects.get(fileNumber=d2['otherManager_form13fFileNumber'])
+                ffp = Filer.objects.get(fileNumber=otherparentfinalfilenumber)
             except:
                 pass
             
@@ -388,8 +428,7 @@ class HoldingsScraper:
             pass
 
         data3.append(d3)
-        print(data3)
-        print(d2)
+ 
         oc = d3['otherIncludedManagersCount']
         
         if d2['reportType']=='13F HOLDINGS REPORT':
@@ -398,9 +437,20 @@ class HoldingsScraper:
             filingtype='CR'
         else:
             filingtype='NT'
-        QuarterlyHolding.objects.get_or_create(filerId = ff, quarter = d2['reportCalendarOrQuarter']  ,filingType=filingtype ,filedOn = d2['reportCalendarOrQuarter'] ,acceptedAt = d2['reportCalendarOrQuarter'],totalValue =d3['tableValueTotal'] )
+
+        Quarter=''
+        if(d2['reportCalendarOrQuarter'][:2]=='03'):
+            Quarter='1'+d2['reportCalendarOrQuarter'][6:11]
+        elif(d2['reportCalendarOrQuarter'][:2]=='06'):
+            Quarter='2'+d2['reportCalendarOrQuarter'][6:11]
+        elif(d2['reportCalendarOrQuarter'][:2]=='09'):
+            Quarter='3'+d2['reportCalendarOrQuarter'][6:11]
+        else:
+            Quarter='4'+d2['reportCalendarOrQuarter'][6:11]
+
+        QuarterlyHolding.objects.get_or_create(filerId = ff, quarter =Quarter  ,filingType=filingtype ,filedOn = d2['reportCalendarOrQuarter'] ,acceptedAt = d2['reportCalendarOrQuarter'],totalValue =d3['tableValueTotal'] )
         
-        qq = QuarterlyHolding.objects.get(filerId = ff,quarter=d2['reportCalendarOrQuarter'])
+        qq = QuarterlyHolding.objects.get(filerId = ff,quarter=Quarter)
 # ===========================================================================================================
 
         holdings4 = soup.find_all('otherManager2')
@@ -422,9 +472,29 @@ class HoldingsScraper:
                 d4['name'] = holdings4[i].find('otherManager').find('name').text
             except:
                 pass
+            
+            try:
+                otherchildfilenumber=''
+                if(d4['form13FFileNumber'][0]=='0'):
+                    otherchildfilenumber=d4['form13FFileNumber']
+                else:
+                    otherchildfilenumber='0'+d4['form13FFileNumber']
+  
+                otherchildfinalfilenumber=''
+                if(otherchildfilenumber[4]!='0' and len(otherchildfilenumber)==8):
+                    otherchildfinalfilenumber=otherchildfilenumber[0:4]+'0'+otherchildfilenumber[4:10]
+                else:
+                    otherchildfinalfilenumber=otherchildfilenumber
+
+            except:
+                pass
+            try:
+                Filer.objects.get_or_create(fileNumber=otherchildfinalfilenumber)                
+            except:
+                pass
 
             try:
-                ffc = Filer.objects.get(fileNumber=d2['form13FFileNumber'],companyId=cc)
+                ffc = Filer.objects.get(fileNumber=otherchildfinalfilenumber)
             except:
                 pass
             
@@ -441,18 +511,34 @@ class HoldingsScraper:
                 QuarterlyOtherManager.objects.get_or_create(parentFilerId =ffp ,quarterlyHoldingId = qq,number=oc )
             except:
                 pass
-            
-            qom = QuarterlyOtherManager.objects.get(quarterlyHoldingId = qq,number=oc )
+            try:
+                qom = QuarterlyOtherManager.objects.get(quarterlyHoldingId = qq,number=oc )
 
+            except:
+                pass
             data4.append(d4)
           
         for i in range(len(data1)):
-            ss=Security.objects.get(cusip=data1[i]['cusip'])
-            QuarterlySecurityHolding.objects.get_or_create(securityId = ss,quarterlyHoldingId = qq,value = data1[i]['value'],amount = data1[i]['sshPrnamt'], holdingType = data1[i]['sshPrnamtType'],investmentDiscretion = data1[i]['investmentDiscretion'],sole = data1[i]['votingAuthoritySole'],shared = data1[i]['votingAuthorityShared'],none = data1[i]['votingAuthorityNone'])
-            qsh = QuarterlySecurityHolding.objects.get(securityId = ss,quarterlyHoldingId = qq,value = data1[i]['value'],amount = data1[i]['sshPrnamt'], holdingType = data1[i]['sshPrnamtType'],investmentDiscretion = data1[i]['investmentDiscretion'],sole = data1[i]['votingAuthoritySole'],shared = data1[i]['votingAuthorityShared'],none = data1[i]['votingAuthorityNone'])
-           
-            QuarterlyOtherManagerDistribution.objects.get_or_create(quarterlyOtherManagerId =qom ,quarterlySecurityHoldingId =qsh)
-
+     
+            try:
+         
+                ss=Security.objects.get(cusip = data1[i]['cusip'],securityName = data1[i]['nameOfIssuer'],titleOfClass = data1[i]['titleOfClass'])
+                
+            except:
+                print("Ss not retreived")
+                pass
+            try:
+                QuarterlySecurityHolding.objects.get_or_create(securityId = ss,quarterlyHoldingId = qq,value = data1[i]['value'],amount = data1[i]['sshPrnamt'], holdingType = data1[i]['sshPrnamtType'],investmentDiscretion = data1[i]['investmentDiscretion'],sole = data1[i]['votingAuthoritySole'],shared = data1[i]['votingAuthorityShared'],none = data1[i]['votingAuthorityNone'])
+                qsh = QuarterlySecurityHolding.objects.get(securityId = ss,quarterlyHoldingId = qq,value = data1[i]['value'],amount = data1[i]['sshPrnamt'], holdingType = data1[i]['sshPrnamtType'],investmentDiscretion = data1[i]['investmentDiscretion'],sole = data1[i]['votingAuthoritySole'],shared = data1[i]['votingAuthorityShared'],none = data1[i]['votingAuthorityNone'])
+                print(qsh)
+            except:
+                print("Problem is here")
+                pass
+            try:
+                QuarterlyOtherManagerDistribution.objects.get_or_create(quarterlyOtherManagerId =qom ,quarterlySecurityHoldingId =qsh)
+            except:
+                print("Problem was here")
+                pass
         data1.clear()
         return(col_headers2, data2)
 

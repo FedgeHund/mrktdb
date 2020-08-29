@@ -150,6 +150,12 @@ DATABASES = {
         'NAME': 'mrktdb',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'MrktDbCIK',
+#     }
+# }
 
 
 # Password validation

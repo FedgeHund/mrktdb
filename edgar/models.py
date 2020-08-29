@@ -125,7 +125,7 @@ class QuarterlyOtherManagerDistribution(models.Model):
 
 
 class FailsToDeliver(models.Model):
-    settlementDate = models.PositiveIntegerField(validators=[MaxValueValidator(99999999)])
+    settlementDate = models.DateField()
     createdAt = models.DateTimeField(auto_now_add=True)
     cusip = models.TextField()
     ticker = models.CharField(max_length=7)

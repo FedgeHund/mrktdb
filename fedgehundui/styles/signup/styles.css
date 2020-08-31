@@ -1,5 +1,5 @@
 .navcolor {
-  background: #a2a2a2;
+  background: rgba(254,111,125,1);
 }
 
 .signin_box {
@@ -10,6 +10,11 @@
 	border-radius: 12px;
 }
 
+.v9_2 {
+  color: #a2a2a2;
+  padding-top: 20px;
+}
+
 .v9_3 {
   color: rgba(81,81,81,1);
   position: relative;
@@ -17,16 +22,16 @@
   font-family: OpenSans-SemiBold;
   font-size: 42px;
   font-weight: 500;
-  padding-top: 40px;
+  padding-top: 10px;
   font-size: 42px;
 }
 
 .v12_0 {
   color: #515151;
   position: relative;
-  font-family: OpenSans-Regular;
+  font-family: OpenSans;
   font-weight: Regular;
-  font-size: 18px;
+  font-size: 17px;
   text-align: right;
   padding-top: 17px;
   padding-bottom: 10px;
@@ -37,7 +42,7 @@
   position: relative;
   font-family: OpenSans;
   font-weight: Regular;
-  font-size: 18px;
+  font-size: 17px;
   text-decoration: none;
   padding-top: 17px;
   padding-bottom: 10px;
@@ -51,29 +56,20 @@ a:hover {
   color: #a2a2a2;
   position: relative;
   font-family: Open Sans;
-  font-weight: Regular;
-  font-size: 21px;
-  padding-top: 20px;
+  font-size: 16px;
+  padding-top: 35px;
+  margin-left: 46px;
+  margin-bottom: -5px;
 }
 
 .v12_4 {
-  color: grey;
+  color: #fe6f7d;
   position: relative;
   font-family: Open Sans;
   font-weight: Regular;
-  font-size: 21px;
+  font-size: 18px;
   opacity: 1;
-  margin-left: 60px;
-}
-
-.v12_8 {
-  color: rgba(162,162,162,1);
-  position: relative;
-  font-family: Open Sans;
-  font-weight: Italic;
-  font-size: 15px;
-  opacity: 1;
-  padding-top: 10px;
+  padding-top: 20px;
 }
 
 .v12_13 {
@@ -128,8 +124,8 @@ a:hover {
 
 .v12_21 {
   position: relative;
-  font-family: OpenSans-Regular;
-  font-size: 13px;
+  font-family: OpenSans;
+  font-size: 11px;
   opacity: 1;
   text-align: center;
   padding-top: 50px;
@@ -146,19 +142,20 @@ input {
     border-right: none;
     background-color: transparent;
     text-decoration: none;
-    color: #ffff;
+    color: #fe6f7d;
     outline: none;
     outline-style: none;
     border-bottom: solid #A9A9A9 1px;
-    text-align: center;
+    text-align: left;
 }
 
 input:focus {
     outline-width: 0;
-    text-align: center;
     border-top-style: hidden;
     border-right-style: hidden;
     border-left-style: hidden;
+    color: #fe6f7d;
+    text-align: left;
 }
 
 /*
@@ -185,7 +182,7 @@ input:focus {
     outline: none;
     border-radius: 30px;
     color: white;
-    margin-top: 45px;
+    margin-top: 65px;
     background-color: rgba(254,111,125,1);
     font-family: OpenSans-SemiBold;
 }
@@ -222,4 +219,152 @@ input:focus {
 
 .submit-btn:focus {
   background-color: rgba(254,111,125,1) !important;
+}
+
+
+/* For Personal Details */
+
+.back-btn{
+    position: relative;
+    padding: 10px 30px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    border-color: rgba(254,111,125,1);
+    border-radius: 30px;
+    margin-top: 65px;
+    color: rgba(254,111,125,1);
+    font-family: OpenSans-SemiBold;
+}
+
+.back-btn:hover {
+  box-shadow: 0 0 11px rgba(33,33,33,.2); 
+  background-color: rgba(254,111,125,1) !important;
+  color: white;
+  transition: 0.03s;
+}
+
+.back-btn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.back-btn span:after {
+  content: '\21E6';
+  color: white;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: -40px;
+  transition: 0.5s;
+}
+
+.back-btn:hover span {
+  padding-left: 17px;
+}
+
+.back-btn:hover span:after {
+  opacity: 1;
+  left: -10px;
+}
+
+.v8_3 {
+  color: rgba(81,81,81,1);
+  position: relative;
+  text-align: center;
+  font-family: OpenSans-SemiBold;
+  font-size: 28px;
+  padding-top: 30px;
+  padding-bottom: 25px;
+}
+
+/* Profile picture */
+.propic_box {
+  background: #fff;
+  height: 590px;
+  margin: 0 auto;
+  margin-top: 97px;
+  border-radius: 12px;
+}
+
+.v7_3 {
+  color: rgba(81,81,81,1);
+  position: relative;
+  text-align: center;
+  font-family: OpenSans-SemiBold;
+  font-size: 35px;
+  padding-top: 30px;
+  padding-bottom: 25px;
+}
+
+/* Create page */
+
+.v12_24 {
+  position: relative;
+  font-family: OpenSans-Regular;
+  font-size: 13px;
+  opacity: 1;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 25px;
+  color: #a2a2a2;
+}
+
+.create_message {
+  color: #363636;
+  font-size: 25px; 
+  text-align: center;
+  margin-top: 10px;
+}
+
+.created_email {
+  color: #a2a2a2;
+  font-size: 16px; 
+  text-align: center;
+}
+
+.uploaded_pic {
+  padding-top: 30px; 
+  padding-bottom: 10px; 
+  text-align: center;
+}
+
+.circle {
+  height: 200px;
+  width: 200px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+input::placeholder {
+  font-family: OpenSans;
+  font-weight: 80;
+  font-size: 16px;
+  opacity: 0.5;
+}
+
+/* Success box */
+.success_content1 {
+  color: rgba(81,81,81,1);
+  position: relative;
+  text-align: center;
+  justify-content: center;
+  font-family: OpenSans-SemiBold;
+  font-size: 40px;
+  font-weight: 500;
+  padding-top: 220px;
+}
+
+.success_content2 {
+  color: rgba(81,81,81,1);
+  position: relative;
+  text-align: center;
+  justify-content: center;
+  font-family: OpenSans-SemiBold;
+  font-size: 23px;
+  font-weight: 500;
+  padding-top: 10px;
 }

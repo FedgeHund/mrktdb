@@ -1,17 +1,18 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom'; 
 import '../../../styles/signin/styles.css';
 
 function Signin() {
   return (
     <Fragment>
-    		<div class="container signin_box shadow p-3 mb-5 bg-white">
+    		<div class="container signin_box shadow p-3 mb-5 bg-white col-md-4 offset-md-4">
                    <div class="col-sm-12 my-auto">
                         <div className="row">
-                            <div class="v9_3 col-md-12">Sign in</div>
+                            <div class="v9_3 col-md-12">Sign In</div>
                         </div>
                         <div className="row">
                             <span class="v12_0 col-md-6">New to WolfStreet? </span>
-                            <a href="#" class="v12_2 col-md-6">Create an account</a>
+                            <Link to={"/"} class="v12_2 col-md-6">Create an account</Link>
                         </div>  
                    </div>
                    

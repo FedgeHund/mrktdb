@@ -143,19 +143,13 @@ WSGI_APPLICATION = 'fedgehundapi.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
+#
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'mrktdb',
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'djongo',
-#         'NAME': 'MrktDbCIK',
-#     }
-# }
 
 
 # Password validation

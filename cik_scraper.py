@@ -7,7 +7,7 @@ from edgar.models import CIK_CUSIP_MAPPING
 
 
 
-with open('CIK_CUSIP.csv','rt')as f:
+with open('static/admin/csv_files/CIK_CUSIP.csv','rt')as f:
     data = csv.reader(f)
 
     try:

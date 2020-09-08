@@ -1,4 +1,5 @@
 from django.db import models
+from fedgehundapi import settings
 
 class Company(models.Model):
     COMPANY_TYPES = (
@@ -125,7 +126,7 @@ class QuarterlyOtherManagerDistribution(models.Model):
 
 
 class FailsToDeliver(models.Model):
-    settlementDate = models.DateField()
+    settlementDate = models.IntegerField()
     createdAt = models.DateTimeField(auto_now_add=True)
     cusip = models.TextField()
     ticker = models.CharField(max_length=7)

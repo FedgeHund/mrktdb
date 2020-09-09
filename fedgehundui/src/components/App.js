@@ -10,7 +10,6 @@ class App extends Component {
     return (
     	<Fragment>
       		<Router>
-	      		<Navbar />
 	      		<Switch>
 		          	<Route path="/" exact component={() => <UserForm />} />
 		          	<Route path="/signin" exact component={() => <Signin />} />

@@ -41,8 +41,14 @@ export class FormUserDetails extends Component {
                                    
                     			<form>
                                     <div className="row">
-                			             <label className="v12_3 col-md-10 offset-md-1">Sign Up using email address</label>
+                                        <label className="v12_3 col-md-10 offset-md-1">Sign Up using email address</label>
                                     </div>
+                                    <div className="row">
+                                        <input type="text" className="v12_4 col-md-9 offset-md-1" placeholder="First Name *" onChange={handleChange('firstName')} value={values.firstName} autoComplete="off" onFocus={this.onFocus} required/>
+                                    </div>  
+                                    <div className="row">
+                                        <input type="text" className="v12_4 col-md-9 offset-md-1" placeholder="Last Name *" onChange={handleChange('lastName')} value={values.lastName} autoComplete="off" onFocus={this.onFocus} required/>
+                                    </div>  
                                     <div className="row">
                                         <input type="email" className="v12_4 col-md-9 offset-md-1" placeholder="Email Address" onChange={handleChange('email')} value={values.email} autoComplete="off" onFocus={this.onFocus} required/>
                                     </div>  
@@ -55,8 +61,8 @@ export class FormUserDetails extends Component {
                 			    </form>
                     			
                                 <div className="row">
-                                    <button className="btn btn-primary shadow-sm col-md-4 offset-md-4 submit-btn" type="submit" onClick={this.continue}>
-                                        <span>Continue</span>
+                                    <button className="btn btn-primary shadow-sm col-md-6 offset-md-3 submit-btn" type="submit" onClick={this.continue}>
+                                        <span>Create Account</span>
                                     </button>
                                 </div>
 

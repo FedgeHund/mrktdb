@@ -16,7 +16,10 @@ export class UserForm extends Component {
 		occupation : '',
 		company : '',
 		city: '',
-		profilePicture : ''
+		profilePicture : '',
+		state: '',
+		zipCode: '',
+		phone: ''
 	}
 
 	// Proceed to next step
@@ -43,8 +46,8 @@ export class UserForm extends Component {
 	render() {
 
 		const { step } = this.state;
-		const { firstName, lastName, email, occupation, city, company, password, confPassword } = this.state;
-		const values = { firstName, lastName, email, occupation, city, company, step, password, confPassword };
+		const { firstName, lastName, email, occupation, city, company, password, confPassword, state, zipCode, phone } = this.state;
+		const values = { firstName, lastName, email, occupation, city, company, step, password, confPassword, state, zipCode, phone };
 
 		switch(step) {
 			case 1: 

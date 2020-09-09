@@ -1,43 +1,82 @@
 import React, { Component, Fragment } from 'react';
+import {useState, useEffect} from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom'; 
 import '../../../styles/signin/styles.css';
 
 function Signin() {
+
+    const [state, setState] = useState({
+        email: '',
+        password: '',
+    });
+
+    const{email, password} = state;
+
+    const handleChange = (name) => (e) => {
+        setState({...state, [name]: e.target.value})
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        axios.post("http://127.0.0.1:8000/auth/login/", {
+                email,
+                password
+            },
+            {
+                headers: {
+                    "Content-Type": 'application/json'
+                }
+            }
+        )
+        .then(function(response) {
+                if(response.status == 200){
+                    window.location = "http://127.0.0.1:8000/auth/logout/"
+                }
+                else{
+                    window.location = "http://127.0.0.1:8000/signin/"
+                }
+            })
+        .catch(error => console.log(error))
+    };
+
+
   return (
     <Fragment>
-    		<div class="container signin_box shadow p-3 mb-5 bg-white col-md-4 offset-md-4">
-                   <div class="col-sm-12 my-auto">
+    		<div className="container signin_box shadow p-3 mb-5 bg-white col-md-4 offset-md-4">
+                   <div className="col-sm-12 my-auto">
                         <div className="row">
-                            <div class="v9_3 col-md-12">Sign In</div>
+                            <div className="v9_3 col-md-12">Sign In</div>
                         </div>
                         <div className="row">
-                            <span class="v12_0 col-md-6">New to WolfStreet? </span>
-                            <Link to={"/"} class="v12_2 col-md-6">Create an account</Link>
+                            <span className="v12_0 col-md-6">New to WolfStreet? </span>
+                            <Link to={"/"} className="v12_2 col-md-6">Create an account</Link>
                         </div>  
                    </div>
                    
     			<form>
                     <div className="row">
-			             <label class="v12_3 col-md-11 offset-md-1">Email Address</label>
+			             <label className="v12_3 col-md-11 offset-md-1">Email Address</label>
                     </div>
                     <div className="row">
-                        <input type="email" class="v12_4 col-md-9 offset-md-1"/>
+                        <input type="email" value={email} onChange = {handleChange('email')} className="v12_4 col-md-9 offset-md-1" required/>
                     </div>  
 			        <div className="row">
-                         <label class="v12_3 col-md-11 offset-md-1">Password</label>
+                         <label className="v12_3 col-md-11 offset-md-1">Password</label>
                     </div>
                     <div className="row">
-                        <input type="password" class="v12_4 col-md-9 offset-md-1"/>
+                        <input type="password" value={password} onChange = {handleChange('password')} className="v12_4 col-md-9 offset-md-1" required/>
                     </div>  
 			    </form>
 
                 <div className="row">
-                    <a href="#" class="v12_8 col-md-11 offset-md-1">Forgot Password?</a>
+                    <a href="#" className="v12_8 col-md-11 offset-md-1">Forgot Password?</a>
                 </div>
     			
                 <div className="row">
-                    <button class="btn btn-primary shadow-sm col-md-4 offset-md-4 submit-btn" type="submit">
-                        <span>Sign in</span>
+                    <button className="btn btn-primary shadow-sm col-md-4 offset-md-4 submit-btn" type="submit" onClick={handleSubmit}>
+                        <span>Sign In</span>
                     </button>
                 </div>
 
@@ -54,7 +93,7 @@ function Signin() {
                 </div>
 	*/}			
 				<div className="row">
-                    <span class="v12_21 col-md-8 offset-md-2">Protected by reCAPTCHA and subject to the Google <a href="#" class="v12_22">Privacy Policy</a> and <a href="#" class="v12_22">Terms of service</a>.</span>
+                    <span className="v12_21 col-md-8 offset-md-2">Protected by reCAPTCHA and subject to the Google <a href="#" className="v12_22">Privacy Policy</a> and <a href="#" className="v12_22">Terms of service</a>.</span>
                 </div>
     			
     		</div>

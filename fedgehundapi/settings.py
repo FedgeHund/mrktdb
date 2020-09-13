@@ -88,6 +88,7 @@ INSTALLED_APPS = [
     'fedgehund_profile.apps.FedgehundProfileConfig',
     'edgar.apps.EdgarConfig',
     'testapp',
+    'django_cron',
 ]
 
 SITE_ID = 1
@@ -140,18 +141,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'fedgehundapi.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-#
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'mrktdb',
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -190,3 +179,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
+
+CRON_CLASSES = [
+    "edgar.cik-cusip.CikCusipCronJob",
+]

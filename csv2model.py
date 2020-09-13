@@ -7,7 +7,7 @@ from edgar.models import FailsToDeliver
 
 
 
-with open('static/admin/csv_files/temp_fails.csv','rt')as f:
+with open('static/admin/csv_files/finaldata2.csv','rt')as f:
     data = csv.reader(f)
 
     try:

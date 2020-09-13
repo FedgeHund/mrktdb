@@ -134,6 +134,7 @@ class FailsToDeliver(models.Model):
 
     class Meta:
         ordering = ['createdAt']
+        
 class CikCusipMapping(models.Model):
     year = models.IntegerField()
     cik = models.IntegerField()

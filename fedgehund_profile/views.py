@@ -10,6 +10,9 @@ class ProfileView(ListCreateAPIView):
 	def get_queryset(self):
 		return Profile.objects.filter(user=self.request.user)
 
+	def post():
+		Profile.objects.filter(user=self.request.user).update()
+
 
 class WatchlistView(APIView):
     def get(self, request):

@@ -1,8 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import '../../../styles/signup/styles.css';
 
 export class FormUserDetails extends Component {
+
+    constructor(){
+        super();
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.continue = this.continue.bind(this);
+        this.state = {errorMessage: ""};
+    }
+
 	continue = e => {
 		e.preventDefault();
 		this.props.nextStep();
@@ -11,9 +20,38 @@ export class FormUserDetails extends Component {
     onFocus = event => {
         if(event.target.autocomplete)
         {
-            event.target.autocomplete = "whatever";
+            event.target.autocomplete = "No";
         }
     };
+
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+
+        axios.post("http://127.0.0.1:8000/auth/registration/", {
+                "first_name": this.props.values.firstName,
+                "last_name": this.props.values.lastName,
+                "email": this.props.values.email,
+                "password1": this.props.values.password,
+                "password2": this.props.values.confPassword
+            },
+            {
+                headers: {
+                    "Content-Type": 'application/json'
+                }
+            }
+        )
+        .then(function(response) {
+                if(response.status == 201){
+                    this.continue(e);
+                }
+                else{
+                    //window.location = "http://127.0.0.1:8000/signin/"
+                }
+            }.bind(this))
+        .catch(error => {this.setState({errorMessage: error.response.data.first_name || error.response.data.last_name})})
+    };
+
 
 	render() {
 		const { values, handleChange, step } = this.props;
@@ -21,57 +59,64 @@ export class FormUserDetails extends Component {
 
 		return (
 			<Fragment>
-				<div className="container-fluid">
-                    <div className="row">
-                        <div className="signin_box p-3 shadow mb-5 col-12 col-md-4 col-sm-6 offset-sm-3 offset-md-4">
+				<div className="main_div">
+                        <div className="signup_box p-3 shadow mb-5">
 
-                                <div className="col-sm-12 my-auto">
+                                <div className="col-sm-12">
                                		<div className="row">
-                                        <div className="v9_2 col-md-12">Step {values.step} / 3</div>
+                                        <div className="step col-md-12">Step {values.step} / 3</div>
                                     </div>
 
                                     <div className="row">
-                                        <div className="v9_3 col-md-12">Sign Up</div>
+                                        <div className="sign_up_text col-md-12">Sign Up</div>
                                     </div>
                                     <div className="row">
-                                        <span className="v12_0 col-sm-8">Already have an account? </span>
-                                        <Link to={"/signin"} className="v12_2 col-sm-3">Sign In</Link>
+                                        <span className="question col-sm-8">Already have an account? </span>
+                                        <Link to={"/signin"} className="signin_Link col-sm-3">Sign In</Link>
                                     </div>  
                                 </div>
                                    
                     			<form>
                                     <div className="row">
-                                        <label className="v12_3 col-md-10 offset-md-1">Sign Up using email address</label>
+                                        <label className="use_email col-md-10 offset-md-1">Sign Up using email address</label>
                                     </div>
-                                    <div className="row">
-                                        <input type="text" className="v12_4 col-md-9 offset-md-1" placeholder="First Name *" onChange={handleChange('firstName')} value={values.firstName} autoComplete="off" onFocus={this.onFocus} required/>
+
+                                    <div className="inputBox">
+                                        <input type="text" onChange={handleChange('firstName')} value={values.firstName} autoComplete="off" onFocus={this.onFocus} required/>
+                                        <label>First Name</label>
                                     </div>  
-                                    <div className="row">
-                                        <input type="text" className="v12_4 col-md-9 offset-md-1" placeholder="Last Name *" onChange={handleChange('lastName')} value={values.lastName} autoComplete="off" onFocus={this.onFocus} required/>
+                                    <div className="inputBox">
+                                        <input type="text" onChange={handleChange('lastName')} value={values.lastName} autoComplete="off" onFocus={this.onFocus} required/>
+                                        <label>Last Name</label>
                                     </div>  
-                                    <div className="row">
-                                        <input type="email" className="v12_4 col-md-9 offset-md-1" placeholder="Email Address" onChange={handleChange('email')} value={values.email} autoComplete="off" onFocus={this.onFocus} required/>
+                                    <div className="inputBox">
+                                        <input type="email" onChange={handleChange('email')} value={values.email} autoComplete="off" onFocus={this.onFocus} required/>
+                                        <label>Email Address</label>
                                     </div>  
-                                    <div className="row">
-                                        <input type="password" className="v12_4 col-md-9 offset-md-1" placeholder="Password" onChange={handleChange('password')} value={values.password}/>
+                                    <div className="inputBox">
+                                        <input type="password" onChange={handleChange('password')} value={values.password} autoComplete="off" onFocus={this.onFocus} required/>
+                                        <label>Password</label>
                                     </div>  
-                                    <div className="row">
-                                        <input type="password" className="v12_4 col-md-9 offset-md-1" placeholder="Confirm Password" onChange={handleChange('confPassword')} value={values.confPassword}/>
+                                    <div className="inputBox">
+                                        <input type="password" onChange={handleChange('confPassword')} value={values.confPassword} autoComplete="off" onFocus={this.onFocus} required/>
+                                        <label>Confirm Password</label>
                                     </div>  
                 			    </form>
-                    			
+
+                                { this.state.errorMessage &&
+  <h3 className="alert alert-danger"> { this.state.errorMessage } </h3> }
+
                                 <div className="row">
-                                    <button className="btn btn-primary shadow-sm col-md-6 offset-md-3 submit-btn" type="submit" onClick={this.continue}>
+                                    <button className="btn btn-primary shadow-sm col-sm-6 offset-sm-3 submit-btn" type="submit" onClick={this.handleSubmit}>
                                         <span>Create Account</span>
                                     </button>
                                 </div>
 
                 				<div className="row">
-                                    <span className="v12_21 col-md-8 offset-md-2">Protected by reCAPTCHA and subject to the Google <a href="#" className="v12_22">Privacy Policy</a> and <a href="#" className="v12_22">Terms of service</a>.</span>
+                                    <span className="captcha col-md-8 offset-md-2">Protected by reCAPTCHA and subject to the Google <a href="#" className="v12_22">Privacy Policy</a> and <a href="#" className="v12_22">Terms of service</a>.</span>
                                 </div>
 
                         </div>  
-        			</div>
         		</div>
 			</Fragment>
 		)

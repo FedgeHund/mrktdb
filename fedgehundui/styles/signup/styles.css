@@ -1,32 +1,41 @@
-.navcolor {
-  background: rgba(254,111,125,1);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.signin_box {
-	background: #fff;
-	height: 715px;
-	margin: 0 auto;
-	margin-top: 77px;
+.main_div {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.signup_box {
+  width: 500px;
+  position: absolute;
+  height: 745px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  background: #fff;
 	border-radius: 12px;
 }
 
-.v9_2 {
+.signup_box .step{
   color: #a2a2a2;
   padding-top: 20px;
 }
 
-.v9_3 {
+.signup_box .sign_up_text {
   color: rgba(81,81,81,1);
-  position: relative;
   text-align: center;
   font-family: OpenSans-SemiBold;
   font-size: 42px;
   font-weight: 500;
-  padding-top: 10px;
-  font-size: 42px;
 }
 
-.v12_0 {
+.signup_box .question{
   color: #515151;
   position: relative;
   font-family: OpenSans;
@@ -34,145 +43,85 @@
   font-size: 17px;
   text-align: right;
   padding-top: 17px;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 }
 
-.v12_2 {
+.signup_box .signin_Link{
   color: #fe6f7d;
   position: relative;
   font-family: OpenSans;
   font-weight: Regular;
   font-size: 17px;
-  text-decoration: none;
   padding-top: 17px;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 }
 
-a:hover {
-  color: rgba(254,111,125,1);
-}
-
-.v12_3 {
+.signup_box .use_email{
   color: #a2a2a2;
   position: relative;
   font-family: Open Sans;
-  font-size: 16px;
+  font-size: 19px;
   padding-top: 35px;
   margin-left: 46px;
-  margin-bottom: -5px;
 }
 
-.v12_4 {
-  color: #fe6f7d;
+.signup_box .inputBox {
   position: relative;
-  font-family: Open Sans;
-  font-weight: Regular;
+  left: 10%;
+  margin-top: 20px;
+}
+
+.signup_box .inputBox input{
+  width: 80%;
+  padding: 4px;
+  padding-left: 10px;
   font-size: 18px;
+  color: #fe6f7d;
+  border: none;
+  border-bottom: solid #A9A9A9 1px;
+  outline: none;
+  background: transparent;
+  text-align: left;
+}
+
+.signup_box .inputBox label{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  font-size: 17px;
+  font-family: OpenSans;
+  font-weight: 80;
+  opacity: 0.5;
+  transition: 0.4s;
+  z-index: -1;
+}
+
+.signup_box .inputBox input:focus ~ label,
+.signup_box .inputBox input:valid ~ label{
+  top: -25px;
+  left: 0;
+  color: #A9A9A9;
+  font-size: 12px;
   opacity: 1;
-  padding-top: 20px;
 }
 
-.v12_13 {
-  color: rgba(162,162,162,1);
-  position: relative;
-  font-family: Open Sans;
-  font-weight: Regular;
-  font-size: 16px;
-  opacity: 1;
-  padding-top: 80px;
-  padding-bottom: 40px;
-  margin: 0 auto;
-  display: flex; 
-  flex-direction: row; 
-}
-
-.v12_13:before{
-  content: ""; 
-  flex: 1 1; 
-  border-bottom: 1px solid silver; 
-  margin: auto; 
-  margin-right: 10px;
-}
-
-.v12_13:after { 
-  content: ""; 
-  flex: 1 1; 
-  border-bottom: 1px solid silver; 
-  margin: auto; 
-  right: 10px;
-  margin-left: 10px;
-} 
-
-.v12_14 {
-  position: relative;
-  font-family: Open Sans;
-  font-weight: Italic;
-  font-size: 20px;
-  text-align: center;
-  border-radius: 50px;
-}
-
-.v12_15 {
-  position: relative;
-  font-family: Open Sans;
-  font-weight: Italic;
-  font-size: 20px;
-  text-align: center;
-  border-radius: 50px;
-  top: 10px;
-}
-
-.v12_21 {
+.signup_box .captcha{
   position: relative;
   font-family: OpenSans;
-  font-size: 11px;
+  font-size: 12px;
   opacity: 1;
   text-align: center;
-  padding-top: 50px;
+  padding-top: 40px;
   color: #a2a2a2;
 }
 
-.v12_22 {
-	color: rgba(254,111,125,1);
-}
 
-input {
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    background-color: transparent;
-    text-decoration: none;
-    color: #fe6f7d;
-    outline: none;
-    outline-style: none;
-    border-bottom: solid #A9A9A9 1px;
-    text-align: left;
-}
 
-input:focus {
-    outline-width: 0;
-    border-top-style: hidden;
-    border-right-style: hidden;
-    border-left-style: hidden;
-    color: #fe6f7d;
-    text-align: left;
-}
 
-/*
-.v12_9 {
-  position: relative;
-  font-family: Open Sans;
-  font-weight: Italic;
-  font-size: 20px;
-  text-align: center;
-  background-color: rgba(254,111,125,1);
-  border-color: transparent;
-  border-radius: 50px;
-  top: 45px;
-}
-*/
 
-.submit-btn{
+/* CSS for submit button */
+.signup_box .submit-btn{
     position: relative;
     padding: 10px 30px;
     cursor: pointer;
@@ -182,24 +131,24 @@ input:focus {
     outline: none;
     border-radius: 30px;
     color: white;
-    margin-top: 65px;
+    margin-top: 60px;
     background-color: rgba(254,111,125,1);
     font-family: OpenSans-SemiBold;
 }
 
-.submit-btn:hover {
+.signup_box .submit-btn:hover {
   box-shadow: 0 0 11px rgba(33,33,33,.2); 
   background-color: rgba(254,111,125,1) !important;
 }
 
-.submit-btn span {
+.signup_box .submit-btn span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-.submit-btn span:after {
+.signup_box .submit-btn span:after {
   content: '\21E8';
   position: absolute;
   opacity: 0;
@@ -208,50 +157,52 @@ input:focus {
   transition: 0.5s;
 }
 
-.submit-btn:hover span {
+.signup_box .submit-btn:hover span {
   padding-right: 25px;
 }
 
-.submit-btn:hover span:after {
+.signup_box .submit-btn:hover span:after {
   opacity: 1;
   right: 0;
 }
 
-.submit-btn:focus {
+.signup_box .submit-btn:focus {
   background-color: rgba(254,111,125,1) !important;
 }
 
 
-/* For Personal Details */
 
-.back-btn{
-    position: relative;
-    padding: 10px 30px;
-    cursor: pointer;
-    text-align: center;
-    display: block;
-    border-color: rgba(254,111,125,1);
-    border-radius: 30px;
-    margin-top: 65px;
-    color: rgba(254,111,125,1);
-    font-family: OpenSans-SemiBold;
+
+
+/* CSS for back button */
+.signup_box .back-btn{
+  position: relative;
+  padding: 10px 30px;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  border-color: rgba(254,111,125,1);
+  border-radius: 30px;
+  margin-top: 60px;
+  color: rgba(254,111,125,1);
+  font-family: OpenSans-SemiBold;
 }
 
-.back-btn:hover {
+.signup_box .back-btn:hover {
   box-shadow: 0 0 11px rgba(33,33,33,.2); 
   background-color: rgba(254,111,125,1) !important;
   color: white;
   transition: 0.03s;
 }
 
-.back-btn span {
+.signup_box .back-btn span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-.back-btn span:after {
+.signup_box .back-btn span:after {
   content: '\21E6';
   color: white;
   position: absolute;
@@ -261,16 +212,22 @@ input:focus {
   transition: 0.5s;
 }
 
-.back-btn:hover span {
+.signup_box .back-btn:hover span {
   padding-left: 17px;
 }
 
-.back-btn:hover span:after {
+.signup_box .back-btn:hover span:after {
   opacity: 1;
   left: -10px;
 }
 
-.v8_3 {
+
+
+
+
+
+/* More details Page */
+.signup_box .detail_heading{
   color: rgba(81,81,81,1);
   position: relative;
   text-align: center;
@@ -280,58 +237,17 @@ input:focus {
   padding-bottom: 25px;
 }
 
-/* Profile picture */
-.propic_box {
-  background: #fff;
-  height: 590px;
-  margin: 0 auto;
-  margin-top: 97px;
-  border-radius: 12px;
-}
 
-.v7_3 {
-  color: rgba(81,81,81,1);
-  position: relative;
-  text-align: center;
-  font-family: OpenSans-SemiBold;
-  font-size: 35px;
-  padding-top: 30px;
-  padding-bottom: 25px;
-}
 
-/* Create page */
 
-.v12_24 {
-  position: relative;
-  font-family: OpenSans-Regular;
-  font-size: 13px;
-  opacity: 1;
-  text-align: center;
-  padding-top: 50px;
-  padding-bottom: 25px;
-  color: #a2a2a2;
-}
-
-.create_message {
-  color: #363636;
-  font-size: 25px; 
-  text-align: center;
-  margin-top: 10px;
-}
-
-.created_email {
-  color: #a2a2a2;
-  font-size: 16px; 
-  text-align: center;
-}
-
-.uploaded_pic {
+/* CSS for Profile Picture page */
+.signup_box .uploaded_pic {
   padding-top: 30px; 
   padding-bottom: 10px; 
   text-align: center;
 }
 
-.circle {
+.signup_box .circle {
   height: 200px;
   width: 200px;
   background-color: #bbb;
@@ -339,14 +255,39 @@ input:focus {
   display: inline-block;
 }
 
-input::placeholder {
-  font-family: OpenSans;
-  font-weight: 80;
-  font-size: 16px;
-  opacity: 0.5;
+
+
+
+/* CSS for Welcome (Confirm) page */
+.signup_box .almost_text {
+  color: rgba(81,81,81,1);
+  text-align: center;
+  font-family: OpenSans-SemiBold;
+  font-size: 42px;
+  font-weight: 500;
+  margin-top: 40px;
+  margin-bottom: 30px;
 }
 
-/* Success box */
+.signup_box .create_message {
+  color: #363636;
+  font-size: 25px; 
+  font-family: OpenSans;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.signup_box .created_email {
+  color: #a2a2a2;
+  font-size: 16px; 
+  font-family: OpenSans;
+  text-align: center;
+}
+
+
+
+
+/* CSS for success page */
 .success_content1 {
   color: rgba(81,81,81,1);
   position: relative;

@@ -19,7 +19,7 @@ export class UserForm extends Component {
 		profilePicture : '',
 		state: '',
 		zipCode: '',
-		phone: ''
+		phone: '',
 	}
 
 	// Proceed to next step
@@ -40,7 +40,7 @@ export class UserForm extends Component {
 
 	// Handle fields change
 	handleChange = input => e => {
-		this.setState({[input] : e.target.value});
+		this.setState({[input] : e.target.value, errorMessage: ''});
 	}
 
 	render() {

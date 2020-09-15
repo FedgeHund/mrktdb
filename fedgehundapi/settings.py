@@ -181,5 +181,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
 
 CRON_CLASSES = [
-    "edgar.cik-cusip.CikCusipCronJob",
+    "edgar.cikCusipCronJob.CikCusipCronJob",
 ]

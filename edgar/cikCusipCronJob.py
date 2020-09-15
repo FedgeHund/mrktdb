@@ -21,6 +21,4 @@ class CikCusipCronJob(CronJobBase):
                 )
                 for row in data
             ]
-            print("Starting...")
             CikCusipMapping.objects.bulk_create(Objects, batch_size = 1000)
-            print("End!")

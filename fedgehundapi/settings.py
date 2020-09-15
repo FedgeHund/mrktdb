@@ -45,7 +45,7 @@ if DJANGO_ENV == "production":
         }
     }
 else:
-    # Use local DB in development
+    #Use local DB in development
     DATABASES = {
         'default': {
             'ENGINE': 'djongo',

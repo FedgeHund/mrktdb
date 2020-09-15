@@ -46,12 +46,18 @@ if DJANGO_ENV == "production":
     }
 else:
     # Use local DB in development
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'djongo',
+    #         'NAME': env('LOCAL_DB_NAME', default=''),
+    #     }
+    # }
     DATABASES = {
-        'default': {
-            'ENGINE': 'djongo',
-            'NAME': env('LOCAL_DB_NAME', default=''),
-        }
-    }
+         'default': {
+             'ENGINE': 'djongo',
+             'NAME': 'mrktdb',
+         }
+     }
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

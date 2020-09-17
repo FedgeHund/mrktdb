@@ -106,6 +106,17 @@
   opacity: 1;
 }
 
+.signup_box .validations{
+  color: #fe6f7d;
+  position: relative;
+  font-family: OpenSans;
+  font-weight: Regular;
+  font-size: 12px;
+  left: 12%;
+  padding-top: 15px;
+  margin-bottom: -35px;
+}
+
 .signup_box .captcha{
   position: relative;
   font-family: OpenSans;

@@ -49,7 +49,12 @@ export class FormUserDetails extends Component {
                     //window.location = "http://127.0.0.1:8000/signin/"
                 }
             }.bind(this))
-        .catch(error => {this.setState({errorMessage: error.response.data.first_name || error.response.data.last_name})})
+        .catch(error => {this.setState({errorMessage: error.response.data.first_name || 
+                                                    error.response.data.last_name || 
+                                                    error.response.data.email || 
+                                                    error.response.data.password1 || 
+                                                    error.response.data.password2})}
+        )
     };
 
 
@@ -101,10 +106,8 @@ export class FormUserDetails extends Component {
                                         <input type="password" onChange={handleChange('confPassword')} value={values.confPassword} autoComplete="off" onFocus={this.onFocus} required/>
                                         <label>Confirm Password</label>
                                     </div>  
+                                    <div>{ this.state.errorMessage && <p className="validations"> *{ this.state.errorMessage } </p> }</div>
                 			    </form>
-
-                                { this.state.errorMessage &&
-  <h3 className="alert alert-danger"> { this.state.errorMessage } </h3> }
 
                                 <div className="row">
                                     <button className="btn btn-primary shadow-sm col-sm-6 offset-sm-3 submit-btn" type="submit" onClick={this.handleSubmit}>

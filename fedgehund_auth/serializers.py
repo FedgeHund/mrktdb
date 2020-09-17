@@ -16,6 +16,13 @@ class UserRegisterSerializer(RegisterSerializer):
             'email': self.validated_data.get('email', ''),
         }
 
+    def __init__(self, *args, **kwargs):
+        super(RegisterSerializer, self).__init__(*args, **kwargs)
+        self.fields["first_name"].error_messages["blank"] = u"All fields on this page are required"
+        self.fields["last_name"].error_messages["blank"] = u"All fields on this page are required"
+        self.fields["email"].error_messages["blank"] = u"All fields on this page are required"
+        self.fields["password1"].error_messages["blank"] = u"All fields on this page are required"
+        self.fields["password2"].error_messages["blank"] = u"Passwords do not match"
 
 class UserSerializer(serializers.ModelSerializer):
 	profile = ProfileSerializer()

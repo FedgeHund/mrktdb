@@ -1,7 +1,16 @@
 import React, { Component, Fragment } from 'react';
+import axios from 'axios';
 import '../../../styles/signup/styles.css';
 
 export class FormPersonalDetails extends Component {
+
+    constructor(){
+        super();
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.continue = this.continue.bind(this);
+        this.state = {errorMessage: ""};
+    }
+
 	continue = e => {
 		e.preventDefault();
 		this.props.nextStep();
@@ -15,8 +24,47 @@ export class FormPersonalDetails extends Component {
     onFocus = event => {
         if(event.target.autocomplete)
         {
-            event.target.autocomplete = "Whatever";
+            event.target.autocomplete = "No";
         }
+    };
+
+    handleSubmit = async (e) => {
+        e.preventDefault();
+
+        axios.defaults.xsrfCookieName = 'csrftoken';
+        axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+        await axios.post("http://127.0.0.1:8000/profile/fields/", {
+                "occupation": this.props.values.occupation,
+                "company": this.props.values.company,
+                "state": this.props.values.state,
+                "city": this.props.values.city,
+                "zip_code": this.props.values.zip_code,
+                "phone": this.props.values.phone
+            },
+            {
+                headers: {
+                    "Content-Type": 'application/json',
+                    "X-CSRFToken": 'csrftoken'
+                }
+            }
+        )
+        .then(function(response) {
+                if(response.status == 201){
+                    //this.continue(e);
+                }
+                else{
+                    //window.location = "http://127.0.0.1:8000/signin/"
+                }
+            }.bind(this))
+        .catch(error => {this.setState({errorMessage: error.response.data.occupation || 
+                                                    error.response.data.company || 
+                                                    error.response.data.state || 
+                                                    error.response.data.city || 
+                                                    error.response.data.zip_code ||
+                                                    error.response.data.phone })}
+        )
+        this.continue(e);
     };
 
 	render() {
@@ -39,7 +87,7 @@ export class FormPersonalDetails extends Component {
                         </div>   
 
                    
-            			<form>
+            			<form method="post">
                             <div className="inputBox">
                                 <input type="text" onChange={handleChange('occupation')} value={values.occupation} autoComplete="off" onFocus={this.onFocus}/>
                                 <label>Occupation</label>
@@ -61,7 +109,7 @@ export class FormPersonalDetails extends Component {
                             </div>
 
                             <div className="inputBox">
-                                <input type="text" onChange={handleChange('zipCode')} value={values.zipCode} autoComplete="off" onFocus={this.onFocus}/>
+                                <input type="text" onChange={handleChange('zip_code')} value={values.zip_code} autoComplete="off" onFocus={this.onFocus}/>
                                 <label>Zip Code</label>
                             </div>  
 
@@ -69,14 +117,11 @@ export class FormPersonalDetails extends Component {
                                 <input type="text" onChange={handleChange('phone')} value={values.phone} autoComplete="off" onFocus={this.onFocus}/>
                                 <label>Phone Number</label>
                             </div>
+                            <div>{ this.state.errorMessage && <p className="validations"> *{ this.state.errorMessage } </p> }</div>
         			    </form>
             			
                         <div className="row">
-                            <button className="btn shadow-sm col-md-3 offset-md-1 back-btn" type="submit" onClick={this.back}>
-                                <span>Back</span>
-                            </button>
-
-                            <button className="btn btn-primary shadow-sm col-md-4 offset-md-3 submit-btn" type="submit" onClick={this.continue}>
+                            <button className="btn btn-primary shadow-sm col-md-6 offset-md-3 submit-btn" type="submit" onClick={this.handleSubmit}>
                                 <span>Continue</span>
                             </button>
                         </div>

@@ -14,11 +14,7 @@ export class FormPersonalDetails extends Component {
 
                         <div className="col-sm-12">
                             <div className="row">
-                                <div className="success_content1 col-md-10 offset-md-1">Thank you for your submission</div>
-                            </div>
-
-                            <div className="row">
-                                <div className="success_content2 col-md-10 offset-md-1">You will receive an email with further instructions</div>
+                                <div className="success_content1 col-md-10 offset-md-1">Homepage</div>
                             </div>
                         </div>
                       

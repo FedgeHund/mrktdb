@@ -1,4 +1,5 @@
 from rest_auth.registration.serializers import RegisterSerializer
+from rest_auth.serializers import LoginSerializer
 from rest_framework import serializers
 from fedgehund_profile.models import Profile
 from django.contrib.auth.models import User
@@ -23,6 +24,20 @@ class UserRegisterSerializer(RegisterSerializer):
         self.fields["email"].error_messages["blank"] = u"All fields on this page are required"
         self.fields["password1"].error_messages["blank"] = u"All fields on this page are required"
         self.fields["password2"].error_messages["blank"] = u"Passwords do not match"
+
+
+class UserLoginSerializer(LoginSerializer):
+    email = serializers.EmailField(required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(LoginSerializer, self).__init__(*args, **kwargs)
+        self.fields["email"].error_messages["invalid"] = u"Enter a valid  address"
+        self.fields["email"].error_messages["blank"] = u"Enter a valid email address"
+        self.fields["email"].error_messages["required"] = u"Unable to login with the provided credentials"
+        self.fields["password"].error_messages["blank"] = u"Enter your password"
+        self.fields["password"].error_messages["required"] = u"Enter your password"
+        self.fields["password"].error_messages["invalid"] = u"Unable to login with the provided credentials"
+
 
 class UserSerializer(serializers.ModelSerializer):
 	profile = ProfileSerializer()

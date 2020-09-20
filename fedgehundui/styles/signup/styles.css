@@ -112,9 +112,9 @@
   font-family: OpenSans;
   font-weight: Regular;
   font-size: 12px;
-  left: 12%;
-  padding-top: 15px;
-  margin-bottom: -35px;
+  margin-left: 55px;
+  padding-top: 18px;
+  margin-bottom: -36px;
 }
 
 .signup_box .captcha{
@@ -127,6 +127,9 @@
   color: #a2a2a2;
 }
 
+.signup_box .captcha .links{
+  color: #fe6f7d;
+}
 
 
 
@@ -295,9 +298,6 @@
   text-align: center;
 }
 
-
-
-
 /* CSS for success page */
 .success_content1 {
   color: rgba(81,81,81,1);
@@ -310,13 +310,27 @@
   padding-top: 220px;
 }
 
-.success_content2 {
-  color: rgba(81,81,81,1);
+
+
+
+/* CSS for Sign In page */
+.signup_box .forgotPassword{
+  color: #a2a2a2;
   position: relative;
-  text-align: center;
-  justify-content: center;
-  font-family: OpenSans-SemiBold;
-  font-size: 23px;
-  font-weight: 500;
-  padding-top: 10px;
+  font-family: OpenSans;
+  font-weight: Regular;
+  font-size: 12px;
+  left: 12%;
+  padding-top: 15px;
+}
+
+.signup_box .signinValidations{
+  color: #fe6f7d;
+  position: relative;
+  font-family: OpenSans;
+  font-weight: Regular;
+  font-size: 13px;
+  margin-left: 65px;
+  padding-top: 18px;
+  margin-bottom: -38px;
 }

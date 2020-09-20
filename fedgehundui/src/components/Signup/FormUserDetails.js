@@ -9,7 +9,7 @@ export class FormUserDetails extends Component {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
         this.continue = this.continue.bind(this);
-        this.state = {errorMessage: ""};
+        this.state = {errorMessage: "", buttonText: "Create Account"};
     }
 
 	continue = e => {
@@ -25,10 +25,12 @@ export class FormUserDetails extends Component {
     };
 
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
 
-        axios.post("http://127.0.0.1:8000/auth/registration/", {
+        this.setState({buttonText: "Creating..."});
+
+        await axios.post("http://127.0.0.1:8000/auth/registration/", {
                 "first_name": this.props.values.firstName,
                 "last_name": this.props.values.lastName,
                 "email": this.props.values.email,
@@ -53,8 +55,9 @@ export class FormUserDetails extends Component {
                                                     error.response.data.last_name || 
                                                     error.response.data.email || 
                                                     error.response.data.password1 || 
-                                                    error.response.data.password2})}
+                                                    error.response.data.password2 })}
         )
+        this.setState({buttonText: "Create Account"});
     };
 
 
@@ -111,12 +114,12 @@ export class FormUserDetails extends Component {
 
                                 <div className="row">
                                     <button className="btn btn-primary shadow-sm col-sm-6 offset-sm-3 submit-btn" type="submit" onClick={this.handleSubmit}>
-                                        <span>Create Account</span>
+                                        <span>{this.state.buttonText}</span>
                                     </button>
                                 </div>
 
                 				<div className="row">
-                                    <span className="captcha col-md-8 offset-md-2">Protected by reCAPTCHA and subject to the Google <a href="#" className="v12_22">Privacy Policy</a> and <a href="#" className="v12_22">Terms of service</a>.</span>
+                                    <span className="captcha col-md-8 offset-md-2">Protected by reCAPTCHA and subject to the Google <a href="#" className="links">Privacy Policy</a> and <a href="#" className="links">Terms of service</a>.</span>
                                 </div>
 
                         </div>  

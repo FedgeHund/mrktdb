@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 
 """
 scraper.py contains the main functionality to find and scrape
@@ -15,6 +15,7 @@ from csv import DictWriter
 import csv
 import datetime
 import os
+import time
 import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
 django.setup()
@@ -24,19 +25,34 @@ import sys
 import time
 import urllib.request
 import urllib.parse
-
+from django.utils.timezone import now
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-
+import random
 SEC_LINK = "https://www.sec.gov/edgar/searchedgar/companysearch.html"
 CIK_SEARCH_URL = "https://www.sec.gov/cgi-bin/browse-edgar?CIK="
 DOMAIN = "https://www.sec.gov"
-data1=[]
+infoTableData=[]
+securitymaster=[]
+cusiplist=[]
 
+for se in Security.objects.all():
+    securitymaster.append(se.cusip)
+
+print(securitymaster)
+print(len(securitymaster))
+# valuelist=[]
+# amountlist=[]
+# holdingTypelist=[]
+# investmentDiscretionlist=[]
+# solelist=[]
+# sharedlist=[]
+# nonelist=[]
+uinlist=[]
 class HoldingsScraper:
     """Find holdings data in funds by scraping data from the SEC."""
 
@@ -133,17 +149,15 @@ class HoldingsScraper:
             print(xml_file2)
 
             sys.stdout.write('Getting holdings from: %s\n' % xml_file)
-            holdings = self.get_holdings_xml(xml_file)
+            holdings = self.infoTable(xml_file)
             col_headers = holdings[0]
             data = holdings[1]
 
             sys.stdout.write('Getting holdings from: %s\n' % xml_file2)
-            holdings2 = self.get_holdings_xml2(xml_file2)
-            col_headers2 = holdings2[0]
-            data2 = holdings2[1]
-            # self.save_holdings_xml(file_name, report_headers, col_headers, data, col_headers2, data2)
-
-
+            coverPage = self.primaryDoc(xml_file2)
+            col_headers2 = coverPage[0]
+            coverPageData = coverPage[1]
+            # self.save_holdings_xml(file_name, report_headers, col_headers, data, col_headers2, coverPageData)
 
         except:
             pass
@@ -177,216 +191,266 @@ class HoldingsScraper:
         # col_report = list(header_report.keys())
         return(file_name, headers)
 
-    def get_holdings_xml(self, xml_file):
+    def infoTable(self, xml_file):
         """Get holdings detail from xml file and store data.
 
         XML format for filings was required by SEC in 2013.
         """
         self.browser.get(xml_file)
         soup = BeautifulSoup(self.browser.page_source, "xml")
-        holdings = soup.find_all('infoTable')
+        infoTable = soup.find_all('infoTable')
         data = []
-
+        objs=[]
+        toBeSaved=[]
+        cusiplist.clear()
+        uinlist.clear()
         # Attempt retrieval of available attributes for 13F filings
-        for i in range(len(holdings)):
+        for i in range(len(infoTable)):
             d = {}
+            
             try:
-                d['nameOfIssuer'] = holdings[i].find('nameOfIssuer').text
+                d['nameOfIssuer'] = infoTable[i].find('nameOfIssuer').text
             except:
                 pass
             try:
-                d['titleOfClass'] = holdings[i].find('titleOfClass').text
+                d['titleOfClass'] = infoTable[i].find('titleOfClass').text
             except:
                 pass
             try:
-                d['cusip'] = holdings[i].find('cusip').text
+                d['cusip'] = infoTable[i].find('cusip').text
             except:
                 pass
             try:
-                d['value'] = holdings[i].find('value').text
+                d['value'] = infoTable[i].find('value').text
             except:
                 pass
             try:
-                d['sshPrnamt'] = holdings[i].find('shrsOrPrnAmt').find('sshPrnamt').text
+                d['sshPrnamt'] = infoTable[i].find('shrsOrPrnAmt').find('sshPrnamt').text
             except:
                 pass
             try:
-                d['sshPrnamtType'] = holdings[i].find('shrsOrPrnAmt').find('sshPrnamtType').text
+                d['sshPrnamtType'] = infoTable[i].find('shrsOrPrnAmt').find('sshPrnamtType').text
             except:
                 pass
             try:
-                d['putCall'] = holdings[i].find('putCall').text
+                d['putCall'] = infoTable[i].find('putCall').text
             except:
                  pass
             try:
-                d['investmentDiscretion'] = holdings[i].find('investmentDiscretion').text
+                d['investmentDiscretion'] = infoTable[i].find('investmentDiscretion').text
             except:
                 pass
             try:
-                d['otherManager'] = holdings[i].find('otherManager').text
+                d['otherManager'] = infoTable[i].find('otherManager').text
             except:
                 pass
             try:
-                d['votingAuthoritySole'] = holdings[i].find('votingAuthority').find('Sole').text
+                d['votingAuthoritySole'] = infoTable[i].find('votingAuthority').find('Sole').text
             except:
                 pass
             try:
-                d['votingAuthorityShared'] = holdings[i].find('votingAuthority').find('Shared').text
+                d['votingAuthorityShared'] = infoTable[i].find('votingAuthority').find('Shared').text
             except:
                 pass
             try:
-                d['votingAuthorityNone'] = holdings[i].find('votingAuthority').find('None').text
+                d['votingAuthorityNone'] = infoTable[i].find('votingAuthority').find('None').text
             except:
+                pass
+            infoTableData.append(d)
+            randomNumber=random.randint(0,1000)
+            uin=d['cusip']+str(randomNumber)+d['votingAuthoritySole']+d['value']
+            uinlist.append(uin)
+            cusiplist.append(d['cusip'])
+            try:
+                if d['cusip'] not in securitymaster:
+                    securitymaster.append(d['cusip'])
+                    toBeSaved.append(d)
+            except:
+                print("No new security to be saved")
                 pass
 
-        for items in range(len(data1)):    
-            try:
-                Security.objects.get_or_create(cusip = data1[items]['cusip'],securityName = data1[items]['nameOfIssuer'] ,securityType = 'STOCK',titleOfClass = data1[items]['titleOfClass'])
-            except:
-                pass
-            data1.append(d)
+        try:        
+            securityObjects = [
+                Security(
+                    cusip = toBeSaved[items]['cusip'],securityName = toBeSaved[items]['nameOfIssuer'] ,securityType = 'STOCK',titleOfClass = toBeSaved[items]['titleOfClass']
+                )
+                for items in range(len(toBeSaved))
+            ]
+        except:
+            print("caught exception while creating security objects and appending them to the securityObjects list")
+            pass
+
+        print("Bulk Save for Securities Started")
+        try:
+            Security.objects.bulk_create(securityObjects)
+        except:
+            print("caught exception while saving securities")
+            pass
+        print("Bulk Save for Securities Ended")
+        securityObjects.clear()
+        toBeSaved.clear()
+            
         col_headers = list(d.keys())
         return(col_headers, data)
 
       
-    def get_holdings_xml2(self, xml_file2):
+    def primaryDoc(self, xml_file2):
         self.browser.get(xml_file2)
         soup = BeautifulSoup(self.browser.page_source, "xml")
-        holdings2 = soup.find_all('coverPage')
-        data2 = []
+        coverPage = soup.find_all('coverPage')
+        coverPageData = []
         
         filingtype=''
-        for i in range(len(holdings2)):
+        for i in range(len(coverPage)):
             d2 = {}
             try:
-                d2['reportCalendarOrQuarter'] = holdings2[i].find('reportCalendarOrQuarter').text
+                d2['reportCalendarOrQuarter'] = coverPage[i].find('reportCalendarOrQuarter').text
             except:
                 pass
             try:
-                d2['isAmendment'] = holdings2[i].find('isAmendment').text
+                d2['isAmendment'] = coverPage[i].find('isAmendment').text
             except:
                 pass
             try:
-                d2['filing_manager_name'] = holdings2[i].find('filingManager').find('name').text
+                d2['amendmentType'] = coverPage[i].find('amendmentInfo').find('amendmentType').text
             except:
                 pass
-# =============================================================================================================================================
             try:
-                d2['filingManager_address1_street1'] = holdings2[i].find('filingManager').find('address').find('com:street1').text
-            except:
-                pass
-
-            try:
-                d2['filingManager_address1_street1'] = holdings2[i].find('filingManager').find('address').find('ns1:street1').text
+                d2['filing_manager_name'] = coverPage[i].find('filingManager').find('name').text
             except:
                 pass
 # =============================================================================================================================================
             try:
-                d2['filingManager_address2_street2'] = holdings2[i].find('filingManager').find('address').find('com:street2').text
+                d2['filingManager_address1_street1'] = coverPage[i].find('filingManager').find('address').find('com:street1').text
             except:
                 pass
 
             try:
-                d2['filingManager_address2_street2'] = holdings2[i].find('filingManager').find('address').find('ns1:street2').text
+                d2['filingManager_address1_street1'] = coverPage[i].find('filingManager').find('address').find('ns1:street1').text
             except:
                 pass
-
 # =============================================================================================================================================
             try:
-                d2['filingManager_address3_city'] = holdings2[i].find('filingManager').find('address').find('com:city').text
+                d2['filingManager_address2_street2'] = coverPage[i].find('filingManager').find('address').find('com:street2').text
             except:
                 pass
 
             try:
-                d2['filingManager_address3_city'] = holdings2[i].find('filingManager').find('address').find('ns1:city').text
+                d2['filingManager_address2_street2'] = coverPage[i].find('filingManager').find('address').find('ns1:street2').text
             except:
                 pass
 
 # =============================================================================================================================================
             try:
-                d2['filingManager_address4_state-or-country'] = holdings2[i].find('filingManager').find('address').find('com:stateOrCountry').text
+                d2['filingManager_address3_city'] = coverPage[i].find('filingManager').find('address').find('com:city').text
             except:
                 pass
 
             try:
-                d2['filingManager_address4_state-or-country'] = holdings2[i].find('filingManager').find('address').find('ns1:stateOrCountry').text
-            except:
-                pass
-
-# =============================================================================================================================================
-            try:
-                d2['filingManager_address5_zipCode'] = holdings2[i].find('filingManager').find('address').find('com:zipCode').text
-            except:
-                pass
-
-            try:
-                d2['filingManager_address5_zipCode'] = holdings2[i].find('filingManager').find('address').find('ns1:zipCode').text
+                d2['filingManager_address3_city'] = coverPage[i].find('filingManager').find('address').find('ns1:city').text
             except:
                 pass
 
 # =============================================================================================================================================
             try:
-                d2['reportType'] = holdings2[i].find('reportType').text
+                d2['filingManager_address4_state-or-country'] = coverPage[i].find('filingManager').find('address').find('com:stateOrCountry').text
             except:
-                 pass
+                pass
+
             try:
-                d2['form13FFileNumber'] = holdings2[i].find('form13FFileNumber').text
+                d2['filingManager_address4_state-or-country'] = coverPage[i].find('filingManager').find('address').find('ns1:stateOrCountry').text
+            except:
+                pass
+
+# =============================================================================================================================================
+            try:
+                d2['filingManager_address5_zipCode'] = coverPage[i].find('filingManager').find('address').find('com:zipCode').text
+            except:
+                pass
+
+            try:
+                d2['filingManager_address5_zipCode'] = coverPage[i].find('filingManager').find('address').find('ns1:zipCode').text
+            except:
+                pass
+
+# =============================================================================================================================================
+            try:
+                d2['reportType'] = coverPage[i].find('reportType').text
             except:
                 pass
             try:
-                d2['otherManager_form13fFileNumber'] = holdings2[i].find('otherManager').find('form13FFileNumber').text
+                d2['form13FFileNumber'] = coverPage[i].find('form13FFileNumber').text
             except:
                 pass
             try:
-                d2['otherManager_name'] = holdings2[i].find('otherManager').find('name').text
+                d2['otherManager_form13fFileNumber'] = coverPage[i].find('otherManager').find('form13FFileNumber').text
+            except:
+                pass
+            try:
+                d2['otherManager_name'] = coverPage[i].find('otherManager').find('name').text
             except:
                 pass    
             try:
-                d2['provideInfoForInstruction5'] = holdings2[i].find('provideInfoForInstruction5').find('Sole').text
+                d2['provideInfoForInstruction5'] = coverPage[i].find('provideInfoForInstruction5').find('Sole').text
             except:
                 pass
-
-          
-            data2.append(d2)
-
-            
-            ad=d2['filingManager_address1_street1']+', '+d2['filingManager_address3_city']+', '+d2['filingManager_address4_state-or-country']+', '+d2['filingManager_address5_zipCode']
-            
-            Company.objects.get_or_create(name=d2['filing_manager_name'].lower(),address=ad.lower(),companyType='HF',cik=self.ticker)
-
-
+# ========================================================================================================================================
+            coverPageData.append(d2)
+            Address=d2['filingManager_address1_street1']+', '+d2['filingManager_address3_city']+', '+d2['filingManager_address4_state-or-country']+', '+d2['filingManager_address5_zipCode']
+            try:
+                Company.objects.get_or_create(name=d2['filing_manager_name'].lower(),address=Address.lower(),companyType='HF',cik=self.ticker)
+            except:
+                print("caught exception while creating Company object")
+                pass
             filenumber=''
             if(d2['form13FFileNumber'][0]=='0'):
                 filenumber=d2['form13FFileNumber']
             else:
                 filenumber='0'+d2['form13FFileNumber']
-
             
-            
-            if(filenumber[4]!='0' and len(filenumber)==8):
-                finalfilenumber=filenumber[0:4]+'0'+filenumber[4:10]
-            else:
-                finalfilenumber=filenumber
-
-
+            try:
+                if(filenumber[4]!='0' and len(filenumber)==8):
+                    finalfilenumber=filenumber[0:4]+'0'+filenumber[4:10]
+                else:
+                    finalfilenumber=filenumber
+            except:
+                pass
             # =========================================================================================================================
-            cc = Company.objects.get(cik=self.ticker)
-            Filer.objects.get_or_create(companyId=cc,fileNumber=finalfilenumber,fileType='13F')
-            ff = Filer.objects.get(fileNumber=finalfilenumber,companyId=cc)  
+            companyObject = Company.objects.get(cik=self.ticker)
+            print(companyObject)
+
+            fflag='f'
+            try:
+                Filer.objects.get(fileNumber=finalfilenumber ,fileType='13F')
+                fflag='t'
+            except:
+                pass
+            try:
+                if(fflag=='t'):
+                    Filer.objects.filter(fileNumber=finalfilenumber ,fileType='13F').update(companyId=companyObject)
+                else:
+                    Filer.objects.get_or_create(companyId=companyObject,fileNumber=finalfilenumber,fileType='13F')  
+            except:
+                pass
+            try:
+                filerObject = Filer.objects.get(fileNumber=finalfilenumber ,companyId=companyObject)
+                print(filerObject)
+            except:
+                print("filerObject not retreived")
+                pass
             
             try:
                 otherparentfilenumber=''
                 if(d2['otherManager_form13fFileNumber'][0]=='0'):
                     otherparentfilenumber=d2['otherManager_form13fFileNumber']
                 else:
-                    otherparentfilenumber='0'+d2['otherManager_form13fFileNumber']
-
+                    otherparentfilenumber='0'+d2['otherManager_form13fFileNumber']                
                 
                 if(otherparentfilenumber[4]!='0' and len(otherparentfilenumber)==8):
                     otherparentfinalfilenumber=otherparentfilenumber[0:4]+'0'+otherparentfilenumber[4:10]
                 else:
                     otherparentfinalfilenumber=otherparentfilenumber
-
+                print(otherparentfinalfilenumber)
             except:
                 pass
 
@@ -396,40 +460,48 @@ class HoldingsScraper:
             except:
                 pass
             try:
-                ffp = Filer.objects.get(fileNumber=otherparentfinalfilenumber)
+                parentFilerObject = Filer.objects.get(fileNumber=otherparentfinalfilenumber)
             except:
                 pass
-            
+            print(coverPageData)
         col_headers2 = list(d2.keys())
-      
+# ==================================================================================================      
+        signatureBlock = soup.find_all('signatureBlock')
+        d7 = {}
+        
+        try:
+            d7['signatureDate'] = signatureBlock[i].find('signatureDate').text
+        except:
+            print("FiledOn / Signature Date is not present for this filer")
+            pass
 
-        holdings3 = soup.find_all('summaryPage')
+
+        summaryPage = soup.find_all('summaryPage')
         d3 = {}
-        data3 = []
-        oc=0
+        summaryPageData = []
+        otherManagerCount=0
         try:
-            d3['otherIncludedManagersCount'] = holdings3[i].find('otherIncludedManagersCount').text
+            d3['otherIncludedManagersCount'] = summaryPage[i].find('otherIncludedManagersCount').text
         except:
             pass
 
         try:
-            d3['tableEntryTotal'] = holdings3[i].find('tableEntryTotal').text
+            d3['tableEntryTotal'] = summaryPage[i].find('tableEntryTotal').text
         except:
             pass
 
         try:
-            d3['tableValueTotal'] = holdings3[i].find('tableValueTotal').text
+            d3['tableValueTotal'] = summaryPage[i].find('tableValueTotal').text
         except:
             pass
 
         try:
-            d3['isConfidentialOmitted'] = holdings3[i].find('isConfidentialOmitted').text
+            d3['isConfidentialOmitted'] = summaryPage[i].find('isConfidentialOmitted').text
         except:
             pass
-
-        data3.append(d3)
  
-        oc = d3['otherIncludedManagersCount']
+        summaryPageData.append(d3)
+        otherManagerCount = d3['otherIncludedManagersCount']
         
         if d2['reportType']=='13F HOLDINGS REPORT':
             filingtype='HR'
@@ -437,7 +509,7 @@ class HoldingsScraper:
             filingtype='CR'
         else:
             filingtype='NT'
-
+       
         Quarter=''
         if(d2['reportCalendarOrQuarter'][:2]=='03'):
             Quarter='1'+d2['reportCalendarOrQuarter'][6:11]
@@ -447,45 +519,79 @@ class HoldingsScraper:
             Quarter='3'+d2['reportCalendarOrQuarter'][6:11]
         else:
             Quarter='4'+d2['reportCalendarOrQuarter'][6:11]
-
-        QuarterlyHolding.objects.get_or_create(filerId = ff, quarter =Quarter  ,filingType=filingtype ,filedOn = d2['reportCalendarOrQuarter'] ,acceptedAt = d2['reportCalendarOrQuarter'],totalValue =d3['tableValueTotal'] )
         
-        qq = QuarterlyHolding.objects.get(filerId = ff,quarter=Quarter)
+        try:
+            if d2['isAmendment']=='true':
+                filingtype=filingtype+'A' 
+        except:
+            pass
+        nhflag='f'
+        try:
+            if(d2['amendmentType']=='NEW HOLDINGS'):
+                nhflag='t'
+        except:
+            pass
+        try:
+            if(nhflag=='t'):
+                QuarterlyHolding.objects.filter(filerId = filerObject,quarter=Quarter).update(filingType=filingType)
+            else:
+                qflag='f'
+                try:
+                    if QuarterlyHolding.objects.get(filerId = filerObject,quarter=Quarter).filingType[2:3]=='A':
+                        qflag='t'
+                except:
+                    pass
+                filedon = datetime.datetime.strptime(d7['signatureDate'][:8], '%m-%d-%y')
+                try:
+                    QuarterlyHolding.objects.get_or_create(filerId = filerObject, quarter =Quarter  ,filingType=filingtype ,filedOn = filedon ,acceptedAt = filedon,totalValue =d3['tableValueTotal'] ,totalEntry =d3['tableEntryTotal'])
+                except:
+                    print("Exception caught while creating QuarterlyHolding Object")
+                    pass
+                try:
+                    if qflag=='t':
+                        QuarterlyHolding.objects.filter(filerId = filerObject,filingType=filingtype,quarter=Quarter).update(deletedAt=datetime.datetime.now())
+                except:
+                    pass
+        except:
+            pass
+        
+        quarterlyHoldingObject = QuarterlyHolding.objects.get(filerId = filerObject,quarter=Quarter,totalValue =d3['tableValueTotal'])
+        print(quarterlyHoldingObject)
 # ===========================================================================================================
-
-        holdings4 = soup.find_all('otherManager2')
-        data4 = []
-
-        for i in range(len(holdings4)):
+        
+        otherManager2 = soup.find_all('otherManager2')
+        otherManager2Data = []
+        print(len(otherManager2))
+        for i in range(len(otherManager2)):
             d4 = {}
             try:
-                d4['sequenceNumber'] = holdings4[i].find('sequenceNumber').text
+                d4['sequenceNumber'] = otherManager2[i].find('sequenceNumber').text
             except:
                 pass
 
             try:
-                d4['form13FFileNumber'] = holdings4[i].find('otherManager').find('form13FFileNumber').text
+                d4['form13FFileNumber'] = otherManager2[i].find('otherManager').find('form13FFileNumber').text
             except:
                 pass
 
             try:
-                d4['name'] = holdings4[i].find('otherManager').find('name').text
+                d4['name'] = otherManager2[i].find('otherManager').find('name').text
             except:
                 pass
             
             try:
                 otherchildfilenumber=''
+
                 if(d4['form13FFileNumber'][0]=='0'):
                     otherchildfilenumber=d4['form13FFileNumber']
                 else:
                     otherchildfilenumber='0'+d4['form13FFileNumber']
-  
+                
                 otherchildfinalfilenumber=''
                 if(otherchildfilenumber[4]!='0' and len(otherchildfilenumber)==8):
                     otherchildfinalfilenumber=otherchildfilenumber[0:4]+'0'+otherchildfilenumber[4:10]
                 else:
                     otherchildfinalfilenumber=otherchildfilenumber
-
             except:
                 pass
             try:
@@ -494,57 +600,121 @@ class HoldingsScraper:
                 pass
 
             try:
-                ffc = Filer.objects.get(fileNumber=otherchildfinalfilenumber)
+                childFilerObject = Filer.objects.get(fileNumber=otherchildfinalfilenumber)
             except:
                 pass
             
             try:
-                QuarterlyOtherManager.objects.get_or_create(parentFilerId =ffp ,childFilerId =ffc ,quarterlyHoldingId = qq,number=oc )
+                QuarterlyOtherManager.objects.get_or_create(parentFilerId =parentFilerObject ,childFilerId =childFilerObject ,quarterlyHoldingId = quarterlyHoldingObject,number=otherManagerCount )
             except:
                 pass
             
             try:
-                QuarterlyOtherManager.objects.get_or_create(childFilerId =ffc ,quarterlyHoldingId = qq,number=oc )
+                QuarterlyOtherManager.objects.get_or_create(childFilerId =childFilerObject ,quarterlyHoldingId = quarterlyHoldingObject,number=otherManagerCount )
             except:
                 pass
             try:
-                QuarterlyOtherManager.objects.get_or_create(parentFilerId =ffp ,quarterlyHoldingId = qq,number=oc )
+                QuarterlyOtherManager.objects.get_or_create(parentFilerId =parentFilerObject ,quarterlyHoldingId = quarterlyHoldingObject,number=otherManagerCount )
             except:
                 pass
             try:
-                qom = QuarterlyOtherManager.objects.get(quarterlyHoldingId = qq,number=oc )
+                QuarterlyOtherManagerObject = QuarterlyOtherManager.objects.get(quarterlyHoldingId = quarterlyHoldingObject,number=otherManagerCount )
 
             except:
                 pass
-            data4.append(d4)
+            otherManager2Data.append(d4)
           
-        for i in range(len(data1)):
-     
+        QuarterlySecurityHoldingObjectstbs=[]
+        QuarterlyOtherManagerObjectstbs=[]
+        sss=[]
+        print(quarterlyHoldingObject)
+        print(len(cusiplist))
+        print(len(infoTableData))
+
+        # ===================================================================================================================
+
+        for i in range(len(infoTableData)):
             try:
-         
-                ss=Security.objects.get(cusip = data1[i]['cusip'],securityName = data1[i]['nameOfIssuer'],titleOfClass = data1[i]['titleOfClass'])
+                ss=Security.objects.get(cusip = infoTableData[i]['cusip'])
+                sss.append(ss)
+            except:
+                print("Exception caught while getting security")
+                pass
+        try:
+            print(len(sss))
+        except:
+            pass
+        try:
+            QuarterlySecurityHoldingObjectstbs = [
+                QuarterlySecurityHolding(
+                    securityId = sss[i],
+                    quarterlyHoldingId = quarterlyHoldingObject,
+                    marketvalue = infoTableData[i]['value'],
+                    quantity = infoTableData[i]['sshPrnamt'], 
+                    holdingType = infoTableData[i]['sshPrnamtType'],
+                    investmentDiscretion = infoTableData[i]['investmentDiscretion'],
+                    sole = infoTableData[i]['votingAuthoritySole'],
+                    shared = infoTableData[i]['votingAuthorityShared'],
+                    none = infoTableData[i]['votingAuthorityNone'],
+                    uin=uinlist[i]
+                    )for i in range(len(infoTableData))
+            ]
+        except:
+            print("Exception caught while creating QuarterlySecurityHoldingObjectstbs list")
+            pass
+        print("Bulk Save for QuarterlySecurityHolding Started")
+        try:
+            QuarterlySecurityHolding.objects.bulk_create(QuarterlySecurityHoldingObjectstbs)
+        except:
+            print("Exception caught while saving QuarterlySecurityHolding")
+            pass
+        print("Bulk Save for QuarterlySecurityHolding Ended")
+        try:
+            print(QuarterlyOtherManagerObject)
+        except:
+            pass
+        print(len(uinlist))
+        QuarterlyOtherManagerObjectsList=[]
+        QuarterlyOtherManagerObjectsList.clear()
+        try:
+            if QuarterlyOtherManagerObject:
+                QuarterlyOtherManagerObjectsList=QuarterlySecurityHolding.objects.filter(uin__in=uinlist)
+                print(len(QuarterlyOtherManagerObjectsList))
+                try:
+                    QuarterlyOtherManagerObjectstbs = [
+                        QuarterlyOtherManagerDistribution(
+                            quarterlyOtherManagerId =QuarterlyOtherManagerObject ,
+                            quarterlySecurityHoldingId = QuarterlyOtherManagerObjectsList[i]
+                            )for i in range(len(infoTableData))
+                    ]
+                except:
+                    print("Exception caught while creating QuarterlyOtherManagerObjectstbs list")
+                    pass
                 
-            except:
-                print("Ss not retreived")
-                pass
-            try:
-                QuarterlySecurityHolding.objects.get_or_create(securityId = ss,quarterlyHoldingId = qq,value = data1[i]['value'],amount = data1[i]['sshPrnamt'], holdingType = data1[i]['sshPrnamtType'],investmentDiscretion = data1[i]['investmentDiscretion'],sole = data1[i]['votingAuthoritySole'],shared = data1[i]['votingAuthorityShared'],none = data1[i]['votingAuthorityNone'])
-                qsh = QuarterlySecurityHolding.objects.get(securityId = ss,quarterlyHoldingId = qq,value = data1[i]['value'],amount = data1[i]['sshPrnamt'], holdingType = data1[i]['sshPrnamtType'],investmentDiscretion = data1[i]['investmentDiscretion'],sole = data1[i]['votingAuthoritySole'],shared = data1[i]['votingAuthorityShared'],none = data1[i]['votingAuthorityNone'])
-                print(qsh)
-            except:
-                print("Problem is here")
-                pass
-            try:
-                QuarterlyOtherManagerDistribution.objects.get_or_create(quarterlyOtherManagerId =qom ,quarterlySecurityHoldingId =qsh)
-            except:
-                print("Problem was here")
-                pass
-        data1.clear()
-        return(col_headers2, data2)
+                
+                print("Bulk Save for QuarterlyOtherManagerDistribution Started")
+                
+                try:
+                    QuarterlyOtherManagerDistribution.objects.bulk_create(QuarterlyOtherManagerObjectstbs)
+                except:
+                    print("Exception caught while saving QuarterlyOtherManagerDistribution")
+                    pass
+                print("Bulk Save for QuarterlyOtherManagerDistribution Ended")
+
+        except:
+            print("No other managers for this holding/filer")
+            pass
+        infoTableData.clear()
+        sss.clear()
+        cusiplist.clear()
+        uinlist.clear()
+        QuarterlyOtherManagerObjectsList.clear()
+
+        return(col_headers2, coverPageData)
 
 
 
-    def save_holdings_xml(self, file_name, report_headers, col_headers, data, col_headers2, data2):
+    def save_holdings_xml(self, file_name, report_headers, col_headers, data, col_headers2, coverPageData):
         """Create and write holdings data from XML to tab-delimited text file."""
         with open(file_name, 'w', newline='') as f:
 
@@ -563,7 +733,7 @@ class HoldingsScraper:
 
 
             csv_writer.writerow(col_headers2)
-            for row in data2:
+            for row in coverPageData:
                 csv_writer.writerow([row.get(k, 'n/a') for k in col_headers2])
 
         # print(col_headers2)

@@ -20,7 +20,7 @@ export class FormPersonalDetails extends Component {
 		return (
 			<Fragment>
 				<div className="main_div">
-                   <div className="signup_box p-3 shadow mb-5" style={{height: "670px"}}>
+                   <div className="signup_box p-3 col-md-4 shadow mb-5" style={{height: "670px"}}>
 
                         <div className="col-sm-12">
                             <div className="row">
@@ -45,7 +45,7 @@ export class FormPersonalDetails extends Component {
                         </div>
 
                         <div className="row">
-                            <span className="captcha col-md-8 offset-md-2">By creating this account you will agree with the <a href="#" className="v12_22">Privacy Policy </a> and <a href="#" className="v12_22">Terms &amp; Conditions </a>of MrktDB.</span>
+                            <span className="captcha col-md-8 offset-md-2">By creating this account you will agree with the <a href="#" className="links">Privacy Policy </a> and <a href="#" className="links">Terms &amp; Conditions </a>of MrktDB.</span>
                         </div>             
     			    </div>
     		    </div>

@@ -68,7 +68,7 @@ export class FormUserDetails extends Component {
 		return (
 			<Fragment>
 				<div className="main_div">
-                        <div className="signup_box p-3 shadow mb-5">
+                        <div className="signup_box p-3 col-md-4 shadow mb-5">
 
                                 <div className="col-sm-12">
                                		<div className="row">

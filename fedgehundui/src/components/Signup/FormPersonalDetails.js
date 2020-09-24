@@ -74,7 +74,7 @@ export class FormPersonalDetails extends Component {
 		return (
 			<Fragment>
 				<div className="main_div">
-                    <div className="signup_box p-3 shadow mb-5" style={{height: "700px"}}>
+                    <div className="signup_box col-md-4 p-3 shadow mb-5" style={{height: "700px"}}>
 
                         <div className="col-sm-12">
                        		<div className="row">

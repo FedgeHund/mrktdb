@@ -1,7 +1,6 @@
 from django.urls import path
 
-from .views import WatchlistView
-from .views import ProfileView
+from .views import WatchlistView, ProfileView
 
 app_name = "Company_watchlist"
 

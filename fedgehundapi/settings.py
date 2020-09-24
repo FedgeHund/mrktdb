@@ -45,7 +45,7 @@ if DJANGO_ENV == "production":
         }
     }
 else:
-    # Use local DB in development
+    #Use local DB in development
     DATABASES = {
         'default': {
             'ENGINE': 'djongo',
@@ -92,6 +92,7 @@ INSTALLED_APPS = [
     'edgar.apps.EdgarConfig',
     'testapp',
     'fedgehundui',
+    'django_cron',
 ]
 
 SITE_ID=1
@@ -145,7 +146,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'fedgehundapi.wsgi.application'
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -184,3 +184,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
+
+CRON_CLASSES = [
+    "edgar.cikCusipCronJob.CikCusipCronJob",
+]

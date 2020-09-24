@@ -124,3 +124,23 @@ class QuarterlyOtherManagerDistribution(models.Model):
         ordering = ['createdAt']
 
 
+class FailsToDeliver(models.Model):
+    settlementDate = models.DateField()
+    createdAt = models.DateTimeField(auto_now_add=True)
+    cusip = models.TextField()
+    ticker = models.CharField(max_length=7)
+    quantity = models.IntegerField()
+    description = models.TextField()
+
+    class Meta:
+        ordering = ['createdAt']
+        
+class CikCusipMapping(models.Model):
+    year = models.IntegerField()
+    cik = models.IntegerField()
+    sec_name = models.TextField()
+    cusip = models.TextField()
+    cusip6 = models.TextField()
+
+    class Meta:
+        ordering = ['year']

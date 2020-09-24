@@ -7,7 +7,6 @@ class ProfileSerializer(serializers.ModelSerializer):
 		model = Profile
 		fields = ['occupation', 'company', 'city', 'state', 'phone', 'zip_code']
 
-
 class WatchlistSerializer(serializers.ModelSerializer):
 	company_name= serializers.ReadOnlyField(source='companies_watchlist.name')
 	company_id= serializers.ReadOnlyField(source='companies_watchlist.companyId')

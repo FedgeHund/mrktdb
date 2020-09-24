@@ -123,6 +123,12 @@ The application hits local MongoDB when running in our system and when it runs o
     ```
 3. Put up a PR for review.
 
+### How to transfer data from CIK_CUSIP.csv to Database ?
+Run the following command in virtual environment.
+```
+python cik_scraper.py
+```
+
 
 ### Version
 

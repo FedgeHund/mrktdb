@@ -7,5 +7,5 @@ app_name = "Company_watchlist"
 # app_name will help us do a reverse look-up latter.
 urlpatterns = [
     path('watchlist/', WatchlistView.as_view()),
-    path('fields/', ProfileView.as_view()),
+    path('/', ProfileView.as_view()),
 ]

@@ -21,7 +21,7 @@ export class UserForm extends Component {
 		zip_code: '',
 		phone: '',
 	}
-
+	// file deepcode ignore React-stateUsedInStateUpdateMethod: <>
 	// Proceed to next step
 	nextStep = () => {
 		const { step } = this.state;

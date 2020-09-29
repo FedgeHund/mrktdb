@@ -187,4 +187,5 @@ STATIC_ROOT = 'static'
 
 CRON_CLASSES = [
     "edgar.cikCusipCronJob.CikCusipCronJob",
+    "edgar.securityLinkCompanyCronJob.SecurityLinkCompanyCronJob",
 ]

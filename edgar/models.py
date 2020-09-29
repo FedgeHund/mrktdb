@@ -7,6 +7,7 @@ class Company(models.Model):
         ('HC', 'Holdings Company'),
     )
     name = models.TextField(max_length=80)
+    cik = models.IntegerField(default=None)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)
     deletedAt = models.DateTimeField(default=None, blank=True)
@@ -16,6 +17,33 @@ class Company(models.Model):
 
     class Meta:
         ordering = ['createdAt']
+
+class CikCusipMapping(models.Model):
+    year = models.IntegerField()
+    cik = models.IntegerField()
+    sec_name = models.TextField()
+    cusip = models.TextField()
+    cusip6 = models.TextField()
+
+    class Meta:
+        ordering = ['year']
+
+class Security(models.Model):
+    companyId = models.IntegerField(default=None)
+    cusip = models.TextField()
+    securityName = models.TextField()
+    securityType = models.TextField()
+    ticker = models.CharField(max_length=5)
+    titleOfClass = models.TextField()
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updatedAt = models.DateTimeField(default=None, blank=True)
+    deletedAt = models.DateTimeField(default=None, blank=True)
+    securityId = models.AutoField(primary_key=True)
+    cikCusipMappingId = models.TextField(default=None, blank=True)
+
+    class Meta:
+        ordering = ['ticker']
+        verbose_name_plural = "Securities"
 
 class Filer(models.Model):
     FILE_TYPES = (
@@ -43,8 +71,8 @@ class QuarterlyHolding(models.Model):
     filerId = models.ForeignKey(Filer, on_delete=models.CASCADE)
     quarter = models.IntegerField()
     filingType = models.CharField(max_length=2, choices=FILING_TYPES)
-    filedOn = models.DateTimeField(blank=True)
-    acceptedAt = models.DateTimeField(blank=True)
+    #filedOn = models.DateTimeField(blank=True)
+    #acceptedAt = models.DateTimeField(blank=True)
     totalValue = models.FloatField()
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)
@@ -66,22 +94,6 @@ class QuarterlyOtherManager(models.Model):
 
     class Meta:
         ordering = ['quarterlyHoldingId']
-
-
-class Security(models.Model):
-    companyId = models.ForeignKey(Company, on_delete=models.CASCADE)
-    cusip = models.TextField()
-    securityName = models.TextField()
-    securityType = models.TextField()
-    ticker = models.CharField(max_length=5)
-    titleOfClass = models.TextField()
-    createdAt = models.DateTimeField(auto_now_add=True)
-    updatedAt = models.DateTimeField(default=None, blank=True)
-    deletedAt = models.DateTimeField(default=None, blank=True)
-    securityId = models.AutoField(primary_key=True)
-
-    class Meta:
-        ordering = ['ticker']
 
 class QuarterlySecurityHolding(models.Model):
     HOLDING_TYPES = (
@@ -134,13 +146,3 @@ class FailsToDeliver(models.Model):
 
     class Meta:
         ordering = ['createdAt']
-        
-class CikCusipMapping(models.Model):
-    year = models.IntegerField()
-    cik = models.IntegerField()
-    sec_name = models.TextField()
-    cusip = models.TextField()
-    cusip6 = models.TextField()
-
-    class Meta:
-        ordering = ['year']

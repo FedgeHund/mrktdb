@@ -30,6 +30,7 @@ class Migration(migrations.Migration):
             name='Company',
             fields=[
                 ('name', models.TextField(max_length=80)),
+                ('cik', models.IntegerField(default=None)),
                 ('createdAt', models.DateTimeField(auto_now_add=True)),
                 ('updatedAt', models.DateTimeField(blank=True, default=None)),
                 ('deletedAt', models.DateTimeField(blank=True, default=None)),
@@ -117,7 +118,7 @@ class Migration(migrations.Migration):
                 ('updatedAt', models.DateTimeField(blank=True, default=None)),
                 ('deletedAt', models.DateTimeField(blank=True, default=None)),
                 ('securityId', models.AutoField(primary_key=True, serialize=False)),
-                ('companyId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='edgar.Company')),
+                ('companyId', models.IntegerField(default=None)),
             ],
             options={
                 'ordering': ['ticker'],

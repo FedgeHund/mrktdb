@@ -7,7 +7,6 @@
     "dev": "webpack --mode development --watch ./fedgehundui/src/index.js --output ./fedgehundui/static/fedgehundui/main.js",
     "build": "webpack --mode production ./fedgehundui/src/index.js --output ./fedgehundui/static/fedgehundui/main.js"
   },
-  "eb:prod": "npm run build",
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -15,6 +15,10 @@
    ```shell
    pip install -r requirements.txt
    ```   
+   Install all the required packages for working with React.js
+   ```shell
+   npm install
+   ```   
 5. Install mongodb-community version 4.2.8
 
    ##### On Mac-
@@ -36,6 +40,24 @@
    https://www.youtube.com/watch?v=nJVbTnNdqL0
  
 7. You are ready to run the Django app. To run django app follow the django tutorial
+
+
+
+### Running the server and react app
+
+1. Go to the directory having manage.py
+
+2. Run - 
+    ```shell
+   python manage.py runserver
+   ```
+   to run the Django server. Open and terminal window and go to same directory as manage.py, and Run -
+   ```shell
+   npm run dev
+   ```
+   to run React   
+
+
 
 ### Setting env variables
 
@@ -100,6 +122,12 @@ The application hits local MongoDB when running in our system and when it runs o
     pip freeze > requirements.txt
     ```
 3. Put up a PR for review.
+
+### How to transfer data from CIK_CUSIP.csv to Database ?
+Run the following command in virtual environment.
+```
+python cik_scraper.py
+```
 
 
 ### Version

@@ -39,7 +39,7 @@ class Security(models.Model):
     updatedAt = models.DateTimeField(default=None, blank=True)
     deletedAt = models.DateTimeField(default=None, blank=True)
     securityId = models.AutoField(primary_key=True)
-    cikCusipMappingId = models.ForeignKey('CikCusipMapping', on_delete=models.SET_DEFAULT, default=None, blank=True)
+    cikCusipMappingId = models.TextField(default=None, blank=True)
 
     class Meta:
         ordering = ['ticker']
@@ -71,8 +71,8 @@ class QuarterlyHolding(models.Model):
     filerId = models.ForeignKey(Filer, on_delete=models.CASCADE)
     quarter = models.IntegerField()
     filingType = models.CharField(max_length=2, choices=FILING_TYPES)
-    filedOn = models.DateTimeField(blank=True)
-    acceptedAt = models.DateTimeField(blank=True)
+    filedOn = models.DateTimeField(default=None, blank=True)
+    acceptedAt = models.DateTimeField(default=None, blank=True)
     totalValue = models.FloatField()
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)

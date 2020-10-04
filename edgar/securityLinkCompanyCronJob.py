@@ -28,3 +28,4 @@ class SecurityLinkCompanyCronJob(CronJobBase):
                             security.companyId = company.companyId
                             security.cikCusipMappingId = mapping.get('_id')
                             security.save()
+        print("Done")

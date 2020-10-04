@@ -7,19 +7,20 @@ from edgar.models import FailsToDeliver
 
 
 
-with open('static/admin/csv_files/finaldata2.csv','rt')as f:
+with open('static/admin/csv_files/Unique_Mappings.csv','rt')as f:
     data = csv.reader(f)
 
     try:
 
             Objects = [
                 FailsToDeliver(
-                    settlementDate=row[0], cusip=row[1], ticker=row[2], quantity=row[3], description=row[4]
+                    settlementDate=row[0], cusip=row[1], ticker=row[2], description=row[3]
+
                 )
                 for row in data
             ]
 
-            FailsToDeliver.objects.bulk_create(Objects)
+            FailsToDeliver.objects.bulk_create(Objects, batch_size=1000)
 
     except:
         print("Failed To Store")

@@ -24,6 +24,7 @@ class CikCusipMapping(models.Model):
     sec_name = models.TextField()
     cusip = models.TextField()
     cusip6 = models.TextField()
+    cikCusipMappingId = models.TextField()
 
     class Meta:
         ordering = ['year']

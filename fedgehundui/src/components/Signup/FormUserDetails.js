@@ -30,7 +30,7 @@ export class FormUserDetails extends Component {
 
         this.setState({buttonText: "Creating..."});
 
-        await axios.post("http://127.0.0.1:8000/auth/registration/", {
+        await axios.post(baseURL:"http://127.0.0.1:8000/auth/registration/", {
                 "first_name": this.props.values.firstName,
                 "last_name": this.props.values.lastName,
                 "email": this.props.values.email,

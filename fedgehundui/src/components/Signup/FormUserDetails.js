@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../../styles/signup/styles.css';
+import { URL } from '../App.js';
 
 export class FormUserDetails extends Component {
 
@@ -24,13 +25,12 @@ export class FormUserDetails extends Component {
         }
     };
 
-
     handleSubmit = async (e) => {
         e.preventDefault();
 
         this.setState({buttonText: "Creating..."});
 
-        await axios.post("http://mrktdbapi-prod.eba-tw27jjhn.us-west-2.elasticbeanstalk.com/auth/registration/", {
+        await axios.post("http://"+URL+"/auth/registration/", {
                 "first_name": this.props.values.firstName,
                 "last_name": this.props.values.lastName,
                 "email": this.props.values.email,

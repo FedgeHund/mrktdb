@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import '../../../styles/signup/styles.css';
+import { URL } from '../App.js';
 
 export class FormPersonalDetails extends Component {
 
@@ -34,7 +35,7 @@ export class FormPersonalDetails extends Component {
         axios.defaults.xsrfCookieName = 'csrftoken';
         axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-        await axios.post("http://127.0.0.1:8000/profile/fields/", {
+        await axios.post("http://"+URL+"/profile/fields/", {
                 "occupation": this.props.values.occupation,
                 "company": this.props.values.company,
                 "state": this.props.values.state,

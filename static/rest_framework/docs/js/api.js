@@ -137,7 +137,6 @@ $(function () {
         } catch (err) {
           // Ignore malformed JSON
         }
-        // file deepcode ignore DuplicateIfBody: <redundant suggestion>
       } else if (dataType === 'object' && paramValue) {
         try {
           params[paramKey] = JSON.parse(paramValue)

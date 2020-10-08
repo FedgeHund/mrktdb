@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; 
 import '../../../styles/signup/styles.css';
+import { URL } from '../App.js';
 
 function Signin() {
 
@@ -28,7 +29,7 @@ function Signin() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post("http://127.0.0.1:8000/auth/login/", {
+        axios.post("http://"+URL+"/auth/login/", {
                 email,
                 password
             },
@@ -40,10 +41,10 @@ function Signin() {
         )
         .then(function(response) {
                 if(response.status == 200){
-                    window.location = "http://127.0.0.1:8000/auth/logout/"
+                    window.location = "http://"+URL+"/auth/logout/"
                 }
                 else{
-                    window.location = "http://127.0.0.1:8000/signin/"
+                    window.location = "http://"+URL+"/signin/"
                 }
             })
         .catch(error => {setState({errorMessage: error.response.data.email || 

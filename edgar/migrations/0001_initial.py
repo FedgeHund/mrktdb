@@ -77,8 +77,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('quarter', models.IntegerField()),
                 ('filingType', models.CharField(choices=[('CR', 'Combined Report'), ('NT', 'Notice'), ('HR', 'Holdings Report')], max_length=2)),
-                ('filedOn', models.DateTimeField(blank=True)),
-                ('acceptedAt', models.DateTimeField(blank=True)),
+                ('filedOn', models.DateTimeField(default=None, blank=True)),
+                ('acceptedAt', models.DateTimeField(default=None, blank=True)),
                 ('totalValue', models.FloatField()),
                 ('createdAt', models.DateTimeField(auto_now_add=True)),
                 ('updatedAt', models.DateTimeField(blank=True, default=None)),
@@ -119,6 +119,7 @@ class Migration(migrations.Migration):
                 ('deletedAt', models.DateTimeField(blank=True, default=None)),
                 ('securityId', models.AutoField(primary_key=True, serialize=False)),
                 ('companyId', models.IntegerField(default=None)),
+                ('cikCusipMappingId', models.TextField(blank=True, default=None)),
             ],
             options={
                 'ordering': ['ticker'],

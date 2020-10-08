@@ -24,6 +24,7 @@ class CikCusipMapping(models.Model):
     sec_name = models.TextField()
     cusip = models.TextField()
     cusip6 = models.TextField()
+    cikCusipMappingId = models.TextField()
 
     class Meta:
         ordering = ['year']
@@ -71,8 +72,8 @@ class QuarterlyHolding(models.Model):
     filerId = models.ForeignKey(Filer, on_delete=models.CASCADE)
     quarter = models.IntegerField()
     filingType = models.CharField(max_length=2, choices=FILING_TYPES)
-    #filedOn = models.DateTimeField(blank=True)
-    #acceptedAt = models.DateTimeField(blank=True)
+    filedOn = models.DateTimeField(default=None, blank=True)
+    acceptedAt = models.DateTimeField(default=None, blank=True)
     totalValue = models.FloatField()
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)

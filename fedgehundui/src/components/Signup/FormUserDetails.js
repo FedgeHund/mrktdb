@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../../../styles/signup/styles.css';
+import '../../../styles/signup/styles.scss';
 import { URL } from '../App.js';
 
 export class FormUserDetails extends Component {

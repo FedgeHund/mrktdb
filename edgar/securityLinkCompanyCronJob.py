@@ -13,10 +13,10 @@ class SecurityLinkCompanyCronJob(CronJobBase):
     def do(self):
         security_items = Security.objects.all()
         company_items = Company.objects.all()
-        cikCusipMapping_items = CikCusipMapping.objects.all()
+        cikCusipMapping_items = CikCusipMapping.objects.order_by('year').all()
 
-        for security in security_items:
-            for mapping in cikCusipMapping_items:
+        for mapping in cikCusipMapping_items:
+            for security in security_items:
                 if(security.cusip == mapping.cusip or security.cusip == mapping.cusip6):
                     for company in company_items:
                         if(company.cik == mapping.cik):

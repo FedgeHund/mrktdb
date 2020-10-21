@@ -1,0 +1,1 @@
+* * * * * root source /opt/python/current/env && /opt/python/run/venv/bin/python3 /opt/python/current/app/manage.py runcrons >> /var/log/cronjobs.log

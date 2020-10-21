@@ -7,7 +7,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
 from edgar.models import CikCusipMapping
 
 class CikCusipCronJob(CronJobBase):
-    RUN_EVERY_MINS = 0.01 # we dont run this every minute, we will be using linux crontab to setup when the job will run
+    RUN_EVERY_MINS = 1 # we dont run this every minute, we will be using linux crontab to setup when the job will run
 
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
     code = 'edgar.cikCusipCronJob'    # a unique code

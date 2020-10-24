@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Company(models.Model):
     COMPANY_TYPES = (
         ('HF', 'Hedge Fund'),
@@ -17,6 +18,7 @@ class Company(models.Model):
     class Meta:
         ordering = ['createdAt']
 
+
 class Filer(models.Model):
     FILE_TYPES = (
         ('13F', '13F'),
@@ -33,6 +35,7 @@ class Filer(models.Model):
 
     class Meta:
         ordering = ['companyId']
+
 
 class QuarterlyHolding(models.Model):
     FILING_TYPES = (
@@ -53,6 +56,7 @@ class QuarterlyHolding(models.Model):
 
     class Meta:
         ordering = ['createdAt']
+
 
 class QuarterlyOtherManager(models.Model):
     parentFilerId = models.ForeignKey(Filer, on_delete=models.CASCADE, related_name='parent_filer')
@@ -83,6 +87,7 @@ class Security(models.Model):
     class Meta:
         ordering = ['ticker']
 
+
 class QuarterlySecurityHolding(models.Model):
     HOLDING_TYPES = (
         ('SHR', 'SH'),
@@ -112,6 +117,7 @@ class QuarterlySecurityHolding(models.Model):
     class Meta:
         ordering = ['quarterlyHoldingId']
 
+
 class QuarterlyOtherManagerDistribution(models.Model):
     quarterlyOtherManagerId = models.ForeignKey(QuarterlyOtherManager, on_delete=models.CASCADE)
     quarterlySecurityHoldingId = models.ForeignKey(QuarterlySecurityHolding, on_delete=models.CASCADE)
@@ -134,7 +140,8 @@ class FailsToDeliver(models.Model):
 
     class Meta:
         ordering = ['createdAt']
-        
+
+
 class CikCusipMapping(models.Model):
     year = models.IntegerField()
     cik = models.IntegerField()

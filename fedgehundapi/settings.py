@@ -44,6 +44,20 @@ if DJANGO_ENV == "production":
             },
         }
     }
+if DJANGO_ENV == "local-atlas":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': env("DB_NAME"),
+            'CLIENT': {
+                'name': env("DB_NAME"),
+                'host': env("CONNECTION_STRING"),
+                'username': env("DB_USERNAME"),
+                'password': env("DB_PASSWORD"),
+                "authMechanism": "SCRAM-SHA-1",
+            },
+        }
+    }
 else:
     # Use local DB in development
     DATABASES = {
@@ -60,7 +74,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env(
     'SECRET_KEY', default='f9y!yh1nb6lm5(o*)^(8+-dueu9_p=p$c$d-u8f(p=w+mtd%rx')
 
-ALLOWED_HOSTS = ['mrktdbapi-prod.eba-tw27jjhn.us-west-2.elasticbeanstalk.com','127.0.0.1']
+ALLOWED_HOSTS = [
+    'mrktdbapi-prod.eba-tw27jjhn.us-west-2.elasticbeanstalk.com', '127.0.0.1']
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -96,7 +111,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
-#The username field is optional and we will hide it in the registration page
+# The username field is optional and we will hide it in the registration page
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 ACCOUNT_UNIQUE_EMAIL = True

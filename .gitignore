@@ -138,3 +138,6 @@ dmypy.json
 
 # Git
 .git-credentials
+
+# IntelliJ configuration
+.idea/

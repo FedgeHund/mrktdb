@@ -1,1 +1,1 @@
-* * * * * /bin/date >> /tmp/cron_output.log 2>&1
+* * * * * root source /opt/python/current/env && cd /opt/python/current/app/edgar && /opt/python/run/venv/bin/python3 /opt/python/current/app/manage.py runcrons >> /var/log/cronjobs.log

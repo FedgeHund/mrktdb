@@ -1,0 +1,1 @@
+* * * * * root /opt/python/run/venv/bin/python3 /opt/python/fedgehundapi/manage.py runcrons >> /var/log/cronjobs.log

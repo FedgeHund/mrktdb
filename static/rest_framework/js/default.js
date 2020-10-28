@@ -1,3 +1,5 @@
+// file deepcode ignore no-invalid-this:
+
 $(document).ready(function() {
   // JSON highlighting.
   prettyPrint();

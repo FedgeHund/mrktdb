@@ -3,7 +3,7 @@ from edgar.models import CikCusipMapping, Security, Company
 import os
 import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
-
+# file deepcode ignore W0611:
 # file deepcode ignore C0325:
 
 class SecurityLinkCompanyCronJob(CronJobBase):

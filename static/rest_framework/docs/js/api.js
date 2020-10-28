@@ -137,6 +137,7 @@ $(function () {
         } catch (err) {
           // Ignore malformed JSON
         }
+        // file deepcode ignore DuplicateIfBody: This is an auto-generated file
       } else if (dataType === 'object' && paramValue) {
         try {
           params[paramKey] = JSON.parse(paramValue)

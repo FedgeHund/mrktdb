@@ -1,8 +1,9 @@
 from django_cron import CronJobBase, Schedule
+from edgar.models import CikCusipMapping, Security, Company
 import os
 import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
-from edgar.models import CikCusipMapping, Security, Company
+
 # file deepcode ignore C0325:
 
 class SecurityLinkCompanyCronJob(CronJobBase):

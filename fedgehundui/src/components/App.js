@@ -4,6 +4,7 @@ import Navbar from './Layout/Navbar';
 import Signin from './Layout/Signin';
 import UserForm from './Signup/UserForm';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// file deepcode ignore no-mixed-spaces-and-tabs:
 
 class App extends Component {
   render() {

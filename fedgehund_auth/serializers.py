@@ -4,6 +4,7 @@ from rest_framework import serializers
 from fedgehund_profile.models import Profile
 from django.contrib.auth.models import User
 from fedgehund_profile.serializers import ProfileSerializer
+# file deepcode ignore E1003:
 
 class UserRegisterSerializer(RegisterSerializer):
     first_name = serializers.CharField(required=True, write_only=True)

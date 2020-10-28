@@ -1,8 +1,8 @@
-from django_cron import CronJobBase, Schedule
+import os
 import csv
 import time
-import os
 import django
+from django_cron import CronJobBase, Schedule
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
 from edgar.models import CikCusipMapping
 

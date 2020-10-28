@@ -3,6 +3,7 @@ import os
 import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
 from edgar.models import CikCusipMapping, Security, Company
+# file deepcode ignore C0325:
 
 class SecurityLinkCompanyCronJob(CronJobBase):
     RUN_EVERY_MINS = 1 # we dont run this every minute, we will be using linux crontab to setup when the job will run

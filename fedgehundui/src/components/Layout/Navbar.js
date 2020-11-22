@@ -1,21 +1,19 @@
 import React, { Component, Fragment } from 'react';
-import '../../../styles/signup/styles.scss';
+import '../../../styles/navbar.css';
+import logo from '../../../static/logo.png';
 // file deepcode ignore no-mixed-spaces-and-tabs:
 
 function Navbar() {
   return (
     <Fragment>
-    		<nav className="navbar sticky-top">
-			  <a className="navbar-brand" href="#" style={{color: "white"}}>MrktDB</a>
-			  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-			    <span className="navbar-toggler-icon"></span>
-			  </button>
-
-			  <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-			    <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-			    </ul>
-			  </div>
-			</nav>
+		<nav className="navbar sticky-top">
+			<img src={logo} alt="Logo" className="offset-md-2 logo"/>
+			<a className="MrktDB">MrktDB</a>
+			<form className="form-inline mr-auto offset-md-5">
+				<input className="form-control lookup" type="search" placeholder="Fund / Stock Lookup" style={{textDecoration: "None", outline: "None"}}/>
+				<button className="btn btn-outline-none my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</nav>
 	</Fragment>
   );
 }

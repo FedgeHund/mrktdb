@@ -1,0 +1,29 @@
+.logo {
+	width: 60px;
+	height: 60px;
+}
+
+.MrktDB {
+	font-size: 18px;
+	font-family: Helvetica;
+	color: #404040;
+	margin-left: 8px;
+	text-decoration: none;
+}
+
+input[type=search] {
+	background: transparent;
+	font-family: ArialMT;
+}
+
+input[type=search]::placeholder {
+	font-size: 14px;
+}
+
+input[type=search]:focus {
+	background: transparent;
+	outline: none !important;
+	outline-style: none;
+	box-shadow: none;
+	border-color: rgba(254,111,125,1);
+}

@@ -66,7 +66,7 @@ function Signin() {
                                     </div>
                                     <div className="row">
                                         <span className="question col-sm-6">New to MrktDB? </span>
-                                        <Link to={""} className="signin_Link col-sm-6">Create an account</Link>
+                                        <Link to={"/signup"} className="signin_Link col-sm-6">Create an account</Link>
                                     </div>  
                                 </div>
                    

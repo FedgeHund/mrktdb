@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import Navbar from './Layout/Navbar';
 import Signin from './Layout/Signin';
 import UserForm from './Signup/UserForm';
+import Homepage from './Homepage/Homepage';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// file deepcode ignore no-mixed-spaces-and-tabs:
+// file deepcode ignore no-mixed-spaces-and-tabskey: "value", 
 
 class App extends Component {
   render() {
@@ -12,7 +13,8 @@ class App extends Component {
     	<Fragment>
       		<Router>
 	      		<Switch>
-		          	<Route path="/" exact component={() => <UserForm />} />
+                <Route path="/" exact component={() => <Homepage />} />
+		          	<Route path="/signup" exact component={() => <UserForm />} />
 		          	<Route path="/signin" exact component={() => <Signin />} />
 		        </Switch>     		
       		</Router>

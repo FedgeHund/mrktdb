@@ -1,0 +1,531 @@
+.Background {
+	width: 100%;
+}
+
+.contain {
+	position: relative;
+  	text-align: center;
+}
+
+.centered {
+  	position: absolute;
+  	top: 40%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	margin-right: -10px;
+}
+
+.market_beating {
+	color: #404040;
+  	font-size: 43px;
+  	font-family: Helvetica;
+}
+
+.centered_form {
+  	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	margin-top: 5px;
+}
+
+.lookup_home {
+	background: rgba(254, 111, 125, 0.03);
+	font-family: ArialMT;
+	font-size: 15px;
+	height: 34px;
+	width: 560px !important;
+	border-color: #a2a2a2;
+	border-width: 2px;
+}
+
+.lookup_home:focus {
+	background: rgba(254, 111, 125, 0.03);
+	box-shadow: none;
+	border-color: rgba(254,111,125,1);
+}
+
+.search {
+	font-size: 15px;
+	font-family: ArialMT;
+	font-weight: 570px;
+	margin-left: -102px;
+	box-shadow: none !important;
+	background-color: rgba(254, 111, 125, 0.9);
+	color: #fff;
+	padding: 3px 17px 5px 13px;
+	border-radius: 2px;
+	border: none;
+}
+
+.search:focus {
+	outline: none;
+}
+
+.carousel_text {
+	color: #464545;
+	font-size: 14px;
+	font-family: ArialMT;
+}
+
+.centered_carousel {
+  	position: absolute;
+  	top: 62%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	margin-top: 5px;
+}
+
+.centered_carousel_link {
+  	position: absolute;
+  	top: 68%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	margin-top: 5px;
+  	color: #fe6f7d;
+  	font-size: 12px;
+  	font-family: ArialMT;
+}
+
+.centered_carousel_link:hover {
+	color: #fe6f7d;
+}
+
+.inside_db_container {
+	height: 634px;
+	background: white;
+	overflow: hidden;
+	position: relative;
+}
+
+.box {
+	height: 50px;
+	width: 170px;
+	background: #c8ddd6;
+	position: absolute;
+	margin-top: 168px;
+}
+
+.box_text {
+	height: 50px;
+	width: 170px;
+	margin-top: 168px;
+	margin-left: 145px;
+	font-size: 22px;
+	font-family: ArialMT;
+	line-height: 1.2;
+	text-align: right;
+	position: absolute;
+}
+
+.so_far_text {
+	margin-top: 166px;
+	margin-left: 370px;
+	font-family: Arial-BoldMT;
+	line-height: 1.2;
+	color: #404040;
+	font-size: 38px;
+	position: absolute;
+}
+
+.filer_stats {
+	margin-top: 350px;
+	margin-left: 370px;
+	font-family: Arial-BoldMT;
+	color: #404040;
+	font-size: 63px;
+	position: absolute;
+}
+
+.securities_stats {
+	margin-top: 350px;
+	margin-left: 730px;
+	font-family: Arial-BoldMT;
+	color: #404040;
+	font-size: 63px;
+	position: absolute;
+}
+
+.hedgefund_stats {
+	margin-top: 350px;
+	margin-left: 1050px;
+	font-family: Arial-BoldMT;
+	color: #404040;
+	font-size: 63px;
+	position: absolute;
+}
+
+.stat_type {
+	font-size: 19px; 
+	font-family: ArialMT; 
+	margin-top: 430px;
+}
+
+.lower_left_design {
+	margin-left: -200px;
+	margin-top: 148px;
+	z-index: -1;
+}
+
+.right_design {
+	float: right;
+	margin-top: -320px;
+	margin-right: -270px;
+	z-index: -1;
+}
+
+.know_more_container {
+	height: 700px;
+	position: relative;
+}
+
+.container {
+	margin-left: 90px;
+}
+
+.know_more {
+	font-size: 38px;
+	font-family: ArialMT;
+	line-height: 1.2;
+	margin-top: 100px;
+}
+
+.tabs_know {
+	margin-top: 30px;
+	line-height: 1.3;
+}
+
+.tabs_know_heading {
+	color: #7f7f7f !important;
+	font-size: 16px;
+}
+
+.tabs_know_heading.active {
+	background:
+     linear-gradient(
+       to right,
+       rgba(254, 111, 125, 0.9) 0%,
+       rgba(254, 111, 125, 0.9) 5px,
+       transparent 5px
+     );
+  	color: #404040 !important;
+}
+
+.tab_content {
+	color: #7f7f7f;
+	font-size: 18px;
+	font-family: ArialMT;
+	line-height: 1.4;
+	margin-top: 30px;
+	margin-left: 80px;
+}
+
+.know_more_image {
+	width: 30%;
+	position: absolute;
+	bottom: 0px;
+	right: 100px;
+}
+
+.what_is_13F_container {
+	height: 685px;
+	background: white;
+	overflow: hidden;
+	position: relative;
+}
+
+.box_13f {
+	height: 10px;
+	width: 150px;
+	background: #89c7aa;
+	position: absolute;
+	margin-top: 245px;
+}
+
+.lower_left_design_13f {
+	margin-left: -220px;
+	margin-top: 250px;
+	z-index: -1;
+}
+
+.right_design_13f {
+	float: right;
+	margin-top: -140px;
+	margin-right: -200px;
+	z-index: -1;
+}
+
+.what_is_13f_text {
+	margin-top: 150px;
+	margin-left: 250px;
+	font-family: Arial-BoldMT;
+	color: #404040;
+	font-size: 40px;
+	position: absolute;
+}
+
+.what_is_13f_content {
+	margin-top: 235px;
+	margin-left: 250px;
+	font-family: SegoeUI;
+	color: #404040;
+	font-size: 14px;
+	position: absolute;
+}
+
+.know_more_13f {
+	margin-top: 445px;
+	margin-left: 250px;
+	font-family: SegoeUI;
+	color: #fe6f7d;
+	font-size: 14px;
+	position: absolute;
+}
+
+.know_more_13f:hover {
+	color: #fe6f7d;
+}
+
+
+.key_takeaways_head {
+	margin-top: 150px;
+	margin-left: 720px;
+	font-family: ArialMT;
+	color: #fe6f7d;
+	font-size: 20px;
+	position: absolute;
+}
+
+.key_takeaways_content {
+	margin-top: 235px;
+	margin-left: 720px;
+	font-family: SegoeUI;
+	color: #404040;
+	font-size: 14px;
+	position: absolute;
+}
+
+.popular_portfolio_container {
+	height: 656px;
+}
+
+.popular_portfolio_carousel_static {
+	background: #262528;
+	height: 656px;
+	width: 25%;
+	float: left;
+}
+
+.popular_portfolio_on_mrktdb {
+	color: #fff;
+	font-size: 28px;
+	font-family: ArialMT;
+	margin-left: 80px;
+	margin-top: 60px;
+	line-height: 1.3;
+}
+
+.know_about_top_hedge_funds {
+	color: #e5e5e3;
+	font-size: 19px;
+	font-family: ArialMT;
+	margin-left: 80px;
+	line-height: 1.4;
+}
+
+.portfolio_names {
+	margin-left: 80px;
+	margin-top: 140px;
+}
+
+.portfolio_name {
+	color: #b3b2b1;
+	font-size: 16px;
+	font-family: ArialMT;
+}
+
+.more_portfolios_link {
+	color: #b3b2b1;
+	font-size: 16px;
+	font-family: ArialMT;
+	margin-left: 65px;
+}
+
+.popular_portfolios {
+	background: #E5E5E3;
+	height: 656px;
+	width: 75%;
+	float: right;
+}
+
+.carousel_row {
+	margin-left: 70px;
+}
+
+.portfolio_heading {
+	color: #404040;
+	font-size: 40px;
+	font-family: Arial-BoldMT;
+	margin-top: 80px;
+	line-height: 1.2;
+}
+
+.portfolio_value {
+	color: #484848;
+	font-size: 16px;
+	font-family: Arial-BoldMT;
+}
+
+.portfolio_value_number {
+	color: #484848;
+	font-size: 14px;
+	font-family: ArialMT;
+}
+
+.top_holdings_text {
+	color: #484848;
+	font-size: 19px;
+	font-family: Arial-BoldMT;
+}
+
+.top_holding_symbol {
+	color: #484848;
+	font-size: 14px;
+	font-family: Arial-BoldMT;
+}
+
+.top_holding_name {
+	color: #484848;
+	font-size: 14px;
+	font-family: ArialMT;
+	margin-left: 20px;
+}
+
+.as_of_date {
+	color: #484848;
+	font-size: 10px;
+	font-family: ArialMT;
+	margin-top: 80px;
+	position: absolute;
+	margin-left: 90px;
+	margin-top: 600px;
+}
+
+.carousel-indicators li {
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+}
+
+.carousel-indicators {
+	align-items: flex-end;
+    margin-bottom: -140px;
+	right: 60%;
+	margin-left: -650px;
+}
+
+.carousel-control-next-icon {
+    background-image: url("../static/homepage/right-arrow.png");
+    height: 8%;
+    width: 25%;
+}
+
+.carousel-control-next{
+    align-items: flex-end;
+    margin-bottom: -135px;
+}
+
+
+
+.get_started_container {
+	height: 880px;
+	background: white;
+}
+
+.get_started_box {
+	background: #FCF4EB;
+	text-align: center;
+	width: 1166px;
+	height: 406px;
+	left: 50%;
+	top: 42%;
+	position: relative;
+	transform: translate(-50%, -50%);
+	border-radius: 1%;
+}
+
+.exclusive_insights_text {
+	color: #404040;
+	font-size: 28px;
+	font-family: ArialMT;
+	text-align: left;
+	margin-top: 70px;
+	margin-left: 70px;
+}
+
+.sign_up_personalized {
+	color: #262528;
+	font-size: 19px;
+	font-family: ArialMT;
+	margin-top: 70px;
+	margin-left: 70px;
+	text-align: left;
+}
+
+.get_started_btn{
+    position: relative;
+    padding: 10px 30px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    color: white;
+    margin-top: 15px;
+    margin-left: 85px;
+    background-color: rgba(254,111,125,1);
+    font-family: OpenSans-SemiBold;
+}
+
+.get_started_btn:hover {
+  box-shadow: 0 0 11px rgba(33,33,33,.2); 
+  background-color: rgba(254,111,125,1) !important;
+}
+
+.get_started_btn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.get_started_btn span:after {
+  content: '\21E8';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.get_started_btn:hover span {
+  padding-right: 25px;
+}
+
+.get_started_btn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.signup_box .submit-btn:focus {
+  background-color: rgba(254,111,125,1) !important;
+}
+
+.platforms_img {
+	position: absolute;
+	left: 45%;
+	margin-top: -90px;
+}
+
+

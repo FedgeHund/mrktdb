@@ -24,7 +24,7 @@ class App extends Component {
 }
 
 const ENV_VARIABLES = {
-  ENVIRON: "dev",
+  ENVIRON: "prod",
   DEV_API_URL: "127.0.0.1:8000",
   PROD_API_URL: "mrktdbapi-prod.eba-tw27jjhn.us-west-2.elasticbeanstalk.com",
 };

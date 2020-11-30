@@ -132,6 +132,7 @@ $(function () {
           params[paramKey] = value
         }
       } else if (dataType === 'array' && paramValue) {
+        // file deepcode ignore DuplicateIfBody: <comment the reason here>
         try {
           params[paramKey] = JSON.parse(paramValue)
         } catch (err) {

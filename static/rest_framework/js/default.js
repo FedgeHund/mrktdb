@@ -17,6 +17,7 @@ $(document).ready(function() {
     $(e.target).parents('.tabbable').removeClass('first-tab-active');
   });
 
+  // file deepcode ignore no-invalid-this: <comment the reason here>
   $('a[data-toggle="tab"]').click(function() {
     document.cookie = "tabstyle=" + this.name + "; path=/";
   });

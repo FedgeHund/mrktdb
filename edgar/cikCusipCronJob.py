@@ -1,5 +1,5 @@
-from django_cron import CronJobBase, Schedule
 import csv
+from django_cron import CronJobBase, Schedule
 import time
 import os
 import django

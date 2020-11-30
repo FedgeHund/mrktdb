@@ -1,8 +1,8 @@
-from django_cron import CronJobBase, Schedule
 import os
-import django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
+from django_cron import CronJobBase, Schedule
 from edgar.models import CikCusipMapping, Security, Company
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
+
 
 class SecurityLinkCompanyCronJob(CronJobBase):
     RUN_EVERY_MINS = 0.01 # we dont run this every minute, we will be using linux crontab to setup when the job will run
@@ -19,7 +19,7 @@ class SecurityLinkCompanyCronJob(CronJobBase):
             for security in security_items:
                 if(security.cusip == mapping.cusip or security.cusip == mapping.cusip6):
                     for company in company_items:
-                        if(company.cik == mapping.cik):
+                        if company.cik == mapping.cik:
                             security.companyId = company.companyId
                             security.cikCusipMappingId = mapping.cikCusipMappingId
                             security.save()

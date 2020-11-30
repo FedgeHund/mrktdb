@@ -4,7 +4,6 @@ from rest_framework.views import APIView
 from .serializers import WatchlistSerializer
 from .serializers import ProfileSerializer
 from .models import Watchlist, Profile
-from rest_framework import status
 
 class ProfileView(ListCreateAPIView):
 	serializer_class = ProfileSerializer

@@ -1,10 +1,10 @@
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import status
 from .serializers import WatchlistSerializer
 from .serializers import ProfileSerializer
 from .models import Watchlist, Profile
-from rest_framework import status
 
 class ProfileView(ListCreateAPIView):
 	serializer_class = ProfileSerializer

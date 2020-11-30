@@ -31,6 +31,7 @@ class UserLoginSerializer(LoginSerializer):
     email = serializers.EmailField(required=True)
 
     def __init__(self, *args, **kwargs):
+	#  deepcode ignore E1003: <comment the reason here>
         super(LoginSerializer, self).__init__(*args, **kwargs)
         self.fields["email"].error_messages["invalid"] = u"Enter a valid  address"
         self.fields["email"].error_messages["blank"] = u"Enter a valid email address"

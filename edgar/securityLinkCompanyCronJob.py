@@ -1,6 +1,6 @@
+import os
 from django_cron import CronJobBase, Schedule
 from edgar.models import CikCusipMapping, Security, Company
-import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
 
 

@@ -19,7 +19,7 @@ class SecurityLinkCompanyCronJob(CronJobBase):
             for security in security_items:
                 if(security.cusip == mapping.cusip or security.cusip == mapping.cusip6):
                     for company in company_items:
-                        if(company.cik == mapping.cik):
+                        if company.cik == mapping.cik:
                             security.companyId = company.companyId
                             security.cikCusipMappingId = mapping.cikCusipMappingId
                             security.save()

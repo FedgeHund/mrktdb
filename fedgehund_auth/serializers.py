@@ -18,6 +18,7 @@ class UserRegisterSerializer(RegisterSerializer):
         }
 # file deepcode ignore super~first~argument~should~be~the~enclosing~class: <RegisterSerializer is the parent class from which the fields are being inherited>
     def __init__(self, *args, **kwargs):
+	#  deepcode ignore E1003: <comment the reason here>
         super(RegisterSerializer, self).__init__(*args, **kwargs)
         self.fields["first_name"].error_messages["blank"] = u"All fields on this page are required"
         self.fields["last_name"].error_messages["blank"] = u"All fields on this page are required"

@@ -3,29 +3,42 @@ a:hover {
     text-decoration: none;
 }
 
+.navbar {
+	background: transparent;
+}
+
+.navbar.active {
+	background: #FCF4EB;
+	transition: 0.5s;
+}
+
 .logo {
-	width: 60px;
-	height: 60px;
+	width: 4vw;
+	height: 4vw;
 	cursor: pointer;
 }
 
 .MrktDB {
-	font-size: 18px;
+	font-size: 1.2vw;
 	font-family: Helvetica;
 	color: #404040;
-	margin-left: 8px;
+	margin-left: 0.5vw;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+.lookup_form {
+	margin-right: 10vw;
 }
 
 .lookup {
 	background: transparent;
 	font-family: ArialMT;
-	font-size: 14px;
-	height: 30px;
-	width: 269px !important;
+	font-size: 1vw;
+	height: 2vw;
+	width: 18vw !important;
 	border-color: #a2a2a2;
-	border-width: 2px;
+	border-width: 0.15vw;
 }
 
 .lookup:focus {
@@ -35,22 +48,59 @@ a:hover {
 }
 
 .search_btn {
-	font-size: 15px;
+	font-size: 1vw;
 	font-family: ArialMT;
-	font-weight: 570px;
-	margin-left: -95px;
 	box-shadow: none !important;
 	color: #404040;
+	margin-left: -6.7vw;
+}
+
+.search_icon {
+	margin-right: 0.6vw !important;
+}
+
+@media screen and (max-width: 1040px) {
+	.search_btn {
+		margin-left: -7.2vw;
+	}
+}
+
+@media screen and (max-width: 830px) {
+	.search_btn {
+		margin-left: -7.6vw;
+	}
+}
+
+@media screen and (max-width: 550px) {
+	.search_btn {
+		margin-left: -8vw;
+	}
 }
 
 .filers {
-	font-size: 16px;
+	font-size: 1.2vw;
 	font-family: Arial-BoldMT;
 	color: #404040;
 	text-decoration: none;
 	cursor: pointer;
+	margin-left: -5vw;
+}
+
+.circle {
+	font-size: 1.2vw;
+	font-family: Arial-BoldMT;
+	color: #404040;
+	text-decoration: none;
+	cursor: pointer;
+	margin-left: 6vw;
 }
 
 .menu {
-	margin-right: 100px !important;
+	font-size: 1.2vw;
+	font-family: Arial-BoldMT;
+	color: #404040;
+	text-decoration: none;
+	cursor: pointer;
+	margin-left: 4vw;
+	margin-right: 4vw;
 }

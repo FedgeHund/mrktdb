@@ -1,13 +1,29 @@
 .footer_container {
-	height: 1080px;
+	height: 75vw;
 	background: #0D0D0D;
+}
+
+.margin2 {
+	margin-top: 0.5vw;
+}
+
+.margin3 {
+	margin-top: 1vw;
+}
+
+.margin4 {
+	margin-top: 2vw;
+}
+
+.margin5 {
+	margin-top: 3vw;
 }
 
 .footer_box {
 	background: transparent;
 	text-align: center;
-	width: 1166px;
-	height: 406px;
+	width: 80vw;
+	height: 28vw;
 	left: 50%;
 	top: 32%;
 	position: relative;
@@ -17,21 +33,21 @@
 
 .footer_section {
 	color: #fff;
-	font-size: 19px;
+	font-size: 1.3vw;
 	font-family: ArialMT;
 	text-align: left;
 }
 
 .footer_heading {
 	color: #fff;
-	font-size: 20px;
+	font-size: 1.4vw;
 	font-family: SegoeUI-Bold;
 	text-align: left;
 }
 
 .filer_items {
 	color: #a9a9a9;
-	font-size: 17px;
+	font-size: 1.1vw;
 	font-family: SegoeUI;
 	text-align: left;
 }
@@ -41,16 +57,16 @@
 }
 
 .horizontal_line {
-	height: 1px;
+	height: 0.1vw;
 	background-color: #707070;
 }
 
 .quick_links {
-	margin-top: 50px;
+	margin-top: 3.4vw;
 }
 
 .closing_row {
-	margin-top: 120px;
+	margin-top: 8vw;
 }
 
 .white_logo {
@@ -59,14 +75,14 @@
 
 .closing_headings {
 	color: #7f7f7f;
-	font-size: 19px;
+	font-size: 1.4vw;
 	font-family: Arial-BoldMT;
 	text-align: left;
 }
 
 .closing_content {
 	color: #7f7f7f;
-	font-size: 14px;
+	font-size: 1vw;
 	font-family: SegoeUI;
 	text-align: left;
 }
@@ -75,7 +91,7 @@
 	text-align: right;
 	position: absolute;
 	right: 0;
-	margin-right: -150px;
+	margin-right: -13vw;
 }
 
 .stamp {

@@ -9,7 +9,7 @@ function Footer() {
 		    <div className="footer_container">
           <div className="footer_box">
             <div className="row">
-              <div className="col-2 footer_section">Filers -</div>
+              <div className="col-2 footer_section">Filers</div>
               <div className="col-10">
                 <div className="footer_heading">13F Filers</div>
                 <div className="row">
@@ -33,7 +33,7 @@ function Footer() {
 
             <div className="quick_links">
               <div className="row">
-                <div className="col-2 footer_section">Quick links -</div>
+                <div className="col-2 footer_section">Quick links</div>
                 <div className="col-10">
                   <div className="row">
                     <div className="footer_heading col-2">Help</div>

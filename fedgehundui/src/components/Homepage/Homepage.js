@@ -1,7 +1,4 @@
 import React, { Fragment } from 'react';
-import {useState, useEffect} from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom'; 
 import '../../../styles/homepage.css';
 import Navbar from '../Layout/Navbar';
 import Footer from '../Layout/Footer';
@@ -15,48 +12,55 @@ function Homepage() {
 			<div className="contain">
 				<img src="../../../static/homepage/homepage_background.png" alt="background" className="Background"/>
 				<div className="row">
-					<div className="market_beating centered col-md-8">Find the next Market-Beating Portfolio</div>
+					<div className="market_beating centered col-md-10">Find the next Market-Beating Portfolio</div>
 				</div>
 				<div className="row">
 					<form className="form-inline centered_form">
-						<input className="form-control lookup_home" placeholder="Fund / Stock Lookup"/>
-						<button className="search" type="submit"><i className="fas fa-search fa-rotate-90 search_icon"></i>Search</button>
+						<div className="lookup_form">
+							<input className="form-control lookup_home" placeholder="Fund / Stock Lookup"/>
+							<button className="search" type="submit"><i className="fas fa-search fa-rotate-90 search_icon"></i>Search</button>
+						</div>
 					</form>
 				</div>
 				<div className="row">
-					<div className="carousel_text centered_carousel col-6">MrktDB provides exclusive investment insights by giving you a sneak peek into the portfolio of world's most successful investors. Market Research is expensive, don't let that hold you back!</div>
-					<a href="" className="centered_carousel_link">Find out what the smartest investors are buying</a>
-				</div>		
+					<div className="col-xs-10 carousel_text centered_carousel col-md-6">MrktDB provides exclusive investment insights by giving you a sneak peek into the portfolio of world's most successful investors. Market Research is expensive, don't let that hold you back!</div>
+				</div>
+				<div className="row">
+					<a href="" className="centered_carousel_link col-xs-12">Find out what the smartest investors are buying</a>
+				</div>
 			</div>
+
+
 
 			<div className="inside_db_container">
            		<div className="box"></div>
            		<div className="box_text">INSIDE OUR DATABASE</div>
 	       		<div className="row">
-	       			<div className="so_far_text col-5">SO FAR IN THE THIRD QUARTER OF 2020</div>
+	       			<div className="so_far_text col-xl-4 col-md-6 col-xs-6">SO FAR IN THE THIRD QUARTER OF 2020</div>
 	       		</div>
-				
-	       		<div className="row">
-	       			<div className="filer_stats col-1">3047</div>
-	           		<div className="securities_stats">13K</div>
-	           		<div className="hedgefund_stats">545</div>
-	           		
+
+	       		<div className="row stat_contain">
+	       			<div className="filer_stats col-4">3047</div>
+	           		<div className="securities_stats col-4">13K</div>
+	           		<div className="hedgefund_stats col-4">545</div>
 	       		</div>
 
 	       		<div className="row">
-	       			<div className="filer_stat_type col-2">Filers</div>
+	       			<div className="filer_stat_type">Filers</div>
 	       			<div className="security_stat_type">Securities</div>
 	       			<div className="fund_stat_type">Hedge Funds</div>
 	       		</div>
-           		
-           		<img src="../../../static/homepage/lower_left.png" alt="left design" className="lower_left_design"/>
+
+				<img src="../../../static/homepage/lower_left.png" alt="left design" className="lower_left_design"/>
            		<img src="../../../static/homepage/right.png" alt="right design" className="right_design"/>
            </div>
 
+
+
            <div className="know_more_container">
           		<div className="container">
-          			<div className="row">
-          				<div className="know_more col-3">Know more about us</div>
+          			<div className="row know_more">
+          				<div className="col-12 col-xl-8">Know more <br/>about us</div>
           			</div>
 
           			<div className="row">
@@ -68,7 +72,7 @@ function Homepage() {
 					    	</div>
 					  	</div>
 
-					  	<div className="col-5">
+					  	<div className="col-10">
 					    	<div className="tab-content tab_content" id="v-pills-tabContent">
 					      		<div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ut enim ad minim veniam, quis nostrud  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
 					      		<div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">This section describes the trends for individual stocks</div>
@@ -81,6 +85,7 @@ function Homepage() {
           		</div>
            	</div>
 
+
            	<div className="what_is_13F_container">
            		<div className="box_13f"></div>
            		<div className="row">
@@ -88,13 +93,16 @@ function Homepage() {
 	       			<div className="col-1 key_takeaways_head">KEY TAKEAWAYS</div>
 	       		</div>
 	       		<div className="row">
-	       			<div className="col-3 what_is_13f_content">
+	       			<div className="col-6 col-sm-5 col-md-4 what_is_13f_content">
 						The Securities and Exchange Commission's (SEC) form 13F is a quarterly report that is required to be filed by all institutional investment managers with at least $100 million in assets under management. It discloses their equity holdings and can provide some insights into what the smart money is doing in the market. However, studies have found that 13F filings also have serious flaws and can't be taken at face value.
+						<br/>
+						<br/>
+						<br/>
+						<a href="#" className="know_more_13f">Know more<i className="fas fa-angle-double-right arrow"></i></a>
 					</div>
-					<a href="#" className="col-3 know_more_13f">Know more<i className="fas fa-angle-double-right ml-1"></i></a>
 	       		</div>
 	       		<div className="row">
-	       			<div className="key_takeaways_content col-3">
+	       			<div className="col-6 col-sm-5 col-md-4 key_takeaways_content">
 	       				The SEC’s form 13F must be filed quarterly by institutional investment managers with at least $100 million in assets under management.
 	       				<br/>
 	       				<br/>
@@ -107,6 +115,7 @@ function Homepage() {
            		<img src="../../../static/homepage/right.png" alt="left design" className="lower_left_design_13f"/>
            		<img src="../../../static/homepage/right.png" alt="right design" className="right_design_13f"/>
            	</div>
+
 
            	<div className="popular_portfolio_container">
            			<div className="popular_portfolio_carousel_static">
@@ -121,7 +130,7 @@ function Homepage() {
            				</div>
            			</div>
 
-           			<div className="popular_portfolios">
+        			<div className="popular_portfolios">
 	           			<div className="row">
 	           				<div className="as_of_date">As of 18/11/20, 10:16 am EDT</div>
 	           			</div>
@@ -174,7 +183,7 @@ function Homepage() {
 						      			<div className="top_holding_symbol">3. ALIB <span className="top_holding_name">Alibaba Group</span></div>
 						      		</div>
 						      		<div className="col-4">
-						      			<div className="portfolio_heading">5. <br/> <div className="port_head">XXXXX XXXXXXXX</div> </div>
+						      			<div className="portfolio_heading">5. <br/> <div className="port_head">XXXXX <br/>XXXXXXXX</div> </div>
 						      			<div className="portfolio_value_head">Portfolio Value: <span className="portfolio_value_number">$ X,XXX,XXX,XXX</span></div>
 						      			<div className="portfolio_value">Estimated one year return: <span className="portfolio_value_number">X.X%</span></div>
 						      			<div className="top_holdings_text">Top Holdings</div>
@@ -202,22 +211,23 @@ function Homepage() {
            			</div>
            	</div>
 
+
            	<div className="get_started_container">
 	           	<div className="get_started_box shadow">
 	           		<div className="row">
-	           			<div className="exclusive_insights_text col-7">Exclusive insights into the portfolios of the smartest investors on the platform of your choice!</div>
+	           			<div className="exclusive_insights_text col-10 col-sm-8 col-md-10 col-lg-7 col-xl-7">Exclusive insights into the portfolios of the smartest investors on the platform of your choice!</div>
 	           		</div>
 	           		<div className="row">
-	           			<div className="sign_up_personalized col-7">Sign Up for personalised, experienced and exclusive content</div>
+	           			<div className="sign_up_personalized col-md-7 col-xs-10 col-10">Sign Up for personalised, experienced and exclusive content</div>
 	           		</div>
-                    <button className="btn get_started_btn shadow-sm" type="submit">
+	           		<button className="btn get_started_btn shadow-sm" type="submit">
                         <span className="get_started_text">Get Started</span>
                     </button>
 	           	</div>
 	           	<img src="../../../static/homepage/platform.png" alt="Platforms" className="platforms_img"/>
            	</div>
-          	
-          	<Footer />
+
+           	<Footer />
 
 	</Fragment>
   );

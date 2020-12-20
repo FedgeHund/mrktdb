@@ -6,7 +6,7 @@ import UserForm from './Signup/UserForm';
 import Homepage from './Homepage/Homepage';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // file deepcode ignore no-mixed-spaces-and-tabskey: "value", 
-
+// file deepcode ignore no-mixed-spaces-and-tabs: "Tabs and space"
 class App extends Component {
   render() {
     return (

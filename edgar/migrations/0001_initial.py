@@ -2,7 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-
+# file deepcode ignore django~null~true~nontext~field: <comment the reason here>
 
 class Migration(migrations.Migration):
 

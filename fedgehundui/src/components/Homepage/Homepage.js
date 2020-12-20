@@ -4,7 +4,7 @@ import Navbar from '../Layout/Navbar';
 import Footer from '../Layout/Footer';
 
 function Homepage() {
-
+// file deepcode ignore no-mixed-spaces-and-tabs: "Tabs and spaces"
   return (
     <Fragment>
     		<Navbar />

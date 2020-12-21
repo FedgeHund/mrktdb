@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../../../styles/signup/styles.scss';
+import '../../../styles/signup/styles.css';
 import { URL } from '../App.js';
+import Navbar from '../Layout/Navbar';
+import Footer from '../Layout/Footer';
 
 export class FormUserDetails extends Component {
 
@@ -67,6 +69,7 @@ export class FormUserDetails extends Component {
 
 		return (
 			<Fragment>
+                <Navbar />
 				<div className="main_div">
                         <div className="signup_box p-3 col-md-4 shadow mb-5">
 
@@ -79,8 +82,8 @@ export class FormUserDetails extends Component {
                                         <div className="sign_up_text col-md-12">Sign Up</div>
                                     </div>
                                     <div className="row">
-                                        <span className="question col-sm-8">Already have an account? </span>
-                                        <Link to={"/signin"} className="signin_Link col-sm-3">Sign In</Link>
+                                        <span className="already col-sm-8 col-8">Already have an account? </span>
+                                        <Link to={"/signin"} className="signin_Link col-sm-3 col-3">Sign In</Link>
                                     </div>  
                                 </div>
                                    
@@ -113,17 +116,18 @@ export class FormUserDetails extends Component {
                 			    </form>
 
                                 <div className="row">
-                                    <button className="btn btn-primary shadow-sm col-sm-6 offset-sm-3 submit-btn" type="submit" onClick={this.handleSubmit}>
+                                    <button className="btn btn-primary shadow-sm col-sm-6 offset-sm-3 col-xs-8 offset-xs-2 col-8 offset-2 submit-btn" type="submit" onClick={this.handleSubmit}>
                                         <span>{this.state.buttonText}</span>
                                     </button>
                                 </div>
 
                 				<div className="row">
-                                    <span className="captcha col-md-8 offset-md-2">Protected by reCAPTCHA and subject to the Google <a href="#" className="links">Privacy Policy</a> and <a href="#" className="links">Terms of service</a>.</span>
+                                    <span className="captcha col-md-8 offset-md-2 col-sm-10 offset-sm-1">Protected by reCAPTCHA and subject to the Google <a href="#" className="links">Privacy Policy</a> and <a href="#" className="links">Terms of service</a>.</span>
                                 </div>
 
                         </div>  
         		</div>
+                <Footer />
 			</Fragment>
 		)
 	}

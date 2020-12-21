@@ -20,8 +20,8 @@ function Navbar() {
   return (
     <Fragment>
 		<nav className={navbar ? 'navbar active fixed-top' : 'navbar fixed-top'}>
-			<img src={logo} alt="Logo" className="offset-1 logo"/>
-			<a className="MrktDB mr-auto">MrktDB</a>
+			<a href="/" className="offset-1"><img src={logo} alt="Logo" className="logo"/></a>
+			<a href="/" className="MrktDB mr-auto">MrktDB</a>
 			<form className="form-inline">
         <div className="lookup_form_everywhere">
 				  <input className="form-control lookup" placeholder="Fund / Stock Lookup"/>

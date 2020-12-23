@@ -1,732 +1,640 @@
 /* 1st section */
 @media (max-width: 650px) {
-	.Background {
-		height: 90vh;
-	}
 
-	.market_beating {
-		font-size: 4.2vh !important;
-	}
+  .contain {
+    top: 55% !important;
+  }
 
-	.centered_form {
-		margin-top: 7vh;
-	}
+  .market_beating {
+    font-size: 2em !important;
+  }
 
-	.lookup_form {
-		max-width: 80vw !important;
-	}
+  .lookup_form {
+    max-width: 80vw !important;
+    margin-top: 60px !important;
+  }
 
-	.lookup_home.lookup_home {
-		background: rgba(254, 111, 125, 0.03);
-		font-family: ArialMT;
-		font-size: 2vh;
-		height: 4.5vh;
-		width: 100% !important;
-		border-color: #a2a2a2;
-		border-width: 0.3vh;
-		position: relative;
-	}
+  .lookup_home.lookup_home {
+    background: rgba(254, 111, 125, 0.03);
+    font-family: ArialMT;
+    font-size: 1em;
+    width: 100% !important;
+    border-color: #a2a2a2;
+    border-width: 2px;
+    position: relative;
+  }
 
-	.lookup_home:focus {
-		background: rgba(254, 111, 125, 0.03);
-		box-shadow: none;
-		border-color: rgba(254,111,125,1);
-	}
+  .search.search {
+    width: 120px;
+    position: relative;
+    margin-top: 20px;
+  }
 
-	.search_icon {
-		margin-right: 1vh;
-	}
+  .carousel_text.carousel_text {
+    font-size: 0.7em !important;
+    margin-top: 70px;
+  }
 
-	.search.search {
-		font-size: 2vh;
-		font-family: ArialMT;
-		width: 15vh;
-		height: 4.5vh;
-		box-shadow: none !important;
-		background-color: rgba(254, 111, 125, 0.9);
-		color: #fff;
-		padding: 0.3vh 1vh 0.3vh 1vh;
-		border-radius: 5px;
-		border: none;
-		position: relative;
-		margin-top: 2vh;
-	}
-
-	.carousel_text {
-		color: #464545;
-		font-size: 1.4vh !important;
-		font-family: ArialMT;
-		margin-top: 2vh;
-	}
-
-	.centered_carousel {
-	  	position: absolute;
-	  	top: 72% !important;
-	  	left: 50%;
-	  	transform: translate(-50%, -50%);
-	}
-
-	.centered_carousel_link {
-	  	position: absolute;
-	  	top: 81% !important;
-	  	left: 50%;
-	  	transform: translate(-50%, -50%);
-	  	color: #fe6f7d;
-	  	font-size: 1.4vh;
-	  	font-family: ArialMT;
-	  	margin-top: 2vh;
-	}
+  .centered_carousel_link.centered_carousel_link {
+    font-size: 0.7em;
+    margin-top: 40px;
+  }
 }
 
-
 .Background {
-	width: 100%;
-	height: 85vh;
-	object-fit: cover;
+  background-image: url("../static/homepage/homepage_background.png");
+  background-size: cover;
+    width: 100vw;
+    height: 700px !important;
+    background-repeat: no-repeat;
 }
 
 .contain {
-	position: relative;
-  	text-align: center;
+  position: relative;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 1500px;
+  font-size: 16px;
+  text-align: center !important;
 }
 
 .market_beating {
-	color: #404040;
-  	font-size: 5vh;
-  	font-family: Helvetica;
-  	line-height: 1.2;
-}
-
-
-.centered {
-  	position: absolute;
-  	top: 40%;
-  	left: 50%;
-  	transform: translate(-50%, -50%);
-  	margin-right: -10px;
-}
-
-.centered_form {
-  	position: absolute;
-  	top: 50%;
-  	left: 50%;
-  	transform: translate(-50%, -50%);
+  color: #404040;
+  font-size: 2.5em;
+  font-family: Helvetica;
+  line-height: 1.2;
 }
 
 .lookup_form {
-	position: relative;
-	width: 70vh !important;
-	align-items: center;
-  	justify-content: center;
+  position: relative;
+  width: 600px !important;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 50px;
 }
 
 .lookup_home {
-	background: rgba(254, 111, 125, 0.03);
-	font-family: ArialMT;
-	font-size: 2vh;
-	height: 4.5vh;
-	width: 100% !important;
-	border-color: #a2a2a2;
-	border-width: 0.3vh;
-	position: absolute;
-	border-radius: 4px;
-	left: 0;
+  background: rgba(254, 111, 125, 0.03);
+  font-family: ArialMT;
+  font-size: 1em;
+  height: 38px;
+  width: 100% !important;
+  border-color: #a2a2a2;
+  border-width: 2px;
+  border-radius: 4px;
+  left: 0;
 }
 
 .lookup_home:focus {
-	background: rgba(254, 111, 125, 0.03);
-	box-shadow: none;
-	border-color: rgba(254,111,125,1);
-}
-
-.search_icon {
-	margin-right: 1vh;
+  background: rgba(254, 111, 125, 0.03);
+  box-shadow: none;
+  border-color: rgba(254, 111, 125, 1);
 }
 
 .search {
-	font-size: 2vh;
-	font-family: ArialMT;
-	width: 15vh;
-	height: 4.5vh;
-	box-shadow: none !important;
-	background-color: rgba(254, 111, 125, 0.9);
-	color: #fff;
-	padding: 0.3vh 1vh 0.3vh 1vh;
-	border-radius: 4px;
-	border: none;
-	position: absolute;
-	right: 0;
-	z-index: 2;
+  font-size: 1.1em;
+  font-family: ArialMT;
+  width: 120px;
+  height: 38px;
+  box-shadow: none !important;
+  background-color: rgba(254, 111, 125, 0.9);
+  color: #fff;
+  padding: 0.3px 1px 0.3px 1px;
+  border-radius: 4px;
+  border: none;
+  position: absolute;
+  right: 0;
+  z-index: 2;
 }
 
 .search:focus {
-	outline: none;
+  outline: none;
 }
 
 .carousel_text {
-	color: #464545;
-	font-size: 1.7vh;
-	font-family: ArialMT;
-}
-
-.centered_carousel {
-  	position: absolute;
-  	top: 65%;
-  	left: 50%;
-  	transform: translate(-50%, -50%);
+  color: #464545;
+  font-size: 0.85em;
+  font-family: ArialMT;
+  margin: 0 auto;
+  margin-top: 60px;
 }
 
 .centered_carousel_link {
-  	position: absolute;
-  	top: 74%;
-  	left: 50%;
-  	transform: translate(-50%, -50%);
-  	color: #fe6f7d;
-  	font-size: 1.4vh;
-  	font-family: ArialMT;
+  color: #fe6f7d;
+  font-size: 0.65em;
+  font-family: ArialMT;
+  margin: 0 auto;
+  margin-top: 40px;
 }
 
 .centered_carousel_link:hover {
-	color: #fe6f7d;
+  color: #fe6f7d;
 }
+
+
+
+
+
 
 /* 2nd section */
+@media(max-width: 600px) {
+  .box {
+    display: none;
+  }
+
+  .box_text {
+    display: none;
+  }
+
+  .lower_left_design {
+    display: none;
+  }
+
+  .inside_db.inside_db.inside_db.inside_db {
+    top: 44%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+
+  .so_far_text.so_far_text.so_far_text {
+    font-size: 1.2em;
+    margin-left: 20px;
+  }
+
+  .stats.stats {
+    margin-left: 0px;
+    position: relative;
+    left: 31%;
+  }
+
+  .securities_stats.securities_stats {
+    margin-left: 5px !important;
+  }
+
+  .hedgefund_stats.hedgefund_stats.hedgefund_stats {
+    margin-left: 10px !important;
+  }
+
+  .filer_stat_type.filer_stat_type {
+    margin-left: 5px !important;
+  }
+
+  .security_stat_type.security_stat_type {
+    margin-left: 7px !important;
+  }
+
+  .fund_stat_type.fund_stat_type.fund_stat_type{
+    margin-left: -14px !important;
+  }
+}
+
+@media(max-width: 500px) {
+  
+  .filer_stat_type.filer_stat_type.filer_stat_type.filer_stat_type {
+    margin-left: 15px !important;
+  }
+
+  .security_stat_type.security_stat_type.security_stat_type.security_stat_type {
+    margin-left: 9px !important;
+  }
+
+  .fund_stat_type.fund_stat_type.fund_stat_type.fund_stat_type {
+    margin-left: 1px !important;
+  }
+}
+
 @media (max-width: 770px) {
-	.box.box {
-		height: 5vh;
-		margin-top: 10.5vh;
-	}
+  .right_design.right_design {
+    display: none;
+  }
 
-	.box_text.box_text {
-		height: 5vh;
-		margin-top: 11vh;
-		margin-left: 14vh;
-		font-size: 2vh;
-	}
+  .inside_db.inside_db.inside_db {
+    top: 55%;
+    left: 75%;
+    width: 90%;
+  }
 
-	.so_far_text.so_far_text {
-		margin-top: 20vh;
-		margin-left: 4vh;
-		font-family: Arial-BoldMT;
-		line-height: 1.2;
-		color: #404040;
-		font-size: 3.2vh;
-		position: absolute;
-	}
+  .so_far_text.so_far_text {
+    margin-bottom: -100px;
+  }
 
-	.lower_left_design {
-		display: none;
-	}
+  .stats {
+    margin-left: 190px;
+  }
 
-	.stat_contain.stat_contain {
-		position: absolute;
-	  	top: 0%;
-	  	left: 16%;
-	  	transform: translate(-50%, -50%);
-	}
+  .filer_stats, .securities_stats, .hedgefund_stats {
+    margin-left: 0px !important;
+    margin-right: 300px !important;
+    text-align: center !important;
+    margin-top: 30px;
+  }
 
-	.filer_stats.filer_stats {
-		margin-left: 20vw;
-		text-align: center !important;
-	}
+  .filer_stat_type, .security_stat_type, .fund_stat_type {
+    margin-left: 0px !important;
+    margin-right: 300px !important;
+    text-align: center !important;
+  }
 
-	.securities_stats.securities_stats {
-		margin-left: 20vw;
-		text-align: center !important;
-	}
+  .filer_stat_type {
+    margin-top: -203px !important;
+    margin-left: 5px !important;
+  }
 
-	.hedgefund_stats.hedgefund_stats {
-		margin-left: 20vw;
-		text-align: center !important;
-	}
+  .security_stat_type {
+    margin-top: -100px !important;
+    margin-left: 5px !important;
+  }
 
-	.hedgefund_stats.hedgefund_stats {
-		margin-top: 67vh ;
-		font-size: 7vh;
-		text-align: left;
-		align-items: center;
-	}
+  .hedgefund_stats.hedgefund_stats {
+    margin-left: 5px !important;
+  }
 
-	.filer_stat_type {
-		margin-top: 45vh !important;
-		margin-left: 43vw !important;
-		font-size: 2vh;
-	}
-
-	.security_stat_type {
-		margin-top: 60vh !important;
-		margin-left: 41vw !important;
-		font-size: 2vh;
-	}
-
-	.fund_stat_type {
-		margin-top: 75vh !important;
-		margin-left: 39vw !important;
-		font-size: 2vh;
-	}
+  .fund_stat_type {
+    margin-left: -15px !important;
+  }
 }
 
+@media (max-width: 1000px) {
 
-@media (max-width: 900px) {
-	.filer_stats.filer_stats {
-		margin-top: 37vh ;
-		font-size: 7vh;
-		text-align: left;
-		align-items: center;
-	}
+  .inside_db.inside_db {
+    top: 42%;
+    left: 63%;
+    width: 90%;
+  }
 
-	.securities_stats.securities_stats {
-		margin-top: 52vh ;
-		font-size: 7vh;
-		text-align: left;
-		align-items: center;
-	}
+  .so_far_text.so_far_text {
+    font-size: 1.6em;
+  }
 
-	.hedgefund_stats.hedgefund_stats {
-		margin-top: 67vh ;
-		font-size: 7vh;
-		text-align: left;
-		align-items: center;
-	}
+  .filer_stats, .securities_stats, .hedgefund_stats {
+    font-size: 3em !important;
+  }
 
-	.filer_stat_type.filer_stat_type {
-		margin-top: 42vh;
-		margin-left: 44vw;
-		font-size: 2vh;
-	}
+  .securities_stats.securities_stats, .hedgefund_stats.hedgefund_stats, .security_stat_type.security_stat_type, .fund_stat_type.fund_stat_type {
+    margin-left: 30px;
+  }
 
-	.security_stat_type.security_stat_type {
-		margin-top: 57vh;
-		margin-left: 66vw;
-		font-size: 2vh;
-	}
+  .stat_type_container {
+    margin-left: 0px !important;
+  }
 
-	.fund_stat_type.fund_stat_type {
-		margin-top: 72vh;
-		margin-left: 89vw;
-		font-size: 2vh;
-	}
-
-	.right_design {
-		display: none;
-	}
+  .filer_stat_type, .security_stat_type, .fund_stat_type {
+    font-size: 0.7em !important;
+  }
 }
 
-@media (max-width: 1110px) {
-	.right_design {
-		width: 36vh !important;
-	}
+@media (max-width: 1250px) {
+  .box {
+    height: 45px !important;
+    width: 115px !important;
+  }
+
+  .box_text.box_text {
+    margin-top: 175px;
+    margin-left: 85px;
+    font-size: 1.1em;
+  }
+
+  .lower_left_design {
+    margin-left: -258px !important;
+  }
+
+  .right_design {
+      margin-right: -290px !important;
+  }
 }
 
 .inside_db_container {
-	height: 85vh;
-	background: white;
-	position: relative;
-	overflow: hidden;
-	object-fit: cover;
+  height: 700px;
+  background: white;
+  position: relative;
+  overflow: hidden !important;
+  object-fit: cover;
 }
 
-.box {
-	height: 6.6vh;
-	width: 20vh;
-	background: #c8ddd6;
-	position: absolute;
-	margin-top: 20.5vh;
-	z-index: 1;
-}
-
-.box_text {
-	height: 6.6vh;
-	width: 19vh;
-	margin-top: 21vh;
-	margin-left: 17vh;
-	font-size: 2.4vh;
-	font-family: ArialMT;
-	line-height: 1.2;
-	text-align: right;
-	position: absolute;
+.inside_db {
+  position: relative;
+  top: 46%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 1500px;
+  font-size: 16px;
 }
 
 .so_far_text {
-	margin-top: 20vh;
-	margin-left: 45vh;
-	font-family: Arial-BoldMT;
-	line-height: 1.2;
-	color: #404040;
-	font-size: 4.3vh;
-	position: absolute;
+  font-family: Arial-BoldMT;
+  line-height: 1.2;
+  color: #404040;
+  font-size: 2.1em;
 }
 
-.filer_stats {
-	margin-top: 42vh;
-	margin-left: 26vw;
-	font-family: Arial-BoldMT;
-	color: #404040;
-	font-size: 5.2vw;
-	position: absolute;
+.stat_container {
+  margin-top: 120px;
 }
 
-.securities_stats {
-	margin-top: 42vh;
-	margin-left: 50vw;
-	font-family: Arial-BoldMT;
-	color: #404040;
-	font-size: 5.2vw;
-	position: absolute;
+.filer_stats, .securities_stats, .hedgefund_stats {
+  font-family: Arial-BoldMT;
+  color: #404040;
+  font-size: 4.5em;
 }
 
-.hedgefund_stats {
-	margin-top: 42vh;
-	margin-left: 74vw;
-	font-family: Arial-BoldMT;
-	color: #404040;
-	font-size: 5.2vw;
-	position: absolute;
+.stat_type_container {
+  margin-top: -15px;
+  margin-left: 5px;
 }
 
-.filer_stat_type {
-	font-size: 2.2vh; 
-	font-family: ArialMT; 
-	margin-top: 53vh;
-	margin-left: 27vw;
-	color: #404040;
-	position: absolute;
+.filer_stat_type, .security_stat_type, .fund_stat_type {
+  font-size: 1.1em;
+  font-family: ArialMT;
+  color: #404040;
 }
 
-.security_stat_type {
-	font-size: 2.2vh; 
-	font-family: ArialMT; 
-	margin-top: 53vh;
-	margin-left: 51.5vw;
-	color: #404040;
-	position: absolute;
+.box {
+  height: 45px;
+  width: 155px;
+  background: #c8ddd6;
+  position: absolute;
+  margin-top: 170px;
+  z-index: 1;
 }
 
-.fund_stat_type {
-	font-size: 2.2vh; 
-	font-family: ArialMT; 
-	margin-top: 53vh;
-	margin-left: 75vw;
-	color: #404040;
-	position: absolute;
+.box_text {
+  width: 150px;
+  margin-top: 170px;
+  margin-left: 130px;
+  font-size: 1.2em;
+  font-family: ArialMT;
+  line-height: 1.2;
+  text-align: right;
+  position: absolute;
 }
 
 .lower_left_design {
-	margin-left: -25.5vh;
-	margin-top: 18.5vh;
-	z-index: 0;
-	position: absolute;
-	width: 44vh;
+  margin-left: -218px;
+  margin-top: 145px;
+  position: absolute;
 }
 
 .right_design {
-	float: right;
-	margin-top: -22.3vw;
-	margin-right: -19vw;
-	z-index: 0;
-	width: 44vh;
+  float: right;
+  margin-top: -320px;
+  margin-right: -280px;
 }
+
+
 
 
 
 /* 3rd Section */
-@media (max-width: 700px) {
-	.container.container {
-		margin-left: 2vh;
-	}
-
-	.know_more.know_more {
-		font-size: 3.5vh;
-		font-family: ArialMT;
-		line-height: 1.2;
-		margin-top: 8vh;
-	}
-
-	.tabs_know_heading.tabs_know_heading {
-		color: #7f7f7f !important;
-		font-size: 1.4vh;
-		margin-top: 3vh;
-		padding-left: 2vh;
-		width: 10em;
-	}
-
-	.tab_content.tab_content {
-		color: #7f7f7f;
-		font-size: 2vh;
-		font-family: ArialMT;
-		line-height: 1.3;
-		margin-top: 7vh;
-		margin-left: 4em;
-		position: absolute;
-		width: 12em;
-	}
+@media (max-width: 500px) {
+  .tab_content.tab_content.tab_content.tab_content {
+    font-size: 0.9em;
+    margin-left: 4em;
+    width: 12em;
+  }
 }
 
-@media (max-width: 1100px) {
-	.know_more_image {
-		display: none !important;
-	}
+@media (max-width: 700px) {
+  .container.container {
+    margin-left: 5px;
+  }
+
+  .know_more.know_more {
+    font-size: 1.7em;
+    margin-top: 80px;
+  }
+
+  .tabs_know_heading.tabs_know_heading {
+    font-size: 0.8em;
+  }
+
+  .tab_content.tab_content.tab_content {
+    font-size: 1.1em;
+    margin-left: 4em;
+    width: 16em;
+  }
+}
+
+@media (max-width: 1000px) {
+  .know_more_image {
+    display: none !important;
+  }
+
+  .tab_content.tab_content {
+    font-size: 1.05em;
+    margin-left: 130px;
+  }
 }
 
 @media (max-width: 1160px) {
-	.know_more_image {
-		width: 25% !important;
-		right: 5vh !important;
-	}
+  .know_more_image {
+    width: 25% !important;
+    right: 30px !important;
+  }
 }
 
 @media (max-width: 1200px) {
-	.know_more_image.know_more_image {
-		width: 25% !important;
-	}
-}
-
-@media (min-width: 3000px) {
-	.tab_content {
-		margin-left: 12em!important;
-	}
+  .know_more_image.know_more_image {
+    width: 25% !important;
+  }
 }
 
 .know_more_container {
-	height: 86vh;
-	position: relative;
-	object-fit: cover;
-	overflow: hidden;
+  height: 700px;
+  position: relative;
+  object-fit: cover;
+  overflow: hidden;
 }
 
 .container {
-	margin-left: 8vh;
+  position: absolute;
+  top: 40%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 1500px;
+  font-size: 16px;
 }
 
 .know_more {
-	font-size: 4.5vh;
-	font-family: ArialMT;
-	line-height: 1.2;
-	margin-top: 12vh;
+  font-size: 2.3em;
+  font-family: ArialMT;
+  line-height: 1.2;
+  margin-top: 100px;
 }
 
 .tabs_know {
-	margin-top: 4vh;
-	line-height: 1.3;
+  margin-top: 35px;
+  line-height: 1.3;
 }
 
 .tabs_know_heading {
-	color: #7f7f7f !important;
-	font-size: 2vh;
-	margin-top: 3vh;
-	padding-left: 2vh;
-	width: 10em;
+  color: #7f7f7f !important;
+  font-size: 1.1em;
+  margin-top: 25px;
+  padding-left: 20px;
+  width: 10em;
 }
 
 .tabs_know_heading.active {
-	background:
-     linear-gradient(
-       to right,
-       rgba(254, 111, 125, 0.9) 0%,
-       rgba(254, 111, 125, 0.9) 0.6vh,
-       transparent 0.3vw
-     );
-  	color: #404040 !important;
+  background: linear-gradient(
+    to right,
+    rgba(254, 111, 125, 0.9) 0%,
+    rgba(254, 111, 125, 0.9) 4.5px,
+    transparent 1px
+  );
+  color: #404040 !important;
 }
 
 .tab_content {
-	color: #7f7f7f;
-	font-size: 2vh;
-	font-family: ArialMT;
-	line-height: 1.3;
-	margin-top: 7vh;
-	margin-left: 7em;
-	position: absolute;
-	width: 25em;
+  color: #7f7f7f;
+  font-size: 1.05em;
+  font-family: ArialMT;
+  line-height: 1.3;
+  margin-top: 60px;
+  margin-left: 60px;
+  position: absolute;
+  width: 23em;
 }
 
 .know_more_image {
-	width: 30%;
-	position: absolute;
-	bottom: 0vh;
-	right: 12vh;
+  width: 30%;
+  position: absolute;
+  right: 8%;
+  bottom: -34%;
 }
+
 
 
 
 
 /* 4th container */
-@media (max-width: 460px) {
-	.what_is_13F_container.what_is_13F_container {
-		height: 110vh;
-	}
+@media (max-width: 420px) {
+  .what_is_13f_box.what_is_13f_box.what_is_13f_box.what_is_13f_box {
+    top: 50%;
+  }
 }
 
-@media (max-width: 750px) {
-	.lower_left_design_13f.lower_left_design_13f {
-		display: none;
-	}
+@media (max-width: 770px) {
 
-	.right_design_13f.right_design_13f {
-		display: none;
-	}
+  .what_is_13f_box.what_is_13f_box.what_is_13f_box {
+    top: 43%;
+    left: 48%;
+  }
 
-	.box_13f.box_13f {
-		display: none;
-	}
-
-	.what_is_13f_text.what_is_13f_text {
-		margin-top: 10vh;
-		margin-left: 10vw;
-		font-size: 3.5vh !important;
-	}
-
-	.what_is_13f_content.what_is_13f_content {
-		margin-top: 23vh;
-		margin-left: 10vw;
-		font-size: 1.5vh;
-		width: 45vw !important;
-	}
-
-	.know_more_13f.know_more_13f {
-		font-size: 1.3vh;
-	}
-
-	.key_takeaways_head.key_takeaways_head {
-		margin-top: 10.5vh;
-		margin-left: 55vw;
-		font-size: 2.2vh;
-	}
-
-	.key_takeaways_content.key_takeaways_content {
-		margin-top: 23vh;
-		margin-left: 55vw;
-		font-size: 1.5vh;
-		width: 45vw !important;
-	}
+  .what_is_13f_text.what_is_13f_text {
+    font-size: 1.8em !important;
+  }
 }
 
 @media (max-width: 1010px) {
-	.lower_left_design_13f.lower_left_design_13f {
-		display: none;
-	}
 
-	.right_design_13f.right_design_13f {
-		display: none;
-	}
+  .what_is_13f_box.what_is_13f_box {
+    top: 50%;
+  }
 
-	.box_13f.box_13f {
-		display: none;
-	}
+  .lower_left_design_13f.lower_left_design_13f {
+    display: none;
+  }
 
-	.what_is_13f_text.what_is_13f_text {
-		margin-top: 10vh;
-		margin-left: 10vw;
-		font-size: 5.5vh;
-	}
+  .right_design_13f.right_design_13f {
+    display: none;
+  }
 
-	.what_is_13f_content.what_is_13f_content {
-		margin-top: 23vh;
-		margin-left: 10vw;
-		font-size: 1.9vh;
-		width: 45vw !important;
-	}
-
-	.know_more_13f.know_more_13f {
-		font-size: 1.8vh;
-	}
-
-	.key_takeaways_head.key_takeaways_head {
-		margin-top: 10.5vh;
-		margin-left: 55vw;
-		font-size: 2.8vh;
-	}
-
-	.key_takeaways_content.key_takeaways_content {
-		margin-top: 23vh;
-		margin-left: 55vw;
-		font-size: 1.9vh;
-		width: 45vw !important;
-	}
+  .box_13f.box_13f {
+    display: none;
+  }
 }
 
+@media (max-width: 1200px) {
+  .right_design_13f.right_design_13f {
+    margin-right: -260px;
+  }
+}
 
 .what_is_13F_container {
-	height: 85vh;
-	background: white;
-	overflow: hidden;
-	position: relative;
-	object-fit: cover;
+  height: 700px;
+  background: white;
+  position: relative;
+  overflow: hidden;
+  object-fit: cover;
 }
 
 .box_13f {
-	height: 1.3vh;
-	width: 18vh;
-	background: #89c7aa;
-	position: absolute;
-	margin-top: 29.5vh;
+  height: 12px;
+  width: 135px;
+  background: #89c7aa;
+  position: absolute;
+  margin-top: 240px;
 }
 
 .lower_left_design_13f {
-	margin-left: -27vh;
-	margin-top: 30vh;
-	z-index: -1;
-	width: 45vh;
+  margin-left: -235px;
+  margin-top: 250px;
+  z-index: -1;
 }
 
 .right_design_13f {
-	float: right;
-	margin-top: -18vh;
-	margin-right: -24vh;
-	z-index: -1;
-	width: 45vh;
+  float: right;
+  margin-top: -140px;
+  margin-right: -230px;
+  z-index: -1;
+}
+
+.what_is_13f_box {
+  position: absolute;
+  top: 43%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 1500px;
+  font-size: 16px;
 }
 
 .what_is_13f_text {
-	margin-top: 18vh;
-	margin-left: 31vh;
-	font-family: Arial-BoldMT;
-	color: #404040;
-	font-size: 5vh;
-	position: absolute;
-}
-
-.what_is_13f_content {
-	margin-top: 28.5vh;
-	margin-left: 31vh;
-	font-family: SegoeUI;
-	color: #404040;
-	font-size: 1.8vh;
-	position: absolute;
-	width: 25em;
-}
-
-.know_more_13f {
-	font-family: SegoeUI;
-	color: #fe6f7d;
-}
-
-.know_more_13f:hover {
-	color: #fe6f7d;
-}
-
-.arrow{
-	margin-left: 1vh;
+  font-family: Arial-BoldMT;
+  color: #404040;
+  font-size: 2.6em;
 }
 
 .key_takeaways_head {
-	margin-top: 18vh;
-	margin-left: 55vw;
-	font-family: ArialMT;
-	color: #fe6f7d;
-	font-size: 2.2vh;
-	position: absolute;
+  font-family: ArialMT;
+  color: #fe6f7d;
+  font-size: 1.3em;
+}
+
+.what_is_13f_content {
+  font-family: SegoeUI;
+  color: #404040;
+  font-size: 0.9em;
+}
+
+.know_more_13f {
+  font-family: SegoeUI;
+  color: #fe6f7d;
+}
+
+.know_more_13f:hover {
+  color: #fe6f7d;
+}
+
+.arrow {
+  margin-left: 7px;
 }
 
 .key_takeaways_content {
-	margin-top: 28.5vh;
-	margin-left: 55vw;
-	font-family: SegoeUI;
-	color: #404040;
-	font-size: 1.8vh;
-	position: absolute;
-	width: 25em;
+  font-family: SegoeUI;
+  color: #404040;
+  font-size: 0.9em;
 }
+
+
+
 
 
 
@@ -734,237 +642,237 @@
 /* 5th section */
 
 .popular_portfolio_container {
-	height: 81vh;
-	object-fit: cover;
+  height: 81vh;
+  object-fit: cover;
 }
 
 @media (max-width: 1020px) {
-	.popular_portfolio_container.popular_portfolio_container {
-		height: 35vh !important;
-		bottom: 0;
-	}
+  .popular_portfolio_container.popular_portfolio_container {
+    height: 35vh !important;
+    bottom: 0;
+  }
 
-	.popular_portfolio_carousel_static.popular_portfolio_carousel_static {
-		background: #262528;
-		height: 20vh;
-		width: 100%;
-		object-fit: cover;
-	}
+  .popular_portfolio_carousel_static.popular_portfolio_carousel_static {
+    background: #262528;
+    height: 20vh;
+    width: 100%;
+    object-fit: cover;
+  }
 
-	.popular_portfolio_on_mrktdb.popular_portfolio_on_mrktdb {
-		font-size: 3.5vh;
-		margin-left: 9vh;
-		margin-top: 6vh;
-	}
+  .popular_portfolio_on_mrktdb.popular_portfolio_on_mrktdb {
+    font-size: 3.5vh;
+    margin-left: 9vh;
+    margin-top: 6vh;
+  }
 
-	.know_about_top_hedge_funds {
-		display: none !important;
-	}
+  .know_about_top_hedge_funds {
+    display: none !important;
+  }
 
-	.portfolio_names {
-		display: none !important;
-	}
+  .portfolio_names {
+    display: none !important;
+  }
 
-	.portfolio_name {
-		display: none !important;
-	}
+  .portfolio_name {
+    display: none !important;
+  }
 
-	.more_portfolios_link {
-		display: none !important;
-	}
+  .more_portfolios_link {
+    display: none !important;
+  }
 
-	.popular_portfolios {
-		background: #E5E5E3;
-		height: 38vw !important; 
-		width: 100% !important;
-	}
+  .popular_portfolios {
+    background: #e5e5e3;
+    height: 38vw !important;
+    width: 100% !important;
+  }
 
-	.carousel_row {
-		margin-left: 5vw !important;
-	}
+  .carousel_row {
+    margin-left: 5vw !important;
+  }
 
-	.portfolio_heading.portfolio_heading {
-		font-size: 4vw;
-		margin-top: 8vw;
-		line-height: 1.2;
-	}
+  .portfolio_heading.portfolio_heading {
+    font-size: 4vw;
+    margin-top: 8vw;
+    line-height: 1.2;
+  }
 
-	.port_head {
-		margin-top: 2vh;
-	}
+  .port_head {
+    margin-top: 2vh;
+  }
 
-	.as_of_date.as_of_date {
-		font-size: 1.3vw;
-		margin-top: 32vw;
-		margin-left: 9vw;
-	}
+  .as_of_date.as_of_date {
+    font-size: 1.3vw;
+    margin-top: 32vw;
+    margin-left: 9vw;
+  }
 
-	.portfolio_value_head {
-		display: none !important;
-	}
+  .portfolio_value_head {
+    display: none !important;
+  }
 
-	.portfolio_value {
-		display: none !important;
-	}
+  .portfolio_value {
+    display: none !important;
+  }
 
-	.portfolio_value_number {
-		display: none !important;
-	}
+  .portfolio_value_number {
+    display: none !important;
+  }
 
-	.top_holdings_text {
-		display: none !important;
-	}
+  .top_holdings_text {
+    display: none !important;
+  }
 
-	.top_holding_symbol_1 {
-		display: none !important;
-	}
+  .top_holding_symbol_1 {
+    display: none !important;
+  }
 
-	.top_holding_symbol {
-		display: none !important;
-	}
+  .top_holding_symbol {
+    display: none !important;
+  }
 
-	.top_holding_name {
-		display: none !important;
-	}
+  .top_holding_name {
+    display: none !important;
+  }
 
-	.carousel-indicators.carousel-indicators {
-		display: none;
-	}
-	
-	.carousel-control-next-icon.carousel-control-next-icon {
-	    background-image: url("../static/homepage/right-arrow.png");
-	    height: 15%;
-	    width: 37%;
-	}
+  .carousel-indicators.carousel-indicators {
+    display: none;
+  }
 
-	.carousel-control-next {
-	    align-items: flex-end;
-	    margin-bottom: -12vw;
-	}
+  .carousel-control-next-icon.carousel-control-next-icon {
+    background-image: url("../static/homepage/right-arrow.png");
+    height: 15%;
+    width: 37%;
+  }
+
+  .carousel-control-next {
+    align-items: flex-end;
+    margin-bottom: -12vw;
+  }
 }
 
 .popular_portfolio_carousel_static {
-	background: #262528;
-	height: 81vh;
-	width: 25%;
-	float: left;
-	object-fit: cover;
+  background: #262528;
+  height: 81vh;
+  width: 25%;
+  float: left;
+  object-fit: cover;
 }
 
 .popular_portfolio_on_mrktdb {
-	color: #fff;
-	font-size: 3.5vh;
-	font-family: ArialMT;
-	margin-left: 5vw;
-	margin-top: 10vh;
-	line-height: 1.3;
+  color: #fff;
+  font-size: 3.5vh;
+  font-family: ArialMT;
+  margin-left: 5vw;
+  margin-top: 10vh;
+  line-height: 1.3;
 }
 
 .know_about_top_hedge_funds {
-	color: #e5e5e3;
-	font-size: 2.3vh;
-	font-family: ArialMT;
-	margin-top: 5vh;
-	margin-left: 5vw;
-	line-height: 1.4;
+  color: #e5e5e3;
+  font-size: 2.3vh;
+  font-family: ArialMT;
+  margin-top: 5vh;
+  margin-left: 5vw;
+  line-height: 1.4;
 }
 
 .portfolio_names {
-	margin-left: 5vw;
-	margin-top: 14vh;
+  margin-left: 5vw;
+  margin-top: 14vh;
 }
 
 .portfolio_name {
-	color: #b3b2b1;
-	font-size: 1.9vh;
-	font-family: ArialMT;
-	margin-top: 1.7vh;
+  color: #b3b2b1;
+  font-size: 1.9vh;
+  font-family: ArialMT;
+  margin-top: 1.7vh;
 }
 
 .more_portfolios_link {
-	color: #b3b2b1;
-	font-size: 2vh;
-	font-family: ArialMT;
-	margin-left: 5vw;
+  color: #b3b2b1;
+  font-size: 2vh;
+  font-family: ArialMT;
+  margin-left: 5vw;
 }
 
 .popular_portfolios {
-	background: #E5E5E3;
-	height: 81vh;
-	width: 75%;
-	float: right;
+  background: #e5e5e3;
+  height: 81vh;
+  width: 75%;
+  float: right;
 }
 
 .carousel_row {
-	margin-left: 7vh;
+  margin-left: 7vh;
 }
 
 .portfolio_heading {
-	color: #404040;
-	font-size: 4.3vh;
-	font-family: Arial-BoldMT;
-	margin-top: 9.3vh;
-	line-height: 1.2;
+  color: #404040;
+  font-size: 4.3vh;
+  font-family: Arial-BoldMT;
+  margin-top: 9.3vh;
+  line-height: 1.2;
 }
 
 .port_head {
-	margin-top: 2.4vh;
+  margin-top: 2.4vh;
 }
 
 .portfolio_value_head {
-	color: #484848;
-	font-size: 1.9vh;
-	font-family: Arial-BoldMT;
-	margin-top: 4.7vh;
+  color: #484848;
+  font-size: 1.9vh;
+  font-family: Arial-BoldMT;
+  margin-top: 4.7vh;
 }
 
 .portfolio_value {
-	color: #484848;
-	font-size: 1.9vh;
-	font-family: Arial-BoldMT;
+  color: #484848;
+  font-size: 1.9vh;
+  font-family: Arial-BoldMT;
 }
 
 .portfolio_value_number {
-	color: #484848;
-	font-size: 1.8vh;
-	font-family: ArialMT;
+  color: #484848;
+  font-size: 1.8vh;
+  font-family: ArialMT;
 }
 
 .top_holdings_text {
-	color: #484848;
-	font-size: 2.2vh;
-	font-family: Arial-BoldMT;
-	margin-top: 5.7vh;
+  color: #484848;
+  font-size: 2.2vh;
+  font-family: Arial-BoldMT;
+  margin-top: 5.7vh;
 }
 
 .top_holding_symbol_1 {
-	color: #484848;
-	font-size: 1.9vh;
-	font-family: Arial-BoldMT;
-	margin-top: 2.8vh;
+  color: #484848;
+  font-size: 1.9vh;
+  font-family: Arial-BoldMT;
+  margin-top: 2.8vh;
 }
 
 .top_holding_symbol {
-	color: #484848;
-	font-size: 1.9vh;
-	font-family: Arial-BoldMT;
-	margin-top: 0.9vh;
+  color: #484848;
+  font-size: 1.9vh;
+  font-family: Arial-BoldMT;
+  margin-top: 0.9vh;
 }
 
 .top_holding_name {
-	color: #484848;
-	font-size: 1.8vh;
-	font-family: ArialMT;
-	margin-left: 2.2vh;
+  color: #484848;
+  font-size: 1.8vh;
+  font-family: ArialMT;
+  margin-left: 2.2vh;
 }
 
 .as_of_date {
-	color: #484848;
-	font-size: 1.3vh;
-	font-family: ArialMT;
-	margin-top: 72vh;
-	position: absolute;
-	margin-left: 11vh;
+  color: #484848;
+  font-size: 1.3vh;
+  font-family: ArialMT;
+  margin-top: 72vh;
+  position: absolute;
+  margin-left: 11vh;
 }
 
 .carousel-indicators li {
@@ -974,234 +882,165 @@
 }
 
 .carousel-indicators {
-	align-items: flex-end;
-    margin-bottom: -7vw;
-	right: 60%;
-	margin-left: -45vw;
+  align-items: flex-end;
+  margin-bottom: -7vw;
+  right: 60%;
+  margin-left: -45vw;
 }
 
 .carousel-control-next-icon {
-    background-image: url("../static/homepage/right-arrow.png");
-    height: 6%;
-    width: 22%;
+  background-image: url("../static/homepage/right-arrow.png");
+  height: 6%;
+  width: 22%;
 }
 
-.carousel-control-next{
-    align-items: flex-end;
-    margin-bottom: -8vw;
+.carousel-control-next {
+  align-items: flex-end;
+  margin-bottom: -8vw;
 }
+
+
+
 
 
 /* 6th section */
-@media (max-width: 400px) {
-	.get_started_container {
-		height: 110vh !important;
-	}
-	.get_started_box.get_started_box.get_started_box.get_started_box.get_started_box.get_started_box.get_started_box { 
-		margin-top: -56vw !important;
-		height: 110vw !important;
-	}
+@media (max-width: 472px) {
+  .get_started_box.get_started_box.get_started_box.get_started_box {
+    height: 460px;
+  }
 
-	.exclusive_insights_text.exclusive_insights_text.exclusive_insights_text {
-		font-size: 2.2vh !important;
-		margin-top: -50vw !important;
-		margin-left: 6vw !important;
-	}
+  .exclusive_insights_text.exclusive_insights_text.exclusive_insights_text.exclusive_insights_text.exclusive_insights_text {
+    margin-left: 30px;
+  }
 
-	.sign_up_personalized.sign_up_personalized.sign_up_personalized {
-		margin-top: 0vw !important;
-		margin-bottom: 4vh !important;
-		margin-left: 6vw !important;
-	}
+  .sign_up_personalized.sign_up_personalized.sign_up_personalized {
+    margin-left: 30px;
+  }
+
+  .get_started_btn.get_started_btn.get_started_btn {
+    margin-left: 30px;
+  }
 }
 
-@media (max-width: 500px) {
-	.get_started_container {
-		height: 110vh !important;
-	}
-	.get_started_box.get_started_box.get_started_box.get_started_box.get_started_box.get_started_box { 
-		margin-top: -50vw !important;
-		height: 90vw !important;
-	}
+@media (max-width: 675px) {
+  .get_started_box.get_started_box.get_started_box {
+    height: 420px;
+  }
 
-	.exclusive_insights_text.exclusive_insights_text {
-		font-size: 2.2vh !important;
-		margin-top: -50vw !important;
-	}
+  .exclusive_insights_text.exclusive_insights_text.exclusive_insights_text.exclusive_insights_text {
+    margin-left: 40px;
+  }
 
-	.sign_up_personalized.sign_up_personalized {
-		margin-top: -15vw !important;
-		margin-bottom: 4vh !important;
-	}
-}
+  .sign_up_personalized.sign_up_personalized {
+    margin-left: 40px;
+  }
 
-@media (max-width: 540px) {
-	.get_started_box.get_started_box.get_started_box.get_started_box.get_started_box { 
-		margin-top: -18vh !important;
-	}
-}
-
-@media (max-width: 650px) {
-	.get_started_box.get_started_box.get_started_box.get_started_box { 
-		margin-top: -15vh !important;
-	}
-}
-
-@media (max-width: 720px) {
-	.get_started_box.get_started_box.get_started_box { 
-		margin-top: -10vh !important;
-	}
-}
-
-@media (max-width: 750px) {
-	.get_started_box.get_started_box { 
-		margin-top: -8vh !important;
-	}
-}
-
-@media (max-width: 840px) {
-	.get_started_box { 
-		margin-top: -16vh !important;
-	}
-
-	.exclusive_insights_text {
-		font-size: 2.5vh !important;
-		margin-top: -22vh !important;
-		margin-left: 5vw !important;
-	}
-
-	.sign_up_personalized {
-		font-size: 1.7vh !important;
-		margin-top: -5vh !important;
-		margin-left: 5vw !important;
-		margin-bottom: 4vh !important;
-	}
-
-	.get_started_btn { 
-    	margin-top: 0vh !important;
-    	margin-left: 5vw !important;
-    }
-}
-
-@media (max-width: 920px) {
-	.get_started_box { 
-		height: 30vh !important;
-		margin-top: -5vh !important;
-	}
-}
-
-@media (max-width: 960px) {
-	.get_started_box { 
-		height: 40vh !important;
-	}
+  .get_started_btn.get_started_btn {
+    margin-top: 40px;
+    margin-left: 40px;
+  }
 }
 
 @media (max-width: 1000px) {
-	.get_started_box {
-		height: 42vh !important;
-		top: 40% !important;
-	}
+  .platforms_img.platforms_img {
+    display: none;
+  }
 }
 
-@media (max-width: 1020px) {
-	.platforms_img.platforms_img {
-		display: none;
-	}
+@media (max-width: 1130px) {
+  .exclusive_insights_text.exclusive_insights_text.exclusive_insights_text {
+    font-size: 1.3em;
+  }
+}
 
-	.get_started_container.get_started_container {
-		height: 100vh;
-	}
+@media (max-width: 1300px) {
+  .platforms_img.platforms_img {
+    margin-top: -120px;
+    margin-left: 35vw;
+    width: 450px;
+  }
 
-	.get_started_box.get_started_box {
-		background: #FCF4EB;
-		text-align: center;
-		width: 82vw;
-		height: 46vh;
-		left: 0%;
-		top: 45%;
-		position: relative;
-		transform: translate(10%, 10%);
-		border-radius: 1%;
-	}
+  .get_started_box.get_started_box {
+    background: #fcf4eb;
+    text-align: center;
+    width: 82vw;
+    height: 380px;
+    left: 50%;
+    top: 42%;
+    position: relative;
+    border-radius: 1%;
+  }
 
-	.exclusive_insights_text.exclusive_insights_text {
-		font-size: 3vh;
-		margin-top: -26vh;
-		margin-left: 4.7vw;
-	}
+  .exclusive_insights_text.exclusive_insights_text {
+    font-size: 1.5em;
+  }
 
-	.sign_up_personalized.sign_up_personalized {
-		font-size: 1.8vh;
-		margin-top: -7vh;
-		margin-left: 4.7vw;
-	}
-
-	.get_started_btn.get_started_btn { 
-    	margin-top: -8vh;
-    }
+  .sign_up_personalized.sign_up_personalized {
+    font-size: 0.9em;
+  }
 }
 
 .get_started_container {
-	height: 110vh;
-	background: white;
-	object-fit: cover;
+  height: 900px;
+  background: white;
+  object-fit: cover;
 }
 
 .get_started_box {
-	background: #FCF4EB;
-	text-align: center;
-	width: 82vw;
-	height: 45vh;
-	left: 50%;
-	top: 42%;
-	position: relative;
-	transform: translate(-50%, -50%);
-	border-radius: 1%;
+  background: #fcf4eb;
+  text-align: center;
+  width: 1200px;
+  height: 380px;
+  left: 50%;
+  top: 42%;
+  position: relative;
+  transform: translate(-50%, -50%);
+  border-radius: 1%;
 }
 
 .exclusive_insights_text {
-	color: #404040;
-	font-size: 3vh;
-	font-family: ArialMT;
-	text-align: left;
-	margin-top: 4.7vw;
-	margin-left: 4.7vw;
+  color: #404040;
+  font-size: 1.55em;
+  font-family: ArialMT;
+  text-align: left;
+  margin-top: 60px;
+  margin-left: 60px;
 }
 
 .sign_up_personalized {
-	color: #262528;
-	font-size: 1.8vh;
-	font-family: ArialMT;
-	margin-top: 4.7vw;
-	margin-left: 4.7vw;
-	text-align: left;
+  color: #262528;
+  font-size: 1em;
+  font-family: ArialMT;
+  margin-top: 80px;
+  margin-left: 60px;
+  text-align: left;
 }
 
-.get_started_btn { 
-    margin-top: 2.2vw;
-    margin-left: 4.7vw;
-    background-color: rgba(254,111,125,1);
-    color: white;
-    font-family: OpenSans-SemiBold;
-    border: none;
-    border-radius: 30px;
-    outline: none !important;
-    cursor: pointer;
-    text-align: center;
-    height: 5.5vh;
-    width: 25vh;
-    display: flex;
-	justify-content: center;
-	align-items: center;
+.get_started_btn {
+  margin-top: 30px;
+  margin-left: 60px;
+  background-color: rgba(254, 111, 125, 1);
+  color: white;
+  font-family: OpenSans-SemiBold;
+  border: none;
+  border-radius: 30px;
+  outline: none !important;
+  cursor: pointer;
+  text-align: center;
+  height: 50px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .get_started_text {
-	font-size: 2vh;
+  font-size: 1.1em;
 }
 
 .get_started_btn:hover {
-  box-shadow: 0 0 0.7vw rgba(33,33,33,.2); 
-  background-color: rgba(254,111,125,1) !important;
+  box-shadow: 0 0 10px rgba(33, 33, 33, 0.2);
+  background-color: rgba(254, 111, 125, 1) !important;
   color: white;
 }
 
@@ -1214,16 +1053,16 @@
 }
 
 .get_started_btn span:after {
-  content: '\21E8';
+  content: "\21E8";
   position: absolute;
   opacity: 0;
   top: 0;
-  right: -2.4vh;
+  right: -20px;
   transition: 0.5s;
 }
 
 .get_started_btn:hover span {
-  padding-right: 3vh;
+  padding-right: 25px;
 }
 
 .get_started_btn:hover span:after {
@@ -1232,8 +1071,7 @@
 }
 
 .platforms_img {
-	position: absolute;
-	left: 45%;
-	margin-top: -7vh;
-	width: 42vw;
+  margin-top: -190px;
+  margin-left: 500px;
+  width: 600px;
 }

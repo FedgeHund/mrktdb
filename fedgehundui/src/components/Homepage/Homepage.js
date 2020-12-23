@@ -13,21 +13,22 @@ function Homepage() {
 // file deepcode ignore no-mixed-spaces-and-tabs: "Tabs and spaces"
   return (
     <Fragment>
-    		<Navbar />
+    		  
+          <Navbar />
 
-    		<Hero_Section />
+        		<Hero_Section />
 
-    		<Inside_DB />
-			
-    		<Know_More />
+            <Inside_DB />
 
-           	<What_is_13f />
+            <Know_More />
+        		
+            <What_is_13f />
 
-           	<Popular_Portfolios />
-           	
-           	<Get_Started />
+            <Popular_Portfolios />
 
-           	<Footer />
+            <Get_Started />
+
+          <Footer />
 
 	</Fragment>
   );

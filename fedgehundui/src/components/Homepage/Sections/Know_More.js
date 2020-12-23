@@ -8,7 +8,7 @@ function Know_More() {
 			<div className="know_more_container">
           		<div className="container">
           			<div className="row know_more">
-          				<div className="col-12 col-xl-8">Know more <br/>about us</div>
+          				<div className="col-12">Know more <br/>about us</div>
           			</div>
 
           			<div className="row">
@@ -20,7 +20,7 @@ function Know_More() {
 					    	</div>
 					  	</div>
 
-					  	<div className="col-10">
+					  	<div className="col-8">
 					    	<div className="tab-content tab_content" id="v-pills-tabContent">
 					      		<div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ut enim ad minim veniam, quis nostrud  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
 					      		<div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">This section describes the trends for individual stocks</div>

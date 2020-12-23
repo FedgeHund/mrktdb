@@ -1,4 +1,8 @@
-@media (max-width: 500px) {
+:root {
+	--nav-margin-top: -5px;
+}
+
+@media (max-width: 580px) {
 	.lookup_form_everywhere {
 		display: none;
 	}
@@ -9,32 +13,28 @@
 		display: none;
 	}
 
-	.logo {
-		margin-left: -0.8vh;
-	}
-
-	.lookup_form_everywhere {
-		margin-left: 3vh;
+	.lookup_form_everywhere.lookup_form_everywhere {
+		margin-left: 30px;
 	}
 }
 
-@media (max-width: 750px) {
-	.filers {
-		display: none;
-	}
-
+@media (max-width: 750px) {	
 	.circle {
 		display: none;
 	}
 }
 
-@media (max-width: 820px) {
-	.logo {
-		margin-left: -0.5vh;
+@media (max-width: 930px) {
+	.logo.logo {
+		margin-left: -20px;
 	}
 
-	.lookup_form_everywhere {
-		width: 80px !important;
+	.lookup_form_everywhere.lookup_form_everywhere {
+		width: 280px !important;
+	}
+
+	.filers {
+		display: none;
 	}
 }
 
@@ -45,6 +45,7 @@ a:hover {
 
 .navbar {
 	background: transparent;
+	height: 90px;
 }
 
 .navbar.active {
@@ -53,36 +54,38 @@ a:hover {
 }
 
 .logo {
-	width: 10vh;
-	height: 10vh;
+	width: 82px;
+	height: 80px;
 	cursor: pointer;
+	margin-top: var(--nav-margin-top);
 }
 
 .MrktDB {
-	font-size: 2.4vh;
+	font-size: 1.4em;
 	font-family: Helvetica;
 	color: #404040;
-	margin-left: 1vh;
+	margin-left: 15px;
 	text-decoration: none;
 	cursor: pointer;
+	margin-top: var(--nav-margin-top);
 }
 
 
 .lookup_form_everywhere {
 	position: relative;
-	width: 35vh !important;
-	margin-right: 3vh;
-	margin-top: -4vh;
+	width: 300px !important;
+	margin-right: 40px;
+	margin-top: -40px;
 }
 
 .lookup {
 	background: transparent;
 	font-family: ArialMT;
-	font-size: 1.6vh;
-	height: 3.7vh;
+	font-size: 0.8em;
+	height: 32px;
 	width: 100% !important;
 	border-color: #a2a2a2;
-	border-width: 0.3vh;
+	border-width: 2px;
 	position: absolute;
 }
 
@@ -93,46 +96,49 @@ a:hover {
 }
 
 .search_btn {
-	font-size: 1.5vh;
+	font-size: 0.8em;
 	font-family: ArialMT;
 	box-shadow: none !important;
-	height: 3.7vh;
+	height: 32px;
 	color: #404040;
 	position: absolute;
 	object-position: top right !important;
 	right: 0;
 	z-index: 1;
-	margin-right: 0.4vw;
+	margin-right: 5px;
 }
 
 .search_icon {
-	margin-right: 0.8vh !important;
+	margin-right: 10px !important;
 }
 
 
 .filers {
-	font-size: 2.2vh;
+	font-size: 1.2em;
 	font-family: Arial-BoldMT;
 	color: #404040;
 	text-decoration: none;
 	cursor: pointer;
-	margin-right: 4vh;
+	margin-right: 30px;
+	margin-top: var(--nav-margin-top);
 }
 
 .circle {
-	font-size: 2.2vh;
+	font-size: 1em;
 	font-family: Arial-BoldMT;
 	color: #404040;
 	text-decoration: none;
 	cursor: pointer;
-	margin-right: 4vh;
+	margin-right: 60px;
+	margin-top: var(--nav-margin-top);
 }
 
 .menu {
-	font-size: 2.2vh;
+	font-size: 1.2em;
 	font-family: Arial-BoldMT;
 	color: #404040;
 	text-decoration: none;
 	cursor: pointer;
-	margin-right: 4vw;
+	margin-right: 50px;
+	margin-top: var(--nav-margin-top);
 }

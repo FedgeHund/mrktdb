@@ -5,6 +5,7 @@ import Signin from './Signin/Signin';
 import UserForm from './Signup/UserForm';
 import Homepage from './Homepage/Homepage';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import '../../templates/fedgehundui/global.css';
 // file deepcode ignore no-mixed-spaces-and-tabskey: "value", 
 // file deepcode ignore no-mixed-spaces-and-tabs: "Tabs and space"
 class App extends Component {

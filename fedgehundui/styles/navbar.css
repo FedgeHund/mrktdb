@@ -6,6 +6,10 @@
 	.lookup_form_everywhere {
 		display: none;
 	}
+
+	.menu.menu {
+		margin-right: 15px;
+	}
 }
 
 @media (max-width: 650px) {

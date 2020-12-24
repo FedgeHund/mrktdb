@@ -2,7 +2,7 @@
 @media (max-width: 650px) {
 
   .contain {
-    top: 55% !important;
+    top: 59% !important;
   }
 
   .market_beating {
@@ -632,6 +632,7 @@
   width: 90%;
   max-width: 1500px;
   font-size: 16px;
+  margin: 0 auto;
 }
 
 .what_is_13f_text {
@@ -838,6 +839,11 @@
   object-fit: cover;
   max-width: 1500px;
   margin: 0 auto;
+}
+
+.bg_color_large_screen {
+  width: 100%;
+  background: linear-gradient(to right, #262528 50%, #e5e5e3 50%);
 }
 
 .popular_portfolio_carousel_static {

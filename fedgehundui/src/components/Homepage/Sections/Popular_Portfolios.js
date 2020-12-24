@@ -5,7 +5,8 @@ function Popular_Portfolios() {
   	return (
     	<Fragment>
 
-			<div className="popular_portfolio_container">
+    		<div className="bg_color_large_screen">
+				<div className="popular_portfolio_container">
            			<div className="popular_portfolio_carousel_static">
            				<div className="row no_pad">
            					<div className="popular_portfolio_on_mrktdb offset-md-2 col-md-10">Popular Portfolio <br/>on MrktDB</div>
@@ -201,6 +202,7 @@ function Popular_Portfolios() {
 						  </a>
 						</div>
            			</div>
+           		</div>
            		
            	</div>
 

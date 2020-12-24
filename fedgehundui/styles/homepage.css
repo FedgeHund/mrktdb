@@ -45,7 +45,7 @@
   background-image: url("../static/homepage/homepage_background.png");
   background-size: cover;
     width: 100vw;
-    height: 700px !important;
+    height: 720px !important;
     background-repeat: no-repeat;
 }
 
@@ -141,6 +141,10 @@
 
 /* 2nd section */
 @media(max-width: 600px) {
+  .inside_db_container.inside_db_container {
+    height: 600px;
+  }
+
   .box {
     display: none;
   }
@@ -154,7 +158,7 @@
   }
 
   .inside_db.inside_db.inside_db.inside_db {
-    top: 44%;
+    top: 48%;
     left: 55%;
     transform: translate(-50%, -50%);
     width: 100%;
@@ -514,6 +518,40 @@
 
 
 /* 4th container */
+@media (max-width: 400px) {
+  .what_is_13f_content.what_is_13f_content.what_is_13f_content {
+    font-size: 0.75em;
+  }
+
+  .key_takeaways_content.key_takeaways_content.key_takeaways_content {
+    font-size: 0.75em;
+  }
+}
+
+@media (max-width: 485px) {
+  .what_is_13f_box.what_is_13f_box.what_is_13f_box.what_is_13f_box.what_is_13f_box.what_is_13f_box {
+    top: 50%;
+  }
+
+  .what_is_13f_content.what_is_13f_content {
+    font-size: 0.8em;
+  }
+
+  .key_takeaways_content.key_takeaways_content {
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 580px) {
+  .what_is_13f_box.what_is_13f_box.what_is_13f_box.what_is_13f_box.what_is_13f_box {
+    top: 48%;
+  }
+
+  .what_is_13F_container.what_is_13F_container {
+    height: 750px;
+  }
+}
+
 @media (max-width: 420px) {
   .what_is_13f_box.what_is_13f_box.what_is_13f_box.what_is_13f_box {
     top: 50%;
@@ -523,7 +561,7 @@
 @media (max-width: 770px) {
 
   .what_is_13f_box.what_is_13f_box.what_is_13f_box {
-    top: 43%;
+    top: 46%;
     left: 48%;
   }
 
@@ -640,29 +678,79 @@
 
 
 /* 5th section */
+@media (max-width: 430px) {
+  .carousel_row.carousel_row.carousel_row {
+    margin-left: 20px !important;
+  }
 
-.popular_portfolio_container {
-  height: 81vh;
-  object-fit: cover;
+  .as_of_date.as_of_date.as_of_date.as_of_date {
+    margin-left: 55px;
+  }
+}
+
+@media (max-width: 576px) {
+  .popular_portfolio_container.popular_portfolio_container.popular_portfolio_container {
+    height: 760px !important;
+  }
+
+  .popular_portfolio_carousel_static.popular_portfolio_carousel_static.popular_portfolio_carousel_static {
+    height: 25%;
+  }
+
+  .popular_portfolio_on_mrktdb.popular_portfolio_on_mrktdb.popular_portfolio_on_mrktdb {
+    font-size: 1.7em;
+    margin-left: 40px;
+    margin-top: 60px;
+  }
+
+  .carousel_row.carousel_row {
+    margin-left: 30px !important;
+  }
+
+   .popular_portfolios.popular_portfolios {
+      height: 75% !important;
+   }
+
+   .as_of_date.as_of_date.as_of_date {
+    font-size: 0.7em;
+    margin-top: 500px;
+    margin-left: 60px;
+  }
+
+  .carousel-indicators.carousel-indicators.carousel-indicators {
+    display: none;
+  }
+
+  .carousel-control-next.carousel-control-next {
+    align-items: flex-end;
+    position: absolute;
+    right: 30px;
+    bottom: -115px;
+  }
+}
+
+@media (max-width: 670px) {
+  .portfolio_heading.portfolio_heading.portfolio_heading {
+    font-size: 1.55em;
+  }
 }
 
 @media (max-width: 1020px) {
   .popular_portfolio_container.popular_portfolio_container {
-    height: 35vh !important;
-    bottom: 0;
+    height: 550px !important;
   }
 
   .popular_portfolio_carousel_static.popular_portfolio_carousel_static {
     background: #262528;
-    height: 20vh;
+    height: 35%;
     width: 100%;
     object-fit: cover;
   }
 
   .popular_portfolio_on_mrktdb.popular_portfolio_on_mrktdb {
-    font-size: 3.5vh;
-    margin-left: 9vh;
-    margin-top: 6vh;
+    font-size: 2em;
+    margin-left: 70px;
+    margin-top: 50px;
   }
 
   .know_about_top_hedge_funds {
@@ -683,28 +771,28 @@
 
   .popular_portfolios {
     background: #e5e5e3;
-    height: 38vw !important;
+    height: 65% !important;
     width: 100% !important;
   }
 
   .carousel_row {
-    margin-left: 5vw !important;
+    margin-left: 60px !important;
+  }
+
+  .no_pad.no_pad {
+    margin-right: 0px !important;
   }
 
   .portfolio_heading.portfolio_heading {
-    font-size: 4vw;
-    margin-top: 8vw;
+    font-size: 1.8em;
+    margin-top: 80px;
     line-height: 1.2;
   }
 
-  .port_head {
-    margin-top: 2vh;
-  }
-
   .as_of_date.as_of_date {
-    font-size: 1.3vw;
-    margin-top: 32vw;
-    margin-left: 9vw;
+    font-size: 0.7em;
+    margin-top: 260px;
+    margin-left: 90px;
   }
 
   .portfolio_value_head {
@@ -736,24 +824,25 @@
   }
 
   .carousel-indicators.carousel-indicators {
-    display: none;
-  }
-
-  .carousel-control-next-icon.carousel-control-next-icon {
-    background-image: url("../static/homepage/right-arrow.png");
-    height: 15%;
-    width: 37%;
+    left: 0px;
+    bottom: -130px;
   }
 
   .carousel-control-next {
     align-items: flex-end;
-    margin-bottom: -12vw;
   }
+}
+
+.popular_portfolio_container {
+  height: 670px;
+  object-fit: cover;
+  max-width: 1500px;
+  margin: 0 auto;
 }
 
 .popular_portfolio_carousel_static {
   background: #262528;
-  height: 81vh;
+  height: 670px;
   width: 25%;
   float: left;
   object-fit: cover;
@@ -761,142 +850,127 @@
 
 .popular_portfolio_on_mrktdb {
   color: #fff;
-  font-size: 3.5vh;
+  font-size: 2em;
   font-family: ArialMT;
-  margin-left: 5vw;
-  margin-top: 10vh;
   line-height: 1.3;
+  margin-top: 80px;
 }
 
 .know_about_top_hedge_funds {
   color: #e5e5e3;
-  font-size: 2.3vh;
+  font-size: 1.2em;
   font-family: ArialMT;
-  margin-top: 5vh;
-  margin-left: 5vw;
   line-height: 1.4;
-}
-
-.portfolio_names {
-  margin-left: 5vw;
-  margin-top: 14vh;
 }
 
 .portfolio_name {
   color: #b3b2b1;
-  font-size: 1.9vh;
+  font-size: 1em;
   font-family: ArialMT;
-  margin-top: 1.7vh;
 }
 
 .more_portfolios_link {
   color: #b3b2b1;
-  font-size: 2vh;
+  font-size: 0.9em;
   font-family: ArialMT;
-  margin-left: 5vw;
 }
 
 .popular_portfolios {
   background: #e5e5e3;
-  height: 81vh;
+  height: 670px;
   width: 75%;
   float: right;
 }
 
+.as_of_date {
+  color: #484848;
+  font-size: 0.7em;
+  font-family: ArialMT;
+  margin-top: 600px;
+  position: absolute;
+  margin-left: 90px;
+}
+
 .carousel_row {
-  margin-left: 7vh;
+  margin-left: 60px;
 }
 
 .portfolio_heading {
   color: #404040;
-  font-size: 4.3vh;
+  font-size: 2.2em;
   font-family: Arial-BoldMT;
-  margin-top: 9.3vh;
+  margin-top: 80px;
   line-height: 1.2;
-}
-
-.port_head {
-  margin-top: 2.4vh;
 }
 
 .portfolio_value_head {
   color: #484848;
-  font-size: 1.9vh;
+  font-size: 0.9em;
   font-family: Arial-BoldMT;
-  margin-top: 4.7vh;
+  margin-top: 40px;
 }
 
 .portfolio_value {
   color: #484848;
-  font-size: 1.9vh;
+  font-size: 0.9em;
   font-family: Arial-BoldMT;
 }
 
 .portfolio_value_number {
   color: #484848;
-  font-size: 1.8vh;
+  font-size: 1em;
   font-family: ArialMT;
 }
 
 .top_holdings_text {
   color: #484848;
-  font-size: 2.2vh;
+  font-size: 1.1em;
   font-family: Arial-BoldMT;
-  margin-top: 5.7vh;
+  margin-top: 50px;
 }
 
 .top_holding_symbol_1 {
   color: #484848;
-  font-size: 1.9vh;
+  font-size: 1em;
   font-family: Arial-BoldMT;
-  margin-top: 2.8vh;
+  margin-top: 30px;
 }
 
 .top_holding_symbol {
   color: #484848;
-  font-size: 1.9vh;
+  font-size: 0.9em;
   font-family: Arial-BoldMT;
-  margin-top: 0.9vh;
+  margin-top: 10px;
 }
 
 .top_holding_name {
   color: #484848;
-  font-size: 1.8vh;
+  font-size: 0.9em;
   font-family: ArialMT;
-  margin-left: 2.2vh;
-}
-
-.as_of_date {
-  color: #484848;
-  font-size: 1.3vh;
-  font-family: ArialMT;
-  margin-top: 72vh;
-  position: absolute;
-  margin-left: 11vh;
+  margin-left: 15px;
 }
 
 .carousel-indicators li {
-  width: 0.4vw;
-  height: 0.4vw;
+  width: 7px;
+  height: 7px;
   border-radius: 99%;
 }
 
 .carousel-indicators {
   align-items: flex-end;
-  margin-bottom: -7vw;
-  right: 60%;
-  margin-left: -45vw;
+  left: -1500px;
+  bottom: -130px;
 }
 
 .carousel-control-next-icon {
   background-image: url("../static/homepage/right-arrow.png");
-  height: 6%;
-  width: 22%;
+  height: 40px;
+  width: 40px;
 }
 
 .carousel-control-next {
   align-items: flex-end;
-  margin-bottom: -8vw;
+  bottom: -120px;
 }
 
 
@@ -944,6 +1018,14 @@
 @media (max-width: 1000px) {
   .platforms_img.platforms_img {
     display: none;
+  }
+
+  .get_started_container.get_started_container {
+    height: 620px;
+  }
+
+  .get_started_box.get_started_box.get_started_box {
+    top: 50%;
   }
 }
 

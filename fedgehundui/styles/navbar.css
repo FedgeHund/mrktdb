@@ -1,148 +1,368 @@
 :root {
-	--nav-margin-top: -5px;
+  --nav-margin-top: -5px;
 }
 
 @media (max-width: 580px) {
-	.lookup_form_everywhere {
-		display: none;
-	}
+  .lookup_form_everywhere {
+    display: none;
+  }
 
-	.menu.menu {
-		margin-right: 15px;
-	}
+  #menuToggle#menuToggle#menuToggle {
+    right: 15px;
+  }
+
+  #menu#menu#menu {
+    right: -75px;
+  }
 }
 
-@media (max-width: 650px) {
-	.MrktDB{
-		display: none;
-	}
+@media (max-width: 670px) {
+  .MrktDB {
+    display: none;
+  }
 
-	.lookup_form_everywhere.lookup_form_everywhere {
-		margin-left: 30px;
-	}
+  .lookup_form_everywhere.lookup_form_everywhere.lookup_form_everywhere {
+    margin-left: 50px;
+    margin-right: 100px;
+  }
+
+  #menuToggle#menuToggle {
+    right: 40px;
+  }
+
+  #menu#menu {
+    right: -100px;
+  }
+
+  .mrktdb_white {
+    display: none;
+  }
+
+  .signup_menu.signup_menu.signup_menu {
+    font-size: 1em;
+  }
 }
 
-@media (max-width: 750px) {	
-	.circle {
-		display: none;
-	}
+@media (max-width: 750px) {
+  .circle {
+    display: none;
+  }
+
+  .lookup_form_everywhere.lookup_form_everywhere {
+    margin-right: 140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .margin_small3 {
+    margin-top: 12px !important;
+  }
+
+  .margin_small6 {
+    margin-top: 24px !important;
+  }
+
+  .margin_small15 {
+    margin-top: 60px !important;
+  }
+
+  .hamburger_white_logo {
+    display: initial !important;
+  }
+
+  .signup_menu.signup_menu {
+    font-size: 1.2em;
+  }
 }
 
 @media (max-width: 930px) {
-	.logo.logo {
-		margin-left: -20px;
-	}
+  .logo.logo {
+    margin-left: -20px;
+  }
 
-	.lookup_form_everywhere.lookup_form_everywhere {
-		width: 280px !important;
-	}
+  .lookup_form_everywhere.lookup_form_everywhere {
+    width: 280px !important;
+  }
 
-	.filers {
-		display: none;
-	}
+  .filers {
+    display: none;
+  }
+}
+
+@media (max-width: 1000px) {
+  .hamburger_white_logo {
+    display: none;
+  }
 }
 
 a:hover {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 .navbar {
-	background: transparent;
-	height: 90px;
+  background: transparent;
+  height: 90px;
 }
 
 .navbar.active {
-	background: #FCF4EB;
-	transition: 0.5s;
+  background: #fcf4eb;
+  transition: 0.5s;
 }
 
 .logo {
-	width: 82px;
-	height: 80px;
-	cursor: pointer;
-	margin-top: var(--nav-margin-top);
+  width: 82px;
+  height: 80px;
+  cursor: pointer;
+  margin-top: var(--nav-margin-top);
 }
 
 .MrktDB {
-	font-size: 1.4em;
-	font-family: Helvetica;
-	color: #404040;
-	margin-left: 15px;
-	text-decoration: none;
-	cursor: pointer;
-	margin-top: var(--nav-margin-top);
+  font-size: 1.4em;
+  font-family: Helvetica;
+  color: #404040;
+  margin-left: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: var(--nav-margin-top);
 }
 
-
 .lookup_form_everywhere {
-	position: relative;
-	width: 300px !important;
-	margin-right: 40px;
-	margin-top: -40px;
+  position: relative;
+  width: 300px !important;
+  margin-right: 40px;
+  margin-top: -40px;
 }
 
 .lookup {
-	background: transparent;
-	font-family: ArialMT;
-	font-size: 0.8em;
-	height: 32px;
-	width: 100% !important;
-	border-color: #a2a2a2;
-	border-width: 2px;
-	position: absolute;
+  background: transparent;
+  font-family: ArialMT;
+  font-size: 0.8em;
+  height: 32px;
+  width: 100% !important;
+  border-color: #a2a2a2;
+  border-width: 2px;
+  position: absolute;
 }
 
 .lookup:focus {
-	background: transparent;
-	box-shadow: none;
-	border-color: rgba(254,111,125,1);
+  background: transparent;
+  box-shadow: none;
+  border-color: rgba(254, 111, 125, 1);
 }
 
 .search_btn {
-	font-size: 0.8em;
-	font-family: ArialMT;
-	box-shadow: none !important;
-	height: 32px;
-	color: #404040;
-	position: absolute;
-	object-position: top right !important;
-	right: 0;
-	z-index: 1;
-	margin-right: 5px;
+  font-size: 0.8em;
+  font-family: ArialMT;
+  box-shadow: none !important;
+  height: 32px;
+  color: #404040;
+  position: absolute;
+  object-position: top right !important;
+  right: 0;
+  z-index: 1;
+  margin-right: 5px;
 }
 
 .search_icon {
-	margin-right: 10px !important;
+  margin-right: 10px !important;
 }
 
-
 .filers {
-	font-size: 1.2em;
-	font-family: Arial-BoldMT;
-	color: #404040;
-	text-decoration: none;
-	cursor: pointer;
-	margin-right: 30px;
-	margin-top: var(--nav-margin-top);
+  font-size: 1.2em;
+  font-family: Arial-BoldMT;
+  color: #404040;
+  text-decoration: none;
+  cursor: pointer;
+  margin-right: 30px;
+  margin-top: var(--nav-margin-top);
 }
 
 .circle {
-	font-size: 1em;
-	font-family: Arial-BoldMT;
-	color: #404040;
-	text-decoration: none;
-	cursor: pointer;
-	margin-right: 60px;
-	margin-top: var(--nav-margin-top);
+  font-size: 1em;
+  font-family: Arial-BoldMT;
+  color: #404040;
+  text-decoration: none;
+  cursor: pointer;
+  margin-right: 140px;
+  margin-top: var(--nav-margin-top);
 }
 
-.menu {
-	font-size: 1.2em;
-	font-family: Arial-BoldMT;
-	color: #404040;
-	text-decoration: none;
-	cursor: pointer;
-	margin-right: 50px;
-	margin-top: var(--nav-margin-top);
+a {
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+#menuToggle {
+  display: block;
+  position: absolute;
+  top: 30px;
+  right: 60px;
+  z-index: 1;
+  margin-top: -20px;
+  margin-right: 60px;
+}
+
+.toggler {
+  display: block;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  cursor: pointer;
+  object-fit: contain;
+  opacity: 0; /* hide this */
+  z-index: 3; /* and place it over the hamburger */
+}
+
+/* Hamburger */
+.hamburger {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.hamburger > div {
+  position: absolute;
+  width: 60%;
+  height: 4.5px;
+  border-radius: 1.2px;
+  background-color: #0d0d0d;
+  transition: 0.4s;
+}
+
+.hamburger > div:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4.5px;
+  border-radius: 1.5px;
+  background-color: #0d0d0d;
+  top: -10px;
+  left: 0;
+  transition: 0.4s;
+}
+
+.hamburger > div:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4.5px;
+  border-radius: 1.5px;
+  background-color: #0d0d0d;
+  top: 10px;
+  left: 0;
+  transition: 0.4s;
+}
+
+.toggler:checked + .hamburger > div {
+  transform: rotate(135deg);
+  background-color: #fff;
+}
+
+.toggler:checked:hover + .hamburger > div {
+  transform: rotate(225deg);
+  background-color: #fff;
+}
+
+.toggler:checked + .hamburger > div:before,
+.toggler:checked + .hamburger > div:after {
+  top: 0;
+  transform: rotate(90deg);
+  background-color: #fff;
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu {
+  position: absolute;
+  width: 100vw;
+  margin: -100px 0 0 0;
+  padding: 50px;
+  padding-top: 125px;
+  right: -120px;
+  background: #0d0d0d;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+  transform-origin: 0% 0%;
+  transform: translate(100%, 0);
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1) !important;
+}
+
+#menu li {
+  padding: 10px 0;
+  font-size: 22px;
+}
+
+/*
+ * fade it in from the left
+ */
+#menuToggle input:checked ~ div {
+  transform: scale(1, 1);
+  opacity: 1;
+}
+
+.hamburger_container {
+  height: 800px;
+}
+
+.menu_box {
+  text-align: center;
+  width: 100%;
+  max-width: 1500px;
+  left: 50%;
+  top: 45%;
+  position: relative;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  max-height: 100%;
+  overflow-y: scroll;
+}
+
+.hamburger_white_logo {
+  width: 120%;
+}
+
+.mrktdb_white {
+  font-size: 2em;
+  font-family: SegoeUI-Bold;
+  color: #fff;
+  font-weight: 600;
+}
+
+.signup_menu {
+  font-size: 1.4em;
+  color: #fff;
+  font-weight: 600;
+}
+
+.signup_menu:hover {
+  color: #fe6f7d;
+}
+
+.margin3 {
+  margin-top: 15px;
+}
+
+.margin6 {
+  margin-top: 30px;
+}
+
+.margin10 {
+  margin-top: 50px;
+}
+
+.menu_13f {
+  font-size: 2.2em;
+  font-family: SegoeUI;
+  color: #fff;
+  font-weight: 400;
+  text-align: left;
 }

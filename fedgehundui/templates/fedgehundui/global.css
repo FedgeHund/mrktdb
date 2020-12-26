@@ -1,4 +1,5 @@
 .body {
-	background: #FCF4EB !important;
-   	margin: 0 auto !important;
+  background: #fcf4eb !important;
+  margin: 0 auto !important;
+  overflow-x: hidden;
 }

@@ -5,7 +5,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
 # file deepcode ignore C0325:
 
 class SecurityLinkCompanyCronJob(CronJobBase):
-    RUN_EVERY_MINS = 1 # we dont run this every minute, we will be using linux crontab to setup when the job will run
+    RUN_EVERY_MINS = 0.01 # we dont run this every minute, we will be using linux crontab to setup when the job will run
 
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
     code = 'edgar.securityLinkCompanyCronJob'    # a unique code
@@ -19,7 +19,7 @@ class SecurityLinkCompanyCronJob(CronJobBase):
             for security in security_items:
                 if(security.cusip == mapping.cusip or security.cusip == mapping.cusip6):
                     for company in company_items:
-                        if(company.cik == mapping.cik):
+                        if company.cik == mapping.cik:
                             security.companyId = company.companyId
                             security.cikCusipMappingId = mapping.cikCusipMappingId
                             security.save()

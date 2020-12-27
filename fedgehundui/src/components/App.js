@@ -1,17 +1,22 @@
 import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from './Layout/Navbar';
-import Signin from './Layout/Signin';
+import Signin from './Signin/Signin';
 import UserForm from './Signup/UserForm';
+import Homepage from './Homepage/Homepage';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// file deepcode ignore no-mixed-spaces-and-tabs: <comment the reason here>
+import '../../templates/fedgehundui/global.css';
+// file deepcode ignore no-mixed-spaces-and-tabskey: "value", 
+// file deepcode ignore no-mixed-spaces-and-tabs: "Tabs and space"
+
 class App extends Component {
   render() {
     return (
     	<Fragment>
       		<Router>
 	      		<Switch>
-		          	<Route path="/" exact component={() => <UserForm />} />
+                <Route path="/" exact component={() => <Homepage />} />
+		          	<Route path="/signup" exact component={() => <UserForm />} />
 		          	<Route path="/signin" exact component={() => <Signin />} />
 		        </Switch>     		
       		</Router>
@@ -21,7 +26,7 @@ class App extends Component {
 }
 
 const ENV_VARIABLES = {
-  ENVIRON: "dev",
+  ENVIRON: "prod",
   DEV_API_URL: "127.0.0.1:8000",
   PROD_API_URL: "mrktdbapi-prod.eba-tw27jjhn.us-west-2.elasticbeanstalk.com",
 };

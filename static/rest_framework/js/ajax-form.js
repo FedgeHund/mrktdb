@@ -4,7 +4,7 @@ function replaceDocument(docString) {
   doc.write(docString);
   doc.close();
 }
-
+// file deepcode ignore no-invalid-this:
 function doAjaxSubmit(e) {
   // file deepcode ignore no-invalid-this: <comment the reason here>
   var form = $(this);

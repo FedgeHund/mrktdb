@@ -4,7 +4,10 @@ import axios from 'axios';
 import { Link } from 'react-router-dom'; 
 import '../../../styles/signup/styles.css';
 import { URL } from '../App.js';
-// file deepcode ignore no-mixed-spaces-and-tabs: <comment the reason here>
+import Navbar from '../Layout/Navbar';
+import Footer from '../Layout/Footer';
+// file deepcode ignore no-mixed-spaces-and-tabs:
+
 function Signin() {
 
     const [state, setState] = useState({
@@ -56,16 +59,17 @@ function Signin() {
 
   return (
     <Fragment>
+            <Navbar />
             <div className="main_div">
-                        <div className="signup_box p-3 shadow mb-5" style={{height: "650px", width: "480px"}}> 
+                        <div className="signup_box p-3 shadow mb-5" style={{height: "650px"}}> 
 
                                 <div className="col-sm-12">
                                     <div className="row">
                                         <div className="sign_up_text col-md-12 pt-5">Sign In</div>
                                     </div>
                                     <div className="row">
-                                        <span className="question col-sm-6">New to MrktDB? </span>
-                                        <Link to={""} className="signin_Link col-sm-6">Create an account</Link>
+                                        <span className="question col-sm-6 col-6">New to MrktDB? </span>
+                                        <Link to={"/signup"} className="signup_Link col-sm-6 col-6">Create an account</Link>
                                     </div>  
                                 </div>
 
@@ -91,17 +95,18 @@ function Signin() {
                                 </div>
     			
                                 <div className="row pt-3">
-                                    <button className="btn btn-primary shadow-sm col-md-4 offset-md-4 submit-btn" type="submit" onClick={handleSubmit}>
+                                    <button className="btn btn-primary shadow-sm offset-md-3 col-md-6 offset-sm-3 col-sm-6 offset-2 col-8 submit-btn" type="submit" onClick={handleSubmit}>
                                         <span>Sign In</span>
                                     </button>
                                 </div>
 	
 				                <div className="row">
-                                    <span className="captcha col-md-8 offset-md-2 pt-5 mt-4">Protected by reCAPTCHA and subject to the Google <a href="#" className="links">Privacy Policy</a> and <a href="#" className="links">Terms of service</a>.</span>
+                                    <span className="captcha col-md-8 offset-md-2 col-10 offset-1 pt-5 mt-4">Protected by reCAPTCHA and subject to the Google <a href="#" className="links">Privacy Policy</a> and <a href="#" className="links">Terms of service</a>.</span>
                                 </div>
     			
                         </div>
             </div>
+            <Footer />
 	</Fragment>
   );
 }

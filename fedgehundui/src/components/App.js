@@ -4,7 +4,7 @@ import Navbar from './Layout/Navbar';
 import Signin from './Layout/Signin';
 import UserForm from './Signup/UserForm';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+// file deepcode ignore no-mixed-spaces-and-tabs: <comment the reason here>
 class App extends Component {
   render() {
     return (
@@ -20,5 +20,18 @@ class App extends Component {
   }
 }
 
+const ENV_VARIABLES = {
+  ENVIRON: "dev",
+  DEV_API_URL: "127.0.0.1:8000",
+  PROD_API_URL: "mrktdbapi-prod.eba-tw27jjhn.us-west-2.elasticbeanstalk.com",
+};
+
+let URL;
+if(ENV_VARIABLES.ENVIRON == "dev")
+  URL = ENV_VARIABLES.DEV_API_URL;
+else
+  URL = ENV_VARIABLES.PROD_API_URL;
+
+export { URL };
 
 ReactDOM.render(<App />, document.getElementById('app'));

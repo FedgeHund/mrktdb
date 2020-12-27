@@ -1,7 +1,7 @@
 var responseDisplay = 'data'
 var coreapi = window.coreapi
 var schema = window.schema
-
+// file deepcode ignore no-invalid-this: <comment the reason here>
 function normalizeKeys (arr) {
   var _normarr = [];
   for (var i = 0; i < arr.length; i++) {
@@ -132,12 +132,12 @@ $(function () {
           params[paramKey] = value
         }
       } else if (dataType === 'array' && paramValue) {
+        // file deepcode ignore DuplicateIfBody: <comment the reason here>
         try {
           params[paramKey] = JSON.parse(paramValue)
         } catch (err) {
           // Ignore malformed JSON
         }
-        // file deepcode ignore DuplicateIfBody: <redundant suggestion>
       } else if (dataType === 'object' && paramValue) {
         try {
           params[paramKey] = JSON.parse(paramValue)

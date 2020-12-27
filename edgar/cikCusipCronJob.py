@@ -1,9 +1,9 @@
 import os
 import csv
+# file deepcode ignore C0412
 from django_cron import CronJobBase, Schedule
 import time
 import django
-from django_cron import CronJobBase, Schedule
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
 from edgar.models import CikCusipMapping
 

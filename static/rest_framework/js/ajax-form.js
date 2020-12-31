@@ -6,6 +6,7 @@ function replaceDocument(docString) {
 }
 // file deepcode ignore no-invalid-this:
 function doAjaxSubmit(e) {
+  // file deepcode ignore no-invalid-this: <comment the reason here>
   var form = $(this);
   var btn = $(this.clk);
   var method = (

@@ -229,7 +229,7 @@ a {
 .hamburger > div {
   position: absolute;
   width: 60%;
-  height: 4.5px;
+  height: 3px;
   border-radius: 1.2px;
   background-color: #0d0d0d;
   transition: 0.4s;
@@ -238,25 +238,41 @@ a {
 .hamburger > div:before {
   content: "";
   position: absolute;
-  width: 100%;
-  height: 4.5px;
+  width: 75%;
+  height: 3px;
   border-radius: 1.5px;
   background-color: #0d0d0d;
   top: -10px;
-  left: 0;
+  right: 0;
   transition: 0.4s;
 }
 
 .hamburger > div:after {
   content: "";
   position: absolute;
-  width: 100%;
-  height: 4.5px;
+  width: 85%;
+  height: 3px;
   border-radius: 1.5px;
   background-color: #0d0d0d;
   top: 10px;
-  left: 0;
+  right: 0;
   transition: 0.4s;
+}
+
+.toggler:hover + .hamburger > div:before {
+  width: 100%;
+}
+
+.toggler:hover + .hamburger > div:after {
+  width: 100%;
+}
+
+.toggler:checked + .hamburger > div:before {
+  width: 100%;
+}
+
+.toggler:checked + .hamburger > div:after {
+  width: 100%;
 }
 
 .toggler:checked + .hamburger > div {
@@ -293,7 +309,7 @@ a {
   /* to stop flickering of text in safari */
   transform-origin: 0% 0%;
   transform: translate(100%, 0);
-  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1) !important;
+  transition: transform 1.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 }
 
 #menu li {
@@ -323,7 +339,99 @@ a {
   transform: translate(-50%, -50%);
   font-size: 16px;
   max-height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box {
+   animation: menu_content_fade_in 1.5s ease-in-out;
+}
+
+.toggler:not(:checked) + .hamburger + #menu {
+  transition: transform 2s cubic-bezier(0.77, 0.2, 0.05, 1) 0.5s;
+}
+
+.toggler:not(:checked) + .hamburger + #menu > .hamburger_container > .menu_box {
+   animation: menu_content_fade_out 0.4s ease-out;
+   opacity: 0;
+}
+
+@keyframes menu_content_fade_in {
+  0% { opacity:0; }
+    75% { opacity:0; }
+    100% { opacity:1; }
+}
+
+@keyframes menu_content_fade_out {
+  0% { opacity: 1; }
+    100% { opacity:0; }
+}
+
+@keyframes slide_up {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  90% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes slide_down {
+  0% {
+    transform: translateY(-120px);
+    opacity: 0;
+  }
+
+  90% {
+    transform: translateY(-120px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes slide_left {
+  0% {
+    transform: translateX(80px);
+    opacity: 0;
+  }
+
+  80% {
+    transform: translateX(80px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes slide_right {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+
+  70% {
+    width: 0;
+    opacity: 0;
+  }
+
+  100% {
+    width: 70%;
+    opacity: 1;
+  }
 }
 
 .hamburger_white_logo {
@@ -336,6 +444,75 @@ a {
   color: #fff;
   font-weight: 600;
 }
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div > .logo_div {
+  animation: slide_down 1.2s ease-out;
+}
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div > .mrktdb_white {
+  animation: slide_down 1.2s ease-out;
+}
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div > .mrktdb_white + .signup_left {
+  animation: slide_left 1.6s ease-in;
+}
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div > .mrktdb_white + .signup_left + .signup_left {
+  animation: slide_left 1.6s ease-in;
+}
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div + .up_13f {
+  animation: slide_down 1.7s ease-in;
+}
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div + .up_13f + div > .horizontal_line_to_right {
+  animation: slide_right 2s ease-in;
+}
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div + .up_13f + div + div + .quick_links_small_screen > div + div > .horizontal_lines_small_screen_to_right {
+  animation: slide_right 2s ease-in;
+}
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div + .up_13f + div + .quick_links {
+  animation: slide_up 2s ease-in;
+}
+
+@keyframes text_glow {
+  to {
+    font-size: 1.05em;
+    color: #fff;
+    font-weight: 550;
+  }
+}
+
+.hover_effect_row {
+  height: 40px !important;
+}
+
+.hover_effect:hover {
+  animation: text_glow 0.05s forwards;
+}
+
+.link_arrow {
+  display: none !important;
+}
+
+.hover_effect:hover > div > .link_arrow {
+  display: initial !important;
+}
+
+
+
+.horizontal_line_to_right {
+  background-color: #fff !important;
+  height: 1.3px !important;
+}
+
+.horizontal_lines_small_screen_to_right {
+  background-color: #fff !important;
+  height: 1.3px !important;
+}
+
 
 .signup_menu {
   font-size: 1.4em;
@@ -365,4 +542,5 @@ a {
   color: #fff;
   font-weight: 400;
   text-align: left;
+  animation: slide_up 2s ease-in-out;
 }

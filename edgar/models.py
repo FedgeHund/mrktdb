@@ -7,7 +7,7 @@ class Company(models.Model):
         ('HC', 'Holdings Company'),
     )
     name = models.TextField(max_length=80)
-    cik = models.IntegerField(default=None)
+    cik = models.TextField(blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)
     deletedAt = models.DateTimeField(default=None, blank=True)
@@ -52,13 +52,13 @@ class Filer(models.Model):
         ('13G', '13G'),
         ('13D', '13D'),
     )
-    companyId = models.ForeignKey(Company, on_delete=models.CASCADE)
+    companyId = models.ForeignKey(Company, on_delete=models.CASCADE,blank=True)
     fileNumber = models.CharField(max_length=10)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)
     deletedAt = models.DateTimeField(default=None, blank=True)
     filerId = models.AutoField(primary_key=True)
-    fileType = models.CharField(max_length=3, choices=FILE_TYPES)
+    fileType = models.CharField(max_length=3, choices=FILE_TYPES,blank=True)
 
     class Meta:
         ordering = ['companyId']
@@ -72,8 +72,15 @@ class QuarterlyHolding(models.Model):
     filerId = models.ForeignKey(Filer, on_delete=models.CASCADE)
     quarter = models.IntegerField()
     filingType = models.CharField(max_length=2, choices=FILING_TYPES)
+<<<<<<< HEAD
     filedOn = models.DateTimeField(default=None, blank=True)
     acceptedAt = models.DateTimeField(default=None, blank=True)
+=======
+    # filedOn = models.DateTimeField(blank=True)
+    # acceptedAt = models.DateTimeField(blank=True)
+    filedOn = models.TextField(blank=True)
+    acceptedAt = models.TextField(blank=True)
+>>>>>>> 1edf7c8... Added serialization and viewsets
     totalValue = models.FloatField()
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)
@@ -96,6 +103,25 @@ class QuarterlyOtherManager(models.Model):
     class Meta:
         ordering = ['quarterlyHoldingId']
 
+<<<<<<< HEAD
+=======
+
+class Security(models.Model):
+    companyId = models.ForeignKey(Company, on_delete=models.CASCADE,blank=True)
+    cusip = models.TextField()
+    securityName = models.TextField(blank=True)
+    securityType = models.TextField(blank=True)
+    ticker = models.CharField(max_length=5,blank=True)
+    titleOfClass = models.TextField()
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updatedAt = models.DateTimeField(default=None, blank=True)
+    deletedAt = models.DateTimeField(default=None, blank=True)
+    securityId = models.AutoField(primary_key=True)
+
+    class Meta:
+        ordering = ['ticker']
+
+>>>>>>> 1edf7c8... Added serialization and viewsets
 class QuarterlySecurityHolding(models.Model):
     HOLDING_TYPES = (
         ('SHR', 'SH'),

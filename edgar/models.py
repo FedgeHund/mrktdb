@@ -7,12 +7,12 @@ class Company(models.Model):
         ('HC', 'Holdings Company'),
     )
     name = models.TextField(max_length=80)
-    cik = models.TextField(blank=True, default=None)
+    cik = models.TextField(blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)
     deletedAt = models.DateTimeField(default=None, blank=True)
     companyId = models.AutoField(primary_key=True)
-    address = models.TextField(max_length=120, blank=True, default=None)
+    address = models.TextField(max_length=120, blank=True)
     companyType = models.CharField(max_length=2, choices=COMPANY_TYPES, default=None)
 
     class Meta:
@@ -53,12 +53,12 @@ class Filer(models.Model):
         ('13D', '13D'),
     )
     companyId = models.ForeignKey(Company, on_delete=models.CASCADE,blank=True)
-    fileNumber = models.CharField(max_length=10, blank=True, default=None)
+    fileNumber = models.CharField(max_length=10, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)
     deletedAt = models.DateTimeField(default=None, blank=True)
     filerId = models.AutoField(primary_key=True)
-    fileType = models.CharField(max_length=3, choices=FILE_TYPES, blank=True, default=None)
+    fileType = models.CharField(max_length=3, choices=FILE_TYPES, blank=True)
 
     class Meta:
         ordering = ['companyId']

@@ -1,5 +1,12 @@
 from rest_framework import serializers
+
+from .models import FailsToDeliver
 from .models import Company, Filer, QuarterlyHolding, Security, QuarterlyOtherManagerDistribution, QuarterlySecurityHolding, QuarterlyOtherManager
+
+class FailsToDeliverSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FailsToDeliver
+        fields = ('settlementDate', 'createdAt', 'cusip', 'ticker', 'quantity', 'description') 
 
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:

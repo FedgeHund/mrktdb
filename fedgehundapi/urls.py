@@ -22,9 +22,11 @@ from rest_framework.urlpatterns import format_suffix_patterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('fedgehund_auth.urls')),
+    path('profile/', include('fedgehund_profile.urls')),
     path('api/', include('edgar.urls')),
 
     #to rectify 'NoReverseMatch at /auth/registration/' issue
     re_path(r'^account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'),
-	re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(), name='account_confirm_email'),
+	  re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(), name='account_confirm_email'),
+    path('', include('fedgehundui.urls')),
 ]

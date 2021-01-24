@@ -18,6 +18,34 @@ class Company(models.Model):
     class Meta:
         ordering = ['createdAt']
 
+class CikCusipMapping(models.Model):
+    year = models.IntegerField()
+    cik = models.IntegerField()
+    sec_name = models.TextField()
+    cusip = models.TextField()
+    cusip6 = models.TextField()
+    cikCusipMappingId = models.TextField()
+
+    class Meta:
+        ordering = ['year']
+
+class Security(models.Model):
+    companyId = models.IntegerField(default=None)
+    cusip = models.TextField()
+    securityName = models.TextField()
+    securityType = models.TextField()
+    ticker = models.CharField(max_length=5)
+    titleOfClass = models.TextField()
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updatedAt = models.DateTimeField(default=None, blank=True)
+    deletedAt = models.DateTimeField(default=None, blank=True)
+    securityId = models.AutoField(primary_key=True)
+    cikCusipMappingId = models.TextField(default=None, blank=True, null=True)
+
+    class Meta:
+        ordering = ['ticker']
+        verbose_name_plural = "Securities"
+
 class Filer(models.Model):
     FILE_TYPES = (
         ('13F', '13F'),
@@ -72,22 +100,6 @@ class QuarterlyOtherManager(models.Model):
     class Meta:
         ordering = ['quarterlyHoldingId']
 
-
-class Security(models.Model):
-    companyId = models.ForeignKey(Company, on_delete=models.CASCADE,blank=True)
-    cusip = models.TextField()
-    securityName = models.TextField(blank=True)
-    securityType = models.TextField(blank=True)
-    ticker = models.CharField(max_length=5,blank=True)
-    titleOfClass = models.TextField()
-    createdAt = models.DateTimeField(auto_now_add=True)
-    updatedAt = models.DateTimeField(default=None, blank=True)
-    deletedAt = models.DateTimeField(default=None, blank=True)
-    securityId = models.AutoField(primary_key=True)
-
-    class Meta:
-        ordering = ['ticker']
-
 class QuarterlySecurityHolding(models.Model):
     
     DISCRETION_TYPES = (
@@ -125,3 +137,13 @@ class QuarterlyOtherManagerDistribution(models.Model):
         ordering = ['createdAt']
 
 
+class FailsToDeliver(models.Model):
+    settlementDate = models.DateField()
+    createdAt = models.DateTimeField(auto_now_add=True)
+    cusip = models.TextField()
+    ticker = models.CharField(max_length=7)
+    quantity = models.IntegerField()
+    description = models.TextField()
+
+    class Meta:
+        ordering = ['createdAt']

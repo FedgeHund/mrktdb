@@ -45,7 +45,7 @@ if DJANGO_ENV == "production":
         }
     }
 else:
-    # Use local DB in development
+    #Use local DB in development
     DATABASES = {
         'default': {
             'ENGINE': 'djongo',
@@ -66,6 +66,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
     ]
 }
 
@@ -88,18 +91,20 @@ INSTALLED_APPS = [
     'fedgehund_profile.apps.FedgehundProfileConfig',
     'edgar.apps.EdgarConfig',
     'testapp',
+    'fedgehundui',
+    'django_cron',
 ]
 
-SITE_ID = 1
+SITE_ID=1
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 #The username field is optional and we will hide it in the registration page
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 
 AUTHENTICATION_BACKENDS = [
@@ -113,6 +118,7 @@ AUTHENTICATION_BACKENDS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -139,18 +145,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'fedgehundapi.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'mrktdb',
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -190,3 +184,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
+
+CRON_CLASSES = [
+    "edgar.cikCusipCronJob.CikCusipCronJob",
+    "edgar.securityLinkCompanyCronJob.SecurityLinkCompanyCronJob",
+]

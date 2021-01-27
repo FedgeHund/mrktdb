@@ -72,23 +72,23 @@ function Navbar() {
 										<div className="offset-md-2 col-md-1 menu_13f margin3">13F</div>
 									</div>
 
-									<div className="row hover_effect_row margin6">
-										<a href="#" className="filer_items offset-md-2 col-md-2 col-12 hover_effect"><div className="margin_small6">Latest Filings&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
-										<a href="#" className="filer_items col-md-4 col-12 hover_effect"><div className="margin_small3">13F Searching&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+									<div className="row margin6">
+										<a href="#" className="filer_items offset-md-2 col-md-2 col-12 hover_effect hover_effect_row"><div className="margin_small6">Latest Filings&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+										<a href="#" className="filer_items col-md-4 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Searching&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
 									</div>
 
-									<div className="row hover_effect_row">
-										<a href="#" className="filer_items offset-md-2 col-md-2 col-12 hover_effect"><div className="margin_small3">Popular Stocks&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
-										<a href="#" className="filer_items col-md-4 col-12 hover_effect"><div className="margin_small3">13F Fund Performance Search&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+									<div className="row">
+										<a href="#" className="filer_items offset-md-2 col-md-2 col-12 hover_effect hover_effect_row"><div className="margin_small6">Popular Stocks&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+										<a href="#" className="filer_items col-md-4 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Fund Performance Search&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
 									</div>
 
-									<div className="row hover_effect_row">
-										<a href="#" className="filer_items offset-md-2 col-md-2 col-12 hover_effect"><div className="margin_small3">13F Trends&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
-										<a href="#" className="filer_items col-md-4 col-12 hover_effect"><div className="margin_small3">13F Stock Screener&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+									<div className="row">
+										<a href="#" className="filer_items offset-md-2 col-md-2 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Trends&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+										<a href="#" className="filer_items col-md-4 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Stock Screener&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
 									</div>
 
-									<div className="row hover_effect_row">
-										<a href="#" className="filer_items offset-md-2 col-md-3 col-12 hover_effect"><div className="margin_small3">13F Statistics&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>              
+									<div className="row">
+										<a href="#" className="filer_items offset-md-2 col-md-3 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Statistics&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>              
 									</div>
 								</div>
 

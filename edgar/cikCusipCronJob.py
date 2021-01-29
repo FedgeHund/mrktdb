@@ -14,6 +14,7 @@ class CikCusipCronJob(CronJobBase):
     code = 'edgar.cikCusipCronJob'    # a unique code
 
     def do(self):
+        print("Start")
         with open('../static/admin/csv_files/CIK_CUSIP.csv', 'rt')as f:
             data = csv.reader(f)
 
@@ -24,3 +25,4 @@ class CikCusipCronJob(CronJobBase):
                 for row in data
             ]
             CikCusipMapping.objects.bulk_create(Objects, batch_size = 1000)
+        print("End")

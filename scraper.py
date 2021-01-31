@@ -542,6 +542,9 @@ class HoldingsScraper:
         
         otherManager2 = soup.find_all('otherManager2')
         otherManager2Data = []
+        childFilerObjectList= []
+        sequenceNumberList = []
+        childFilerObjectLists = []
         print(len(otherManager2))
         for i in range(len(otherManager2)):
             d4 = {}
@@ -586,24 +589,48 @@ class HoldingsScraper:
                 pass
             
             try:
-                QuarterlyOtherManager.objects.get_or_create(parentFilerId =parentFilerObject ,childFilerId =childFilerObject ,quarterlyHoldingId = quarterlyHoldingObject,number=otherManagerCount )
+                QuarterlyOtherManager.objects.get_or_create(parentFilerId =parentFilerObject ,childFilerId =childFilerObject ,quarterlyHoldingId = quarterlyHoldingObject,number=d4['sequenceNumber'] )
             except:
                 pass
             
             try:
-                QuarterlyOtherManager.objects.get_or_create(childFilerId =childFilerObject ,quarterlyHoldingId = quarterlyHoldingObject,number=otherManagerCount )
+                QuarterlyOtherManager.objects.get_or_create(childFilerId =childFilerObject ,quarterlyHoldingId = quarterlyHoldingObject,number=d4['sequenceNumber'] )
             except:
                 pass
             try:
-                QuarterlyOtherManager.objects.get_or_create(parentFilerId =parentFilerObject ,quarterlyHoldingId = quarterlyHoldingObject,number=otherManagerCount )
+                QuarterlyOtherManager.objects.get_or_create(parentFilerId =parentFilerObject ,quarterlyHoldingId = quarterlyHoldingObject,number=d4['sequenceNumber'] )
             except:
                 pass
-            try:
-                QuarterlyOtherManagerObject = QuarterlyOtherManager.objects.get(quarterlyHoldingId = quarterlyHoldingObject,number=otherManagerCount )
+            # try:
+            #     QuarterlyOtherManagerObject = QuarterlyOtherManager.objects.get(quarterlyHoldingId = quarterlyHoldingObject,number=otherManagerCount )
 
+            # except:
+            #     pass\
+            try:
+                print(d4['sequenceNumber'])
             except:
+                print("Exception caught at line 611")
                 pass
-            otherManager2Data.append(d4)
+            try:
+                childFilerObjectList.append(childFilerObject)
+                childFilerObjectLists=QuarterlyOtherManager.objects.filter(childFilerId__in=childFilerObjectList)
+
+                sequenceNumberList.append(d4['sequenceNumber'])
+                otherManager2Data.append(d4)
+            except:
+                print("Exception caught at line 614")
+                pass
+        try:
+            childFilerMap = {}
+            for i in range(len(sequenceNumberList)):
+                childFilerMap[sequenceNumberList[i]] = childFilerObjectLists[i]
+
+            for i in range(len(childFilerObjectLists)):
+                correspondingsecurity = childFilerMap[childFilerObjectLists[i]]
+        except:
+            print("Exception caugth at line 624")
+            pass
+        print(childFilerMap)
           
         QuarterlySecurityHoldingObjectstbs=[]
         QuarterlyOtherManagerObjectstbs=[]
@@ -623,24 +650,39 @@ class HoldingsScraper:
         #         pass
         SecurityList=[]
         FinalSecurityList=[]
-        SecurityList=Security.objects.filter(cusip__in=cusiplist)
-        print(len(SecurityList))
-        print(len(cusiplist))
-        for j in range(len(cusiplist)):
-            for i in range(len(SecurityList)):
-                try:
-                    if cusiplist[j] == SecurityList[i].cusip:
-                        FinalSecurityList.append(SecurityList[i])
-                except:
-                    pass
+        unique_cusip_list = [] 
+      
+    
+        for x in cusiplist:         
+            if x not in unique_cusip_list: 
+                unique_cusip_list.append(x) 
+        SecurityList=Security.objects.filter(cusip__in=unique_cusip_list)
+        # print(len(SecurityList))
+        # print(len(cusiplist))
+        # for j in range(len(cusiplist)):
+        #     for i in range(len(SecurityList)):
+        #         try:
+        #             if cusiplist[j] == SecurityList[i].cusip:
+        #                 FinalSecurityList.append(SecurityList[i])
+        #         except:
+        #             pass
+        map = {}
+        for i in range(len(SecurityList)):
+            map[SecurityList[i].cusip] = SecurityList[i]
+
+        for i in range(len(unique_cusip_list)):
+            correspondingsecurity = map[unique_cusip_list[i]]
+
+       
 
 
-        print(len(FinalSecurityList))
+        
+        print(map)
        
         try:
             QuarterlySecurityHoldingObjectstbs = [
                 QuarterlySecurityHolding(
-                    securityId = FinalSecurityList[i],
+                    securityId = map.get(cusiplist[i]),
                     quarterlyHoldingId = quarterlyHoldingObject,
                     marketvalue = infoTableData[i]['value'],
                     quantity = infoTableData[i]['sshPrnamt'], 
@@ -670,29 +712,57 @@ class HoldingsScraper:
         QuarterlyOtherManagerObjectsList=[]
         QuarterlyOtherManagerObjectsList.clear()
         try:
-            if QuarterlyOtherManagerObject:
+            for i in range(len(infoTableData)):
+                print(infoTableData[i]['otherManager'][0])                
+                print(childFilerMap.get(infoTableData[i]['otherManager'][0]))
+        except:
+            print("PRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOBBBBBBBBBBBBBLEM")
+            pass
+        try:
+            try:
                 QuarterlyOtherManagerObjectsList=QuarterlySecurityHolding.objects.filter(uin__in=uinlist)
                 print(len(QuarterlyOtherManagerObjectsList))
-                try:
-                    QuarterlyOtherManagerObjectstbs = [
-                        QuarterlyOtherManagerDistribution(
-                            quarterlyOtherManagerId =QuarterlyOtherManagerObject ,
-                            quarterlySecurityHoldingId = QuarterlyOtherManagerObjectsList[i]
-                            )for i in range(len(infoTableData))
-                    ]
-                except:
-                    print("Exception caught while creating QuarterlyOtherManagerObjectstbs list")
-                    pass
-                
-                
-                print("Bulk Save for QuarterlyOtherManagerDistribution Started")
-                
-                try:
-                    QuarterlyOtherManagerDistribution.objects.bulk_create(QuarterlyOtherManagerObjectstbs)
-                except:
-                    print("Exception caught while saving QuarterlyOtherManagerDistribution")
-                    pass
-                print("Bulk Save for QuarterlyOtherManagerDistribution Ended")
+                QuarterlySecurityHoldingOM=[]
+                QuarterlySecurityHoldingOM.clear()
+                sequenceList=[]
+                sequenceList.clear()
+            except:
+                print("Exception at 730")
+                pass
+            k=0
+            try:
+                print(infoTableData[0]['otherManager'].split(","))
+            except:
+                print("Exception at 736")
+                pass
+            for item in QuarterlyOtherManagerObjectsList:
+                for items in infoTableData[k]['otherManager'].split(","):
+                    print(item)
+                    print(items)
+                    sequenceList.append(items)
+                    QuarterlySecurityHoldingOM.append(item)
+                k=k+1
+            print(len(QuarterlySecurityHoldingOM))
+            try:
+                QuarterlyOtherManagerObjectstbs = [
+                    QuarterlyOtherManagerDistribution(
+                        quarterlyOtherManagerId =childFilerMap.get(sequenceList[i]) ,
+                        quarterlySecurityHoldingId = QuarterlySecurityHoldingOM[i]
+                        )for i in range(len(QuarterlySecurityHoldingOM))
+                ]
+            except:
+                print("Exception caught while creating QuarterlyOtherManagerObjectstbs list")
+                pass
+            
+            
+            print("Bulk Save for QuarterlyOtherManagerDistribution Started")
+            
+            try:
+                QuarterlyOtherManagerDistribution.objects.bulk_create(QuarterlyOtherManagerObjectstbs)
+            except:
+                print("Exception caught while saving QuarterlyOtherManagerDistribution")
+                pass
+            print("Bulk Save for QuarterlyOtherManagerDistribution Ended")
 
         except:
             print("No other managers for this holding/filer")

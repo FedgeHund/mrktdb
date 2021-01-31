@@ -90,6 +90,7 @@ INSTALLED_APPS = [
     'fedgehund_auth',
     'fedgehund_profile.apps.FedgehundProfileConfig',
     'edgar.apps.EdgarConfig',
+    'filer.apps.FilerConfig',
     'testapp',
     'fedgehundui',
     'django_cron',

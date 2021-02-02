@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
                 ('sec_name', models.TextField()),
                 ('cusip', models.TextField()),
                 ('cusip6', models.TextField()),
+                ('cikCusipMappingId', models.TextField(default=None, blank=True)),
             ],
             options={
                 'ordering': ['year'],
@@ -30,7 +31,7 @@ class Migration(migrations.Migration):
             name='Company',
             fields=[
                 ('name', models.TextField(max_length=80)),
-                ('cik', models.IntegerField(default=None)),
+                ('cik', models.TextField(blank=True, default=None)),
                 ('createdAt', models.DateTimeField(auto_now_add=True)),
                 ('updatedAt', models.DateTimeField(blank=True, default=None)),
                 ('deletedAt', models.DateTimeField(blank=True, default=None)),
@@ -75,11 +76,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='QuarterlyHolding',
             fields=[
-                ('quarter', models.IntegerField()),
+                ('quarter', models.TextField()),
                 ('filingType', models.CharField(choices=[('CR', 'Combined Report'), ('NT', 'Notice'), ('HR', 'Holdings Report')], max_length=2)),
                 ('filedOn', models.DateTimeField(default=None, blank=True)),
                 ('acceptedAt', models.DateTimeField(default=None, blank=True)),
                 ('totalValue', models.FloatField()),
+                ('totalEntry', models.FloatField()),
                 ('createdAt', models.DateTimeField(auto_now_add=True)),
                 ('updatedAt', models.DateTimeField(blank=True, default=None)),
                 ('deletedAt', models.DateTimeField(blank=True, default=None)),
@@ -128,8 +130,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='QuarterlySecurityHolding',
             fields=[
-                ('value', models.FloatField()),
-                ('amount', models.FloatField()),
+                ('quantity', models.FloatField()),
+                ('marketValue', models.FloatField()),
+                ('uin', models.TextField(blank=True, default=None)),
                 ('holdingType', models.CharField(choices=[('SHR', 'SH'), ('PRN', 'PRN'), ('PUT', 'PUT'), ('CAL', 'CALL')], max_length=3)),
                 ('investmentDiscretion', models.CharField(choices=[('SOLE', 'SOLE'), ('DFND', 'DFND'), ('OTHR', 'OTHER')], max_length=4)),
                 ('sole', models.IntegerField()),

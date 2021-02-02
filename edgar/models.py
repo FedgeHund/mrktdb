@@ -110,7 +110,7 @@ class QuarterlySecurityHolding(models.Model):
     uin=models.TextField()
     securityId = models.ForeignKey(Security, on_delete=models.CASCADE)
     quarterlyHoldingId = models.ForeignKey(QuarterlyHolding, on_delete=models.CASCADE)
-    marketvalue = models.FloatField()
+    marketValue = models.FloatField()
     quantity = models.FloatField()
     holdingType = models.TextField()
     investmentDiscretion = models.CharField(max_length=4, choices=DISCRETION_TYPES)

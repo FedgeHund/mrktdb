@@ -202,6 +202,7 @@ class HoldingsScraper:
         data = []
         objs=[]
         toBeSaved=[]
+        infoTableRow = {}
         cusiplist.clear()
         uinlist.clear()
         # Attempt retrieval of available attributes for 13F filings

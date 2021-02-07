@@ -58,7 +58,7 @@ class HoldingsScraper:
 
     def __init__(self, cik):
         # Using Chrome Driver
-        #self.browser = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver')
+        # self.browser = webdriver.Chrome(executable_path='C:\\chromedriver_win32\\Chromedriver')
 
         # Using Firefox Driver
         # caps = DesiredCapabilities.FIREFOX.copy()

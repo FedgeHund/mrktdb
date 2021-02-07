@@ -12,39 +12,11 @@ class Company(models.Model):
     updatedAt = models.DateTimeField(default=None, blank=True)
     deletedAt = models.DateTimeField(default=None, blank=True)
     companyId = models.AutoField(primary_key=True)
-    address = models.TextField(max_length=120, blank=True)
+    address = models.TextField(max_length=120,blank=True)
     companyType = models.CharField(max_length=2, choices=COMPANY_TYPES, default=None)
 
     class Meta:
         ordering = ['createdAt']
-
-class CikCusipMapping(models.Model):
-    year = models.IntegerField()
-    cik = models.IntegerField()
-    sec_name = models.TextField()
-    cusip = models.TextField()
-    cusip6 = models.TextField()
-    cikCusipMappingId = models.TextField()
-
-    class Meta:
-        ordering = ['year']
-
-class Security(models.Model):
-    companyId = models.IntegerField(default=None)
-    cusip = models.TextField()
-    securityName = models.TextField()
-    securityType = models.TextField()
-    ticker = models.CharField(max_length=5)
-    titleOfClass = models.TextField()
-    createdAt = models.DateTimeField(auto_now_add=True)
-    updatedAt = models.DateTimeField(default=None, blank=True)
-    deletedAt = models.DateTimeField(default=None, blank=True)
-    securityId = models.AutoField(primary_key=True)
-    cikCusipMappingId = models.TextField(default=None, blank=True, null=True)
-
-    class Meta:
-        ordering = ['ticker']
-        verbose_name_plural = "Securities"
 
 class Filer(models.Model):
     FILE_TYPES = (
@@ -53,12 +25,12 @@ class Filer(models.Model):
         ('13D', '13D'),
     )
     companyId = models.ForeignKey(Company, on_delete=models.CASCADE,blank=True)
-    fileNumber = models.CharField(max_length=10, blank=True)
+    fileNumber = models.CharField(max_length=10,blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)
     deletedAt = models.DateTimeField(default=None, blank=True)
     filerId = models.AutoField(primary_key=True)
-    fileType = models.CharField(max_length=3, choices=FILE_TYPES, blank=True)
+    fileType = models.CharField(max_length=3, choices=FILE_TYPES,blank=True)
 
     class Meta:
         ordering = ['companyId']
@@ -100,6 +72,22 @@ class QuarterlyOtherManager(models.Model):
     class Meta:
         ordering = ['quarterlyHoldingId']
 
+
+class Security(models.Model):
+    companyId = models.ForeignKey(Company, on_delete=models.CASCADE,blank=True)
+    cusip = models.TextField()
+    securityName = models.TextField(blank=True)
+    securityType = models.TextField(blank=True)
+    ticker = models.CharField(max_length=5,blank=True)
+    titleOfClass = models.TextField()
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updatedAt = models.DateTimeField(default=None, blank=True)
+    deletedAt = models.DateTimeField(default=None, blank=True)
+    securityId = models.AutoField(primary_key=True)
+
+    class Meta:
+        ordering = ['ticker']
+
 class QuarterlySecurityHolding(models.Model):
     
     DISCRETION_TYPES = (
@@ -110,7 +98,7 @@ class QuarterlySecurityHolding(models.Model):
     uin=models.TextField()
     securityId = models.ForeignKey(Security, on_delete=models.CASCADE)
     quarterlyHoldingId = models.ForeignKey(QuarterlyHolding, on_delete=models.CASCADE)
-    marketValue = models.FloatField()
+    marketvalue = models.FloatField()
     quantity = models.FloatField()
     holdingType = models.TextField()
     investmentDiscretion = models.CharField(max_length=4, choices=DISCRETION_TYPES)
@@ -136,7 +124,6 @@ class QuarterlyOtherManagerDistribution(models.Model):
     class Meta:
         ordering = ['createdAt']
 
-
 class FailsToDeliver(models.Model):
     settlementDate = models.DateField()
     createdAt = models.DateTimeField(auto_now_add=True)
@@ -147,3 +134,14 @@ class FailsToDeliver(models.Model):
 
     class Meta:
         ordering = ['createdAt']
+
+class CikCusipMapping(models.Model):
+    year = models.IntegerField()
+    cik = models.IntegerField()
+    sec_name = models.TextField()
+    cusip = models.TextField()
+    cusip6 = models.TextField()
+    cikCusipMappingId = models.TextField()
+
+    class Meta:
+        ordering = ['year']

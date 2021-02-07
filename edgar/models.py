@@ -84,6 +84,7 @@ class Security(models.Model):
     updatedAt = models.DateTimeField(default=None, blank=True)
     deletedAt = models.DateTimeField(default=None, blank=True)
     securityId = models.AutoField(primary_key=True)
+    cikCusipMappingId = models.TextField(default=None, blank=True, null=True)
 
     class Meta:
         ordering = ['ticker']

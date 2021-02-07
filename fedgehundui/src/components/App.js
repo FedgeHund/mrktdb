@@ -4,6 +4,7 @@ import Navbar from './Layout/Navbar';
 import Signin from './Signin/Signin';
 import UserForm from './Signup/UserForm';
 import Homepage from './Homepage/Homepage';
+import ContactUs from './ContactUs/ContactUs';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import '../../templates/fedgehundui/global.css';
 // file deepcode ignore no-mixed-spaces-and-tabskey: "value", 
@@ -18,6 +19,7 @@ class App extends Component {
                 <Route path="/" exact component={() => <Homepage />} />
 		          	<Route path="/signup" exact component={() => <UserForm />} />
 		          	<Route path="/signin" exact component={() => <Signin />} />
+                <Route path="/contactus" exact component={() => <ContactUs />} />
 		        </Switch>     		
       		</Router>
       	</Fragment>

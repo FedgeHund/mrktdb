@@ -52,7 +52,7 @@ function Footer() {
 									<div className="row hover_effect_row margin6">
 										<a href="#" className="filer_items offset-2 col-2 hover_effect"><div>Our offerings&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
 										<a href="#" className="filer_items col-2 hover_effect"><div>Advertise with us&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
-										<a href="#" className="filer_items col-2 hover_effect"><div>Contact Us&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+										<a href="/contactus" className="filer_items col-2 hover_effect"><div>Contact Us&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
 										<a href="#" className="filer_items col-2 hover_effect"><div>Email Newsletter&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
 									</div>
 

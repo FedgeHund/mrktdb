@@ -17,7 +17,7 @@ for companyobject in Company.objects.all():
     cikmaster.append(companyobject.cik)
 
 
-ciks = ["0001067983"]
+ciks = ["0001067983", "0001167483"]
 
 
 # To find information about any 1 company uncomment line 14 -15 and comment line 19-20

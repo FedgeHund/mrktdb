@@ -69,7 +69,7 @@ function ContactUs() {
                                         <div className="col-md-6 col-10 mt-3 message_box">
                                             <div class="form-group">
                                                 <label className="message">Message</label>
-                                                <textarea className="form-control" rows="8"></textarea>
+                                                <textarea className="form-control textarea_contact" rows="8"></textarea>
                                             </div>
 
                                             <button className="btn shadow-sm col-md-12 col-sm-12 col-12 send_message_btn" type="submit">

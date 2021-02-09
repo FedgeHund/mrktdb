@@ -188,11 +188,11 @@ textarea {
 	resize: none;
 	color: #fe6f7d;
 }
-.form-control {
+.textarea_contact {
 	color: #fe6f7d;
 }
 
-.form-control:focus {
+.textarea_contact:focus {
 	outline: none !important;
 	box-shadow: none !important;
 	color: #fe6f7d;

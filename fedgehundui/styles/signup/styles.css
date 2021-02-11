@@ -73,7 +73,7 @@
 .signup_box {
 	position: absolute;
 	height: 745px;
-	top: 60%;
+	top: 48%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	padding: 50px;
@@ -91,16 +91,15 @@
 .signup_box .sign_up_text {
 	color: rgba(81, 81, 81, 1);
 	text-align: center;
-	font-family: OpenSans-SemiBold;
+	font-family: var(--OpenSans);
 	font-size: 42px;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .signup_box .already {
 	color: #515151;
 	position: relative;
-	font-family: OpenSans;
-	font-weight: Regular;
+	ffont-family: var(--OpenSans);
 	font-size: 17px;
 	text-align: right;
 	padding-top: 17px;
@@ -110,8 +109,7 @@
 .signup_box .signin_Link {
 	color: #fe6f7d;
 	position: relative;
-	font-family: OpenSans;
-	font-weight: Regular;
+	font-family: var(--OpenSans);
 	font-size: 17px;
 	padding-top: 17px;
 	padding-bottom: 5px;
@@ -120,8 +118,7 @@
 .signup_box .question {
 	color: #515151;
 	position: relative;
-	font-family: OpenSans;
-	font-weight: Regular;
+	font-family: var(--OpenSans);
 	font-size: 17px;
 	text-align: right;
 	padding-top: 17px;
@@ -140,7 +137,7 @@
 .signup_box .use_email {
 	color: #a2a2a2;
 	position: relative;
-	font-family: Open Sans;
+	font-family: var(--OpenSans);
 	font-size: 19px;
 	padding-top: 35px;
 	margin-left: 46px;
@@ -171,8 +168,7 @@
 	left: 0;
 	padding: 10px;
 	font-size: 17px;
-	font-family: OpenSans;
-	font-weight: 80;
+	font-family: var(--OpenSans);
 	opacity: 0.5;
 	transition: 0.4s;
 	z-index: -1;
@@ -190,8 +186,7 @@
 .signup_box .validations {
 	color: #fe6f7d;
 	position: relative;
-	font-family: OpenSans;
-	font-weight: Regular;
+	font-family: var(--OpenSans);
 	font-size: 12px;
 	margin-left: 55px;
 	padding-top: 18px;
@@ -200,7 +195,7 @@
 
 .signup_box .captcha {
 	position: relative;
-	font-family: OpenSans;
+	font-family: var(--OpenSans);
 	font-size: 12px;
 	opacity: 1;
 	text-align: center;
@@ -225,7 +220,8 @@
 	color: white;
 	margin-top: 60px;
 	background-color: rgba(254, 111, 125, 1);
-	font-family: OpenSans-SemiBold;
+	font-family: var(--OpenSans);
+	font-weight: 600;
 }
 
 .signup_box .submit-btn:hover {
@@ -273,7 +269,8 @@
 	border-radius: 30px;
 	margin-top: 60px;
 	color: rgba(254, 111, 125, 1);
-	font-family: OpenSans-SemiBold;
+	font-family: var(--OpenSans);
+	font-weight: 600;
 }
 
 .signup_box .back-btn:hover {
@@ -314,7 +311,8 @@
 	color: rgba(81, 81, 81, 1);
 	position: relative;
 	text-align: center;
-	font-family: OpenSans-SemiBold;
+	font-family: var(--OpenSans);
+	font-weight: 600;
 	font-size: 28px;
 	padding-top: 30px;
 	padding-bottom: 25px;
@@ -339,9 +337,9 @@
 .signup_box .almost_text {
 	color: rgba(81, 81, 81, 1);
 	text-align: center;
-	font-family: OpenSans-SemiBold;
+	font-family: var(--OpenSans);
 	font-size: 42px;
-	font-weight: 500;
+	font-weight: 600;
 	margin-top: 40px;
 	margin-bottom: 30px;
 }
@@ -349,7 +347,7 @@
 .signup_box .create_message {
 	color: #363636;
 	font-size: 25px;
-	font-family: OpenSans;
+	font-family: var(--OpenSans);
 	text-align: center;
 	margin-top: 10px;
 }
@@ -357,7 +355,7 @@
 .signup_box .created_email {
 	color: #a2a2a2;
 	font-size: 16px;
-	font-family: OpenSans;
+	font-family: var(--OpenSans);
 	text-align: center;
 }
 
@@ -367,9 +365,9 @@
 	position: relative;
 	text-align: center;
 	justify-content: center;
-	font-family: OpenSans-SemiBold;
+	font-family: var(--OpenSans);
 	font-size: 40px;
-	font-weight: 500;
+	font-weight: 600;
 	padding-top: 220px;
 }
 
@@ -377,8 +375,7 @@
 .signup_box .forgotPassword {
 	color: #a2a2a2;
 	position: relative;
-	font-family: OpenSans;
-	font-weight: Regular;
+	font-family: var(--OpenSans);
 	font-size: 12px;
 	left: 12%;
 	padding-top: 15px;
@@ -387,8 +384,7 @@
 .signup_box .signinValidations {
 	color: #fe6f7d;
 	position: relative;
-	font-family: OpenSans;
-	font-weight: Regular;
+	font-family: var(--OpenSans);
 	font-size: 13px;
 	margin-left: 65px;
 	padding-top: 18px;

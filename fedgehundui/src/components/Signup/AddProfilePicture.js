@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import '../../../styles/signup/styles.scss';
+import '../../../styles/signup/styles.css';
 import { URL } from '../App.js';
 
 export class FormPersonalDetails extends Component {

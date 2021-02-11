@@ -1,3 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Nunito+Sans:wght@300;400;600;700;800&display=swap");
+
+:root {
+	--Roboto: "Roboto", sans-serif;
+	--OpenSans: "Open Sans", sans-serif;
+	--Lato: "Lato", sans-serif;
+}
+
 /* 1st section */
 @media (max-width: 650px) {
 	.contain {
@@ -77,7 +87,7 @@
 
 .lookup_home {
 	background: rgba(254, 111, 125, 0.03);
-	font-family: ArialMT;
+	font-family: var(--Roboto);
 	font-size: 1em;
 	height: 38px;
 	width: 100% !important;
@@ -95,7 +105,7 @@
 
 .search {
 	font-size: 1.1em;
-	font-family: ArialMT;
+	font-family: var(--Roboto);
 	width: 120px;
 	height: 38px;
 	box-shadow: none !important;
@@ -116,7 +126,7 @@
 .carousel_text {
 	color: #464545;
 	font-size: 0.85em;
-	font-family: ArialMT;
+	font-family: var(--Roboto);
 	margin: 0 auto;
 	margin-top: 60px;
 }
@@ -124,7 +134,7 @@
 .centered_carousel_link {
 	color: #fe6f7d;
 	font-size: 0.65em;
-	font-family: ArialMT;
+	font-family: var(--Roboto);
 	margin: 0 auto;
 	margin-top: 40px;
 }
@@ -324,6 +334,7 @@
 }
 
 .inside_db {
+	font-family: var(--OpenSans);
 	position: relative;
 	top: 46%;
 	left: 52%;
@@ -334,7 +345,8 @@
 }
 
 .so_far_text {
-	font-family: Arial-BoldMT;
+	font-family: var(--Lato);
+	font-weight: 700;
 	line-height: 1.2;
 	color: #404040;
 	font-size: 2.1em;
@@ -347,7 +359,8 @@
 .filer_stats,
 .securities_stats,
 .hedgefund_stats {
-	font-family: Arial-BoldMT;
+	font-family: var(--Roboto);
+	font-weight: 600;
 	color: #404040;
 	font-size: 4.5em;
 }
@@ -361,7 +374,7 @@
 .security_stat_type,
 .fund_stat_type {
 	font-size: 1.1em;
-	font-family: ArialMT;
+	font-family: var(--Lato);
 	color: #404040;
 }
 
@@ -470,7 +483,8 @@
 
 .know_more {
 	font-size: 2.3em;
-	font-family: ArialMT;
+	font-family: var(--Lato);
+	font-weight: 500;
 	line-height: 1.2;
 	margin-top: 100px;
 }
@@ -482,7 +496,8 @@
 
 .tabs_know_heading {
 	color: #7f7f7f !important;
-	font-size: 1.1em;
+	font-family: var(--Lato);
+	font-size: 1em;
 	margin-top: 25px;
 	padding-left: 20px;
 	width: 10em;
@@ -501,7 +516,7 @@
 .tab_content {
 	color: #7f7f7f;
 	font-size: 1.05em;
-	font-family: ArialMT;
+	font-family: var(--Roboto);
 	line-height: 1.3;
 	margin-top: 60px;
 	margin-left: 60px;
@@ -633,25 +648,26 @@
 }
 
 .what_is_13f_text {
-	font-family: Arial-BoldMT;
+	font-family: var(--Roboto);
+	font-weight: 700;
 	color: #404040;
 	font-size: 2.6em;
 }
 
 .key_takeaways_head {
-	font-family: ArialMT;
+	font-family: var(--Roboto);
 	color: #fe6f7d;
 	font-size: 1.3em;
 }
 
 .what_is_13f_content {
-	font-family: SegoeUI;
+	font-family: var(--OpenSans);
 	color: #404040;
 	font-size: 0.9em;
 }
 
 .know_more_13f {
-	font-family: SegoeUI;
+	font-family: var(--OpenSans);
 	color: #fe6f7d;
 }
 
@@ -664,7 +680,7 @@
 }
 
 .key_takeaways_content {
-	font-family: SegoeUI;
+	font-family: var(--OpenSans);
 	color: #404040;
 	font-size: 0.9em;
 }
@@ -848,7 +864,7 @@
 .popular_portfolio_on_mrktdb {
 	color: #fff;
 	font-size: 2em;
-	font-family: ArialMT;
+	font-family: var(--OpenSans);
 	line-height: 1.3;
 	margin-top: 80px;
 }
@@ -856,20 +872,20 @@
 .know_about_top_hedge_funds {
 	color: #e5e5e3;
 	font-size: 1.2em;
-	font-family: ArialMT;
+	font-family: var(--OpenSans);
 	line-height: 1.4;
 }
 
 .portfolio_name {
 	color: #b3b2b1;
 	font-size: 1em;
-	font-family: ArialMT;
+	font-family: var(--OpenSans);
 }
 
 .more_portfolios_link {
 	color: #b3b2b1;
 	font-size: 0.9em;
-	font-family: ArialMT;
+	font-family: var(--OpenSans);
 }
 
 .popular_portfolios {
@@ -882,7 +898,7 @@
 .as_of_date {
 	color: #484848;
 	font-size: 0.7em;
-	font-family: ArialMT;
+	font-family: var(--OpenSans);
 	margin-top: 600px;
 	position: absolute;
 	margin-left: 90px;
@@ -895,7 +911,8 @@
 .portfolio_heading {
 	color: #404040;
 	font-size: 2.2em;
-	font-family: Arial-BoldMT;
+	font-family: var(--OpenSans);
+	font-weight: 700;
 	margin-top: 80px;
 	line-height: 1.2;
 }
@@ -903,47 +920,53 @@
 .portfolio_value_head {
 	color: #484848;
 	font-size: 0.9em;
-	font-family: Arial-BoldMT;
+	font-family: var(--OpenSans);
+	font-weight: 700;
 	margin-top: 40px;
 }
 
 .portfolio_value {
 	color: #484848;
 	font-size: 0.9em;
-	font-family: Arial-BoldMT;
+	font-family: var(--OpenSans);
+	font-weight: 700;
 }
 
 .portfolio_value_number {
 	color: #484848;
 	font-size: 1em;
-	font-family: ArialMT;
+	font-family: var(--OpenSans);
 }
 
 .top_holdings_text {
 	color: #484848;
 	font-size: 1.1em;
-	font-family: Arial-BoldMT;
+	font-family: var(--OpenSans);
+	font-weight: 700;
 	margin-top: 50px;
 }
 
 .top_holding_symbol_1 {
 	color: #484848;
-	font-size: 1em;
-	font-family: Arial-BoldMT;
+	font-size: 0.9em;
+	font-family: var(--OpenSans);
+	font-weight: 700;
 	margin-top: 30px;
 }
 
 .top_holding_symbol {
 	color: #484848;
 	font-size: 0.9em;
-	font-family: Arial-BoldMT;
+	font-family: var(--OpenSans);
+	font-weight: 700;
 	margin-top: 10px;
 }
 
 .top_holding_name {
 	color: #484848;
 	font-size: 0.9em;
-	font-family: ArialMT;
+	font-family: var(--OpenSans);
+	font-weight: 400 !important;
 	margin-left: 15px;
 }
 
@@ -1076,7 +1099,7 @@
 .exclusive_insights_text {
 	color: #404040;
 	font-size: 1.55em;
-	font-family: ArialMT;
+	font-family: var(--OpenSans);
 	text-align: left;
 	margin-top: 60px;
 	margin-left: 60px;
@@ -1085,7 +1108,7 @@
 .sign_up_personalized {
 	color: #262528;
 	font-size: 1em;
-	font-family: ArialMT;
+	font-family: var(--Lato);
 	margin-top: 80px;
 	margin-left: 60px;
 	text-align: left;
@@ -1096,9 +1119,10 @@
 	margin-left: 60px;
 	background-color: rgba(254, 111, 125, 1);
 	color: white;
-	font-family: OpenSans-SemiBold;
+	font-family: var(--OpenSans);
+	font-weight: 600;
 	border: none;
-	border-radius: 30px;
+	border-radius: 25px;
 	outline: none !important;
 	cursor: pointer;
 	text-align: center;
@@ -1110,7 +1134,7 @@
 }
 
 .get_started_text {
-	font-size: 1.1em;
+	font-size: 1em;
 }
 
 .get_started_btn:hover {

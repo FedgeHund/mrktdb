@@ -1,3 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
+
+:root {
+	--Roboto: "Roboto", sans-serif;
+	--OpenSans: "Open Sans", sans-serif;
+}
+
 @media (max-width: 490px) {
 	.contact_us_container.contact_us_container.contact_us_container {
 		height: 1450px;
@@ -79,15 +87,16 @@
 }
 
 .contact_us_heading {
-	font-family: Arial-BoldMT;
+	font-family: var(--Roboto);
+	font-weight: 700;
 	color: #404040;
 	font-size: 2.8em;
 }
 
 .contact_notice {
-	font-family: SegoeUI;
+	font-family: var(--OpenSans);
 	color: #404040;
-	font-size: 0.9em;
+	font-size: 0.8em;
 }
 
 .link_to_homepage {
@@ -99,6 +108,7 @@
 }
 
 .email_us {
+	font-family: var(--OpenSans);
 	margin-top: 70px;
 	color: #7f7f7f;
 }
@@ -153,8 +163,7 @@
 	left: 0;
 	padding: 10px;
 	font-size: 1em;
-	font-family: OpenSans;
-	font-weight: 80;
+	font-family: var(--OpenSans);
 	opacity: 0.5;
 	transition: 0.4s;
 	z-index: -1;
@@ -173,6 +182,7 @@
 	position: relative;
 	left: 10%;
 	color: #fe6f7d;
+	font-family: var(--OpenSans);
 	font-size: 0.9em;
 }
 
@@ -182,6 +192,8 @@
 
 .message {
 	color: #7f7f7f;
+	font-family: var(--OpenSans);
+	font-weight: 600;
 }
 
 textarea {
@@ -212,7 +224,7 @@ textarea {
 	color: white;
 	margin-top: 40px;
 	background-color: rgba(254, 111, 125, 1);
-	font-family: OpenSans;
+	font-family: var(--OpenSans);
 }
 
 .send_message_btn:hover {

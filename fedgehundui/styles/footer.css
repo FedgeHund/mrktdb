@@ -1,5 +1,12 @@
-@media(max-width: 768px) {
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
 
+:root {
+	--Roboto: "Roboto", sans-serif;
+	--OpenSans: "Open Sans", sans-serif;
+}
+
+@media (max-width: 768px) {
 	.footer_container.footer_container {
 		height: 1700px;
 	}
@@ -68,13 +75,13 @@
 	}
 }
 
-@media(min-width: 768px) {
+@media (min-width: 768px) {
 	.horizontal_lines_small_screen {
 		display: none !important;
 	}
 }
 
-@media(max-width: 900px) {
+@media (max-width: 900px) {
 	.footer_section.footer_section {
 		font-size: 1em;
 	}
@@ -98,7 +105,7 @@
 
 .footer_container {
 	height: 1100px;
-	background: #0D0D0D;
+	background: #0d0d0d;
 }
 
 .margin3 {
@@ -127,21 +134,23 @@
 .footer_section {
 	color: #fff;
 	font-size: 1.2em;
-	font-family: ArialMT;
+	font-family: var(--Roboto);
+	font-weight: 500;
 	text-align: left;
 }
 
 .footer_heading {
 	color: #fff;
 	font-size: 1.3em;
-	font-family: SegoeUI-Bold;
+	font-family: var(--OpenSans);
+	font-weight: 600;
 	text-align: left;
 }
 
 .filer_items {
 	color: #a9a9a9;
-	font-size: 1em;
-	font-family: SegoeUI;
+	font-size: 0.95em;
+	font-family: var(--OpenSans);
 	text-align: left;
 }
 
@@ -182,14 +191,15 @@
 .closing_headings {
 	color: #7f7f7f;
 	font-size: 1.4em;
-	font-family: Arial-BoldMT;
+	font-family: var(--Roboto);
+	font-weight: 600;
 	text-align: left;
 }
 
 .closing_content {
 	color: #7f7f7f;
-	font-size: 0.8em;
-	font-family: SegoeUI;
+	font-size: 0.75em;
+	font-family: var(--OpenSans);
 	text-align: left;
 }
 

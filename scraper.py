@@ -69,11 +69,14 @@ class HoldingsScraper:
         # Using PhantomJS driver
         #self.browser = webdriver.PhantomJS()
         #self.browser.set_window_size(1024, 768)
-        self.cik = cik
-        self.links = []
+
+        #Using chrome driver
         options = Options()
         options.headless = True
         self.browser = webdriver.Chrome(options=options)
+
+        self.cik = cik
+        self.links = []
 
     def find_filings(self):
         """Open SEC page, feed HTML into BeautifulSoup, and find filings."""

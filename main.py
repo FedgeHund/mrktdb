@@ -1,11 +1,11 @@
 import datetime
-from scraper import HoldingsScraper
 import sys
 import os
 import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
 django.setup()
 
+from scraper import HoldingsScraper
 from edgar.models import Company, Filer, QuarterlyHolding, Security, QuarterlyOtherManagerDistribution, QuarterlySecurityHolding, QuarterlyOtherManager
 
 ticker = ''
@@ -17,7 +17,7 @@ for companyobject in Company.objects.all():
     cikmaster.append(companyobject.cik)
 
 
-ciks = ["0001067983", "0001167483", "0000913144"]
+ciks = ["0001167483"]
 
 
 # To find information about any 1 company uncomment line 14 -15 and comment line 19-20

@@ -16,9 +16,6 @@ import csv
 import datetime
 import os
 import time
-import django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
-django.setup()
 from edgar.models import Company, Filer, QuarterlyHolding, Security, QuarterlyOtherManagerDistribution, QuarterlySecurityHolding, QuarterlyOtherManager
 import re
 import sys

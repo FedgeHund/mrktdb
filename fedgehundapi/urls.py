@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 from rest_auth.registration.views import VerifyEmailView
 from edgar import views
+from filer import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
@@ -24,6 +25,7 @@ urlpatterns = [
     path('auth/', include('fedgehund_auth.urls')),
     path('profile/', include('fedgehund_profile.urls')),
     path('api/', include('edgar.urls')),
+    path('api/', include('filer.urls')),
 
     #to rectify 'NoReverseMatch at /auth/registration/' issue
     re_path(r'^account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'),

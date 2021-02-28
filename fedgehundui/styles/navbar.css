@@ -335,6 +335,8 @@ a {
 
 .hamburger_container {
 	height: 800px;
+	overscroll-behavior: contain;
+	overflow-x: hidden;
 }
 
 .menu_box {
@@ -347,7 +349,6 @@ a {
 	transform: translate(-50%, -50%);
 	font-size: 16px;
 	max-height: 100%;
-	overflow-y: auto;
 }
 
 .toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box {

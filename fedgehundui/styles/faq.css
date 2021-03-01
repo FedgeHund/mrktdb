@@ -69,6 +69,12 @@
 	}
 }
 
+@media (max-width: 1250px) {
+	.contact_us_link.contact_us_link.contact_us_link.contact_us_link.contact_us_link {
+		margin-left: 10vw;
+	}
+}
+
 .faq_container {
 	height: 1250px;
 	position: relative;
@@ -78,7 +84,7 @@
 
 .faq {
 	position: relative;
-	top: 52%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 90%;
@@ -88,7 +94,7 @@
 
 .faq_heading {
 	font-family: var(--Roboto);
-	position: absolute;
+	position: relative;
 	font-weight: 700;
 	color: #404040;
 	font-size: 2.8em;
@@ -96,11 +102,7 @@
 }
 
 .accordion_container {
-	margin-top: 100px;
-}
-
-.accordion {
-	margin-top: 150px;
+	margin-top: 50px;
 }
 
 .accordion-button {

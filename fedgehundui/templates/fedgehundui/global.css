@@ -1,5 +1,25 @@
 .body {
-  background: #fcf4eb !important;
-  margin: 0 auto !important;
-  overflow-x: hidden;
+	background: #fcf4eb !important;
+	margin: 0 auto !important;
+	overflow-x: hidden;
+}
+
+/* Scroll bar width */
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #c4c2c2;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #fe6f7d;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #fa98a2;
 }

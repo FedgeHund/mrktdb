@@ -7,6 +7,11 @@
 	--OpenSans: "Open Sans", sans-serif;
 }
 
+.hamburger_container::-webkit-scrollbar {
+	width: 0 !important; /* Remove scrollbar space */
+	background: transparent !important; /* Optional: just make scrollbar invisible */
+}
+
 @media (max-width: 580px) {
 	.lookup_form_everywhere {
 		display: none;

@@ -34,7 +34,7 @@ class SecuritySerializer(serializers.ModelSerializer):
 class QuarterlySecurityHoldingSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuarterlySecurityHolding
-        fields = ['securityId', 'quarterlyHoldingId', 'value', 'amount', 'holdingType', 'investmentDiscretion', 'sole', 'shared', 'none', 'createdAt', 'updatedAt', 'deletedAt', 'quarterlySecurityHoldingId']
+        fields = ['securityId', 'quarterlyHoldingId', 'marketvalue', 'amount', 'holdingType', 'investmentDiscretion', 'sole', 'shared', 'none', 'createdAt', 'updatedAt', 'deletedAt', 'quarterlySecurityHoldingId']
 
 
 class QuarterlyOtherManagerDistributionSerializer(serializers.ModelSerializer):

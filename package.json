@@ -30,6 +30,7 @@
     "@material-ui/icons": "^4.9.1",
     "@speechly/react-client": "0.0.3",
     "axios": "^0.20.0",
+    "bootstrap-icons": "^1.4.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

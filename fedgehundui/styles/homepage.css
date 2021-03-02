@@ -37,6 +37,12 @@
 		width: 120px;
 		position: relative;
 		margin-top: 20px;
+		z-index: 2 !important;
+	}
+
+	#results#results {
+		max-width: 80vw !important;
+		z-index: 3 !important;
 	}
 
 	.carousel_text.carousel_text {
@@ -60,7 +66,7 @@
 
 .contain {
 	position: relative;
-	top: 56%;
+	top: 54%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 90%;
@@ -79,8 +85,6 @@
 .lookup_form {
 	position: relative;
 	width: 600px !important;
-	align-items: center;
-	justify-content: center;
 	margin: 0 auto;
 	margin-top: 50px;
 }
@@ -95,6 +99,30 @@
 	border-width: 2px;
 	border-radius: 4px;
 	left: 0;
+}
+
+#results {
+	position: absolute;
+	z-index: 1 !important;
+	width: inherit;
+}
+
+.list-group-item {
+	background-color: #fcf4eb;
+	color: #404040;
+}
+
+.list-group-item:hover {
+	background-color: rgba(254, 111, 125);
+	color: #fff;
+}
+
+.list-group-item-action {
+	text-align: left;
+}
+
+.no_results {
+	background-color: #fcf4eb !important;
 }
 
 .lookup_home:focus {
@@ -331,6 +359,7 @@
 	position: relative;
 	overflow: hidden !important;
 	object-fit: cover;
+	z-index: -1 !important;
 }
 
 .inside_db {

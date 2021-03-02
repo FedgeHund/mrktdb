@@ -1,7 +1,10 @@
-.body {
+html,
+body {
 	background: #fcf4eb !important;
+	width: 100% !important;
 	margin: 0 auto !important;
-	overflow-x: hidden;
+	padding: 0px !important;
+	overflow-x: hidden !important;
 }
 
 /* Scroll bar width */

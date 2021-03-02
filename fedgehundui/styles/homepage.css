@@ -528,7 +528,7 @@
 	width: 30%;
 	position: absolute;
 	right: 8%;
-	bottom: -34%;
+	bottom: -37%;
 }
 
 /* 4th container */
@@ -844,6 +844,7 @@
 .popular_portfolio_container {
 	height: 670px;
 	object-fit: cover;
+	width: 100vw;
 	max-width: 1500px;
 	margin: 0 auto;
 }

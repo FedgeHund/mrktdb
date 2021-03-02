@@ -1,15 +1,6 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react';
 
-fetch('http://www.mrktdb.com/api/security')
-	.then(response => response.json())
-	.then(data => console.log(data));
-
-const defaultOptions = [];
-for (let i = 0; i < 13; i++) {
-	defaultOptions.push(`option ${i}`);
-	defaultOptions.push(`suggesstion ${i}`);
-	defaultOptions.push(`advice ${i}`);
-}
+const securityNames = [];
 
 const SearchbarDropdown = (props) => {
 	const { options, onInputChange } = props;
@@ -78,7 +69,7 @@ function Search() {
 
 	const onInputChange = (event) => {
 		setOptions(
-			defaultOptions.filter((option) => option.includes(event.target.value))
+			securityNames.filter((option) => option.includes(event.target.value.toUpperCase()))
 		);
 	};
 
@@ -89,6 +80,25 @@ function Search() {
 
 function Hero_Section() {
 	// file deepcode ignore no-mixed-spaces-and-tabs: "Tabs and spaces"
+	const [securityData, setSecurityData] = useState([]);
+
+	async function getSecurityNames() {
+		fetch('http://www.mrktdb.com/api/security', {
+			headers: {
+				'Content-Type': 'application/json',
+				'Accept': 'application/json'
+			}
+		})
+			.then(response => response.json())
+			.then(data => setSecurityData(data));
+	}
+
+	useEffect(() => {
+		getSecurityNames();
+	}, []);
+
+	securityData.map(d => securityNames.push(d.securityName));
+
 
 	return (
 		<Fragment>

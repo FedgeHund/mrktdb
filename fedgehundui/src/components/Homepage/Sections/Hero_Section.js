@@ -1,5 +1,10 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react';
 
+fetch('http://www.mrktdb.com/api/security')
+	.then(response => response.json())
+	.then(data => console.log(data));
+
+
 
 const SearchbarDropdown = (props) => {
 	const { options, onInputChange } = props;

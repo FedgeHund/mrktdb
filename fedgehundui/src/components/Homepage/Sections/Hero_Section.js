@@ -4,7 +4,12 @@ fetch('http://www.mrktdb.com/api/security')
 	.then(response => response.json())
 	.then(data => console.log(data));
 
-
+const defaultOptions = [];
+for (let i = 0; i < 13; i++) {
+	defaultOptions.push(`option ${i}`);
+	defaultOptions.push(`suggesstion ${i}`);
+	defaultOptions.push(`advice ${i}`);
+}
 
 const SearchbarDropdown = (props) => {
 	const { options, onInputChange } = props;
@@ -67,12 +72,6 @@ const SearchbarDropdown = (props) => {
 	);
 };
 
-const defaultOptions = [];
-for (let i = 0; i < 100; i++) {
-	defaultOptions.push(`option ${i}`);
-	defaultOptions.push(`suggesstion ${i}`);
-	defaultOptions.push(`advice ${i}`);
-}
 
 function Search() {
 	const [options, setOptions] = useState([]);

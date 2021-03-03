@@ -18,7 +18,7 @@ env = environ.Env()
 # reading .env file
 environ.Env.read_env()
 
-DJANGO_ENV = env("ENV", default="production")
+DJANGO_ENV = env("ENV", default="development")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if DJANGO_ENV == "production":

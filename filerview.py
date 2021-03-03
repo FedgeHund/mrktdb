@@ -46,6 +46,6 @@ for filer in filers:
             for position in top10_positions_by_marketValue:
                 top10holdingspercent = top10holdingspercent + position.marketValue
             top10holdingspercent = (top10holdingspercent/total_market_value)*100
-            q = QuarterlyFilerView(filerName=company.name, quarterId = quarterlyholding, filerId = filer ,cik = company.cik,filerType = company.companyType, marketValue = position.marketValue,previousMarketValue=previous_market_value,previousHoldingsCount=previous_entry_count,soldOutHoldingsCount = soldOutHoldingsCount, increasedHoldingsCount = increasedHoldingsCount, newHoldingsCount = newHoldingsCount,decreasedHoldingsCount=decreasedHoldingsCount,top10HoldingsPercent=top10holdingspercent,filerDescription=description)
+            q = QuarterlyFilerView(filerName=company.name, quarterId = quarterlyholding, filerId = filer ,cik = company.cik,filerType = company.companyType, marketValue = quarterlyholding.totalValue,previousMarketValue=previous_market_value,previousHoldingsCount=previous_entry_count,soldOutHoldingsCount = soldOutHoldingsCount, increasedHoldingsCount = increasedHoldingsCount, newHoldingsCount = newHoldingsCount,decreasedHoldingsCount=decreasedHoldingsCount,top10HoldingsPercent=top10holdingspercent,filerDescription=description)
             q.save()
         

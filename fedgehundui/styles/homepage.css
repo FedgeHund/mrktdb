@@ -113,7 +113,7 @@
 }
 
 .list-group-item:hover {
-	background-color: rgba(254, 111, 125);
+	background-color: rgb(255, 128, 140);
 	color: #fff;
 }
 

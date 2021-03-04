@@ -96,10 +96,9 @@ INSTALLED_APPS = [
     'fedgehund_auth',
     'fedgehund_profile.apps.FedgehundProfileConfig',
     'edgar.apps.EdgarConfig',
-    'holdings.apps.HoldingsConfig',
-    'securities.apps.SecuritiesConfig',
     'filer.apps.FilerConfig',
     'testapp',
+    'holdings.apps.HoldingsConfig',
     'fedgehundui',
     'django_cron',
 ]

@@ -13,11 +13,14 @@ const SearchbarDropdown = (props) => {
 			ulRef.current.style.display = 'flex';
 			onInputChange(event);
 		});
+
 		document.addEventListener('click', (event) => {
 			ulRef.current.style.display = 'none';
 		});
 
 		document.getElementById('results').style.display = 'none';
+
+
 	}, []);
 
 	let results;
@@ -49,13 +52,33 @@ const SearchbarDropdown = (props) => {
 		)
 	}
 
+	const changeCategory = (event) => {
+		document.getElementById('btnGroupDrop1').innerHTML = event.target.innerHTML;
+	}
+
 	return (
 		<form className="form-inline centered_form">
 			<div className="lookup_form">
 
 				<input className="form-control lookup_home" placeholder="Fund / Stock Lookup" onChange={onInputChange} ref={inputRef} />
+
 				{results}
-				<button id='search' className="search" type="submit"><i className="fas fa-search fa-rotate-90 search_icon"></i>Search</button>
+
+				<div className="btn-group search_btns" role="group" aria-label="Button group with nested dropdown">
+					<div className="btn-group" role="group">
+						<button id="btnGroupDrop1" type="button" className="dropdown-toggle search_type_button" data-bs-toggle="dropdown" aria-expanded="false">
+							All Categories
+    					</button>
+						<ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
+							<li><a className="dropdown-item" href="#" onClick={changeCategory}>All Categories</a></li>
+							<li><a className="dropdown-item" href="#" onClick={changeCategory}>Stocks</a></li>
+							<li><a className="dropdown-item" href="#" onClick={changeCategory}>Filers</a></li>
+						</ul>
+					</div>
+
+					<button id='search' type="button" className="search"><i className="fas fa-search fa-rotate-90 search_icon"></i>Search</button>
+				</div>
+
 
 			</div>
 		</form>

@@ -1,11 +1,34 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react';
+import axios from 'axios';
 
 const securityNames = [];
+const companyNames = [];
+var all_items = [];
 
-const SearchbarDropdown = (props) => {
-	const { options, onInputChange } = props;
+const SearchbarDropdown = () => {
 	const ulRef = useRef();
 	const inputRef = useRef();
+	const [options, setOptions] = useState([]);
+
+
+	const onInputChange = (event) => {
+		if (document.getElementById('btnGroupDrop1').innerHTML === 'All Categories') {
+			setOptions(
+				all_items.filter((option) => option.includes(event.target.value.toUpperCase()))
+			);
+		}
+		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Stocks') {
+			setOptions(
+				securityNames.filter((option) => option.includes(event.target.value.toUpperCase()))
+			);
+		}
+		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Filers') {
+			setOptions(
+				companyNames.filter((option) => option.includes(event.target.value.toUpperCase()))
+			);
+		}
+	}
+
 
 	useEffect(() => {
 		inputRef.current.addEventListener('click', (event) => {
@@ -19,12 +42,10 @@ const SearchbarDropdown = (props) => {
 		});
 
 		document.getElementById('results').style.display = 'none';
-
-
 	}, []);
 
-	let results;
 
+	let results;
 	if (options.length) {
 		results = (
 			<ul id="results" className="list-group" ref={ulRef}>
@@ -53,6 +74,7 @@ const SearchbarDropdown = (props) => {
 	}
 
 	const changeCategory = (event) => {
+		event.preventDefault();
 		document.getElementById('btnGroupDrop1').innerHTML = event.target.innerHTML;
 	}
 
@@ -66,7 +88,7 @@ const SearchbarDropdown = (props) => {
 
 				<div className="btn-group search_btns" role="group" aria-label="Button group with nested dropdown">
 					<div className="btn-group" role="group">
-						<button id="btnGroupDrop1" type="button" className="dropdown-toggle search_type_button" data-bs-toggle="dropdown" aria-expanded="false">
+						<button id="btnGroupDrop1" type="button" className="dropdown-toggle search_type_button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => { e.preventDefault(); }}>
 							All Categories
     					</button>
 						<ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -76,9 +98,8 @@ const SearchbarDropdown = (props) => {
 						</ul>
 					</div>
 
-					<button id='search' type="button" className="search"><i className="fas fa-search fa-rotate-90 search_icon"></i>Search</button>
+					<button id='search' type="submit" className="search"><i className="fas fa-search fa-rotate-90 search_icon"></i>Search</button>
 				</div>
-
 
 			</div>
 		</form>
@@ -87,40 +108,28 @@ const SearchbarDropdown = (props) => {
 };
 
 
-function Search() {
-	const [options, setOptions] = useState([]);
-
-	const onInputChange = (event) => {
-		setOptions(
-			securityNames.filter((option) => option.includes(event.target.value.toUpperCase()))
-		);
-	};
-
-	return (
-		<SearchbarDropdown options={options} onInputChange={onInputChange} />
-	);
-}
-
 function Hero_Section() {
 	// file deepcode ignore no-mixed-spaces-and-tabs: "Tabs and spaces"
-	const [securityData, setSecurityData] = useState([]);
+	const [searchData, setSearchData] = useState({ security_data: '', company_data: '' });
 
-	async function getSecurityNames() {
-		fetch('http://www.mrktdb.com/api/security', {
-			headers: {
-				'Content-Type': 'application/json',
-				'Accept': 'application/json'
-			}
-		})
-			.then(response => response.json())
-			.then(data => setSecurityData(data));
-	}
+	const getData = async () => {
+		let company_url = 'http://www.mrktdb.com/api/company';
+		let security_url = 'http://www.mrktdb.com/api/security';
+
+		const company_data = await axios.get(company_url);
+		const security_data = await axios.get(security_url);
+
+		setSearchData({ security_data: security_data.data, company_data: company_data.data });
+	};
 
 	useEffect(() => {
-		getSecurityNames();
+		getData();
 	}, []);
 
-	securityData.map(d => securityNames.push(d.securityName));
+	Object.values(searchData.security_data).map(security => securityNames.push(security.securityName));
+	Object.values(searchData.company_data).map(company => companyNames.push(company.name.toUpperCase()));
+
+	all_items = [...companyNames, ...securityNames];
 
 
 	return (
@@ -132,7 +141,7 @@ function Hero_Section() {
 						<div className="market_beating centered col-md-12">Find the next Market-Beating Portfolio</div>
 					</div>
 					<div className="">
-						< Search />
+						< SearchbarDropdown />
 					</div>
 					<div className="row">
 						<div className="col-xs-10 carousel_text col-md-7">MrktDB provides exclusive investment insights by giving you a sneak peek into the portfolio of world's most successful investors. Market Research is expensive, don't let that hold you back!</div>

@@ -52,11 +52,11 @@ export class UserForm extends Component {
 		switch(step) {
 			case 1: 
 					return(
-						<FormUserDetails 
-							nextStep = {this.nextStep}
-							handleChange = {this.handleChange}
-							values = {values}
-						/>
+							<FormUserDetails 
+								nextStep = {this.nextStep}
+								handleChange = {this.handleChange}
+								values = {values}
+							/>
 					)		
 					
 			case 2: 

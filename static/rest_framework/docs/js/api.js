@@ -87,7 +87,7 @@ $(function () {
     $codeBlocks.not('[data-language="' + language + '"]').addClass('hide')
     $codeBlocks.filter('[data-language="' + language + '"]').removeClass('hide')
   })
-
+  // file deepcode ignore no-invalid-this:
   // API Explorer
   $('form.api-interaction').submit(function (event) {
     event.preventDefault()
@@ -138,6 +138,7 @@ $(function () {
         } catch (err) {
           // Ignore malformed JSON
         }
+        // file deepcode ignore DuplicateIfBody: This is an auto-generated file
       } else if (dataType === 'object' && paramValue) {
         try {
           params[paramKey] = JSON.parse(paramValue)

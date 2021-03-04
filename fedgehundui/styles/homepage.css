@@ -1,0 +1,1165 @@
+/* 1st section */
+@media (max-width: 650px) {
+
+  .contain {
+    top: 59% !important;
+  }
+
+  .market_beating {
+    font-size: 2em !important;
+  }
+
+  .lookup_form {
+    max-width: 80vw !important;
+    margin-top: 60px !important;
+  }
+
+  .lookup_home.lookup_home {
+    background: rgba(254, 111, 125, 0.03);
+    font-family: ArialMT;
+    font-size: 1em;
+    width: 100% !important;
+    border-color: #a2a2a2;
+    border-width: 2px;
+    position: relative;
+  }
+
+  .search.search {
+    width: 120px;
+    position: relative;
+    margin-top: 20px;
+  }
+
+  .carousel_text.carousel_text {
+    font-size: 0.7em !important;
+    margin-top: 70px;
+  }
+
+  .centered_carousel_link.centered_carousel_link {
+    font-size: 0.7em;
+    margin-top: 40px;
+  }
+}
+
+.Background {
+  background-image: url("../static/homepage/homepage_background.png");
+  background-size: cover;
+    width: 100vw;
+    height: 720px !important;
+    background-repeat: no-repeat;
+}
+
+.contain {
+  position: relative;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 1500px;
+  font-size: 16px;
+  text-align: center !important;
+}
+
+.market_beating {
+  color: #404040;
+  font-size: 2.5em;
+  font-family: Helvetica;
+  line-height: 1.2;
+}
+
+.lookup_form {
+  position: relative;
+  width: 600px !important;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.lookup_home {
+  background: rgba(254, 111, 125, 0.03);
+  font-family: ArialMT;
+  font-size: 1em;
+  height: 38px;
+  width: 100% !important;
+  border-color: #a2a2a2;
+  border-width: 2px;
+  border-radius: 4px;
+  left: 0;
+}
+
+.lookup_home:focus {
+  background: rgba(254, 111, 125, 0.03);
+  box-shadow: none;
+  border-color: rgba(254, 111, 125, 1);
+}
+
+.search {
+  font-size: 1.1em;
+  font-family: ArialMT;
+  width: 120px;
+  height: 38px;
+  box-shadow: none !important;
+  background-color: rgba(254, 111, 125, 0.9);
+  color: #fff;
+  padding: 0.3px 1px 0.3px 1px;
+  border-radius: 4px;
+  border: none;
+  position: absolute;
+  right: 0;
+  z-index: 2;
+}
+
+.search:focus {
+  outline: none;
+}
+
+.carousel_text {
+  color: #464545;
+  font-size: 0.85em;
+  font-family: ArialMT;
+  margin: 0 auto;
+  margin-top: 60px;
+}
+
+.centered_carousel_link {
+  color: #fe6f7d;
+  font-size: 0.65em;
+  font-family: ArialMT;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+.centered_carousel_link:hover {
+  color: #fe6f7d;
+}
+
+
+
+
+
+
+/* 2nd section */
+@media(max-width: 600px) {
+  .inside_db_container.inside_db_container {
+    height: 600px;
+  }
+
+  .box {
+    display: none;
+  }
+
+  .box_text {
+    display: none;
+  }
+
+  .lower_left_design {
+    display: none;
+  }
+
+  .inside_db.inside_db.inside_db.inside_db {
+    top: 48%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+
+  .so_far_text.so_far_text.so_far_text {
+    font-size: 1.2em;
+    margin-left: 20px;
+  }
+
+  .stats.stats {
+    margin-left: 0px;
+    position: relative;
+    left: 31%;
+  }
+
+  .securities_stats.securities_stats {
+    margin-left: 5px !important;
+  }
+
+  .hedgefund_stats.hedgefund_stats.hedgefund_stats {
+    margin-left: 10px !important;
+  }
+
+  .filer_stat_type.filer_stat_type {
+    margin-left: 5px !important;
+  }
+
+  .security_stat_type.security_stat_type {
+    margin-left: 7px !important;
+  }
+
+  .fund_stat_type.fund_stat_type.fund_stat_type{
+    margin-left: -14px !important;
+  }
+}
+
+@media(max-width: 500px) {
+  
+  .filer_stat_type.filer_stat_type.filer_stat_type.filer_stat_type {
+    margin-left: 15px !important;
+  }
+
+  .security_stat_type.security_stat_type.security_stat_type.security_stat_type {
+    margin-left: 9px !important;
+  }
+
+  .fund_stat_type.fund_stat_type.fund_stat_type.fund_stat_type {
+    margin-left: 1px !important;
+  }
+}
+
+@media (max-width: 770px) {
+  .right_design.right_design {
+    display: none;
+  }
+
+  .inside_db.inside_db.inside_db {
+    top: 55%;
+    left: 75%;
+    width: 90%;
+  }
+
+  .so_far_text.so_far_text {
+    margin-bottom: -100px;
+  }
+
+  .stats {
+    margin-left: 190px;
+  }
+
+  .filer_stats, .securities_stats, .hedgefund_stats {
+    margin-left: 0px !important;
+    margin-right: 300px !important;
+    text-align: center !important;
+    margin-top: 30px;
+  }
+
+  .filer_stat_type, .security_stat_type, .fund_stat_type {
+    margin-left: 0px !important;
+    margin-right: 300px !important;
+    text-align: center !important;
+  }
+
+  .filer_stat_type {
+    margin-top: -203px !important;
+    margin-left: 5px !important;
+  }
+
+  .security_stat_type {
+    margin-top: -100px !important;
+    margin-left: 5px !important;
+  }
+
+  .hedgefund_stats.hedgefund_stats {
+    margin-left: 5px !important;
+  }
+
+  .fund_stat_type {
+    margin-left: -15px !important;
+  }
+}
+
+@media (max-width: 1000px) {
+
+  .inside_db.inside_db {
+    top: 42%;
+    left: 63%;
+    width: 90%;
+  }
+
+  .so_far_text.so_far_text {
+    font-size: 1.6em;
+  }
+
+  .filer_stats, .securities_stats, .hedgefund_stats {
+    font-size: 3em !important;
+  }
+
+  .securities_stats.securities_stats, .hedgefund_stats.hedgefund_stats, .security_stat_type.security_stat_type, .fund_stat_type.fund_stat_type {
+    margin-left: 30px;
+  }
+
+  .stat_type_container {
+    margin-left: 0px !important;
+  }
+
+  .filer_stat_type, .security_stat_type, .fund_stat_type {
+    font-size: 0.7em !important;
+  }
+}
+
+@media (max-width: 1250px) {
+  .box {
+    height: 45px !important;
+    width: 115px !important;
+  }
+
+  .box_text.box_text {
+    margin-top: 175px;
+    margin-left: 85px;
+    font-size: 1.1em;
+  }
+
+  .lower_left_design {
+    margin-left: -258px !important;
+  }
+
+  .right_design {
+      margin-right: -290px !important;
+  }
+}
+
+.inside_db_container {
+  height: 700px;
+  background: white;
+  position: relative;
+  overflow: hidden !important;
+  object-fit: cover;
+}
+
+.inside_db {
+  position: relative;
+  top: 46%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 1500px;
+  font-size: 16px;
+}
+
+.so_far_text {
+  font-family: Arial-BoldMT;
+  line-height: 1.2;
+  color: #404040;
+  font-size: 2.1em;
+}
+
+.stat_container {
+  margin-top: 120px;
+}
+
+.filer_stats, .securities_stats, .hedgefund_stats {
+  font-family: Arial-BoldMT;
+  color: #404040;
+  font-size: 4.5em;
+}
+
+.stat_type_container {
+  margin-top: -15px;
+  margin-left: 5px;
+}
+
+.filer_stat_type, .security_stat_type, .fund_stat_type {
+  font-size: 1.1em;
+  font-family: ArialMT;
+  color: #404040;
+}
+
+.box {
+  height: 45px;
+  width: 155px;
+  background: #c8ddd6;
+  position: absolute;
+  margin-top: 170px;
+  z-index: 1;
+}
+
+.box_text {
+  width: 150px;
+  margin-top: 170px;
+  margin-left: 130px;
+  font-size: 1.2em;
+  font-family: ArialMT;
+  line-height: 1.2;
+  text-align: right;
+  position: absolute;
+}
+
+.lower_left_design {
+  margin-left: -218px;
+  margin-top: 145px;
+  position: absolute;
+}
+
+.right_design {
+  float: right;
+  margin-top: -320px;
+  margin-right: -280px;
+}
+
+
+
+
+
+/* 3rd Section */
+@media (max-width: 500px) {
+  .tab_content.tab_content.tab_content.tab_content {
+    font-size: 0.9em;
+    margin-left: 4em;
+    width: 12em;
+  }
+}
+
+@media (max-width: 700px) {
+  .container.container {
+    margin-left: 5px;
+  }
+
+  .know_more.know_more {
+    font-size: 1.7em;
+    margin-top: 80px;
+  }
+
+  .tabs_know_heading.tabs_know_heading {
+    font-size: 0.8em;
+  }
+
+  .tab_content.tab_content.tab_content {
+    font-size: 1.1em;
+    margin-left: 4em;
+    width: 16em;
+  }
+}
+
+@media (max-width: 1000px) {
+  .know_more_image {
+    display: none !important;
+  }
+
+  .tab_content.tab_content {
+    font-size: 1.05em;
+    margin-left: 130px;
+  }
+}
+
+@media (max-width: 1160px) {
+  .know_more_image {
+    width: 25% !important;
+    right: 30px !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .know_more_image.know_more_image {
+    width: 25% !important;
+  }
+}
+
+.know_more_container {
+  height: 700px;
+  position: relative;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.container {
+  position: absolute;
+  top: 40%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 1500px;
+  font-size: 16px;
+}
+
+.know_more {
+  font-size: 2.3em;
+  font-family: ArialMT;
+  line-height: 1.2;
+  margin-top: 100px;
+}
+
+.tabs_know {
+  margin-top: 35px;
+  line-height: 1.3;
+}
+
+.tabs_know_heading {
+  color: #7f7f7f !important;
+  font-size: 1.1em;
+  margin-top: 25px;
+  padding-left: 20px;
+  width: 10em;
+}
+
+.tabs_know_heading.active {
+  background: linear-gradient(
+    to right,
+    rgba(254, 111, 125, 0.9) 0%,
+    rgba(254, 111, 125, 0.9) 4.5px,
+    transparent 1px
+  );
+  color: #404040 !important;
+}
+
+.tab_content {
+  color: #7f7f7f;
+  font-size: 1.05em;
+  font-family: ArialMT;
+  line-height: 1.3;
+  margin-top: 60px;
+  margin-left: 60px;
+  position: absolute;
+  width: 23em;
+}
+
+.know_more_image {
+  width: 30%;
+  position: absolute;
+  right: 8%;
+  bottom: -34%;
+}
+
+
+
+
+
+/* 4th container */
+@media (max-width: 400px) {
+  .what_is_13f_content.what_is_13f_content.what_is_13f_content {
+    font-size: 0.75em;
+  }
+
+  .key_takeaways_content.key_takeaways_content.key_takeaways_content {
+    font-size: 0.75em;
+  }
+}
+
+@media (max-width: 485px) {
+  .what_is_13f_box.what_is_13f_box.what_is_13f_box.what_is_13f_box.what_is_13f_box.what_is_13f_box {
+    top: 50%;
+  }
+
+  .what_is_13f_content.what_is_13f_content {
+    font-size: 0.8em;
+  }
+
+  .key_takeaways_content.key_takeaways_content {
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 580px) {
+  .what_is_13f_box.what_is_13f_box.what_is_13f_box.what_is_13f_box.what_is_13f_box {
+    top: 48%;
+  }
+
+  .what_is_13F_container.what_is_13F_container {
+    height: 750px;
+  }
+}
+
+@media (max-width: 420px) {
+  .what_is_13f_box.what_is_13f_box.what_is_13f_box.what_is_13f_box {
+    top: 50%;
+  }
+}
+
+@media (max-width: 770px) {
+
+  .what_is_13f_box.what_is_13f_box.what_is_13f_box {
+    top: 46%;
+    left: 48%;
+  }
+
+  .what_is_13f_text.what_is_13f_text {
+    font-size: 1.8em !important;
+  }
+}
+
+@media (max-width: 1010px) {
+
+  .what_is_13f_box.what_is_13f_box {
+    top: 50%;
+  }
+
+  .lower_left_design_13f.lower_left_design_13f {
+    display: none;
+  }
+
+  .right_design_13f.right_design_13f {
+    display: none;
+  }
+
+  .box_13f.box_13f {
+    display: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  .right_design_13f.right_design_13f {
+    margin-right: -260px;
+  }
+}
+
+.what_is_13F_container {
+  height: 700px;
+  background: white;
+  position: relative;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.box_13f {
+  height: 12px;
+  width: 135px;
+  background: #89c7aa;
+  position: absolute;
+  margin-top: 240px;
+}
+
+.lower_left_design_13f {
+  margin-left: -235px;
+  margin-top: 250px;
+  z-index: -1;
+}
+
+.right_design_13f {
+  float: right;
+  margin-top: -140px;
+  margin-right: -230px;
+  z-index: -1;
+}
+
+.what_is_13f_box {
+  position: absolute;
+  top: 43%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 1500px;
+  font-size: 16px;
+  margin: 0 auto;
+}
+
+.what_is_13f_text {
+  font-family: Arial-BoldMT;
+  color: #404040;
+  font-size: 2.6em;
+}
+
+.key_takeaways_head {
+  font-family: ArialMT;
+  color: #fe6f7d;
+  font-size: 1.3em;
+}
+
+.what_is_13f_content {
+  font-family: SegoeUI;
+  color: #404040;
+  font-size: 0.9em;
+}
+
+.know_more_13f {
+  font-family: SegoeUI;
+  color: #fe6f7d;
+}
+
+.know_more_13f:hover {
+  color: #fe6f7d;
+}
+
+.arrow {
+  margin-left: 7px;
+}
+
+.key_takeaways_content {
+  font-family: SegoeUI;
+  color: #404040;
+  font-size: 0.9em;
+}
+
+
+
+
+
+
+
+/* 5th section */
+@media (max-width: 430px) {
+  .carousel_row.carousel_row.carousel_row {
+    margin-left: 20px !important;
+  }
+
+  .as_of_date.as_of_date.as_of_date.as_of_date {
+    margin-left: 55px;
+  }
+}
+
+@media (max-width: 576px) {
+  .popular_portfolio_container.popular_portfolio_container.popular_portfolio_container {
+    height: 760px !important;
+  }
+
+  .popular_portfolio_carousel_static.popular_portfolio_carousel_static.popular_portfolio_carousel_static {
+    height: 25%;
+  }
+
+  .popular_portfolio_on_mrktdb.popular_portfolio_on_mrktdb.popular_portfolio_on_mrktdb {
+    font-size: 1.7em;
+    margin-left: 40px;
+    margin-top: 60px;
+  }
+
+  .carousel_row.carousel_row {
+    margin-left: 30px !important;
+  }
+
+   .popular_portfolios.popular_portfolios {
+      height: 75% !important;
+   }
+
+   .as_of_date.as_of_date.as_of_date {
+    font-size: 0.7em;
+    margin-top: 500px;
+    margin-left: 60px;
+  }
+
+  .carousel-indicators.carousel-indicators.carousel-indicators {
+    display: none;
+  }
+
+  .carousel-control-next.carousel-control-next {
+    align-items: flex-end;
+    position: absolute;
+    right: 30px;
+    bottom: -115px;
+  }
+}
+
+@media (max-width: 670px) {
+  .portfolio_heading.portfolio_heading.portfolio_heading {
+    font-size: 1.55em;
+  }
+}
+
+@media (max-width: 1020px) {
+  .popular_portfolio_container.popular_portfolio_container {
+    height: 550px !important;
+  }
+
+  .popular_portfolio_carousel_static.popular_portfolio_carousel_static {
+    background: #262528;
+    height: 35%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .popular_portfolio_on_mrktdb.popular_portfolio_on_mrktdb {
+    font-size: 2em;
+    margin-left: 70px;
+    margin-top: 50px;
+  }
+
+  .know_about_top_hedge_funds {
+    display: none !important;
+  }
+
+  .portfolio_names {
+    display: none !important;
+  }
+
+  .portfolio_name {
+    display: none !important;
+  }
+
+  .more_portfolios_link {
+    display: none !important;
+  }
+
+  .popular_portfolios {
+    background: #e5e5e3;
+    height: 65% !important;
+    width: 100% !important;
+  }
+
+  .carousel_row {
+    margin-left: 60px !important;
+  }
+
+  .no_pad.no_pad {
+    margin-right: 0px !important;
+  }
+
+  .portfolio_heading.portfolio_heading {
+    font-size: 1.8em;
+    margin-top: 80px;
+    line-height: 1.2;
+  }
+
+  .as_of_date.as_of_date {
+    font-size: 0.7em;
+    margin-top: 260px;
+    margin-left: 90px;
+  }
+
+  .portfolio_value_head {
+    display: none !important;
+  }
+
+  .portfolio_value {
+    display: none !important;
+  }
+
+  .portfolio_value_number {
+    display: none !important;
+  }
+
+  .top_holdings_text {
+    display: none !important;
+  }
+
+  .top_holding_symbol_1 {
+    display: none !important;
+  }
+
+  .top_holding_symbol {
+    display: none !important;
+  }
+
+  .top_holding_name {
+    display: none !important;
+  }
+
+  .carousel-indicators.carousel-indicators {
+    left: 0px;
+    bottom: -130px;
+  }
+
+  .carousel-control-next {
+    align-items: flex-end;
+  }
+}
+
+.popular_portfolio_container {
+  height: 670px;
+  object-fit: cover;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.bg_color_large_screen {
+  width: 100%;
+  background: linear-gradient(to right, #262528 50%, #e5e5e3 50%);
+}
+
+.popular_portfolio_carousel_static {
+  background: #262528;
+  height: 670px;
+  width: 25%;
+  float: left;
+  object-fit: cover;
+}
+
+.popular_portfolio_on_mrktdb {
+  color: #fff;
+  font-size: 2em;
+  font-family: ArialMT;
+  line-height: 1.3;
+  margin-top: 80px;
+}
+
+.know_about_top_hedge_funds {
+  color: #e5e5e3;
+  font-size: 1.2em;
+  font-family: ArialMT;
+  line-height: 1.4;
+}
+
+.portfolio_name {
+  color: #b3b2b1;
+  font-size: 1em;
+  font-family: ArialMT;
+}
+
+.more_portfolios_link {
+  color: #b3b2b1;
+  font-size: 0.9em;
+  font-family: ArialMT;
+}
+
+.popular_portfolios {
+  background: #e5e5e3;
+  height: 670px;
+  width: 75%;
+  float: right;
+}
+
+.as_of_date {
+  color: #484848;
+  font-size: 0.7em;
+  font-family: ArialMT;
+  margin-top: 600px;
+  position: absolute;
+  margin-left: 90px;
+}
+
+.carousel_row {
+  margin-left: 60px;
+}
+
+.portfolio_heading {
+  color: #404040;
+  font-size: 2.2em;
+  font-family: Arial-BoldMT;
+  margin-top: 80px;
+  line-height: 1.2;
+}
+
+.portfolio_value_head {
+  color: #484848;
+  font-size: 0.9em;
+  font-family: Arial-BoldMT;
+  margin-top: 40px;
+}
+
+.portfolio_value {
+  color: #484848;
+  font-size: 0.9em;
+  font-family: Arial-BoldMT;
+}
+
+.portfolio_value_number {
+  color: #484848;
+  font-size: 1em;
+  font-family: ArialMT;
+}
+
+.top_holdings_text {
+  color: #484848;
+  font-size: 1.1em;
+  font-family: Arial-BoldMT;
+  margin-top: 50px;
+}
+
+.top_holding_symbol_1 {
+  color: #484848;
+  font-size: 1em;
+  font-family: Arial-BoldMT;
+  margin-top: 30px;
+}
+
+.top_holding_symbol {
+  color: #484848;
+  font-size: 0.9em;
+  font-family: Arial-BoldMT;
+  margin-top: 10px;
+}
+
+.top_holding_name {
+  color: #484848;
+  font-size: 0.9em;
+  font-family: ArialMT;
+  margin-left: 15px;
+}
+
+.carousel-indicators li {
+  width: 7px;
+  height: 7px;
+  border-radius: 99%;
+}
+
+.carousel-indicators {
+  align-items: flex-end;
+  left: -1500px;
+  bottom: -130px;
+}
+
+.carousel-control-next-icon {
+  background-image: url("../static/homepage/right-arrow.png");
+  height: 40px;
+  width: 40px;
+}
+
+.carousel-control-next {
+  align-items: flex-end;
+  bottom: -120px;
+}
+
+
+
+
+
+/* 6th section */
+@media (max-width: 472px) {
+  .get_started_box.get_started_box.get_started_box.get_started_box {
+    height: 460px;
+  }
+
+  .exclusive_insights_text.exclusive_insights_text.exclusive_insights_text.exclusive_insights_text.exclusive_insights_text {
+    margin-left: 30px;
+  }
+
+  .sign_up_personalized.sign_up_personalized.sign_up_personalized {
+    margin-left: 30px;
+  }
+
+  .get_started_btn.get_started_btn.get_started_btn {
+    margin-left: 30px;
+  }
+}
+
+@media (max-width: 675px) {
+  .get_started_box.get_started_box.get_started_box {
+    height: 420px;
+  }
+
+  .exclusive_insights_text.exclusive_insights_text.exclusive_insights_text.exclusive_insights_text {
+    margin-left: 40px;
+  }
+
+  .sign_up_personalized.sign_up_personalized {
+    margin-left: 40px;
+  }
+
+  .get_started_btn.get_started_btn {
+    margin-top: 40px;
+    margin-left: 40px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .platforms_img.platforms_img {
+    display: none;
+  }
+
+  .get_started_container.get_started_container {
+    height: 620px;
+  }
+
+  .get_started_box.get_started_box.get_started_box {
+    top: 50%;
+  }
+}
+
+@media (max-width: 1130px) {
+  .exclusive_insights_text.exclusive_insights_text.exclusive_insights_text {
+    font-size: 1.3em;
+  }
+}
+
+@media (max-width: 1300px) {
+  .platforms_img.platforms_img {
+    margin-top: -120px;
+    margin-left: 35vw;
+    width: 450px;
+  }
+
+  .get_started_box.get_started_box {
+    background: #fcf4eb;
+    text-align: center;
+    width: 82vw;
+    height: 380px;
+    left: 50%;
+    top: 42%;
+    position: relative;
+    border-radius: 1%;
+  }
+
+  .exclusive_insights_text.exclusive_insights_text {
+    font-size: 1.5em;
+  }
+
+  .sign_up_personalized.sign_up_personalized {
+    font-size: 0.9em;
+  }
+}
+
+.get_started_container {
+  height: 900px;
+  background: white;
+  object-fit: cover;
+}
+
+.get_started_box {
+  background: #fcf4eb;
+  text-align: center;
+  width: 1200px;
+  height: 380px;
+  left: 50%;
+  top: 42%;
+  position: relative;
+  transform: translate(-50%, -50%);
+  border-radius: 1%;
+}
+
+.exclusive_insights_text {
+  color: #404040;
+  font-size: 1.55em;
+  font-family: ArialMT;
+  text-align: left;
+  margin-top: 60px;
+  margin-left: 60px;
+}
+
+.sign_up_personalized {
+  color: #262528;
+  font-size: 1em;
+  font-family: ArialMT;
+  margin-top: 80px;
+  margin-left: 60px;
+  text-align: left;
+}
+
+.get_started_btn {
+  margin-top: 30px;
+  margin-left: 60px;
+  background-color: rgba(254, 111, 125, 1);
+  color: white;
+  font-family: OpenSans-SemiBold;
+  border: none;
+  border-radius: 30px;
+  outline: none !important;
+  cursor: pointer;
+  text-align: center;
+  height: 50px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.get_started_text {
+  font-size: 1.1em;
+}
+
+.get_started_btn:hover {
+  box-shadow: 0 0 10px rgba(33, 33, 33, 0.2);
+  background-color: rgba(254, 111, 125, 1) !important;
+  color: white;
+}
+
+.get_started_btn span {
+  flex-shrink: 0;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.get_started_btn span:after {
+  content: "\21E8";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.get_started_btn:hover span {
+  padding-right: 25px;
+}
+
+.get_started_btn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.platforms_img {
+  margin-top: -190px;
+  margin-left: 500px;
+  width: 600px;
+}

@@ -4,6 +4,10 @@ from edgar.models import QuarterlyHolding, Filer
 class QuarterlyFilerView(models.Model):
     filerId = models.ForeignKey(Filer, on_delete=models.CASCADE)
     quarterId = models.ForeignKey(QuarterlyHolding, on_delete=models.CASCADE)
+    filerName = models.TextField(blank=True)
+    cik = models.IntegerField(blank=True)
+    filerType = models.TextField(blank=True)
+    marketValue = models.FloatField(blank=True)
     previousMarketValue = models.FloatField(blank=True)
     previousHoldingsCount = models.FloatField(blank=True)
     newHoldingsCount = models.FloatField(blank=True)

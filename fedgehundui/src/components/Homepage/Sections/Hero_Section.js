@@ -89,20 +89,20 @@ const SearchbarDropdown = (props) => {
 		if (document.getElementById('btnGroupDrop1').innerHTML === 'All Categories') {
 			if (Object.values(props.searchData.company_data).filter(company => company.name.toUpperCase() === curr_value.toUpperCase()).length != 0) {
 				const cik = Object.values(props.searchData.company_data).filter(company => company.name.toUpperCase() === curr_value.toUpperCase()).map((company) => company.cik);
-				window.location.replace("http://127.0.0.1:8000/api/company/" + cik[0]);
+				window.location.replace("http://www.mrktdb.com/api/company/" + cik[0]);
 			}
 			else {
 				const sec_name = Object.values(props.searchData.security_data).filter(security => security.securityName.toUpperCase() === curr_value.toUpperCase()).map((security) => security.securityName);
-				window.location.replace("http://127.0.0.1:8000/api/security/" + sec_name[0]);
+				window.location.replace("http://www.mrktdb.com/api/security/" + sec_name[0]);
 			}
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Stocks') {
 			const sec_name = Object.values(props.searchData.security_data).filter(security => security.securityName.toUpperCase() === curr_value.toUpperCase()).map((security) => security.securityName);
-			window.location.replace("http://127.0.0.1:8000/api/security/" + sec_name[0]);
+			window.location.replace("http://www.mrktdb.com/api/security/" + sec_name[0]);
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Filers') {
 			const cik = Object.values(props.searchData.company_data).filter(company => company.name.toUpperCase() === curr_value.toUpperCase()).map((company) => company.cik);
-			window.location.replace("http://127.0.0.1:8000/api/company/" + cik[0]);
+			window.location.replace("http://www.mrktdb.com/api/company/" + cik[0]);
 		}
 	}
 

@@ -1,14 +1,31 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-const securityNames = [];
-const companyNames = [];
+var securityNames = [];
+var companyNames = [];
 var all_items = [];
 
-const SearchbarDropdown = () => {
+
+const SearchbarDropdown = (props) => {
+	const searchData = { props };
 	const ulRef = useRef();
 	const inputRef = useRef();
 	const [options, setOptions] = useState([]);
+
+	useEffect(() => {
+		inputRef.current.addEventListener('click', (event) => {
+			event.stopPropagation();
+			ulRef.current.style.display = 'flex';
+			onInputChange(event);
+		});
+
+		document.addEventListener('click', (event) => {
+			ulRef.current.style.display = 'none';
+		});
+
+		document.getElementById('results').style.display = 'none';
+	}, []);
 
 
 	const onInputChange = (event) => {
@@ -30,40 +47,30 @@ const SearchbarDropdown = () => {
 	}
 
 
-	useEffect(() => {
-		inputRef.current.addEventListener('click', (event) => {
-			event.stopPropagation();
-			ulRef.current.style.display = 'flex';
-			onInputChange(event);
-		});
-
-		document.addEventListener('click', (event) => {
-			ulRef.current.style.display = 'none';
-		});
-
-		document.getElementById('results').style.display = 'none';
-	}, []);
-
-
 	let results;
 	if (options.length) {
+
 		results = (
 			<ul id="results" className="list-group" ref={ulRef}>
 				{options.slice(0, 7).map((option, index) => {
 					return (
-						<button
-							type="button"
-							key={index}
-							onClick={(e) => {
-								inputRef.current.value = option;
-							}}
-							className="list-group-item list-group-item-action"
-						>
-							{option}
-						</button>
+						<a key={index}>
+							<button
+								type="button"
+								key={index}
+								onClick={(e) => {
+									inputRef.current.value = option;
+									search_db(inputRef.current.value, searchData);
+								}}
+								className="list-group-item list-group-item-action"
+							>
+								{option}
+							</button>
+						</a>
 					);
-				})}
-			</ul>
+				})
+				}
+			</ul >
 		)
 	} else {
 		results = (
@@ -78,8 +85,29 @@ const SearchbarDropdown = () => {
 		document.getElementById('btnGroupDrop1').innerHTML = event.target.innerHTML;
 	}
 
+	const search_db = (curr_value, searchData) => {
+		if (document.getElementById('btnGroupDrop1').innerHTML === 'All Categories') {
+			if (Object.values(props.searchData.company_data).filter(company => company.name.toUpperCase() === curr_value.toUpperCase()).length != 0) {
+				const cik = Object.values(props.searchData.company_data).filter(company => company.name.toUpperCase() === curr_value.toUpperCase()).map((company) => company.cik);
+				window.location.replace("http://127.0.0.1:8000/api/company/" + cik[0]);
+			}
+			else {
+				const sec_name = Object.values(props.searchData.security_data).filter(security => security.securityName.toUpperCase() === curr_value.toUpperCase()).map((security) => security.securityName);
+				window.location.replace("http://127.0.0.1:8000/api/security/" + sec_name[0]);
+			}
+		}
+		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Stocks') {
+			const sec_name = Object.values(props.searchData.security_data).filter(security => security.securityName.toUpperCase() === curr_value.toUpperCase()).map((security) => security.securityName);
+			window.location.replace("http://127.0.0.1:8000/api/security/" + sec_name[0]);
+		}
+		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Filers') {
+			const cik = Object.values(props.searchData.company_data).filter(company => company.name.toUpperCase() === curr_value.toUpperCase()).map((company) => company.cik);
+			window.location.replace("http://127.0.0.1:8000/api/company/" + cik[0]);
+		}
+	}
+
 	return (
-		<form className="form-inline centered_form">
+		<form className="form-inline centered_form" onSubmit={search_db}>
 			<div className="lookup_form">
 
 				<input className="form-control lookup_home" placeholder="Fund / Stock Lookup" onChange={onInputChange} ref={inputRef} />
@@ -89,7 +117,7 @@ const SearchbarDropdown = () => {
 				<div className="btn-group search_btns" role="group" aria-label="Button group with nested dropdown">
 					<div className="btn-group" role="group">
 						<button id="btnGroupDrop1" type="button" className="dropdown-toggle search_type_button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => { e.preventDefault(); }}>
-							All Categories
+							Stocks
     					</button>
 						<ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
 							<li><a className="dropdown-item" href="#" onClick={changeCategory}>All Categories</a></li>
@@ -129,8 +157,10 @@ function Hero_Section() {
 	Object.values(searchData.security_data).map(security => securityNames.push(security.securityName));
 	Object.values(searchData.company_data).map(company => companyNames.push(company.name.toUpperCase()));
 
-	all_items = [...companyNames, ...securityNames];
+	console.log(securityNames);
+	console.log(companyNames);
 
+	all_items = [...companyNames, ...securityNames];
 
 	return (
 		<Fragment>
@@ -141,7 +171,7 @@ function Hero_Section() {
 						<div className="market_beating centered col-md-12">Find the next Market-Beating Portfolio</div>
 					</div>
 					<div className="">
-						< SearchbarDropdown />
+						< SearchbarDropdown searchData={searchData} />
 					</div>
 					<div className="row">
 						<div className="col-xs-10 carousel_text col-md-7">MrktDB provides exclusive investment insights by giving you a sneak peek into the portfolio of world's most successful investors. Market Research is expensive, don't let that hold you back!</div>

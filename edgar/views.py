@@ -9,6 +9,7 @@ class CompanyList(generics.ListCreateAPIView):
 
 class CompanyDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Company.objects.all()
+    lookup_field = 'cik'
     serializer_class = CompanySerializer
 
 class FilerList(generics.ListCreateAPIView):
@@ -34,6 +35,7 @@ class SecurityList(generics.ListCreateAPIView):
 
 class SecurityDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Security.objects.all()
+    lookup_field = 'securityName'
     serializer_class = SecuritySerializer
 
 class QuarterlyOtherManagerList(generics.ListCreateAPIView):

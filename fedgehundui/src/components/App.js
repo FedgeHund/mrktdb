@@ -6,23 +6,27 @@ import Homepage from './Homepage/Homepage';
 import ContactUs from './ContactUs/ContactUs';
 import FAQ from './FAQ/FAQ';
 import Stock from './Stock/Stock';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import '../../templates/fedgehundui/global.css';
 // file deepcode ignore no-mixed-spaces-and-tabskey: "value", 
 // file deepcode ignore no-mixed-spaces-and-tabs: "Tabs and space"
 
 class App extends Component {
   render() {
+
+    const pathname = window.location.pathname;
+
     return (
       <Fragment>
         <Router>
           <Switch>
+            <Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} />
             <Route path="/" exact component={() => <Homepage />} />
             <Route path="/signup" exact component={() => <UserForm />} />
             <Route path="/signin" exact component={() => <Signin />} />
             <Route path="/contactus" exact component={() => <ContactUs />} />
             <Route path="/faq" exact component={() => <FAQ />} />
-            <Route path="/stock/:securityName" exact component={() => <Stock />} />
+            <Route path="/stock/:securityName" render={(props) => <Stock {...props} />} />
           </Switch>
         </Router>
       </Fragment>

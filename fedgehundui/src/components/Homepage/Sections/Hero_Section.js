@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router'
 import { BrowserRouter as Router, Route, Switch, Link, useHistory } from "react-router-dom";
 
 var securityNames = [];
@@ -96,13 +97,23 @@ const SearchbarDropdown = (props) => {
 			}
 			else {
 				const sec_name = Object.values(props.searchData.security_data).filter(security => security.securityName.toUpperCase() === curr_value.toUpperCase()).map((security) => security.securityName);
-				window.location.replace("http://www.mrktdb.com/api/security/" + sec_name[0]);
+				history.push(
+					{
+						pathname: `/stock/${sec_name[0]}`,
+						state: { SecName: sec_name[0] },
+					}
+				);
 			}
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Stocks') {
 			const sec_name = Object.values(props.searchData.security_data).filter(security => security.securityName.toUpperCase() === curr_value.toUpperCase()).map((security) => security.securityName);
-			window.location.replace("http://www.mrktdb.com/api/security/" + sec_name[0]);
-			//history.push('/api/security');
+			//window.location.replace("http://www.mrktdb.com/api/security/" + sec_name[0]);
+			history.push(
+				{
+					pathname: `/stock/${sec_name[0]}`,
+					state: { SecName: sec_name[0] },
+				}
+			);
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Filers') {
 			const cik = Object.values(props.searchData.company_data).filter(company => company.name.toUpperCase() === curr_value.toUpperCase()).map((company) => company.cik);
@@ -121,7 +132,7 @@ const SearchbarDropdown = (props) => {
 				<div className="btn-group search_btns" role="group" aria-label="Button group with nested dropdown">
 					<div className="btn-group" role="group">
 						<button id="btnGroupDrop1" type="button" className="dropdown-toggle search_type_button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => { e.preventDefault(); }}>
-							Stocks
+							All Categories
     					</button>
 						<ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
 							<li><a className="dropdown-item" href="#" onClick={changeCategory}>All Categories</a></li>
@@ -190,4 +201,4 @@ function Hero_Section() {
 	);
 }
 
-export default Hero_Section;
+export default withRouter(Hero_Section);

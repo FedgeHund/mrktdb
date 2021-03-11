@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link, useHistory } from "react-router-dom";
 
 var securityNames = [];
 var companyNames = [];
@@ -12,6 +12,7 @@ const SearchbarDropdown = (props) => {
 	const ulRef = useRef();
 	const inputRef = useRef();
 	const [options, setOptions] = useState([]);
+	const history = useHistory();
 
 	useEffect(() => {
 		inputRef.current.addEventListener('click', (event) => {
@@ -21,7 +22,9 @@ const SearchbarDropdown = (props) => {
 		});
 
 		document.addEventListener('click', (event) => {
-			ulRef.current.style.display = 'none';
+			if (ulRef.current != null) {
+				ulRef.current.style.display = 'none';
+			}
 		});
 
 		document.getElementById('results').style.display = 'none';
@@ -99,6 +102,7 @@ const SearchbarDropdown = (props) => {
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Stocks') {
 			const sec_name = Object.values(props.searchData.security_data).filter(security => security.securityName.toUpperCase() === curr_value.toUpperCase()).map((security) => security.securityName);
 			window.location.replace("http://www.mrktdb.com/api/security/" + sec_name[0]);
+			//history.push('/api/security');
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Filers') {
 			const cik = Object.values(props.searchData.company_data).filter(company => company.name.toUpperCase() === curr_value.toUpperCase()).map((company) => company.cik);

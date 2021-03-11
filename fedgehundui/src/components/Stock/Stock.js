@@ -35,7 +35,7 @@ function Stock(props) {
                 <div className="security">
                     <div className="row">
                         <div className="security_heading col-6">{securityData ? securityData.securityName : null}</div>
-                        <div className="security_cusip col-5">Cusip: {securityData ? securityData.cusip : null}</div>
+                        <div className="security_toc col-5">TOC: {securityData ? securityData.titleOfClass : null}</div>
                     </div>
                     <div className="security_type">{securityData ? securityData.securityType : null}</div>
                 </div>

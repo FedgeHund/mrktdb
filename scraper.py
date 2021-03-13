@@ -398,10 +398,15 @@ class HoldingsScraper:
             coverPageData.append(d2)
             address=d2['filingManager_address1_street1']+', '+d2['filingManager_address3_city']+', '+d2['filingManager_address4_state-or-country']+', '+d2['filingManager_address5_zipCode']
             try:
-                Company.objects.get_or_create(name=d2['filing_manager_name'].lower(),address=address.lower(),companyType='HF',cik=self.cik)
-            except:
-                print("caught exception while creating Company object")
-                pass
+                companyobj = Company.objects.get(cik=self.cik)
+            except Company.DoesNotExist:
+                companyobj = Company(name=d2['filing_manager_name'].lower(),address=address.lower(),companyType='HF',cik=self.cik)
+                companyobj.save()
+            # try:
+            #     Company.objects.get_or_create(name=d2['filing_manager_name'].lower(),address=address.lower(),companyType='HF',cik=self.cik)
+            # except:
+            #     print("caught exception while creating Company object")
+            #     pass
             filenumber=''
             if(d2['form13FFileNumber'][0]=='0'):
                 filenumber=d2['form13FFileNumber']

@@ -4,6 +4,9 @@ from edgar.models import QuarterlyHolding, Security
 class Position(models.Model):
     securityId = models.ForeignKey(Security, on_delete=models.CASCADE)
     quarterId = models.ForeignKey(QuarterlyHolding, on_delete=models.CASCADE, related_name='quarter_Id')
+    quarter = models.IntegerField(blank=True)
+    securityName = models.TextField(blank=True)
+    filerName = models.TextField(blank=True)
     quarterFirstOwned = models.ForeignKey(QuarterlyHolding, on_delete=models.CASCADE, related_name='quarterFirstOwned_Id')
     investmentDiscretion = models.TextField(blank=True)
     quantity = models.FloatField(blank=True)

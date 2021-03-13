@@ -5,15 +5,10 @@ import { BrowserRouter as Router, Route, Switch, Link, useHistory } from "react-
 
 var securityNames = [];
 var companyNames = [];
-var all_items = [];
-
+var default_items = ["BERKSHIRE HATHAWAY INC", "BLACKROCK INC.", "AMAZON COM INC", "WAL MART STORES INC", "COCA COLA CO", "APPLE INC", "BRIDGEWATER ASSOCIATES, LP"];
+var all_items = []
 
 const SearchbarDropdown = (props) => {
-	const searchData = { props };
-	const ulRef = useRef();
-	const inputRef = useRef();
-	const [options, setOptions] = useState([]);
-	const history = useHistory();
 
 	useEffect(() => {
 		inputRef.current.addEventListener('click', (event) => {
@@ -32,28 +27,14 @@ const SearchbarDropdown = (props) => {
 	}, []);
 
 
-	const onInputChange = (event) => {
-		if (document.getElementById('btnGroupDrop1').innerHTML === 'All Categories') {
-			setOptions(
-				all_items.filter((option) => option.includes(event.target.value.toUpperCase()))
-			);
-		}
-		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Stocks') {
-			setOptions(
-				securityNames.filter((option) => option.includes(event.target.value.toUpperCase()))
-			);
-		}
-		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Filers') {
-			setOptions(
-				companyNames.filter((option) => option.includes(event.target.value.toUpperCase()))
-			);
-		}
-	}
-
-
+	const searchData = { props };
+	const ulRef = useRef();
+	const inputRef = useRef();
+	const [options, setOptions] = useState([]);
+	const history = useHistory();
 	let results;
-	if (options.length) {
 
+	if (options.length) {
 		results = (
 			<ul id="results" className="list-group" ref={ulRef}>
 				{options.slice(0, 7).map((option, index) => {
@@ -84,16 +65,42 @@ const SearchbarDropdown = (props) => {
 		)
 	}
 
+
+	const onInputChange = (event) => {
+		if (document.getElementById('btnGroupDrop1').innerHTML === 'All Categories') {
+			setOptions(
+				all_items.filter((option) => option.includes(event.target.value.toUpperCase()))
+			);
+		}
+		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Stocks') {
+			setOptions(
+				securityNames.filter((option) => option.includes(event.target.value.toUpperCase()))
+			);
+		}
+		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Filers') {
+			setOptions(
+				companyNames.filter((option) => option.includes(event.target.value.toUpperCase()))
+			);
+		}
+	}
+
+
 	const changeCategory = (event) => {
 		event.preventDefault();
 		document.getElementById('btnGroupDrop1').innerHTML = event.target.innerHTML;
 	}
 
+
 	const search_db = (curr_value, searchData) => {
 		if (document.getElementById('btnGroupDrop1').innerHTML === 'All Categories') {
 			if (Object.values(props.searchData.company_data).filter(company => company.name.toUpperCase() === curr_value.toUpperCase()).length != 0) {
 				const cik = Object.values(props.searchData.company_data).filter(company => company.name.toUpperCase() === curr_value.toUpperCase()).map((company) => company.cik);
-				window.location.replace("http://www.mrktdb.com/api/company/" + cik[0]);
+				history.push(
+					{
+						pathname: `/filer/${cik[0]}`,
+						state: { cik: cik[0] },
+					}
+				);
 			}
 			else {
 				const sec_name = Object.values(props.searchData.security_data).filter(security => security.securityName.toUpperCase() === curr_value.toUpperCase()).map((security) => security.securityName);
@@ -117,9 +124,15 @@ const SearchbarDropdown = (props) => {
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Filers') {
 			const cik = Object.values(props.searchData.company_data).filter(company => company.name.toUpperCase() === curr_value.toUpperCase()).map((company) => company.cik);
-			window.location.replace("http://www.mrktdb.com/api/company/" + cik[0]);
+			history.push(
+				{
+					pathname: `/filer/${cik[0]}`,
+					state: { cik: cik[0] },
+				}
+			);
 		}
 	}
+
 
 	return (
 		<form className="form-inline centered_form" onSubmit={search_db}>
@@ -132,7 +145,7 @@ const SearchbarDropdown = (props) => {
 				<div className="btn-group search_btns" role="group" aria-label="Button group with nested dropdown">
 					<div className="btn-group" role="group">
 						<button id="btnGroupDrop1" type="button" className="dropdown-toggle search_type_button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => { e.preventDefault(); }}>
-							Stocks
+							Filers
     					</button>
 						<ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
 							<li><a className="dropdown-item" href="#" onClick={changeCategory}>All Categories</a></li>
@@ -175,7 +188,7 @@ function Hero_Section() {
 	console.log(securityNames);
 	console.log(companyNames);
 
-	all_items = [...companyNames, ...securityNames];
+	all_items = [...default_items, ...companyNames, ...securityNames];
 
 	return (
 		<Fragment>

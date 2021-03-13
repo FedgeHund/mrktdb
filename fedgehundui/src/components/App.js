@@ -6,6 +6,7 @@ import Homepage from './Homepage/Homepage';
 import ContactUs from './ContactUs/ContactUs';
 import FAQ from './FAQ/FAQ';
 import Stock from './Stock/Stock';
+import Filer from './Filer/Filer';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import '../../templates/fedgehundui/global.css';
 // file deepcode ignore no-mixed-spaces-and-tabskey: "value", 
@@ -27,6 +28,7 @@ class App extends Component {
             <Route path="/contactus" exact component={() => <ContactUs />} />
             <Route path="/faq" exact component={() => <FAQ />} />
             <Route path="/stock/:securityName" render={(props) => <Stock {...props} />} />
+            <Route path="/filer/:cik" render={(props) => <Filer {...props} />} />
           </Switch>
         </Router>
       </Fragment>

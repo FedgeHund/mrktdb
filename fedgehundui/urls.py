@@ -8,4 +8,5 @@ urlpatterns = [
 	path('contactus/', views.index),
 	path('faq/', views.index),
 	path('stock/<securityName>/', views.index),
+	path('filer/<cik>/', views.index),
 ]

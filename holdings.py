@@ -7,7 +7,7 @@ django.setup()
 from next_prev import next_in_order, prev_in_order
 from edgar.models import Company, QuarterlyHolding, QuarterlyOtherManagerDistribution, QuarterlySecurityHolding, QuarterlyOtherManager, Filer, Security
 from holdings.models import Position
-
+from security.models import Price
 companies = filers = quarterlyholdings = securities = quarterlyothermanagerdistributions = quarterlysecurityholdings = quarterlysecurityholdings_all = quarterlyothermanagers = []
 companies = Company.objects.all()
 filers = Filer.objects.all()
@@ -100,10 +100,18 @@ for filer in filers:
             except:
                 print("No prev quarter")
                 pass
-
+            price = None
+            
+            try:
+                if(Price.objects.filter(name=security_id.securityName,quarter=quarterlyholding.quarter).first()):
+                    price = Price.objects.filter(name=security_id.securityName,quarter=quarterlyholding.quarter).first().value
+                    print(price)
+            except:
+                print('price for security not available')
+                pass
             if(qtr_first_owned!=None):
-                position = Position(quarter=quarterlyholding.quarter,securityName=security_id.securityName,filerName=quarterlyholding.filer_id.company_id.name,securityId=security_id,quarterId=quarterlyholding,investmentDiscretion=quarterlysecurityholding.investmentDiscretion,marketValue=quarterlysecurityholding.marketvalue,quantity=quarterlysecurityholding.quantity, weightPercent=weight_percent, changeInShares = change_in_shares, positionType = position_type, previousWeightPercent = previous_weight_percent, changeInPositionPercent = position_change, sourceType = filer.fileType, sourcedOn=quarterlyholding.filedOn, quarterFirstOwned=qtr_first_owned)
+                position = Position(lastPrice=price,quarter=quarterlyholding.quarter,securityName=security_id.securityName,filerName=quarterlyholding.filerId.companyId.name,securityId=security_id,quarterId=quarterlyholding,investmentDiscretion=quarterlysecurityholding.investmentDiscretion,marketValue=quarterlysecurityholding.marketvalue,quantity=quarterlysecurityholding.quantity, weightPercent=weight_percent, changeInShares = change_in_shares, positionType = position_type, previousWeightPercent = previous_weight_percent, changeInPositionPercent = position_change, sourceType = filer.fileType, sourcedOn=quarterlyholding.filedOn, quarterFirstOwned=qtr_first_owned)
             else:
-                position = Position(quarter=quarterlyholding.quarter,securityName=security_id.securityName,filerName=quarterlyholding.filer_id.company_id.name,securityId=security_id,quarterId=quarterlyholding,investmentDiscretion=quarterlysecurityholding.investmentDiscretion,marketValue=quarterlysecurityholding.marketvalue,quantity=quarterlysecurityholding.quantity, weightPercent=weight_percent, changeInShares = change_in_shares, positionType = position_type, previousWeightPercent = previous_weight_percent, changeInPositionPercent = position_change, sourceType = filer.fileType, sourcedOn=quarterlyholding.filedOn)
+                position = Position(lastPrice=price,quarter=quarterlyholding.quarter,securityName=security_id.securityName,filerName=quarterlyholding.filerId.companyId.name,securityId=security_id,quarterId=quarterlyholding,investmentDiscretion=quarterlysecurityholding.investmentDiscretion,marketValue=quarterlysecurityholding.marketvalue,quantity=quarterlysecurityholding.quantity, weightPercent=weight_percent, changeInShares = change_in_shares, positionType = position_type, previousWeightPercent = previous_weight_percent, changeInPositionPercent = position_change, sourceType = filer.fileType, sourcedOn=quarterlyholding.filedOn)
             position.save()
 

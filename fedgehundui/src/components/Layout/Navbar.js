@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../../../styles/navbar.css';
 import logo from '../../../static/homepage/logo.png';
 // file deepcode ignore no-mixed-spaces-and-tabs:
@@ -21,8 +22,8 @@ function Navbar() {
 		<Fragment>
 			<nav className={navbar ? 'navbar active fixed-top' : 'navbar fixed-top'}>
 
-				<a href="/" className="offset-1"><img src={logo} alt="Logo" className="logo" /></a>
-				<a href="/" className="MrktDB mr-auto">MrktDB</a>
+				<Link to={"/"} className="offset-1"><img src={logo} alt="Logo" className="logo" /></Link>
+				<Link to={"/"} className="MrktDB mr-auto">MrktDB</Link>
 
 				<form className="form-inline">
 					<div className="lookup_form_everywhere">

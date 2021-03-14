@@ -34,11 +34,13 @@ function FAQ() {
                                                 <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
                                             </svg>
                                         </div>
-                                    What is 13F?
+                                        What is Form 13F?
                                 </button>
                                 </h2>
                                 <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">The Securities and Exchange Commission's (SEC) form 13F is a quarterly report that is required to be filed by all institutional investment managers with at least $100 million in assets under management. It discloses their equity holdings and can provide some insights into what the smart money is doing in the market. However, studies have found that 13F filings also have serious flaws and can't be taken at face value.</div>
+                                    <div class="accordion-body">
+                                        The Securities and Exchange Commission's (SEC) form 13F is a quarterly report that is required to be filed by all institutional investment managers with at least $100 million in assets under management. It discloses their equity holdings and can provide some insights into what the smart money is doing in the market. However, studies have found that 13F filings also have serious flaws and can't be taken at face value.
+                                    </div>
                                 </div>
                             </div>
 
@@ -57,11 +59,13 @@ function FAQ() {
                                                 <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
                                             </svg>
                                         </div>
-                                    When are filings due?
+                                        Who is required to file Form 13F?
                                 </button>
                                 </h2>
                                 <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">The SEC’s form 13F must be filed quarterly.</div>
+                                    <div class="accordion-body">
+                                        All institutional investment managers with at least $100 million in assets under management and holding US listed securities are required to file Form 13F with SEC every quarter and disclose their long equity and options holdings.
+                                    </div>
                                 </div>
                             </div>
 
@@ -80,15 +84,13 @@ function FAQ() {
                                                 <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
                                             </svg>
                                         </div>
-                                    What kind of assets must be reported on form 13F?
+                                        When are filings due?
                                 </button>
                                 </h2>
                                 <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">The SEC’s form 13F must be filed quarterly by institutional investment managers with at least $100 million in assets under management.
-
-                                    Congress intended these filings to provide transparency on the holdings of the nation’s biggest investors.
-
-                                Small investors frequently use these filings to determine what the “smart money” is doing in the market, but there are serious problems with the reliability and timeliness of the data.</div>
+                                    <div class="accordion-body">
+                                        Form 13F must be filed within 45 days of each quarter’s end. Holdings are reported as of quarter end date.
+                                    </div>
                                 </div>
                             </div>
 
@@ -107,11 +109,13 @@ function FAQ() {
                                                 <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
                                             </svg>
                                         </div>
-                                    Why can't I find my favourite mutual fund?
+                                        What kind of assets must be reported on form 13F?
                                 </button>
                                 </h2>
                                 <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                                    <div class="accordion-body">
+                                        Filers are required to report long only holdings of US listed stocks and options. Each quarter, SEC identifies the security universe required to be reported and publishes the list here: https://www.sec.gov/divisions/investment/13flists.htm
+                                    </div>
                                 </div>
                             </div>
 
@@ -134,7 +138,9 @@ function FAQ() {
                                 </button>
                                 </h2>
                                 <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                                    <div class="accordion-body">
+                                        We are working hard to improve data quality and take feedback very seriously. Please reach out to us at support@mrktdb.com if you have some data error.
+                                    </div>
                                 </div>
                             </div>
 

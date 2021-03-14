@@ -591,11 +591,15 @@
 	width: 23em;
 }
 
+.tab-pane {
+	line-height: 1.5 !important;
+}
+
 .know_more_image {
 	width: 30%;
 	position: absolute;
 	right: 8%;
-	bottom: -37%;
+	bottom: -41%;
 }
 
 /* 4th container */

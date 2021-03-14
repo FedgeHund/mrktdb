@@ -5,6 +5,8 @@ import UserForm from './Signup/UserForm';
 import Homepage from './Homepage/Homepage';
 import ContactUs from './ContactUs/ContactUs';
 import FAQ from './FAQ/FAQ';
+import Page_404 from './Page_404/Page_404';
+import Page_500 from './Page_500/Page_500';
 import Stock from './Stock/Stock';
 import Filer from './Filer/Filer';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
@@ -29,6 +31,9 @@ class App extends Component {
             <Route path="/faq" exact component={() => <FAQ />} />
             <Route path="/stock/:securityName" render={(props) => <Stock {...props} />} />
             <Route path="/filer/:cik" render={(props) => <Filer {...props} />} />
+            <Route path="/404" exact component={() => <Page_404 />} />
+            <Route path="/500" exact component={() => <Page_500 />} />
+            <Route component={() => <Page_404 />} />
           </Switch>
         </Router>
       </Fragment>

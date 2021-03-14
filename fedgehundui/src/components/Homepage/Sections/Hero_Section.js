@@ -169,8 +169,8 @@ function Hero_Section() {
 	const [searchData, setSearchData] = useState({ security_data: '', company_data: '' });
 
 	const getData = async () => {
-		let company_url = 'http://www.mrktdb.com/api/company';
-		let security_url = 'http://www.mrktdb.com/api/security';
+		let company_url = 'http://www.mrktdb.com/api/company/';
+		let security_url = 'http://www.mrktdb.com/api/security/';
 
 		const company_data = await axios.get(company_url);
 		const security_data = await axios.get(security_url);

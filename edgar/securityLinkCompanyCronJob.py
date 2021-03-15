@@ -11,15 +11,24 @@ class SecurityLinkCompanyCronJob(CronJobBase):
     code = 'edgar.securityLinkCompanyCronJob'    # a unique code
 
     def do(self):
+        print("Linking started")
+
         security_items = Security.objects.all()
         company_items = Company.objects.all()
         cikCusipMapping_items = CikCusipMapping.objects.order_by('year').all()
 
+        mapping_no = 0
+        found_items = 0
         for mapping in cikCusipMapping_items:
+            print("Mapping:", mapping_no)
             for security in security_items:
                 if(security.cusip == mapping.cusip or security.cusip == mapping.cusip6):
                     for company in company_items:
-                        if company.cik == mapping.cik:
+                        if int(company.cik) == mapping.cik:
+                            found_items += 1
+                            print("Found:", found_items)
                             security.companyId = company.companyId
                             security.cikCusipMappingId = mapping.cikCusipMappingId
                             security.save()
+            mapping_no += 1
+        print("Linking ended")

@@ -14,7 +14,7 @@ function Stock(props) {
     // let securityName = thePath.substring(thePath.lastIndexOf('/') + 1);
 
     const getSecurityData = async () => {
-        let particular_security_url = 'http://www.mrktdb.com/api/security/' + securityName;
+        let particular_security_url = 'http://www.mrktdb.com/api/security/' + securityName + '/';
 
         const particular_security = await axios.get(particular_security_url);
 

@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Link, useHistory } from "react-
 
 var securityNames = [];
 var companyNames = [];
-var default_items = ["BERKSHIRE HATHAWAY INC", "BLACKROCK INC.", "AMAZON COM INC", "WAL MART STORES INC", "COCA COLA CO", "APPLE INC", "BRIDGEWATER ASSOCIATES, LP"];
+//var default_items = ["BERKSHIRE HATHAWAY INC", "BLACKROCK INC.", "AMAZON COM INC", "WAL MART STORES INC", "COCA COLA CO", "APPLE INC", "BRIDGEWATER ASSOCIATES, LP"];
 var all_items = []
 
 const SearchbarDropdown = (props) => {
@@ -188,7 +188,7 @@ function Hero_Section() {
 	console.log(securityNames);
 	console.log(companyNames);
 
-	all_items = [...default_items, ...companyNames, ...securityNames];
+	all_items = [...companyNames, ...securityNames];
 
 	return (
 		<Fragment>

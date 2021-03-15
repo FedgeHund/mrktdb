@@ -19,6 +19,7 @@ function Filer(props) {
         const particular_filer = await axios.get(particular_filer_url);
 
         setFilerData(particular_filer.data);
+        console.log(filerData);
     };
 
     useEffect(() => {

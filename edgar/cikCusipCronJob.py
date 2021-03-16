@@ -15,12 +15,12 @@ class CikCusipCronJob(CronJobBase):
 
     def do(self):
         print("Start")
-        with open('../static/admin/csv_files/CIK_CUSIP.csv', 'rt')as f:
+        with open('../static/admin/csv_files/final_cik_cusip_mapping.csv', 'rt')as f:
             data = csv.reader(f)
 
             Objects = [
                 CikCusipMapping(
-                    year = row[0], cik = row[1], sec_name = row[2], cusip = row[3], cusip6 = row[4], cikCusipMappingId = row[1]+row[3]+row[0]+str(round(time.time()*10000000))
+                    cik = row[0], cusip = row[1], cikCusipMappingId = row[0]+row[1]+str(round(time.time()*10000000))
                 )
                 for row in data
             ]

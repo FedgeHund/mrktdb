@@ -15,20 +15,14 @@ class SecurityLinkCompanyCronJob(CronJobBase):
 
         security_items = Security.objects.all()
         company_items = Company.objects.all()
-        cikCusipMapping_items = CikCusipMapping.objects.order_by('year').all()
+        cikCusipMapping_items = CikCusipMapping.objects.all()
 
-        mapping_no = 0
-        found_items = 0
         for mapping in cikCusipMapping_items:
-            print("Mapping:", mapping_no)
             for security in security_items:
-                if(security.cusip == mapping.cusip or security.cusip == mapping.cusip6):
+                if(mapping.cusip == security.cusip):
                     for company in company_items:
-                        if int(company.cik) == mapping.cik:
-                            found_items += 1
-                            print("Found:", found_items)
-                            security.companyId = company.companyId
+                        if company.cik == mapping.cik:
+                            security.companyId_id = company.companyId
                             security.cikCusipMappingId = mapping.cikCusipMappingId
-                            security.save()
-            mapping_no += 1
+                            security.save() 
         print("Linking ended")

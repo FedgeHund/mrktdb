@@ -137,12 +137,9 @@ class FailsToDeliver(models.Model):
         ordering = ['createdAt']
 
 class CikCusipMapping(models.Model):
-    year = models.IntegerField()
-    cik = models.IntegerField()
-    sec_name = models.TextField()
+    cik = models.TextField()
     cusip = models.TextField()
-    cusip6 = models.TextField()
     cikCusipMappingId = models.TextField()
 
     class Meta:
-        ordering = ['year']
+        ordering = ['cik']

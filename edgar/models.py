@@ -78,7 +78,7 @@ class Security(models.Model):
     cusip = models.TextField()
     securityName = models.TextField(blank=True)
     securityType = models.TextField(blank=True)
-    ticker = models.CharField(max_length=5,blank=True)
+    ticker = models.TextField(blank=True)
     titleOfClass = models.TextField()
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)
@@ -87,7 +87,7 @@ class Security(models.Model):
     cikCusipMappingId = models.TextField(default=None, blank=True, null=True)
 
     class Meta:
-        ordering = ['ticker']
+        ordering = ['securityName']
 
 class QuarterlySecurityHolding(models.Model):
     

@@ -9,7 +9,7 @@
 }
 
 .security_container {
-	height: 700px;
+	height: 2700px;
 	position: relative;
 	object-fit: cover;
 	overflow: hidden;
@@ -17,8 +17,8 @@
 
 .security {
 	position: absolute;
-	top: 32%;
-	left: 55%;
+	top: 50%;
+	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 90%;
 	max-width: 1500px;
@@ -27,14 +27,14 @@
 
 .security_heading {
 	font-size: 3em;
-	font-family: var(--Lato);
+	font-family: var(--OpenSans);
 	font-weight: 600;
 	color: #303030;
 }
 
 .security_toc {
 	font-size: 1.5em;
-	font-family: var(--Lato);
+	font-family: var(--OpenSans);
 	font-weight: 600;
 	text-align: right;
 	text-align: bottom;
@@ -44,7 +44,21 @@
 
 .security_type {
 	font-size: 1.5em;
-	font-family: var(--Lato);
+	font-family: var(--OpenSans);
 	font-weight: 500;
 	color: #303030;
+}
+
+#SymbolInfo {
+	margin: 0 auto;
+	padding: 0;
+}
+
+#CompanyProfile {
+	margin-top: 60px;
+}
+
+#CompanyProfile,
+#TechnicalAnalysis {
+	margin-top: 60px;
 }

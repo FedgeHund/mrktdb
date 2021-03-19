@@ -5,8 +5,9 @@ import { BrowserRouter as Router, Route, Switch, Link, useHistory } from "react-
 
 var securityNames = [];
 var companyNames = [];
+var all_items = [];
 //var default_items = ["BERKSHIRE HATHAWAY INC", "BLACKROCK INC.", "AMAZON COM INC", "WAL MART STORES INC", "COCA COLA CO", "APPLE INC", "BRIDGEWATER ASSOCIATES, LP"];
-var all_items = []
+
 
 const SearchbarDropdown = (props) => {
 
@@ -171,8 +172,8 @@ function Hero_Section() {
 	const [searchData, setSearchData] = useState({ security_data: '', company_data: '' });
 
 	const getData = async () => {
-		let company_url = 'http://www.mrktdb.com/api/company/';
-		let security_url = 'http://www.mrktdb.com/api/security/';
+		let company_url = 'http://127.0.0.1:8000/api/company/';
+		let security_url = 'http://127.0.0.1:8000/api/security/';
 
 		const company_data = await axios.get(company_url);
 		const security_data = await axios.get(security_url);

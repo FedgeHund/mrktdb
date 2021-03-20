@@ -1,15 +1,16 @@
 from edgar.models import Company,Filer,QuarterlyHolding,Security,QuarterlyOtherManager,QuarterlyOtherManagerDistribution,QuarterlySecurityHolding
 from edgar.serializers import CompanySerializer,FilerSerializer,QuarterlyHoldingSerializer,SecuritySerializer,QuarterlyOtherManagerSerializer, QuarterlySecurityHoldingSerializer, QuarterlyOtherManagerDistributionSerializer
-from rest_framework import generics
+from rest_framework import generics, filters
 
 
 class CompanyList(generics.ListCreateAPIView):
+    search_fields = ['^name', '^cik']
+    filter_backends = (filters.SearchFilter,)
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
 
 class CompanyDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Company.objects.all()
-    lookup_field = 'cik'
     serializer_class = CompanySerializer
 
 class FilerList(generics.ListCreateAPIView):
@@ -29,13 +30,13 @@ class QuarterlyHoldingDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = QuarterlyHoldingSerializer
     
 class SecurityList(generics.ListCreateAPIView):
+    search_fields = ['^securityName', '^ticker']
+    filter_backends = (filters.SearchFilter,)
     queryset = Security.objects.all()
     serializer_class = SecuritySerializer
 
-
 class SecurityDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Security.objects.all()
-    lookup_field = 'securityName'
     serializer_class = SecuritySerializer
 
 class QuarterlyOtherManagerList(generics.ListCreateAPIView):

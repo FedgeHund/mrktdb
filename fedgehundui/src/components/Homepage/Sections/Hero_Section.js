@@ -3,8 +3,9 @@ import axios from 'axios';
 import { withRouter } from 'react-router'
 import { BrowserRouter as Router, Route, Switch, Link, useHistory } from "react-router-dom";
 
-var securityNames = [];
-var companyNames = [];
+// var securityNames = ["APPLE INC", "AMAZON COM INC", "MICROSOFT CORP.", "FACEBOOK INC", "TESLA INC"];
+var securityNames = []
+var companyNames = ["BERKSHIRE HATHAWAY INC", "TIGER GLOBAL MANAGEMENT LLC", "AMAZON COM INC", "BRIDGEWATER ASSOCIATES, LP", "MAN GROUP PLC", "RENAISSANCE TECHNOLOGIES LLC", "BLACKROCK INC."];
 var all_items = [];
 //var default_items = ["BERKSHIRE HATHAWAY INC", "BLACKROCK INC.", "AMAZON COM INC", "WAL MART STORES INC", "COCA COLA CO", "APPLE INC", "BRIDGEWATER ASSOCIATES, LP"];
 
@@ -25,7 +26,7 @@ const SearchbarDropdown = (props) => {
 		});
 
 		document.getElementById('results').style.display = 'none';
-	}, []);
+	}, [options]);
 
 
 	const searchData = { props };
@@ -36,22 +37,27 @@ const SearchbarDropdown = (props) => {
 	let results;
 
 	if (options.length) {
+		console.log(options);
 		results = (
 			<ul id="results" className="list-group" ref={ulRef}>
 				{options.slice(0, 7).map((option, index) => {
 					return (
 						<a key={index}>
-							<button
-								type="button"
-								key={index}
-								onClick={(e) => {
-									inputRef.current.value = option;
-									search_db(inputRef.current.value, searchData);
-								}}
-								className="list-group-item list-group-item-action"
-							>
-								{option}
-							</button>
+							{ option.ticker &&
+								<button
+									type="button"
+									key={index}
+									onClick={(e) => {
+										inputRef.current.value = option.ticker;
+										search_db(inputRef.current.value, searchData);
+									}}
+									className="list-group-item list-group-item-action"
+								>
+									<div className="ticker">{option.ticker}&nbsp;&nbsp;
+									<span className="stock_name">{option.securityName}</span>
+									</div>
+								</button>
+							}
 						</a>
 					);
 				})
@@ -74,13 +80,36 @@ const SearchbarDropdown = (props) => {
 			);
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Stocks') {
+			let security_url = `http://127.0.0.1:8000/api/security/?search=${event.target.value}`;
+
+			async function getSecurityData() {
+				const stocks = await fetch(security_url).then(response => response.json());
+				return stocks;
+			}
+
+			getSecurityData().then(stocks => {
+				securityNames = Object.values(stocks).map(stock => stock);
+				//console.log(securityNames);
+			});
+
 			setOptions(
-				securityNames.filter((option) => option.includes(event.target.value.toUpperCase()))
+				securityNames.filter((option) => option.ticker.startsWith(event.target.value.toUpperCase()))
 			);
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Filers') {
+			let company_url = `http://127.0.0.1:8000/api/company/?search=${event.target.value}`;
+
+			async function getFilersData() {
+				const companies = await fetch(company_url).then(response => response.json());
+				return companies;
+			}
+
+			getFilersData().then(companies => {
+				companyNames = Object.values(companies).map(company => company.name.toUpperCase());
+			});
+
 			setOptions(
-				companyNames.filter((option) => option.includes(event.target.value.toUpperCase()))
+				companyNames.filter((option) => option.startsWith(event.target.value.toUpperCase()))
 			);
 		}
 	}
@@ -108,31 +137,51 @@ const SearchbarDropdown = (props) => {
 				const ticker = Object.values(props.searchData.security_data).filter(security => security.securityName.toUpperCase() === curr_value.toUpperCase()).map((security) => security.ticker);
 				history.push(
 					{
-						pathname: `/stock/${sec_name[0]}`,
+						pathname: `/stock/${sec_name[0]} `,
 						state: { SecName: sec_name[0], ticker: ticker[0] },
 					}
 				);
 			}
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Stocks') {
-			const sec_name = Object.values(props.searchData.security_data).filter(security => security.securityName.toUpperCase() === curr_value.toUpperCase()).map((security) => security.securityName);
-			const ticker = Object.values(props.searchData.security_data).filter(security => security.securityName.toUpperCase() === curr_value.toUpperCase()).map((security) => security.ticker);
-			//window.location.replace("http://www.mrktdb.com/api/security/" + sec_name[0]);
-			history.push(
-				{
-					pathname: `/stock/${sec_name[0]}`,
-					state: { SecName: sec_name[0], ticker: ticker[0] },
-				}
-			);
+			let stock_url = `http://127.0.0.1:8000/api/security/?search=${curr_value}`;
+
+			async function getStockData() {
+				const stock = fetch(stock_url).then(response => response.json());
+				return stock;
+			}
+
+			getStockData().then(stock => {
+				const sec_name = stock[0].securityName;
+				const ticker = stock[0].ticker;
+
+				history.push(
+					{
+						pathname: `/stock/${ticker} `,
+						state: { SecName: sec_name, ticker: ticker },
+					}
+				);
+			});
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Filers') {
-			const cik = Object.values(props.searchData.company_data).filter(company => company.name.toUpperCase() === curr_value.toUpperCase()).map((company) => company.cik);
-			history.push(
-				{
-					pathname: `/filer/${cik[0]}`,
-					state: { cik: cik[0] },
-				}
-			);
+			let company_url = `http://127.0.0.1:8000/api/company/?search=${curr_value}`;
+
+			async function getFilersData() {
+				const company = fetch(company_url).then(response => response.json());
+				return company;
+			}
+
+			getFilersData().then(company => {
+				const cik = company[0].cik;
+
+				history.push(
+					{
+						pathname: `/filer/${cik} `,
+						state: { cik: cik },
+					}
+				);
+			});
+
 		}
 	}
 
@@ -148,7 +197,7 @@ const SearchbarDropdown = (props) => {
 				<div className="btn-group search_btns" role="group" aria-label="Button group with nested dropdown">
 					<div className="btn-group" role="group">
 						<button id="btnGroupDrop1" type="button" className="dropdown-toggle search_type_button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => { e.preventDefault(); }}>
-							Filers
+							Stocks
     					</button>
 						<ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
 							<li><a className="dropdown-item" href="#" onClick={changeCategory}>All Categories</a></li>
@@ -171,27 +220,27 @@ function Hero_Section() {
 	// file deepcode ignore no-mixed-spaces-and-tabs: "Tabs and spaces"
 	const [searchData, setSearchData] = useState({ security_data: '', company_data: '' });
 
-	const getData = async () => {
-		let company_url = 'http://127.0.0.1:8000/api/company/';
-		let security_url = 'http://127.0.0.1:8000/api/security/';
+	// const getData = async () => {
+	// 	let company_url = 'http://127.0.0.1:8000/api/company/?search=';
+	// 	let security_url = 'http://127.0.0.1:8000/api/security/?search=';
 
-		const company_data = await axios.get(company_url);
-		const security_data = await axios.get(security_url);
+	// 	const company_data = await axios.get(company_url);
+	// 	const security_data = await axios.get(security_url);
 
-		setSearchData({ security_data: security_data.data, company_data: company_data.data });
-	};
+	// 	setSearchData({ security_data: security_data.data, company_data: company_data.data });
+	// };
 
-	useEffect(() => {
-		getData();
-	}, []);
+	// useEffect(() => {
+	// 	getData();
+	// }, []);
 
-	Object.values(searchData.security_data).map(security => securityNames.push(security.securityName));
-	Object.values(searchData.company_data).map(company => companyNames.push(company.name.toUpperCase()));
+	// Object.values(searchData.security_data).map(security => securityNames.push(security.securityName));
+	// Object.values(searchData.company_data).map(company => companyNames.push(company.name.toUpperCase()));
 
-	console.log(securityNames);
-	console.log(companyNames);
+	// console.log(securityNames);
+	// console.log(companyNames);
 
-	all_items = [...companyNames, ...securityNames];
+	// all_items = [...companyNames, ...securityNames];
 
 	return (
 		<Fragment>

@@ -28,7 +28,7 @@ class QuarterlyOtherManagerSerializer(serializers.ModelSerializer):
 class SecuritySerializer(serializers.ModelSerializer):
     class Meta:
         model = Security
-        fields = ['companyId', 'cusip', 'securityName', 'securityType', 'ticker', 'titleOfClass', 'createdAt', 'updatedAt', 'deletedAt', 'securityId']
+        fields = ['companyId', 'securityName', 'securityType', 'ticker', 'titleOfClass', 'createdAt', 'updatedAt', 'deletedAt', 'securityId']
 
 
 class QuarterlySecurityHoldingSerializer(serializers.ModelSerializer):

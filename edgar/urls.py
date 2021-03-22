@@ -10,7 +10,7 @@ urlpatterns = [
     path('quarterlyholding/', views.QuarterlyHoldingList.as_view()),
     path('quarterlyholding/<int:pk>/', views.QuarterlyHoldingDetail.as_view()),
     path('security/', views.SecurityList.as_view()),
-    path('security/<securityName>/', views.SecurityDetail.as_view()),
+    path('security/<ticker>/', views.SecurityDetail.as_view()),
     path('quarterlyothermanager/', views.QuarterlyOtherManagerList.as_view()),
     path('quarterlyothermanager/<int:pk>/', views.QuarterlyOtherManagerDetail.as_view()),
     path('quarterlysecurityholding/', views.QuarterlySecurityHoldingList.as_view()),

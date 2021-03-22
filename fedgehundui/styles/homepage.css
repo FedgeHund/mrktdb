@@ -118,6 +118,24 @@
 	width: inherit;
 }
 
+.ticker {
+	font-size: 1.2em;
+}
+
+.stock_name {
+	color: #727272;
+	font-size: 0.8em;
+}
+
+.filer_name {
+	font-size: 1.1em;
+}
+
+.cik {
+	color: #727272;
+	font-size: 0.8em;
+}
+
 .dropdown-menu {
 	background-color: #fcf4eb;
 }

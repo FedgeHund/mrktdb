@@ -3,14 +3,13 @@ import axios from 'axios';
 import { withRouter } from 'react-router'
 import { BrowserRouter as Router, Route, Switch, Link, useHistory } from "react-router-dom";
 
-// var securityNames = ["APPLE INC", "AMAZON COM INC", "MICROSOFT CORP.", "FACEBOOK INC", "TESLA INC"];
-var securityNames = []
-var companyNames = ["BERKSHIRE HATHAWAY INC", "TIGER GLOBAL MANAGEMENT LLC", "AMAZON COM INC", "BRIDGEWATER ASSOCIATES, LP", "MAN GROUP PLC", "RENAISSANCE TECHNOLOGIES LLC", "BLACKROCK INC."];
+var securityNames = [{ securityName: "APPLE INC", ticker: "AAPL" }, { securityName: "AMAZON COM INC", ticker: "AMZN" }, { securityName: "MICROSOFT CORP.", ticker: "MSFT" }, { securityName: "FACEBOOK INC", ticker: "FB" }, { securityName: "TESLA INC", ticker: "TSLA" }];
+var companyNames = [{ name: "BERKSHIRE HATHAWAY INC", cik: "0001067983" }, { name: "TIGER GLOBAL MANAGEMENT LLC", cik: "0001167483" }, { name: "AMAZON COM INC", cik: "0001018724" }, { name: "BRIDGEWATER ASSOCIATES, LP", cik: "0001350694" }, { name: "MAN GROUP PLC", cik: "0001637460" }, { name: "RENAISSANCE TECHNOLOGIES LLC", cik: "0001037389" }, { name: "BLACKROCK INC.", cik: "0001364742" }];
 var all_items = [];
 //var default_items = ["BERKSHIRE HATHAWAY INC", "BLACKROCK INC.", "AMAZON COM INC", "WAL MART STORES INC", "COCA COLA CO", "APPLE INC", "BRIDGEWATER ASSOCIATES, LP"];
 
 
-const SearchbarDropdown = (props) => {
+const SearchbarDropdown = () => {
 
 	useEffect(() => {
 		inputRef.current.addEventListener('click', (event) => {
@@ -26,10 +25,8 @@ const SearchbarDropdown = (props) => {
 		});
 
 		document.getElementById('results').style.display = 'none';
-	}, [options]);
+	}, []);
 
-
-	const searchData = { props };
 	const ulRef = useRef();
 	const inputRef = useRef();
 	const [options, setOptions] = useState([]);
@@ -37,7 +34,6 @@ const SearchbarDropdown = (props) => {
 	let results;
 
 	if (options.length) {
-		console.log(options);
 		results = (
 			<ul id="results" className="list-group" ref={ulRef}>
 				{options.slice(0, 7).map((option, index) => {
@@ -49,12 +45,28 @@ const SearchbarDropdown = (props) => {
 									key={index}
 									onClick={(e) => {
 										inputRef.current.value = option.ticker;
-										search_db(inputRef.current.value, searchData);
+										search_db(inputRef.current.value);
 									}}
 									className="list-group-item list-group-item-action"
 								>
 									<div className="ticker">{option.ticker}&nbsp;&nbsp;
 									<span className="stock_name">{option.securityName}</span>
+									</div>
+								</button>
+							}
+							{ option.cik &&
+								<button
+									type="button"
+									key={index}
+									onClick={(e) => {
+										inputRef.current.value = option.cik;
+										var type_cik = parseInt(option.cik)
+										search_db(inputRef.current.value, type_cik);
+									}}
+									className="list-group-item list-group-item-action"
+								>
+									<div className="filer_name">{option.name.toUpperCase()}&nbsp;&nbsp;&nbsp;
+									<span className="cik">CIK : {option.cik}</span>
 									</div>
 								</button>
 							}
@@ -67,20 +79,21 @@ const SearchbarDropdown = (props) => {
 	} else {
 		results = (
 			<ul id="results" className="list-group" ref={ulRef}>
-				<button type="button" className="list-group-item list-group-item-action no_results" disabled>No results found!</button>
+				{/* <button type="button" className="list-group-item list-group-item-action no_results" disabled>No results found!</button> */}
 			</ul>
 		)
 	}
 
 
 	const onInputChange = (event) => {
-		if (document.getElementById('btnGroupDrop1').innerHTML === 'All Categories') {
-			setOptions(
-				all_items.filter((option) => option.includes(event.target.value.toUpperCase()))
-			);
+		var toSearch = event.target.value;
+
+		if (toSearch === '') {
+			toSearch = 'a';
 		}
-		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Stocks') {
-			let security_url = `http://127.0.0.1:8000/api/security/?search=${event.target.value}`;
+
+		if (document.getElementById('btnGroupDrop1').innerHTML === 'All Categories') {
+			let security_url = `http://127.0.0.1:8000/api/security/?search=${toSearch}`;
 
 			async function getSecurityData() {
 				const stocks = await fetch(security_url).then(response => response.json());
@@ -89,15 +102,9 @@ const SearchbarDropdown = (props) => {
 
 			getSecurityData().then(stocks => {
 				securityNames = Object.values(stocks).map(stock => stock);
-				//console.log(securityNames);
 			});
 
-			setOptions(
-				securityNames.filter((option) => option.ticker.startsWith(event.target.value.toUpperCase()))
-			);
-		}
-		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Filers') {
-			let company_url = `http://127.0.0.1:8000/api/company/?search=${event.target.value}`;
+			let company_url = `http://127.0.0.1:8000/api/company/?search=${toSearch}`;
 
 			async function getFilersData() {
 				const companies = await fetch(company_url).then(response => response.json());
@@ -105,11 +112,53 @@ const SearchbarDropdown = (props) => {
 			}
 
 			getFilersData().then(companies => {
-				companyNames = Object.values(companies).map(company => company.name.toUpperCase());
+				companyNames = Object.values(companies).map(company => company);
+			});
+
+			all_items = [...companyNames, ...securityNames];
+
+			function checkType(option) {
+				if (option.ticker) {
+					return (option.ticker.startsWith(event.target.value.toUpperCase()));
+				} else if (option.cik) {
+					return (option.name.toUpperCase().startsWith(event.target.value.toUpperCase()));
+				}
+			}
+
+			setOptions(
+				all_items.filter(checkType)
+			);
+		}
+		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Stocks') {
+			let security_url = `http://127.0.0.1:8000/api/security/?search=${toSearch}`;
+
+			async function getSecurityData() {
+				const stocks = await fetch(security_url).then(response => response.json());
+				return stocks;
+			}
+
+			getSecurityData().then(stocks => {
+				securityNames = Object.values(stocks).map(stock => stock);
 			});
 
 			setOptions(
-				companyNames.filter((option) => option.startsWith(event.target.value.toUpperCase()))
+				securityNames.filter((option) => option.ticker.startsWith(event.target.value.toUpperCase()))
+			);
+		}
+		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Filers') {
+			let company_url = `http://127.0.0.1:8000/api/company/?search=${toSearch}`;
+
+			async function getFilersData() {
+				const companies = await fetch(company_url).then(response => response.json());
+				return companies;
+			}
+
+			getFilersData().then(companies => {
+				companyNames = Object.values(companies).map(company => company);
+			});
+
+			setOptions(
+				companyNames.filter((option) => option.name.toUpperCase().startsWith(event.target.value.toUpperCase()))
 			);
 		}
 	}
@@ -121,26 +170,46 @@ const SearchbarDropdown = (props) => {
 	}
 
 
-	const search_db = (curr_value, searchData) => {
+	const search_db = (curr_value, type_cik) => {
 		if (document.getElementById('btnGroupDrop1').innerHTML === 'All Categories') {
-			if (Object.values(props.searchData.company_data).filter(company => company.name.toUpperCase() === curr_value.toUpperCase()).length != 0) {
-				const cik = Object.values(props.searchData.company_data).filter(company => company.name.toUpperCase() === curr_value.toUpperCase()).map((company) => company.cik);
-				history.push(
-					{
-						pathname: `/filer/${cik[0]}`,
-						state: { cik: cik[0] },
-					}
-				);
+			if (Number.isInteger(type_cik)) {
+				let company_url = `http://127.0.0.1:8000/api/company/?search=${curr_value}`;
+
+				async function getFilersData() {
+					const company = fetch(company_url).then(response => response.json());
+					return company;
+				}
+
+				getFilersData().then(company => {
+					const cik = company[0].cik;
+
+					history.push(
+						{
+							pathname: `/filer/${cik} `,
+							state: { cik: cik },
+						}
+					);
+				});
 			}
 			else {
-				const sec_name = Object.values(props.searchData.security_data).filter(security => security.securityName.toUpperCase() === curr_value.toUpperCase()).map((security) => security.securityName);
-				const ticker = Object.values(props.searchData.security_data).filter(security => security.securityName.toUpperCase() === curr_value.toUpperCase()).map((security) => security.ticker);
-				history.push(
-					{
-						pathname: `/stock/${sec_name[0]} `,
-						state: { SecName: sec_name[0], ticker: ticker[0] },
-					}
-				);
+				let stock_url = `http://127.0.0.1:8000/api/security/?search=${curr_value}`;
+
+				async function getStockData() {
+					const stock = fetch(stock_url).then(response => response.json());
+					return stock;
+				}
+
+				getStockData().then(stock => {
+					const sec_name = stock[0].securityName;
+					const ticker = stock[0].ticker;
+
+					history.push(
+						{
+							pathname: `/stock/${ticker} `,
+							state: { SecName: sec_name, ticker: ticker },
+						}
+					);
+				});
 			}
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Stocks') {
@@ -197,7 +266,7 @@ const SearchbarDropdown = (props) => {
 				<div className="btn-group search_btns" role="group" aria-label="Button group with nested dropdown">
 					<div className="btn-group" role="group">
 						<button id="btnGroupDrop1" type="button" className="dropdown-toggle search_type_button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => { e.preventDefault(); }}>
-							Stocks
+							All Categories
     					</button>
 						<ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
 							<li><a className="dropdown-item" href="#" onClick={changeCategory}>All Categories</a></li>
@@ -218,29 +287,6 @@ const SearchbarDropdown = (props) => {
 
 function Hero_Section() {
 	// file deepcode ignore no-mixed-spaces-and-tabs: "Tabs and spaces"
-	const [searchData, setSearchData] = useState({ security_data: '', company_data: '' });
-
-	// const getData = async () => {
-	// 	let company_url = 'http://127.0.0.1:8000/api/company/?search=';
-	// 	let security_url = 'http://127.0.0.1:8000/api/security/?search=';
-
-	// 	const company_data = await axios.get(company_url);
-	// 	const security_data = await axios.get(security_url);
-
-	// 	setSearchData({ security_data: security_data.data, company_data: company_data.data });
-	// };
-
-	// useEffect(() => {
-	// 	getData();
-	// }, []);
-
-	// Object.values(searchData.security_data).map(security => securityNames.push(security.securityName));
-	// Object.values(searchData.company_data).map(company => companyNames.push(company.name.toUpperCase()));
-
-	// console.log(securityNames);
-	// console.log(companyNames);
-
-	// all_items = [...companyNames, ...securityNames];
 
 	return (
 		<Fragment>
@@ -251,7 +297,7 @@ function Hero_Section() {
 						<div className="market_beating centered col-md-12">Find the next Market-Beating Portfolio</div>
 					</div>
 					<div className="">
-						< SearchbarDropdown searchData={searchData} />
+						< SearchbarDropdown />
 					</div>
 					<div className="row">
 						<div className="col-xs-10 carousel_text col-md-7">MrktDB provides exclusive investment insights by giving you a sneak peek into the portfolio of world's most successful investors. Market Research is expensive, don't let that hold you back!</div>

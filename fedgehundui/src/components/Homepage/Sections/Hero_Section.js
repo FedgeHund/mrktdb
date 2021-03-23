@@ -93,7 +93,7 @@ const SearchbarDropdown = () => {
 		}
 
 		if (document.getElementById('btnGroupDrop1').innerHTML === 'All Categories') {
-			let security_url = `http://127.0.0.1:8000/api/security/?search=${toSearch}`;
+			let security_url = `http://www.mrktdb.com/api/security/?search=${toSearch}`;
 
 			async function getSecurityData() {
 				const stocks = await fetch(security_url).then(response => response.json());
@@ -104,7 +104,7 @@ const SearchbarDropdown = () => {
 				securityNames = Object.values(stocks).map(stock => stock);
 			});
 
-			let company_url = `http://127.0.0.1:8000/api/company/?search=${toSearch}`;
+			let company_url = `http://www.mrktdb.com/api/company/?search=${toSearch}`;
 
 			async function getFilersData() {
 				const companies = await fetch(company_url).then(response => response.json());
@@ -130,7 +130,7 @@ const SearchbarDropdown = () => {
 			);
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Stocks') {
-			let security_url = `http://127.0.0.1:8000/api/security/?search=${toSearch}`;
+			let security_url = `http://www.mrktdb.com/api/security/?search=${toSearch}`;
 
 			async function getSecurityData() {
 				const stocks = await fetch(security_url).then(response => response.json());
@@ -146,7 +146,7 @@ const SearchbarDropdown = () => {
 			);
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Filers') {
-			let company_url = `http://127.0.0.1:8000/api/company/?search=${toSearch}`;
+			let company_url = `http://www.mrktdb.com/api/company/?search=${toSearch}`;
 
 			async function getFilersData() {
 				const companies = await fetch(company_url).then(response => response.json());
@@ -173,7 +173,7 @@ const SearchbarDropdown = () => {
 	const search_db = (curr_value, type_cik) => {
 		if (document.getElementById('btnGroupDrop1').innerHTML === 'All Categories') {
 			if (Number.isInteger(type_cik)) {
-				let company_url = `http://127.0.0.1:8000/api/company/?search=${curr_value}`;
+				let company_url = `http://www.mrktdb.com/api/company/?search=${curr_value}`;
 
 				async function getFilersData() {
 					const company = fetch(company_url).then(response => response.json());
@@ -192,7 +192,7 @@ const SearchbarDropdown = () => {
 				});
 			}
 			else {
-				let stock_url = `http://127.0.0.1:8000/api/security/?search=${curr_value}`;
+				let stock_url = `http://www.mrktdb.com/api/security/?search=${curr_value}`;
 
 				async function getStockData() {
 					const stock = fetch(stock_url).then(response => response.json());
@@ -213,7 +213,7 @@ const SearchbarDropdown = () => {
 			}
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Stocks') {
-			let stock_url = `http://127.0.0.1:8000/api/security/?search=${curr_value}`;
+			let stock_url = `http://www.mrktdb.com/api/security/?search=${curr_value}`;
 
 			async function getStockData() {
 				const stock = fetch(stock_url).then(response => response.json());
@@ -233,7 +233,7 @@ const SearchbarDropdown = () => {
 			});
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Filers') {
-			let company_url = `http://127.0.0.1:8000/api/company/?search=${curr_value}`;
+			let company_url = `http://www.mrktdb.com/api/company/?search=${curr_value}`;
 
 			async function getFilersData() {
 				const company = fetch(company_url).then(response => response.json());
@@ -266,7 +266,7 @@ const SearchbarDropdown = () => {
 				<div className="btn-group search_btns" role="group" aria-label="Button group with nested dropdown">
 					<div className="btn-group" role="group">
 						<button id="btnGroupDrop1" type="button" className="dropdown-toggle search_type_button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => { e.preventDefault(); }}>
-							All Categories
+							Stocks
     					</button>
 						<ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
 							<li><a className="dropdown-item" href="#" onClick={changeCategory}>All Categories</a></li>

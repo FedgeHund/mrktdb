@@ -14,7 +14,7 @@ function Filer(props) {
     // let securityName = thePath.substring(thePath.lastIndexOf('/') + 1);
 
     const getFilerData = async () => {
-        let particular_filer_url = 'http://127.0.0.1:8000/api/company/?search=' + cik;
+        let particular_filer_url = 'http://www.mrktdb.com/api/company/?search=' + cik;
 
         const particular_filer = await axios.get(particular_filer_url);
 

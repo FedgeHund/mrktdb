@@ -119,7 +119,7 @@ const SearchbarDropdown = () => {
 
 			function checkType(option) {
 				if (option.ticker) {
-					return (option.ticker.startsWith(event.target.value.toUpperCase()));
+					return (option.ticker.startsWith(event.target.value.toUpperCase()) || option.securityName.startsWith(event.target.value.toUpperCase()));
 				} else if (option.cik) {
 					return (option.name.toUpperCase().startsWith(event.target.value.toUpperCase()));
 				}
@@ -141,8 +141,12 @@ const SearchbarDropdown = () => {
 				securityNames = Object.values(stocks).map(stock => stock);
 			});
 
+			function tickerOrName(option) {
+				return (option.ticker.startsWith(event.target.value.toUpperCase()) || option.securityName.startsWith(event.target.value.toUpperCase()));
+			}
+
 			setOptions(
-				securityNames.filter((option) => option.ticker.startsWith(event.target.value.toUpperCase()))
+				securityNames.filter(tickerOrName)
 			);
 		}
 		else if (document.getElementById('btnGroupDrop1').innerHTML === 'Filers') {
@@ -266,7 +270,7 @@ const SearchbarDropdown = () => {
 				<div className="btn-group search_btns" role="group" aria-label="Button group with nested dropdown">
 					<div className="btn-group" role="group">
 						<button id="btnGroupDrop1" type="button" className="dropdown-toggle search_type_button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => { e.preventDefault(); }}>
-							Stocks
+							All Categories
     					</button>
 						<ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
 							<li><a className="dropdown-item" href="#" onClick={changeCategory}>All Categories</a></li>

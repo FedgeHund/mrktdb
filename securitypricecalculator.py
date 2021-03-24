@@ -13,11 +13,11 @@ securities = Security.objects.all()
 filers = Filer.objects.all()
 quarterlyholdings_all = QuarterlyHolding.objects.all()
 quarterlysecurityholdings = QuarterlySecurityHolding.objects.all()
-quarter = [42019,12020,22020,32020,42020]
+quarters = [42019,12020,22020,32020,42020]
 #############################################################################################################################
 securities_securities=Security.objects.all()
 for security in securities_securities:
-    print(security.name)
+    print(security.securityName)
     quarterlysecurityholdingsforsecurity = QuarterlySecurityHolding.objects.filter(securityId=security)
     # saare quarterly security holding for a security for all filers ke liye value divide by quantity
     for quarter in quarters:
@@ -25,7 +25,7 @@ for security in securities_securities:
         total_quantity = 0
         avg_value = 0
         quarterlyholdingforquarter = QuarterlyHolding.objects.filter(quarter=quarter)
-        quarterlysecurityholdingsforsecurity = QuarterlySecurityHolding.objects.filter(securityId=security,quarterId__in=quarterlyholdingforquarter)
+        quarterlysecurityholdingsforsecurity = QuarterlySecurityHolding.objects.filter(securityId=security,quarterlyHoldingId__in =quarterlyholdingforquarter)
         for quarterlysecurityholdingforsecurity in quarterlysecurityholdingsforsecurity:        
             try:                
                 total_value = total_value + quarterlysecurityholdingforsecurity.marketvalue*1000
@@ -43,7 +43,12 @@ for security in securities_securities:
             else:
                 avg_value = total_value/total_quantity
                 try:
-                    q = Price(securityId=security, value = avg_value, quarter = quarter, cusip = quarterlysecurityholdingforsecurity.cusip, name = security.name)
+                    print(security)
+                    print(avg_value)
+                    print(quarter)
+                    print(quarterlysecurityholdingforsecurity)
+                    q = Price(securityId=security, value = avg_value, quarter = quarter, cusip = '', name = security.securityName)
+                    print('Security Info Saved')
                 except:
                     print('herrrr')
                     pass

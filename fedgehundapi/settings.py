@@ -18,7 +18,7 @@ env = environ.Env()
 # reading .env file
 environ.Env.read_env()
 
-DJANGO_ENV = env("ENV", default="development")
+DJANGO_ENV = env("ENV", default="production")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if DJANGO_ENV == "production":
@@ -101,6 +101,7 @@ INSTALLED_APPS = [
     'holdings.apps.HoldingsConfig',
     'fedgehundui',
     'django_cron',
+    'security.apps.SecurityConfig'
 ]
 
 SITE_ID=1

@@ -139,3 +139,6 @@ dmypy.json
 # Git
 .git-credentials
 node_modules
+
+# IntelliJ
+.idea/

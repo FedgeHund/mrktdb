@@ -28,6 +28,7 @@ import urllib.parse
 from django.utils.timezone import now
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
@@ -66,8 +67,14 @@ class HoldingsScraper:
         # self.browser = webdriver.Firefox(capabilities=caps,executable_path=r'C:\\geckodriver-v0.26.0-win64\\geckodriver.exe')
 
         # Using PhantomJS driver
-        self.browser = webdriver.PhantomJS()
-        self.browser.set_window_size(1024, 768)
+        #self.browser = webdriver.PhantomJS()
+        #self.browser.set_window_size(1024, 768)
+
+        #Using chrome driver
+        options = Options()
+        options.headless = True
+        self.browser = webdriver.Chrome(options=options)
+
         self.cik = cik
         self.links = []
 

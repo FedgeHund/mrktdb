@@ -10,27 +10,27 @@ import Get_Started from "./Sections/Get_Started";
 import Footer from '../Layout/Footer';
 
 function Homepage() {
-// file deepcode ignore no-mixed-spaces-and-tabs: "Tabs and spaces"
+  // file deepcode ignore no-mixed-spaces-and-tabs: "Tabs and spaces"
   return (
     <Fragment>
-    		  
-          <Navbar />
 
-        		<Hero_Section />
+      <Navbar />
 
-            <Inside_DB />
+      <Hero_Section />
 
-            <Know_More />
-        		
-            <What_is_13f />
+      <Inside_DB />
 
-            <Popular_Portfolios />
+      <Know_More />
 
-            <Get_Started />
+      <What_is_13f />
 
-          <Footer />
+      <Popular_Portfolios />
 
-	</Fragment>
+      <Get_Started />
+
+      <Footer />
+
+    </Fragment>
   );
 }
 

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import '../../../styles/signup/styles.scss';
+import '../../../styles/signup/styles.css';
 // file deepcode ignore no-mixed-spaces-and-tabs:
 
 export class FormPersonalDetails extends Component {

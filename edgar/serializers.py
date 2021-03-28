@@ -1,12 +1,5 @@
 from rest_framework import serializers
-
-from .models import FailsToDeliver
-from .models import Company, Filer, QuarterlyHolding, Security, QuarterlyOtherManagerDistribution, QuarterlySecurityHolding, QuarterlyOtherManager
-
-class FailsToDeliverSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = FailsToDeliver
-        fields = ('settlementDate', 'createdAt', 'cusip', 'ticker', 'quantity', 'description') 
+from .models import Company, Filer, QuarterlyHolding, Security, QuarterlyOtherManagerDistribution, QuarterlySecurityHolding, QuarterlyOtherManager, FailsToDeliver
 
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
@@ -35,16 +28,21 @@ class QuarterlyOtherManagerSerializer(serializers.ModelSerializer):
 class SecuritySerializer(serializers.ModelSerializer):
     class Meta:
         model = Security
-        fields = ['companyId', 'cusip', 'securityName', 'securityType', 'ticker', 'titleOfClass', 'createdAt', 'updatedAt', 'deletedAt', 'securityId']
+        fields = ['companyId', 'securityName', 'securityType', 'ticker', 'titleOfClass', 'createdAt', 'updatedAt', 'deletedAt', 'securityId']
 
 
 class QuarterlySecurityHoldingSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuarterlySecurityHolding
-        fields = ['securityId', 'quarterlyHoldingId', 'value', 'amount', 'holdingType', 'investmentDiscretion', 'sole', 'shared', 'none', 'createdAt', 'updatedAt', 'deletedAt', 'quarterlySecurityHoldingId']
+        fields = ['securityId', 'quarterlyHoldingId', 'marketvalue', 'quantity', 'holdingType', 'investmentDiscretion', 'sole', 'shared', 'none', 'createdAt', 'updatedAt', 'deletedAt', 'quarterlySecurityHoldingId']
 
 
 class QuarterlyOtherManagerDistributionSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuarterlyOtherManagerDistribution
         fields = ['quarterlyOtherManagerId', 'quarterlySecurityHoldingId', 'createdAt', 'updatedAt', 'deletedAt', 'quarterlyOtherManagerDistributionId']
+
+class FailsToDeliverSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FailsToDeliver
+        fields = ('settlementDate', 'createdAt', 'cusip', 'ticker', 'quantity', 'description')

@@ -1,0 +1,210 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Nunito+Sans:wght@300;400;600;700;800&display=swap");
+
+:root {
+	--Roboto: "Roboto", sans-serif;
+	--OpenSans: "Open Sans", sans-serif;
+	--Lato: "Lato", sans-serif;
+}
+
+@media (max-width: 380px) {
+    ._404_content._404_content._404_content._404_content._404_content._404_content._404_content {
+        top: 310px !important;
+    }
+}
+
+@media (max-width: 420px) {
+    ._404_content._404_content._404_content._404_content {
+        top: 350px;
+    }
+}
+
+@media (max-width: 500px) {
+    ._404_content._404_content._404_content._404_content._404_content._404_content {
+        top: 380px !important;
+    }
+
+    ._404_heading._404_heading._404_heading {
+        font-size: 1.6em;
+    }
+    
+    ._404_message._404_message._404_message {
+        font-size: 1em;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .container_404.container_404 {
+        height: 700px;
+    }
+
+    ._404_content._404_content._404_content._404_content._404_content {
+        top: 420px !important;
+    }
+    
+    ._404_heading._404_heading {
+        font-size: 2em;
+    }
+    
+    ._404_message._404_message {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 1150px) and (min-width:768px) {
+    .left_404_img {
+        display: none;
+    }
+
+    ._404_content._404_content {
+        top: 600px !important;
+    }
+
+    .right_404_img {
+        display: none;
+    }
+
+    .middle_404_img.middle_404_img {
+        width: 60vw;
+        margin-left: -100px;
+    }
+}
+
+@media (max-width: 980px) {
+    ._404_content._404_content._404_content {
+        top: 500px !important;
+    }
+}
+
+.container_404 {
+	height: 940px;
+	position: relative;
+	object-fit: cover;
+	overflow: hidden;
+}
+
+._404 {
+	position: absolute;
+	top: 35%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 90%;
+	max-width: 1500px;
+	font-size: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 1150px) {
+    .left_404_img {
+        width: 100%;
+        margin-top: 160px;
+        display: initial;
+    }
+
+    .middle_404_img {
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    .right_404_img {
+        width: 100%;
+        margin-top: 130px;
+        display: initial;
+    }
+}
+
+@media (max-width: 768px) {
+    .left_404_img {
+        display: none;
+    }
+
+    .middle_404_img {
+        width: 100% !important;
+    }
+
+    .right_404_img {
+        display: none;
+    }
+
+    ._404_content._404_content._404_content._404_content {
+        top: 550px !important;
+    }
+}
+
+._404_content {
+    margin-left: 30px;
+    top: 550px;
+    position: absolute;
+}
+
+._404_heading {
+	font-size: 2.4em;
+	font-family: var(--Roboto);
+	font-weight: 500;
+	color: #303030;
+}
+
+._404_message {
+	font-size: 1.5em;
+	font-family: var(--Lato);
+	font-weight: 400;
+    margin-top: 15px;
+	color: #303030;
+}
+
+.go_home_button {
+	margin-top: 40px;
+	background-color: rgba(254, 111, 125, 1);
+	color: white;
+	font-family: var(--OpenSans);
+	font-weight: 600;
+	border: none;
+	border-radius: 25px;
+	outline: none !important;
+	cursor: pointer;
+	text-align: center;
+	height: 50px;
+	width: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.go_home_text {
+	font-size: 1.1em;
+}
+
+.go_home_button:hover {
+	box-shadow: 0 0 10px rgba(33, 33, 33, 0.2);
+	background-color: rgba(254, 111, 125, 1) !important;
+	color: white;
+}
+
+.go_home_button span {
+	flex-shrink: 0;
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+}
+
+.go_home_button span:after {
+	content: "\21E8";
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	right: -20px;
+	transition: 0.5s;
+}
+
+.go_home_button:hover span {
+	padding-right: 25px;
+}
+
+.go_home_button:hover span:after {
+	opacity: 1;
+	right: 0;
+}

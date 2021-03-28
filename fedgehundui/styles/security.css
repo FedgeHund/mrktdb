@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Nunito+Sans:wght@300;400;600;700;800&display=swap");
+
+:root {
+	--Roboto: "Roboto", sans-serif;
+	--OpenSans: "Open Sans", sans-serif;
+	--Lato: "Lato", sans-serif;
+}
+
+.security_container {
+	height: 2700px;
+	position: relative;
+	object-fit: cover;
+	overflow: hidden;
+}
+
+.security {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 90%;
+	max-width: 1500px;
+	font-size: 16px;
+}
+
+.security_heading {
+	font-size: 3em;
+	font-family: var(--OpenSans);
+	font-weight: 600;
+	color: #303030;
+}
+
+.security_toc {
+	font-size: 1.5em;
+	font-family: var(--OpenSans);
+	font-weight: 600;
+	text-align: right;
+	text-align: bottom;
+	margin-top: 25px;
+	color: #303030;
+}
+
+.security_type {
+	font-size: 1.5em;
+	font-family: var(--OpenSans);
+	font-weight: 500;
+	color: #303030;
+}
+
+#SymbolInfo {
+	margin: 0 auto;
+	padding: 0;
+}
+
+#CompanyProfile {
+	margin-top: 60px;
+}
+
+#CompanyProfile,
+#TechnicalAnalysis {
+	margin-top: 60px;
+}

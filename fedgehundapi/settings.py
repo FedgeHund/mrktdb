@@ -60,7 +60,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env(
     'SECRET_KEY', default='f9y!yh1nb6lm5(o*)^(8+-dueu9_p=p$c$d-u8f(p=w+mtd%rx')
 
-ALLOWED_HOSTS = ['mrktdbapi-prod.eba-tw27jjhn.us-west-2.elasticbeanstalk.com','127.0.0.1']
+ALLOWED_HOSTS = ['MrktDB.eba-brufwk2z.us-west-2.elasticbeanstalk.com','127.0.0.1','www.mrktdb.com']
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -72,6 +72,11 @@ REST_FRAMEWORK = {
     ]
 }
 
+CORS_ORIGIN_WHITELIST = [
+    'http://127.0.0.1:8000',
+    'http://localhost:3000'
+]
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -82,6 +87,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'allauth',
+    'corsheaders',
     'allauth.account',
     'rest_framework',
     'rest_framework.authtoken',
@@ -95,6 +101,7 @@ INSTALLED_APPS = [
     'holdings.apps.HoldingsConfig',
     'fedgehundui',
     'django_cron',
+    'security.apps.SecurityConfig'
 ]
 
 SITE_ID=1
@@ -118,6 +125,7 @@ AUTHENTICATION_BACKENDS = [
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -190,4 +198,5 @@ STATIC_ROOT = 'static'
 CRON_CLASSES = [
     "edgar.cikCusipCronJob.CikCusipCronJob",
     "edgar.securityLinkCompanyCronJob.SecurityLinkCompanyCronJob",
+    "edgar.cusipTickerMappingSecurityUpdate.CusipTickerMappingSecurityUpdate"
 ]

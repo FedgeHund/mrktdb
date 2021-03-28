@@ -1,171 +1,157 @@
-import datetime
-import sys
 import os
 import django
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
 django.setup()
-from next_prev import next_in_order, prev_in_order
-from edgar.models import Company, QuarterlyHolding, QuarterlyOtherManagerDistribution, QuarterlySecurityHolding, QuarterlyOtherManager, Filer, Security
+
+from edgar.models import QuarterlyHolding, QuarterlySecurityHolding, Filer
 from holdings.models import Position
 from security.models import Price
-companies = filers = quarterlyholdings = securities = quarterlyothermanagerdistributions = quarterlysecurityholdings = quarterlysecurityholdings_all = quarterlyothermanagers = []
-companies = Company.objects.all()
+
+quarterly_holdings = quarterly_security_holdings = []
 filers = Filer.objects.all()
-securities = Security.objects.all()
-quarterlyholdings_all = QuarterlyHolding.objects.all()
-quarterlyothermanagerdistributions = QuarterlyOtherManagerDistribution.objects.all()
-quarterlysecurityholdings = QuarterlySecurityHolding.objects.all()
-quarterlyothermanagers = QuarterlyOtherManager.objects.all()
-
-
-#############################################################################################################################
-
-#############################################################################################################################
 
 for filer in filers:
-    quarterlyholdings = QuarterlyHolding.objects.filter(filerId=filer)
-    arrr = []
-    for quarterlyholding in quarterlyholdings:
-        arr = {}
-        quarterlysecurityholdings = QuarterlySecurityHolding.objects.filter(quarterlyHoldingId=quarterlyholding)
-        previous_quarterlysecurityholdings = QuarterlySecurityHolding.objects.filter(quarterlyHoldingId=next_in_order(quarterlyholding))
+    quarterly_holdings = QuarterlyHolding.objects.filter(filerId=filer).order_by('filedOn')
+    positions_to_create = []
+    prev_quarterly_holding = None
+    qtrly_sec_holdings_for_prev_qtrly_holding = []
+
+    # Add logic to figure out which was the first quarter the security was owned
+    first_qtrly_holding_by_sec_id = {}
+
+    for quarterly_holding in quarterly_holdings:
+        quarterly_security_holdings = QuarterlySecurityHolding.objects.filter(quarterlyHoldingId=quarterly_holding)
+
+        prev_total_market_value = 0
+        for qtrly_sec_holding_for_prev_qtrly_holding in qtrly_sec_holdings_for_prev_qtrly_holding:
+            prev_total_market_value = qtrly_sec_holding_for_prev_qtrly_holding.marketvalue + prev_total_market_value
+
         total_market_value = 0
-        previous_total_market_value = 0
-        
-        for quarterlysecurityholding in previous_quarterlysecurityholdings:
-            previous_total_market_value = quarterlysecurityholding.marketvalue + previous_total_market_value 
-        for quarterlysecurityholding in quarterlysecurityholdings:
-            total_market_value = quarterlysecurityholding.marketvalue + total_market_value 
-            security_id = quarterlysecurityholding.securityId
-            weight_percent = 0
-            previous_weight_percent = 0
-            weight_percent = (quarterlysecurityholding.marketvalue/total_market_value)*100
+        for quarterly_security_holding in quarterly_security_holdings:
+            total_market_value = quarterly_security_holding.marketvalue + total_market_value
 
-            try:
-                qq = QuarterlySecurityHolding.objects.filter(quarterlyHoldingId=next_in_order(quarterlyholding),securityId = security_id).first()
-                if(qq!=None):
-                    previous_weight_percent = (qq.marketvalue/previous_total_market_value)*100
-            except:
-                print("Error while calculating previous weight percent")
-                pass
-            # Get previous quarter
-            prev_quarter_id = next_in_order(quarterlyholding)
-            
-            #Get previous quarterly security holding id for that security
-            change_in_shares = 0
-            position_type = ''
-            position_change = 0
-            quarterlysecurityholdings_for_filer_for_security=[]
-            for quarterlyholdingobject in quarterlyholdings:
-                quarterlysecurityholding_for_filer_for_security = QuarterlySecurityHolding.objects.filter(securityId = security_id, quarterlyHoldingId = quarterlyholdingobject).first()
-                if (quarterlysecurityholding_for_filer_for_security!=None):
-                    quarterlysecurityholdings_for_filer_for_security.append(quarterlysecurityholding_for_filer_for_security)
-            qtr_first_owned = None
-            try:
-                for i in range(len(quarterlysecurityholdings_for_filer_for_security)-1):
-                    if(i<len(quarterlysecurityholdings_for_filer_for_security)):
-                        print(quarterlysecurityholdings_for_filer_for_security[i+1].quantity)
-                        if (quarterlysecurityholdings_for_filer_for_security[i+1].quantity == 0):
-                            qtr_first_owned = quarterlysecurityholdings_for_filer_for_security[i+1].quarterId
-                            break
-                    else:
-                        break
-            except:
-                pass
+        distinct_security_ids_for_qtrly_holdings = []  # find unique security per quarter holding
+        for security in distinct_security_ids_for_qtrly_holdings:
 
-            try:
-                if(prev_quarter_id!=None):
-                    prev_quarterly_security_holding_id_e = QuarterlySecurityHolding.objects.filter(quarterlyHoldingId = prev_quarter_id, securityId = security_id ).first()
-                    try:
-                        
+            ##########################################
+            # START: Find totals for current quarter #
+            ##########################################
+            total_market_value_of_sec = 0
+            total_quantity_of_sec = 0
+            total_sole_of_sec = 0
+            total_shared_of_sec = 0
+            total_none_of_sec = 0
+            qtrly_sec_holdings_for_sec_and_qtrly_holding = quarterly_security_holdings.filter(securityId=security)
+            for qtrly_sec_holding_for_sec_and_qtrly_holding in qtrly_sec_holdings_for_sec_and_qtrly_holding:
+                total_market_value_of_sec = total_market_value_of_sec + qtrly_sec_holding_for_sec_and_qtrly_holding.marketvalue
+                total_quantity_of_sec = total_quantity_of_sec + qtrly_sec_holding_for_sec_and_qtrly_holding.quantity
+                total_sole_of_sec = total_sole_of_sec + qtrly_sec_holding_for_sec_and_qtrly_holding.sole
+                total_shared_of_sec = total_shared_of_sec + qtrly_sec_holding_for_sec_and_qtrly_holding.shared
+                total_none_of_sec = total_none_of_sec + qtrly_sec_holding_for_sec_and_qtrly_holding.none
 
-                        if(prev_quarterly_security_holding_id_e.quantity!=None):
-                            change_in_shares = quarterlysecurityholding.quantity - prev_quarterly_security_holding_id_e.quantity
+            weight_percent_of_sec = None
+            if total_market_value != 0:
+                weight_percent_of_sec = (total_market_value_of_sec * 100) / total_market_value
 
-                            if(prev_quarterly_security_holding_id_e.quantity > quarterlysecurityholding.quantity):
-                                position_type = 'Decreased'
-                            if(prev_quarterly_security_holding_id_e.quantity < quarterlysecurityholding.quantity):
-                                position_type = 'Increased'
-                            if(prev_quarterly_security_holding_id_e.quantity == quarterlysecurityholding.quantity):
-                                position_type = 'No Change'
-                            position_change = ((quarterlysecurityholding.quantity/prev_quarterly_security_holding_id_e.quantity)-1)*100 #doubt: what happens when a security is added in this quarter
-                            
-                        else:
-                            position_type = 'New'
-                            position_change = None
+            ########################################
+            # END: Find totals for current quarter #
+            ########################################
 
-                        
-                    except:
-                        pass
-                else:
-                    pass
-            except:
-                print("No prev quarter")
-                pass
-            price = None
-            
-            try:
-                priceobject = Price.objects.filter(name=security_id.securityName,quarter=quarterlyholding.quarter).first()
-                if(priceobject):
-                    arr['lastPrice'] = priceobject.value
-                    print(price)
-            except:
-                print('price for security not available')
-                pass
-            arr['quarter'] = quarterlyholding.quarter
-            arr['filerId'] = filer
-            arr['securityName'] = security_id.securityName
-            arr['filerName'] = quarterlyholding.filerId.companyId.name
-            arr['securityId']=security_id
-            arr['quarterId']=quarterlyholding
-            arr['investmentDiscretion']=quarterlysecurityholding.investmentDiscretion
-            arr['marketValue']=quarterlysecurityholding.marketvalue
-            arr['quantity']=quarterlysecurityholding.quantity
-            arr['weightPercent']=weight_percent 
-            arr['changeInShares'] = change_in_shares
-            arr['positionType'] = position_type
-            arr['previousWeightPercent'] = previous_weight_percent
-            arr['changeInPositionPercent'] = position_change
-            arr['sourceType'] = filer.fileType
-            arr['sourcedOn']=quarterlyholding.filedOn
-            if(qtr_first_owned!=None):
-                arr['quarterFirstOwned']=qtr_first_owned
-            arrr.append(arr)
-            
-    try:
-        PositionObjectstbs = [
-            Position(
-                quarter = arrr[i]['quarter'],
-                filerId = arrr[i]['filerId'],
-                securityName = arrr[i]['securityName'],
-                filerName = arrr[i]['filerName'],
-                securityId = arrr[i]['securityId'],
-                quarterId = arrr[i]['quarterId'],
-                investmentDiscretion = arrr[i]['investmentDiscretion'],
-                marketValue = arrr[i]['marketValue'],
-                quantity = arrr[i]['quantity'],
-                weightPercent = arrr[i]['weightPercent'],
-                changeInShares = arrr[i]['changeInShares'],
-                positionType = arrr[i]['positionType'],
-                previousWeightPercent = arrr[i]['previousWeightPercent'],
-                changeInPositionPercent = arrr[i]['changeInPositionPercent'],
-                sourceType = arrr[i]['sourceType'],
-                sourcedOn = arrr[i]['sourcedOn']
-            )for i in range(len(arrr))
-        ]
-    except:
-        print("Exception caught while creating PositionObjectstbs list")
-        pass
-    print("Bulk Save for Position Started")
-    try:
-        Position.objects.bulk_create(PositionObjectstbs)
-    except:
-        print("Exception caught while saving Position")
-        pass
-    print("Bulk Save for Position Ended")    
-            # if(qtr_first_owned!=None):
-            #     position = Position(lastPrice=price,quarter=quarterlyholding.quarter,securityName=security_id.securityName,filerName=quarterlyholding.filerId.companyId.name,securityId=security_id,quarterId=quarterlyholding,investmentDiscretion=quarterlysecurityholding.investmentDiscretion,marketValue=quarterlysecurityholding.marketvalue,quantity=quarterlysecurityholding.quantity, weightPercent=weight_percent, changeInShares = change_in_shares, positionType = position_type, previousWeightPercent = previous_weight_percent, changeInPositionPercent = position_change, sourceType = filer.fileType, sourcedOn=quarterlyholding.filedOn, quarterFirstOwned=qtr_first_owned)
-            # else:
-            #     position = Position(lastPrice=price,quarter=quarterlyholding.quarter,securityName=security_id.securityName,filerName=quarterlyholding.filerId.companyId.name,securityId=security_id,quarterId=quarterlyholding,investmentDiscretion=quarterlysecurityholding.investmentDiscretion,marketValue=quarterlysecurityholding.marketvalue,quantity=quarterlysecurityholding.quantity, weightPercent=weight_percent, changeInShares = change_in_shares, positionType = position_type, previousWeightPercent = previous_weight_percent, changeInPositionPercent = position_change, sourceType = filer.fileType, sourcedOn=quarterlyholding.filedOn)
-            # position.save()
+            ###########################################
+            # START: Find totals for previous quarter #
+            ###########################################
 
+            prev_total_market_value_of_sec = 0
+            prev_total_quantity_of_sec = 0
+            prev_total_sole_of_sec = 0
+            prev_total_shared_of_sec = 0
+            prev_total_none_of_sec = 0
+
+            qtrly_sec_holdings_for_sec_and_prev_qtrly_holding = []
+            if not qtrly_sec_holdings_for_prev_qtrly_holding:
+                qtrly_sec_holdings_for_sec_and_prev_qtrly_holding = qtrly_sec_holdings_for_prev_qtrly_holding.filter(
+                    securityId=security)
+                for qtrly_sec_holding_for_sec_and_prev_qtrly_holding in qtrly_sec_holdings_for_sec_and_prev_qtrly_holding:
+                    prev_total_market_value_of_sec = prev_total_market_value_of_sec + qtrly_sec_holding_for_sec_and_prev_qtrly_holding.marketvalue
+                    prev_total_quantity_of_sec = prev_total_quantity_of_sec + qtrly_sec_holding_for_sec_and_prev_qtrly_holding.quantity
+                    prev_total_sole_of_sec = prev_total_sole_of_sec + qtrly_sec_holding_for_sec_and_prev_qtrly_holding.sole
+                    prev_total_shared_of_sec = prev_total_shared_of_sec + qtrly_sec_holding_for_sec_and_prev_qtrly_holding.shared
+                    prev_total_none_of_sec = prev_total_none_of_sec + qtrly_sec_holding_for_sec_and_prev_qtrly_holding.none
+
+            prev_weight_percent_of_sec = None
+            if prev_total_market_value != 0:
+                prev_weight_percent_of_sec = (prev_total_market_value_of_sec * 100) / prev_total_market_value
+
+            #########################################
+            # END: Find totals for previous quarter #
+            #########################################
+
+            #########################################
+            # START: Compare current vs prev totals #
+            #########################################
+
+            change_in_shares = total_quantity_of_sec - prev_total_quantity_of_sec
+            position_change = None
+            position_type = 'New'
+            if prev_total_quantity_of_sec != 0:
+                position_change = (
+                                    change_in_shares / prev_total_quantity_of_sec) * 100  # doubt: what happens when a security is added in this quarter
+                if prev_total_quantity_of_sec > total_quantity_of_sec:
+                    position_type = 'Decreased'
+                elif prev_total_quantity_of_sec < total_quantity_of_sec:
+                    position_type = 'Increased'
+                elif prev_total_quantity_of_sec == total_quantity_of_sec:
+                    position_type = 'No Change'
+
+            #######################################
+            # END: Compare current vs prev totals #
+            #######################################
+
+            #########################
+            # START: Get last price #
+            #########################
+
+            price = Price.objects.filter(securityId=security.securityId, quarter=quarterly_holding.quarter).first()
+            last_price = None
+            if price is not None:
+                last_price = price.value
+
+            #######################
+            # END: Get last price #
+            #######################
+
+            #################################
+            # START: Create position object #
+            #################################
+
+            ## Need to think about investmentDiscretion. Different rows in quaterly holding for same security can have the different investmentDiscretion
+
+            position_to_create = Position(securityId=security, quarterId=quarterly_holding, filerId=filer,
+                                          quarter=quarterly_holding.quarter, securityName=security.securityName,
+                                          filerName=filer.companyId.name, cusip=security.cusip, cik=filer.companyId.cik,
+                                          quarterFirstOwned=first_qtrly_holding_by_sec_id.get(security.securityId),
+                                          quantity=total_quantity_of_sec, marketValue=total_market_value_of_sec,
+                                          weightPercent=weight_percent_of_sec,
+                                          previousWeightPercent=prev_weight_percent_of_sec, lastPrice=last_price,
+                                          changeInShares=change_in_shares, changeInPositionPercent=position_change,
+                                          sourceType=filer.fileType, sourcedOn=quarterly_holding.filedOn,
+                                          positionType=position_type)
+            positions_to_create.append(position_to_create)
+
+            ###############################
+            # END: Create position object #
+            ###############################
+
+        #######################################################
+        # START: Reassign to current to prev for next quarter #
+        #######################################################
+
+        prev_quarterly_holding = quarterly_holding
+        qtrly_sec_holdings_for_prev_qtrly_holding = quarterly_security_holdings
+
+        #####################################################
+        # END: Reassign to current to prev for next quarter #
+        #####################################################
+
+    Position.objects.bulk_create(positions_to_create)

@@ -1,6 +1,5 @@
 import os
 import django
-import time
 
 from django.core.exceptions import MultipleObjectsReturned
 from django.db import transaction
@@ -9,14 +8,9 @@ from django.db.models import Sum
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
 django.setup()
 
-from edgar.models import QuarterlyHolding, QuarterlySecurityHolding, Filer, Security
+from edgar.models import QuarterlyHolding, QuarterlySecurityHolding, Filer
 from holdings.models import Position
 from security.models import Price
-
-start_time = time.time()
-
-quarterly_holdings = quarterly_security_holdings = []
-filers = Filer.objects.all()
 
 
 @transaction.atomic
@@ -43,7 +37,6 @@ def calculate_positions(filer):
 
     for quarterly_holding in quarterly_holdings:
         positions_to_create = []
-        quarter_start_time = time.time()
         print("Starting positions calculation for filer: ", filer.filerId, " quarter: ", quarterly_holding.quarter)
 
         quarterly_security_holdings = QuarterlySecurityHolding.objects.filter(quarterlyHoldingId=quarterly_holding)
@@ -83,7 +76,6 @@ def calculate_positions(filer):
             prev_total_market_value_of_sec = 0
             prev_total_quantity_of_sec = 0
 
-            qtrly_sec_holdings_for_sec_and_prev_qtrly_holding = []
             if qtrly_sec_holdings_for_prev_qtrly_holding is not None:
                 prev_totals_of_sec = qtrly_sec_holdings_for_prev_qtrly_holding.filter(securityId=security).aggregate(
                     Sum("marketvalue"), Sum("quantity"))
@@ -190,13 +182,11 @@ def calculate_positions(filer):
         # END: Bulk write #
         ###################
 
-        print("------------------------------------------------------------------------------------")
-        print("------------------------------------------------------------------------------------")
-        print("Time Taken to process each quarter: ", time.time() - quarter_start_time)
-        print("------------------------------------------------------------------------------------")
-        print("------------------------------------------------------------------------------------")
-
 
 def main():
+    filers = Filer.objects.all()
     for filer in filers:
         calculate_positions(filer)
+
+
+main()

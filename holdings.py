@@ -1,6 +1,9 @@
+import getopt
 import os
-import django
+import sys
 
+import django
+from joblib import Parallel, delayed
 from django.core.exceptions import MultipleObjectsReturned
 from django.db import transaction
 from django.db.models import Sum
@@ -183,10 +186,20 @@ def calculate_positions(filer):
         ###################
 
 
-def main():
+def main(argv):
+    try:
+        opts, args = getopt.getopt(argv, "n:", ["numThreads=", ])
+    except getopt.GetoptError:
+        print('holdings.py -n <numberOfThreads>')
+        sys.exit(2)
+    n_jobs = 2
+    for opt, arg in opts:
+        if opt == '-n':
+            n_jobs = int(arg)
+
     filers = Filer.objects.all()
-    for filer in filers:
-        calculate_positions(filer)
+    Parallel(n_jobs=n_jobs, prefer="threads")(delayed(calculate_positions)(filer) for filer in filers)
 
 
-main()
+if __name__ == "__main__":
+    main(sys.argv[1:])

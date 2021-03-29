@@ -43,7 +43,7 @@ def calculate_positions(filer):
         print("Starting positions calculation for filer: ", filer.filerId, " quarter: ", quarterly_holding.quarter)
 
         quarterly_security_holdings = QuarterlySecurityHolding.objects.filter(quarterlyHoldingId=quarterly_holding)
-        total_market_value = quarterly_security_holdings.aggregate(Sum("marketvalue")).get("marketvalue__sum")
+        total_market_value = quarterly_security_holdings.aggregate(Sum("marketvalue")).get("marketvalue__sum", 0)
         distinct_securities_in_qtrly_sec_holdings = set()
         # Security.objects.filter(
         #    quarterlysecurityholding__in=quarterly_security_holdings).distinct()

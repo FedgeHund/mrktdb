@@ -188,16 +188,19 @@ def calculate_positions(filer):
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv, "n:", ["numThreads=", ])
+        opts, args = getopt.getopt(argv, "n:f:", ["numThreads=", "filerStartId="])
     except getopt.GetoptError:
         print('holdings.py -n <numberOfThreads>')
         sys.exit(2)
     n_jobs = 2
+    filer_start_id = 0
     for opt, arg in opts:
         if opt == '-n':
             n_jobs = int(arg)
+        if opt == '-f':
+            filer_start_id = int(arg)
 
-    filers = Filer.objects.all()
+    filers = Filer.objects.filter(filerId__gt=filer_start_id)
     Parallel(n_jobs=n_jobs, prefer="threads")(delayed(calculate_positions)(filer) for filer in filers)
 
 

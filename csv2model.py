@@ -7,7 +7,7 @@ from edgar.models import FailsToDeliver
 
 
 
-with open('static/admin/csv_files/Unique_Mappings.csv','rt')as f:
+with open('static/admin/csv_files/Unique_Mappings.csv','rt', encoding='utf8')as f:
     data = csv.reader(f)
 
     print('Start')

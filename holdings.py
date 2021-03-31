@@ -59,10 +59,14 @@ def calculate_positions(filer):
             # START: Find totals for current quarter #
             ##########################################
 
-            totals_of_sec = quarterly_security_holdings.filter(securityId=security).aggregate(Sum("marketvalue"),
-                                                                                              Sum("quantity"))
-            total_market_value_of_sec = totals_of_sec.get("marketvalue__sum", 0)
-            total_quantity_of_sec = totals_of_sec.get("quantity__sum", 0)
+            totals_of_sec = quarterly_security_holdings.filter(securityId=security).aggregate(
+                totalMarketValue=Sum("marketvalue"), totalQuantity=Sum("quantity"))
+            total_market_value_of_sec = totals_of_sec.get("totalMarketValue", 0)
+            if total_market_value_of_sec is None:
+                total_market_value_of_sec = 0
+            total_quantity_of_sec = totals_of_sec.get("totalQuantity", 0)
+            if total_quantity_of_sec is None:
+                total_quantity_of_sec = 0
 
             weight_percent_of_sec = None
             if total_market_value != 0:
@@ -81,9 +85,14 @@ def calculate_positions(filer):
 
             if qtrly_sec_holdings_for_prev_qtrly_holding is not None:
                 prev_totals_of_sec = qtrly_sec_holdings_for_prev_qtrly_holding.filter(securityId=security).aggregate(
-                    Sum("marketvalue"), Sum("quantity"))
-                prev_total_market_value_of_sec = prev_totals_of_sec.get("marketvalue__sum", 0)
-                prev_total_quantity_of_sec = prev_totals_of_sec.get("quantity__sum", 0)
+                    totalMarketValue=Sum("marketvalue"),
+                    totalQuantity=Sum("quantity"))
+                prev_total_market_value_of_sec = prev_totals_of_sec.get("totalMarketValue", 0)
+                if prev_total_market_value_of_sec is None:
+                    prev_total_market_value_of_sec = 0
+                prev_total_quantity_of_sec = prev_totals_of_sec.get("totalQuantity", 0)
+                if prev_total_quantity_of_sec is None:
+                    prev_total_quantity_of_sec = 0
 
             prev_weight_percent_of_sec = None
             if prev_total_market_value != 0:

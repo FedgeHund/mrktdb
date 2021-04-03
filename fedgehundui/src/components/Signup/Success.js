@@ -19,7 +19,7 @@ export class FormPersonalDetails extends Component {
 
 	checkUser = async () => {
 
-		await axios.get("http://" + URL + "/auth/user/", {
+		await axios.get("http://" + "mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com" + "/auth/user/", {
 		},
 			{
 				headers: {
@@ -62,7 +62,7 @@ export class FormPersonalDetails extends Component {
 
 		var csrftoken = this.getCookie('csrftoken');
 
-		await axios.post("http://" + URL + "/auth/logout/", {
+		await axios.post("http://" + "mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com" + "/auth/logout/", {
 		},
 			{
 				headers: {
@@ -81,7 +81,7 @@ export class FormPersonalDetails extends Component {
 				}
 			}.bind(this))
 
-		window.location = "http://" + URL + "/signin/"
+		window.location = "http://" + "mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com" + "/signin/"
 	};
 
 

@@ -48,7 +48,7 @@ export class FormUserDetails extends Component {
 
         var csrftoken = this.getCookie('csrftoken');
 
-        await axios.post("http://" + URL + "/auth/logout/", {
+        await axios.post("http://" + "mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com" + "/auth/logout/", {
         },
             {
                 headers: {
@@ -69,7 +69,7 @@ export class FormUserDetails extends Component {
 
         this.setState({ buttonText: "Creating..." });
 
-        await axios.post("http://" + URL + "/auth/registration/", {
+        await axios.post("http://" + "mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com" + "/auth/registration/", {
             "first_name": this.props.values.firstName,
             "last_name": this.props.values.lastName,
             "email": this.props.values.email,

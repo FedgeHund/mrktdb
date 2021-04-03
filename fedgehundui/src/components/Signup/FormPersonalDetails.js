@@ -36,7 +36,7 @@ export class FormPersonalDetails extends Component {
         axios.defaults.xsrfCookieName = 'csrftoken';
         axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-        await axios.post("http://" + URL + "/profile/fields/", {
+        await axios.post("http://" + "mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com" + "/profile/fields/", {
             "occupation": this.props.values.occupation,
             "company": this.props.values.company,
             "state": this.props.values.state,

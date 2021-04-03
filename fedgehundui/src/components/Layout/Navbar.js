@@ -12,7 +12,7 @@ function Navbar() {
 	const [errorMessage, seterrorMessage] = useState();
 
 	const checkUser = async () => {
-		await axios.get("http://" + URL + "/auth/user/", {
+		await axios.get("http://" + "mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com" + "/auth/user/", {
 		},
 			{
 				headers: {
@@ -60,7 +60,7 @@ function Navbar() {
 
 		var csrftoken = getCookie('csrftoken');
 
-		await axios.post("http://" + URL + "/auth/logout/", {
+		await axios.post("http://" + "mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com" + "/auth/logout/", {
 		},
 			{
 				headers: {
@@ -79,7 +79,7 @@ function Navbar() {
 				}
 			}.bind(this))
 
-		window.location = "http://" + URL + "/signin/"
+		window.location = "http://" + "mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com" + "/signin/"
 	};
 
 	const changeNavbarBackground = () => {

@@ -31,7 +31,7 @@ function Signin() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post("http://" + "mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com" + "/auth/login/", {
+        axios.post("http://mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com/auth/login/", {
             email,
             password
         },
@@ -43,10 +43,10 @@ function Signin() {
         )
             .then(function (response) {
                 if (response.status == 200) {
-                    window.location = "http://" + "mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com" + "/auth/logout/"
+                    window.location = "http://mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com/auth/logout/"
                 }
                 else {
-                    window.location = "http://" + "mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com" + "/signin/"
+                    window.location = "http://mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com/signin/"
                 }
             })
             .catch(error => {

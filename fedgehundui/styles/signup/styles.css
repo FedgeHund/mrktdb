@@ -73,13 +73,13 @@
 .signup_box {
 	position: absolute;
 	height: 745px;
-	top: 48%;
+	top: 49%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	padding: 50px;
 	background: #fff;
 	border-radius: 12px;
-	max-width: 500px;
+	max-width: 600px;
 }
 
 .signup_box .step {
@@ -99,7 +99,7 @@
 .signup_box .already {
 	color: #515151;
 	position: relative;
-	ffont-family: var(--OpenSans);
+	font-family: var(--OpenSans);
 	font-size: 17px;
 	text-align: right;
 	padding-top: 17px;
@@ -258,6 +258,15 @@
 	background-color: rgba(254, 111, 125, 1) !important;
 }
 
+.or {
+	color: #a2a2a2;
+	font-family: var(--OpenSans);
+}
+
+#my-signin2 {
+	margin-top: 15px;
+}
+
 /* CSS for back button */
 .signup_box .back-btn {
 	position: relative;
@@ -327,8 +336,7 @@
 
 .signup_box .circle {
 	height: 200px;
-	width: 200px;
-	background-color: #bbb;
+	width: 220px;
 	border-radius: 50%;
 	display: inline-block;
 }
@@ -360,7 +368,7 @@
 }
 
 /* CSS for success page */
-.success_content1 {
+.success_hello {
 	color: rgba(81, 81, 81, 1);
 	position: relative;
 	text-align: center;
@@ -368,7 +376,18 @@
 	font-family: var(--OpenSans);
 	font-size: 40px;
 	font-weight: 600;
-	padding-top: 220px;
+	margin-top: 260px;
+}
+
+.success_content1 {
+	color: rgba(81, 81, 81, 1);
+	position: relative;
+	text-align: center;
+	justify-content: center;
+	font-family: var(--OpenSans);
+	font-size: 50px;
+	font-weight: 600;
+	margin-top: 20px;
 }
 
 /* CSS for Sign In page */

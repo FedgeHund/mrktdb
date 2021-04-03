@@ -1,9 +1,8 @@
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import WatchlistSerializer
 from .serializers import ProfileSerializer
-from .models import Watchlist, Profile
+from .models import Profile
 
 class ProfileView(ListCreateAPIView):
 	serializer_class = ProfileSerializer
@@ -32,11 +31,3 @@ class ProfileView(ListCreateAPIView):
 			Profile.objects.filter(user=self.request.user).update(phone = phone)
 
 		return Response(data = Profile.objects.filter(user=self.request.user).values())
-
-
-class WatchlistView(APIView):
-    def get(self, request):
-    	user = self.request.user
-    	companies = Watchlist.objects.filter(user=user)
-    	serializer = WatchlistSerializer(companies, many=True)
-    	return Response({"watchlist": serializer.data})

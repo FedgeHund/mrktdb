@@ -60,7 +60,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env(
     'SECRET_KEY', default='f9y!yh1nb6lm5(o*)^(8+-dueu9_p=p$c$d-u8f(p=w+mtd%rx')
 
-ALLOWED_HOSTS = ['MrktDB.eba-brufwk2z.us-west-2.elasticbeanstalk.com','127.0.0.1','www.mrktdb.com']
+ALLOWED_HOSTS = ['MrktDB.eba-brufwk2z.us-west-2.elasticbeanstalk.com','127.0.0.1']
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -95,13 +95,8 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'fedgehund_auth',
     'fedgehund_profile.apps.FedgehundProfileConfig',
-    'edgar.apps.EdgarConfig',
-    'filer.apps.FilerConfig',
-    'testapp',
-    'holdings.apps.HoldingsConfig',
     'fedgehundui',
     'django_cron',
-    'security.apps.SecurityConfig'
 ]
 
 SITE_ID=1

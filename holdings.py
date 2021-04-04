@@ -1,9 +1,12 @@
 import getopt
 import os
 import sys
+import logging
+import time
 
 import django
-from joblib import Parallel, delayed
+
+from joblib import Parallel, delayed, wrap_non_picklable_objects
 from django.core.exceptions import MultipleObjectsReturned
 from django.db import transaction
 from django.db.models import Sum
@@ -15,6 +18,8 @@ from edgar.models import QuarterlyHolding, QuarterlySecurityHolding, Filer
 from holdings.models import Position
 from security.models import Price
 
+logger = logging.getLogger("holdings_job")
+
 
 @transaction.atomic
 def bulk_get_or_create(positions_dict_to_create):
@@ -25,25 +30,32 @@ def bulk_get_or_create(positions_dict_to_create):
                                            quarter=position_dict.get("quarter"),
                                            defaults=position_dict)
         except MultipleObjectsReturned:
-            print("Multiple objects returned. This is bad, we will need to remove this duplication SecurityId: ",
-                  position_dict.get("securityId").securityId, " quarterId: ",
-                  position_dict.get("quarterId").quarterlyHoldingId, " quarter: ", position_dict.get("quarter"))
+            logger.exception(
+                "Multiple objects returned. "
+                "This is bad, we will need to remove this duplication SecurityId: %0s quarterId: %1s quarter: %2s",
+                position_dict.get("securityId").securityId,
+                position_dict.get("quarterId").quarterlyHoldingId, position_dict.get("quarter"))
 
 
-def calculate_positions(filer):
-    print("Starting positions calculation for filer: ", filer.filerId)
+@delayed
+@wrap_non_picklable_objects
+def calculate_positions(filer_id, filer_type, company_name, cik):
+    logger.info("Starting positions calculation for filer: %s", filer_id)
 
-    quarterly_holdings = QuarterlyHolding.objects.filter(filerId=filer).order_by('quarter')
+    quarterly_holdings = QuarterlyHolding.objects.filter(filerId=filer_id).order_by('quarter')
     prev_total_market_value = 0
     qtrly_sec_holdings_for_prev_qtrly_holding = None
     first_qtrly_holding_by_sec_id = {}
 
     for quarterly_holding in quarterly_holdings:
         positions_to_create = []
-        print("Starting positions calculation for filer: ", filer.filerId, " quarter: ", quarterly_holding.quarter)
+        logger.info("Starting positions calculation for filer: %0s quarter: %1s", filer_id,
+                    quarterly_holding.quarter)
 
         quarterly_security_holdings = QuarterlySecurityHolding.objects.filter(quarterlyHoldingId=quarterly_holding)
         total_market_value = quarterly_security_holdings.aggregate(Sum("marketvalue")).get("marketvalue__sum", 0)
+        if total_market_value is None:
+            total_market_value = 0
         distinct_securities_in_qtrly_sec_holdings = set()
         # Security.objects.filter(
         #    quarterlysecurityholding__in=quarterly_security_holdings).distinct()
@@ -52,8 +64,8 @@ def calculate_positions(filer):
             distinct_securities_in_qtrly_sec_holdings.add(quarterly_security_holding.securityId)
 
         for security in distinct_securities_in_qtrly_sec_holdings:
-            print("Starting positions calculation for filer: ", filer.filerId, " quarter: ", quarterly_holding.quarter,
-                  " security: ", security.cusip, "|", security.securityName)
+            logger.info("Starting positions calculation for filer: %0s quarter: %1s security: %2s|%3s ", filer_id,
+                        quarterly_holding.quarter, security.securityName, security.cusip)
 
             ##########################################
             # START: Find totals for current quarter #
@@ -111,7 +123,8 @@ def calculate_positions(filer):
             position_type = 'New'
             if prev_total_quantity_of_sec != 0:
                 position_change = (
-                                    change_in_shares / prev_total_quantity_of_sec) * 100  # doubt: what happens when a security is added in this quarter
+                                    change_in_shares / prev_total_quantity_of_sec) * 100
+                # doubt: what happens when a security is added in this quarter
                 if prev_total_quantity_of_sec > total_quantity_of_sec:
                     position_type = 'Decreased'
                 elif prev_total_quantity_of_sec < total_quantity_of_sec:
@@ -141,16 +154,16 @@ def calculate_positions(filer):
             #################################
 
             ## Need to think about investmentDiscretion. Different rows in quaterly holding for same security can have the different investmentDiscretion
-            position_to_create = {"securityId": security, "quarterId": quarterly_holding, "filerId": filer,
+            position_to_create = {"securityId": security, "quarterId": quarterly_holding, "filerId": filer_id,
                                   "quarter": quarterly_holding.quarter, "securityName": security.securityName,
-                                  "filerName": filer.companyId.name, "cusip": security.cusip,
-                                  "cik": filer.companyId.cik,
+                                  "filerName": company_name, "cusip": security.cusip,
+                                  "cik": cik,
                                   "quarterFirstOwned": first_qtrly_holding_by_sec_id.get(security.securityId),
                                   "quantity": total_quantity_of_sec, "marketValue": total_market_value_of_sec,
                                   "weightPercent": weight_percent_of_sec,
                                   "previousWeightPercent": prev_weight_percent_of_sec, "lastPrice": last_price,
                                   "changeInShares": change_in_shares, "changeInPositionPercent": position_change,
-                                  "sourceType": filer.fileType, "sourcedOn": quarterly_holding.filedOn,
+                                  "sourceType": filer_type, "sourcedOn": quarterly_holding.filedOn,
                                   "positionType": position_type}
 
             positions_to_create.append(position_to_create)
@@ -174,7 +187,6 @@ def calculate_positions(filer):
         # START: Reassign to current to prev for next quarter #
         #######################################################
 
-        prev_quarterly_holding = quarterly_holding
         qtrly_sec_holdings_for_prev_qtrly_holding = quarterly_security_holdings
         prev_total_market_value = total_market_value
 
@@ -186,13 +198,14 @@ def calculate_positions(filer):
         # START: Bulk write #
         #####################
 
-        print("Bulk writing ", len(positions_to_create), " positions for filer: ", filer.filerId, " quarter: ",
-              quarterly_holding.quarter)
+        logger.info("Bulk writing %0s positions for filer: %1s quarter: %2s", len(positions_to_create), filer_id,
+                    quarterly_holding.quarter)
         bulk_get_or_create(positions_to_create)
 
         ###################
         # END: Bulk write #
         ###################
+
 
 
 def main(argv):
@@ -209,8 +222,12 @@ def main(argv):
         if opt == '-f':
             filer_start_id = int(arg)
 
-    filers = Filer.objects.filter(filerId__gt=filer_start_id)
-    Parallel(n_jobs=n_jobs, prefer="threads")(delayed(calculate_positions)(filer) for filer in filers)
+    filers = Filer.objects.filter(filerId__gt=filer_start_id).prefetch_related("companyId")
+    start_time = time.time()
+    Parallel(n_jobs=n_jobs, backend="multiprocessing")(
+        calculate_positions(filer_id=filer.filerId, filer_type=filer.fileType, company_name=filer.companyId.name,
+                            cik=filer.companyId.cik) for filer in filers)
+    logger.info("Time taken: %0s", time.time() - start_time)
 
 
 if __name__ == "__main__":

@@ -39,7 +39,7 @@ def bulk_get_or_create(positions_dict_to_create):
 
 @delayed
 @wrap_non_picklable_objects
-def calculate_positions(filer):
+def calculate_positions(filer, number_of_threads=8):
     logger.info("Starting positions calculation for filer: %s", filer.filerId)
 
     quarterly_holdings = QuarterlyHolding.objects.filter(filerId=filer).order_by('quarter')
@@ -48,8 +48,7 @@ def calculate_positions(filer):
     first_qtrly_holding_by_sec_id = {}
 
     for quarterly_holding in quarterly_holdings:
-        positions_to_create = []
-        logger.info("Starting positions calculation for filer: %0s quarter: %1s", filer,
+        logger.info("Starting positions calculation for filer: %0s quarter: %1s", filer.filerId,
                     quarterly_holding.quarter)
 
         quarterly_security_holdings = QuarterlySecurityHolding.objects.filter(quarterlyHoldingId=quarterly_holding)
@@ -64,114 +63,6 @@ def calculate_positions(filer):
             distinct_securities_in_qtrly_sec_holdings.add(quarterly_security_holding.securityId)
 
         for security in distinct_securities_in_qtrly_sec_holdings:
-            logger.info("Starting positions calculation for filer: %0s quarter: %1s security: %2s|%3s ", filer.filerId,
-                        quarterly_holding.quarter, security.securityName, security.cusip)
-
-            ##########################################
-            # START: Find totals for current quarter #
-            ##########################################
-
-            totals_of_sec = quarterly_security_holdings.filter(securityId=security).aggregate(
-                totalMarketValue=Sum("marketvalue"), totalQuantity=Sum("quantity"))
-            total_market_value_of_sec = totals_of_sec.get("totalMarketValue", 0)
-            if total_market_value_of_sec is None:
-                total_market_value_of_sec = 0
-            total_quantity_of_sec = totals_of_sec.get("totalQuantity", 0)
-            if total_quantity_of_sec is None:
-                total_quantity_of_sec = 0
-
-            weight_percent_of_sec = None
-            if total_market_value != 0:
-                weight_percent_of_sec = (total_market_value_of_sec * 100) / total_market_value
-
-            ########################################
-            # END: Find totals for current quarter #
-            ########################################
-
-            ###########################################
-            # START: Find totals for previous quarter #
-            ###########################################
-
-            prev_total_market_value_of_sec = 0
-            prev_total_quantity_of_sec = 0
-
-            if qtrly_sec_holdings_for_prev_qtrly_holding is not None:
-                prev_totals_of_sec = qtrly_sec_holdings_for_prev_qtrly_holding.filter(securityId=security).aggregate(
-                    totalMarketValue=Sum("marketvalue"),
-                    totalQuantity=Sum("quantity"))
-                prev_total_market_value_of_sec = prev_totals_of_sec.get("totalMarketValue", 0)
-                if prev_total_market_value_of_sec is None:
-                    prev_total_market_value_of_sec = 0
-                prev_total_quantity_of_sec = prev_totals_of_sec.get("totalQuantity", 0)
-                if prev_total_quantity_of_sec is None:
-                    prev_total_quantity_of_sec = 0
-
-            prev_weight_percent_of_sec = None
-            if prev_total_market_value != 0:
-                prev_weight_percent_of_sec = (prev_total_market_value_of_sec * 100) / prev_total_market_value
-
-            #########################################
-            # END: Find totals for previous quarter #
-            #########################################
-
-            #########################################
-            # START: Compare current vs prev totals #
-            #########################################
-
-            change_in_shares = total_quantity_of_sec - prev_total_quantity_of_sec
-            position_change = None
-            position_type = 'New'
-            if prev_total_quantity_of_sec != 0:
-                position_change = (
-                                    change_in_shares / prev_total_quantity_of_sec) * 100
-                # doubt: what happens when a security is added in this quarter
-                if prev_total_quantity_of_sec > total_quantity_of_sec:
-                    position_type = 'Decreased'
-                elif prev_total_quantity_of_sec < total_quantity_of_sec:
-                    position_type = 'Increased'
-                elif prev_total_quantity_of_sec == total_quantity_of_sec:
-                    position_type = 'No Change'
-
-            #######################################
-            # END: Compare current vs prev totals #
-            #######################################
-
-            #########################
-            # START: Get last price #
-            #########################
-
-            price = Price.objects.filter(securityId=security, quarter=quarterly_holding.quarter).first()
-            last_price = None
-            if price is not None:
-                last_price = price.value
-
-            #######################
-            # END: Get last price #
-            #######################
-
-            #################################
-            # START: Create position object #
-            #################################
-
-            ## Need to think about investmentDiscretion. Different rows in quaterly holding for same security can have the different investmentDiscretion
-            position_to_create = {"securityId": security, "quarterId": quarterly_holding, "filerId": filer.filerId,
-                                  "quarter": quarterly_holding.quarter, "securityName": security.securityName,
-                                  "filerName": filer.companyId.name, "cusip": security.cusip,
-                                  "cik": filer.companyId.cik,
-                                  "quarterFirstOwned": first_qtrly_holding_by_sec_id.get(security.securityId),
-                                  "quantity": total_quantity_of_sec, "marketValue": total_market_value_of_sec,
-                                  "weightPercent": weight_percent_of_sec,
-                                  "previousWeightPercent": prev_weight_percent_of_sec, "lastPrice": last_price,
-                                  "changeInShares": change_in_shares, "changeInPositionPercent": position_change,
-                                  "sourceType": filer.fileType, "sourcedOn": quarterly_holding.filedOn,
-                                  "positionType": position_type}
-
-            positions_to_create.append(position_to_create)
-
-            ###############################
-            # END: Create position object #
-            ###############################
-
             ####################################
             # START: Store quarter first owned #
             ####################################
@@ -182,6 +73,15 @@ def calculate_positions(filer):
             ##################################
             # END: Store quarter first owned #
             ##################################
+
+        positions_to_create = Parallel(n_jobs=number_of_threads, prefer="threads")(
+            calculate_positions_per_sec(filer=filer, security=security, total_market_value=total_market_value,
+                                        prev_total_market_value=prev_total_market_value,
+                                        quarterly_holding=quarterly_holding,
+                                        quarterly_security_holdings=quarterly_security_holdings,
+                                        qtrly_sec_holdings_for_prev_qtrly_holding=qtrly_sec_holdings_for_prev_qtrly_holding,
+                                        first_qtrly_holding_by_sec_id=first_qtrly_holding_by_sec_id) for security in
+            distinct_securities_in_qtrly_sec_holdings)
 
         #######################################################
         # START: Reassign to current to prev for next quarter #
@@ -207,6 +107,121 @@ def calculate_positions(filer):
         ###################
 
 
+@delayed
+@wrap_non_picklable_objects
+def calculate_positions_per_sec(filer, security, total_market_value,
+                                prev_total_market_value,
+                                quarterly_holding, quarterly_security_holdings,
+                                qtrly_sec_holdings_for_prev_qtrly_holding, first_qtrly_holding_by_sec_id):
+    logger.info("Starting positions calculation for filer: %0s quarter: %1s security: %2s|%3s ", filer.filerId,
+                quarterly_holding.quarter, security.securityName, security.cusip)
+
+    ##########################################
+    # START: Find totals for current quarter #
+    ##########################################
+
+    totals_of_sec = quarterly_security_holdings.filter(securityId=security).aggregate(
+        totalMarketValue=Sum("marketvalue"), totalQuantity=Sum("quantity"))
+    total_market_value_of_sec = totals_of_sec.get("totalMarketValue", 0)
+    if total_market_value_of_sec is None:
+        total_market_value_of_sec = 0
+    total_quantity_of_sec = totals_of_sec.get("totalQuantity", 0)
+    if total_quantity_of_sec is None:
+        total_quantity_of_sec = 0
+
+    weight_percent_of_sec = None
+    if total_market_value != 0:
+        weight_percent_of_sec = (total_market_value_of_sec * 100) / total_market_value
+
+    ########################################
+    # END: Find totals for current quarter #
+    ########################################
+
+    ###########################################
+    # START: Find totals for previous quarter #
+    ###########################################
+
+    prev_total_market_value_of_sec = 0
+    prev_total_quantity_of_sec = 0
+
+    if qtrly_sec_holdings_for_prev_qtrly_holding is not None:
+        prev_totals_of_sec = qtrly_sec_holdings_for_prev_qtrly_holding.filter(securityId=security).aggregate(
+            totalMarketValue=Sum("marketvalue"),
+            totalQuantity=Sum("quantity"))
+        prev_total_market_value_of_sec = prev_totals_of_sec.get("totalMarketValue", 0)
+        if prev_total_market_value_of_sec is None:
+            prev_total_market_value_of_sec = 0
+        prev_total_quantity_of_sec = prev_totals_of_sec.get("totalQuantity", 0)
+        if prev_total_quantity_of_sec is None:
+            prev_total_quantity_of_sec = 0
+
+    prev_weight_percent_of_sec = None
+    if prev_total_market_value != 0:
+        prev_weight_percent_of_sec = (prev_total_market_value_of_sec * 100) / prev_total_market_value
+
+    #########################################
+    # END: Find totals for previous quarter #
+    #########################################
+
+    #########################################
+    # START: Compare current vs prev totals #
+    #########################################
+
+    change_in_shares = total_quantity_of_sec - prev_total_quantity_of_sec
+    position_change = None
+    position_type = 'New'
+    if prev_total_quantity_of_sec != 0:
+        position_change = (
+                            change_in_shares / prev_total_quantity_of_sec) * 100
+        # doubt: what happens when a security is added in this quarter
+        if prev_total_quantity_of_sec > total_quantity_of_sec:
+            position_type = 'Decreased'
+        elif prev_total_quantity_of_sec < total_quantity_of_sec:
+            position_type = 'Increased'
+        elif prev_total_quantity_of_sec == total_quantity_of_sec:
+            position_type = 'No Change'
+
+    #######################################
+    # END: Compare current vs prev totals #
+    #######################################
+
+    #########################
+    # START: Get last price #
+    #########################
+
+    price = Price.objects.filter(securityId=security, quarter=quarterly_holding.quarter).first()
+    last_price = None
+    if price is not None:
+        last_price = price.value
+
+    #######################
+    # END: Get last price #
+    #######################
+
+    #################################
+    # START: Create position object #
+    #################################
+
+    ## Need to think about investmentDiscretion. Different rows in quaterly holding for same security can have the different investmentDiscretion
+    position_to_create = {"securityId": security, "quarterId": quarterly_holding, "filerId": filer,
+                          "quarter": quarterly_holding.quarter, "securityName": security.securityName,
+                          "filerName": filer.companyId.name, "cusip": security.cusip,
+                          "cik": filer.companyId.cik,
+                          "quarterFirstOwned": first_qtrly_holding_by_sec_id.get(security.securityId),
+                          "quantity": total_quantity_of_sec, "marketValue": total_market_value_of_sec,
+                          "weightPercent": weight_percent_of_sec,
+                          "previousWeightPercent": prev_weight_percent_of_sec, "lastPrice": last_price,
+                          "changeInShares": change_in_shares, "changeInPositionPercent": position_change,
+                          "sourceType": filer.fileType, "sourcedOn": quarterly_holding.filedOn,
+                          "positionType": position_type}
+
+    return position_to_create
+
+    ###############################
+    # END: Create position object #
+    ###############################
+
+
 def main(argv):
     try:
         opts, args = getopt.getopt(argv, "n:f:", ["numThreads=", "filerStartId="])
@@ -223,7 +238,8 @@ def main(argv):
 
     filers = Filer.objects.filter(filerId__gt=filer_start_id).prefetch_related("companyId")
     start_time = time.time()
-    Parallel(n_jobs=n_jobs, backend="multiprocessing")(calculate_positions(filer) for filer in filers)
+    Parallel(n_jobs=n_jobs, backend="multiprocessing")(
+        calculate_positions(filer=filer, number_of_threads=n_jobs) for filer in filers)
     logger.info("Time taken: %0s", time.time() - start_time)
 
 

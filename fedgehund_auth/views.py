@@ -15,5 +15,3 @@ class UserAPIView(APIView):
     def get(self, request, *args, **kwargs):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
-
-    

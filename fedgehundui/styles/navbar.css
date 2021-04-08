@@ -1,12 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Nunito+Sans:wght@300;400;600;700;800&display=swap");
 
 :root {
 	--nav-margin-top: -5px;
 	--Roboto: "Roboto", sans-serif;
 	--OpenSans: "Open Sans", sans-serif;
-	--Lato: "Lato", sans-serif;
 }
 
 .hamburger_container::-webkit-scrollbar {
@@ -131,24 +129,13 @@ a:hover {
 
 .MrktDB {
 	font-size: 1.4em;
-	font-family: var(--Lato);
-	font-weight: 600;
+	font-family: var(--Roboto);
+	font-weight: 500;
 	color: #404040;
 	margin-left: 15px;
 	text-decoration: none;
 	cursor: pointer;
 	margin-top: var(--nav-margin-top);
-}
-
-.signup_nav {
-	font-family: var(--Lato);
-	font-size: 1.4em;
-	color: #404040;
-	font-weight: 600;
-}
-
-.signup_nav:hover {
-	color: #fe6f7d;
 }
 
 .lookup_form_everywhere {

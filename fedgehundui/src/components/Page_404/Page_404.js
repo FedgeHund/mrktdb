@@ -32,7 +32,7 @@ function Page_404() {
                             <div className="col-md-9 _404_message">Not all those who wander are lost, but it seems you may have taken a wrong turn</div>
                         </div>
                         <div className="row">
-                            <Link to={"/signup"}>
+                            <Link to={"/"}>
                                 <button className="btn go_home_button shadow-sm" type="submit">
                                     <span className="go_home_text">Home</span>
                                 </button>

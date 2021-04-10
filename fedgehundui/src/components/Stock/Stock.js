@@ -4,6 +4,7 @@ import axios from 'axios';
 import Navbar from '../Layout/Navbar';
 import Footer from '../Layout/Footer';
 import '../../../styles/security.css';
+import { URL } from '../App.js';
 import TechnicalAnalysis from "./TradingView/TechnicalAnalysis"
 import SymbolInfo from "./TradingView/SymbolInfo"
 import CompanyProfile from "./TradingView/CompanyProfile"
@@ -25,7 +26,7 @@ function Stock(props) {
     // let securityName = thePath.substring(thePath.lastIndexOf('/') + 1);
 
     const getSecurityData = async () => {
-        let particular_security_url = 'http://www.mrktdb.com/api/security/?search=' + ticker;
+        let particular_security_url = 'http://' + URL + '/api/security/?search=' + ticker;
 
         const particular_security = await axios.get(particular_security_url);
 

@@ -9,6 +9,8 @@ class StandardResultsSetPagination(PageNumberPagination):
     max_page_size = 200
 
 class PositionList(generics.ListAPIView):
+    search_fields = ['^cik']
+    filter_backends = (filters.SearchFilter,)
     queryset = Position.objects.all()
     pagination_class = StandardResultsSetPagination
     serializer_class = PositionSerializer

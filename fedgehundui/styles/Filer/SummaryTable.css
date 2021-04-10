@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Nunito+Sans:wght@300;400;600;700;800&display=swap");
+
+:root {
+	--Roboto: "Roboto", sans-serif;
+	--OpenSans: "Open Sans", sans-serif;
+	--Lato: "Lato", sans-serif;
+}
+
+.summaryTable {
+	border: 2px solid #303030;
+	border-collapse: separate;
+	border-radius: 8px !important;
+}
+
+.summaryTableHeading {
+	font-family: var(--OpenSans);
+	color: #303030;
+	padding: 15px;
+	padding-left: 25px;
+	font-size: 1.5em;
+	font-weight: 600;
+}
+
+.summaryTableData {
+	font-family: var(--OpenSans);
+	font-size: 0.9em;
+	color: #303030;
+}
+
+.summaryTableValue {
+	font-family: var(--OpenSans);
+	font-size: 0.9em;
+	color: #303030;
+	text-align: right;
+}
+
+.table-condensed > thead > tr > th,
+.table-condensed > tbody > tr > th,
+.table-condensed > tfoot > tr > th,
+.table-condensed > thead > tr > td,
+.table-condensed > tbody > tr > td,
+.table-condensed > tfoot > tr > td {
+	padding-bottom: 0px;
+}

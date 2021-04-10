@@ -5,7 +5,7 @@ class QuarterlyFilerView(models.Model):
     filerId = models.ForeignKey(Filer, on_delete=models.CASCADE)
     quarter = models.IntegerField(blank=True)
     filerName = models.TextField(blank=True)
-    cik = models.IntegerField(blank=True)
+    cik = models.TextField(blank=True)
     filerType = models.TextField(blank=True)
     marketValue = models.FloatField(blank=True)
     previousMarketValue = models.FloatField(blank=True)

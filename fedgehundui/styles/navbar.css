@@ -138,6 +138,29 @@ a:hover {
 	margin-top: var(--nav-margin-top);
 }
 
+.signup_nav {
+	font-family: var(--Lato);
+	font-size: 1.2em;
+	color: #404040;
+	font-weight: 700;
+	margin-top: -8px;
+	margin-right: 40px;
+}
+
+.signin_nav {
+	font-family: var(--Lato);
+	font-size: 1.2em;
+	color: #404040;
+	font-weight: 700;
+	margin-top: -8px;
+	margin-right: 140px;
+}
+
+.signup_nav:hover,
+.signin_nav:hover {
+	color: #fe6f7d;
+}
+
 .lookup_form_everywhere {
 	position: relative;
 	width: 300px !important;
@@ -181,12 +204,12 @@ a:hover {
 
 .filers {
 	font-size: 1.2em;
-	font-family: var(--OpenSans);
+	font-family: var(--Roboto);
 	font-weight: 700;
 	color: #404040;
 	text-decoration: none;
 	cursor: pointer;
-	margin-right: 30px;
+	margin-right: 40px;
 	margin-top: var(--nav-margin-top);
 }
 
@@ -197,7 +220,7 @@ a:hover {
 	color: #404040;
 	text-decoration: none;
 	cursor: pointer;
-	margin-right: 140px;
+	margin-right: 40px;
 	margin-top: var(--nav-margin-top);
 }
 

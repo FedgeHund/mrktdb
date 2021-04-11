@@ -5,6 +5,7 @@ import { URL } from '../App.js';
 import { Link } from 'react-router-dom';
 import '../../../styles/navbar.css';
 import logo from '../../../static/homepage/logo.png';
+import { getCookie } from '../Helpers/getCookie';
 // file deepcode ignore no-mixed-spaces-and-tabs:
 
 function Navbar() {
@@ -42,20 +43,6 @@ function Navbar() {
 		checkUser();
 	}, []);
 
-	const getCookie = (name) => {
-		var cookieValue = null;
-		if (document.cookie && document.cookie !== '') {
-			var cookies = document.cookie.split(';');
-			for (var i = 0; i < cookies.length; i++) {
-				var cookie = jQuery.trim(cookies[i]);
-				if (cookie.substring(0, name.length + 1) === (name + '=')) {
-					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-					break;
-				}
-			}
-		}
-		return cookieValue;
-	}
 
 	const handleSubmit = async (e) => {
 
@@ -72,11 +59,11 @@ function Navbar() {
 		)
 			.then(function (response) {
 				if (response.status == 200) {
-					console.log(response);
+					// console.log(response);
 				}
 				else {
 					//window.location = "http://127.0.0.1:8000/signin/"
-					console.log(response);
+					// console.log(response);
 				}
 			}.bind(this))
 
@@ -97,7 +84,7 @@ function Navbar() {
 		<Fragment>
 			<nav className={navbar ? 'navbar active fixed-top shadow-sm' : 'navbar fixed-top'}>
 
-				<Link to={"/"} className="offset-1"><img src={logo} alt="Logo" className="logo" /></Link>
+				<Link to={"/"} className="offset-1 mrktdb_nav_logo"><img src={logo} alt="Logo" className="logo" /></Link>
 				<Link to={"/"} className="MrktDB mr-auto">MrktDB</Link>
 
 				<form className="form-inline">
@@ -128,7 +115,7 @@ function Navbar() {
 
 				{
 					firstname ?
-						<Link to={"/signup"} className="signup_nav mr-3">Hi, {firstname}</Link>
+						<Link className="signup_nav mr-3">Hi, {firstname}</Link>
 						:
 						<span></span>
 				}

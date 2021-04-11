@@ -6,6 +6,7 @@ import { URL } from '../App.js';
 import Navbar from '../Layout/Navbar';
 import Footer from '../Layout/Footer';
 import GoogleLoginBtn from './GoogleLoginBtn';
+import { getCookie } from '../Helpers/getCookie';
 
 export class FormUserDetails extends Component {
 
@@ -13,7 +14,6 @@ export class FormUserDetails extends Component {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
         this.continue = this.continue.bind(this);
-        this.getCookie = this.getCookie.bind(this);
         this.state = { errorMessage: "", buttonText: "Create Account" };
     }
 
@@ -28,33 +28,17 @@ export class FormUserDetails extends Component {
         }
     };
 
-    getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-
-
     handleSubmit = async (e) => {
         e.preventDefault();
 
-        var csrftoken = this.getCookie('csrftoken');
+        var csrftoken = getCookie('csrftoken');
 
         await axios.post("http://" + URL + "/auth/logout/", {
         },
             {
                 headers: {
                     "Content-Type": 'application/json',
-                    'X-CSRFToken': csrftoken
+                    "X-CSRFToken": csrftoken
                 }
             }
         )
@@ -79,7 +63,8 @@ export class FormUserDetails extends Component {
         },
             {
                 headers: {
-                    "Content-Type": 'application/json'
+                    "Content-Type": 'application/json',
+                    "X-CSRFToken": csrftoken
                 }
             }
         )

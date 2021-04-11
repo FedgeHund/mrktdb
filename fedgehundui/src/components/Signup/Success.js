@@ -4,6 +4,8 @@ import axios from 'axios';
 import { URL } from '../App.js';
 import Navbar from '../Layout/Navbar';
 import Footer from '../Layout/Footer';
+import { getCookie } from '../Helpers/getCookie';
+import { checkUser } from '../Helpers/checkUser';
 // file deepcode ignore no-mixed-spaces-and-tabs:
 
 export class Success extends Component {
@@ -13,54 +15,16 @@ export class Success extends Component {
 
 	constructor() {
 		super();
-		this.checkUser = this.checkUser.bind(this);
-		this.getCookie = this.getCookie.bind(this);
 	}
-
-	checkUser = async () => {
-
-		await axios.get("http://" + URL + "/auth/user/", {
-		},
-			{
-				headers: {
-					"Content-Type": 'application/json'
-				}
-			}
-		)
-			.then(function (response) {
-				if (response.status == 200) {
-					console.log(response.data);
-					this.setState(response.data);
-				}
-				else {
-					//window.location = "http://127.0.0.1:8000/signin/"
-					console.log(response);
-				}
-			}.bind(this))
-	};
 
 	componentDidMount() {
-		this.checkUser();
+		checkUser();
 	}
 
-	getCookie(name) {
-		var cookieValue = null;
-		if (document.cookie && document.cookie !== '') {
-			var cookies = document.cookie.split(';');
-			for (var i = 0; i < cookies.length; i++) {
-				var cookie = jQuery.trim(cookies[i]);
-				if (cookie.substring(0, name.length + 1) === (name + '=')) {
-					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-					break;
-				}
-			}
-		}
-		return cookieValue;
-	}
 
 	handleSubmit = async (e) => {
 
-		var csrftoken = this.getCookie('csrftoken');
+		var csrftoken = getCookie('csrftoken');
 
 		await axios.post("http://" + URL + "/auth/logout/", {
 		},

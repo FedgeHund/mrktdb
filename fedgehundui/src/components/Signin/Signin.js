@@ -6,6 +6,7 @@ import '../../../styles/signup/styles.css';
 import { URL } from '../App.js';
 import Navbar from '../Layout/Navbar';
 import Footer from '../Layout/Footer';
+import { getCookie } from '../Helpers/getCookie';
 // file deepcode ignore no-mixed-spaces-and-tabs:
 
 function Signin() {
@@ -31,13 +32,16 @@ function Signin() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        var csrftoken = getCookie('csrftoken');
+
         axios.post("http://" + URL + "/auth/login/", {
             email,
             password
         },
             {
                 headers: {
-                    "Content-Type": 'application/json'
+                    "Content-Type": 'application/json',
+                    "X-CSRFToken": csrftoken
                 }
             }
         )

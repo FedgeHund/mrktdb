@@ -43,7 +43,7 @@ class App extends Component {
 
 const ENV_VARIABLES = {
   ENVIRON: "prod",
-  DEV_API_URL: "127.0.0.1:8000",
+  DEV_API_URL: "localhost:8000",
   PROD_API_URL: "mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com",
   // PROD_API_URL: "mrktdb.com",
 };

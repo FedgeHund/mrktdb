@@ -24,12 +24,12 @@ function Navbar() {
 		)
 			.then(function (response) {
 				if (response.status == 200) {
-					console.log(response);
+					// console.log(response);
 					setFirstname(response.data.first_name);
 				}
 				else {
 					//window.location = "http://127.0.0.1:8000/signin/"
-					console.log(response);
+					// console.log(response);
 				}
 			}).catch(error => {
 				seterrorMessage(
@@ -115,7 +115,7 @@ function Navbar() {
 
 				{
 					firstname ?
-						<Link className="signup_nav mr-3">Hi, {firstname}</Link>
+						<Link to={"/"} className="signup_nav mr-2">Hi, {firstname}</Link>
 						:
 						<span></span>
 				}

@@ -6,6 +6,7 @@ import '../../../styles/signup/styles.css';
 import { URL } from '../App.js';
 import Navbar from '../Layout/Navbar';
 import Footer from '../Layout/Footer';
+import GoogleSigninButton from './GoogleSigninButton';
 import { getCookie } from '../Helpers/getCookie';
 // file deepcode ignore no-mixed-spaces-and-tabs:
 
@@ -108,6 +109,12 @@ function Signin() {
                             <span>Sign In</span>
                         </button>
                     </div>
+
+                    <div className="row">
+                        <div className="col-12 mt-4 or" align="center">OR</div>
+                    </div>
+
+                    <GoogleSigninButton />
 
                     <div className="row">
                         <span className="captcha col-md-8 offset-md-2 col-10 offset-1 pt-5 mt-4">Protected by reCAPTCHA and subject to the Google <a href="#" className="links">Privacy Policy</a> and <a href="#" className="links">Terms of service</a>.</span>

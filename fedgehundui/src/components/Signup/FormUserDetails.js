@@ -5,7 +5,7 @@ import '../../../styles/signup/styles.css';
 import { URL } from '../App.js';
 import Navbar from '../Layout/Navbar';
 import Footer from '../Layout/Footer';
-import GoogleLoginBtn from './GoogleLoginBtn';
+import GoogleSignupButton from './GoogleSignupButton';
 import { getCookie } from '../Helpers/getCookie';
 
 export class FormUserDetails extends Component {
@@ -155,7 +155,7 @@ export class FormUserDetails extends Component {
                             <div className="col-12 mt-4 or" align="center">OR</div>
                         </div>
 
-                        <GoogleLoginBtn />
+                        <GoogleSignupButton />
 
                         <div className="row">
                             <span className="captcha col-md-8 offset-md-2 col-sm-10 offset-sm-1">Protected by reCAPTCHA and subject to the Google <a href="#" className="links">Privacy Policy</a> and <a href="#" className="links">Terms of service</a>.</span>

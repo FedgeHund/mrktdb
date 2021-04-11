@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
 import { BrowserRouter as Router, Route, Switch, Link, useHistory } from "react-router-dom";
 
 var securityNames = [{ securityName: "APPLE INC", ticker: "AAPL" }, { securityName: "AMAZON COM INC", ticker: "AMZN" }, { securityName: "MICROSOFT CORP.", ticker: "MSFT" }, { securityName: "FACEBOOK INC", ticker: "FB" }, { securityName: "TESLA INC", ticker: "TSLA" }];

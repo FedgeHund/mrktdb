@@ -20,6 +20,16 @@ class PositionDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PositionSerializer
 
 class LatestQuarterPositionList(generics.ListAPIView):
-    queryset = Position.objects.filter(cik="0001037389", cusip="Y09675102")
     pagination_class = StandardResultsSetPagination
     serializer_class = PositionSerializer
+
+    def get_queryset(self):
+        if self.request.method == 'GET':
+            queryset = Position.objects.all()
+            cik = self.request.GET.get('cik', None)
+            if cik is not None:
+                queryset = queryset.filter(cik=cik).order_by('-quarter')
+                latest_quarter = queryset[0].quarter
+                queryset = queryset.filter(quarter=latest_quarter)
+                
+            return queryset

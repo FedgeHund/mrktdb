@@ -505,13 +505,13 @@ class HoldingsScraper:
        
         Quarter=''
         if(d2['reportCalendarOrQuarter'][:2]=='03'):
-            Quarter='1'+d2['reportCalendarOrQuarter'][6:11]
+            Quarter= d2['reportCalendarOrQuarter'][6:11] + '1'
         elif(d2['reportCalendarOrQuarter'][:2]=='06'):
-            Quarter='2'+d2['reportCalendarOrQuarter'][6:11]
+            Quarter= d2['reportCalendarOrQuarter'][6:11] + '2'
         elif(d2['reportCalendarOrQuarter'][:2]=='09'):
-            Quarter='3'+d2['reportCalendarOrQuarter'][6:11]
+            Quarter= d2['reportCalendarOrQuarter'][6:11] + '3'
         else:
-            Quarter='4'+d2['reportCalendarOrQuarter'][6:11]
+            Quarter= d2['reportCalendarOrQuarter'][6:11] + '4'
         
         try:
             if d2['isAmendment']=='true':

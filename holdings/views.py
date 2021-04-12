@@ -18,3 +18,8 @@ class PositionList(generics.ListAPIView):
 class PositionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Position.objects.all()
     serializer_class = PositionSerializer
+
+class LatestQuarterPositionList(generics.ListAPIView):
+    queryset = Position.objects.filter(cik="0001037389", cusip="Y09675102")
+    pagination_class = StandardResultsSetPagination
+    serializer_class = PositionSerializer

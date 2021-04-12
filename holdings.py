@@ -111,8 +111,8 @@ def calculate_positions_per_sec(filer, security, total_market_value,
                                 prev_total_market_value,
                                 quarterly_holding, quarterly_security_holdings,
                                 qtrly_sec_holdings_for_prev_qtrly_holding):
-    logger.info("Starting positions calculation for filer: %0s quarter: %1s security: %2s|%3s ", filer.filerId,
-                quarterly_holding.quarter, security.securityName, security.cusip)
+    logger.info("Starting positions calculation for filer: %0s quarter: %1s security: %2s|%3s ", filer.filerId, quarterly_holding.quarter, security.securityName, security.cusip)
+    print("Starting positions calculation for filer: %0s quarter: %1s security: %2s|%3s ", filer.filerId, quarterly_holding.quarter, security.securityName, security.cusip)
 
     ##########################################
     # START: Find totals for current quarter #

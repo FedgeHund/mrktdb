@@ -20,7 +20,6 @@ class PositionDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PositionSerializer
 
 class LatestQuarterPositionList(generics.ListAPIView):
-    pagination_class = StandardResultsSetPagination
     serializer_class = PositionSerializer
 
     def get_queryset(self):

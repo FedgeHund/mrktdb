@@ -2,6 +2,7 @@ from .models import Position
 from holdings.serializers import PositionSerializer
 from rest_framework import generics, filters
 from rest_framework.pagination import PageNumberPagination
+from django.db.models import Count
 
 class StandardResultsSetPagination(PageNumberPagination):
     page_size = 100
@@ -30,5 +31,33 @@ class LatestQuarterPositionList(generics.ListAPIView):
                 queryset = queryset.filter(cik=cik).order_by('-quarter')
                 latest_quarter = queryset[0].quarter
                 queryset = queryset.filter(quarter=latest_quarter)
+                
+            return queryset
+
+class AllOwnedSecurities(generics.ListAPIView):
+    serializer_class = PositionSerializer
+
+    def get_queryset(self):
+        if self.request.method == 'GET':
+            queryset = Position.objects.values('cusip', 'securityName')
+            cik = self.request.GET.get('cik', None)
+
+            if cik is not None:
+                queryset = queryset.filter(cik=cik)
+                queryset = queryset.annotate(unique_cusips=Count('cusip', distinct=True))
+                
+            return queryset
+
+class OwnershipHistory(generics.ListAPIView):
+    serializer_class = PositionSerializer
+
+    def get_queryset(self):
+        if self.request.method == 'GET':
+            queryset = Position.objects.all()
+            cik = self.request.GET.get('cik', None)
+            cusip = self.request.GET.get('cusip', None)
+
+            if cik is not None:
+                queryset = queryset.filter(cik=cik, cusip=cusip)
                 
             return queryset

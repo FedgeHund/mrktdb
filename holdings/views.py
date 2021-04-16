@@ -20,7 +20,7 @@ class PositionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Position.objects.all()
     serializer_class = PositionSerializer
 
-class LatestQuarterPositionList(generics.ListAPIView):
+class LatestQuarterBiggestHoldings(generics.ListAPIView):
     serializer_class = PositionSerializer
 
     def get_queryset(self):
@@ -28,9 +28,39 @@ class LatestQuarterPositionList(generics.ListAPIView):
             queryset = Position.objects.all()
             cik = self.request.GET.get('cik', None)
             if cik is not None:
-                queryset = queryset.filter(cik=cik).order_by('-quarter')
+                queryset = queryset.filter(cik=cik).order_by('-quarter', '-marketValue')
                 latest_quarter = queryset[0].quarter
-                queryset = queryset.filter(quarter=latest_quarter)
+                queryset = queryset.filter(quarter=latest_quarter)[:5]
+                
+            return queryset
+
+class LatestQuarterTopBuys(generics.ListAPIView):
+    serializer_class = PositionSerializer
+
+    def get_queryset(self):
+        if self.request.method == 'GET':
+            queryset = Position.objects.all()
+            cik = self.request.GET.get('cik', None)
+            if cik is not None:
+                queryset = queryset.filter(cik=cik).order_by('-quarter', '-changeInShares')
+                latest_quarter = queryset[0].quarter
+                queryset = queryset.filter(quarter=latest_quarter)[:5]
+                print(queryset.query)
+                
+            return queryset
+
+class LatestQuarterTopSells(generics.ListAPIView):
+    serializer_class = PositionSerializer
+
+    def get_queryset(self):
+        if self.request.method == 'GET':
+            queryset = Position.objects.all()
+            cik = self.request.GET.get('cik', None)
+            if cik is not None:
+                queryset = queryset.filter(cik=cik).order_by('-quarter', 'changeInShares')
+                latest_quarter = queryset[0].quarter
+                queryset = queryset.filter(quarter=latest_quarter)[:5]
+                print(queryset.query)
                 
             return queryset
 

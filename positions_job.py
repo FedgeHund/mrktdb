@@ -30,6 +30,7 @@ def get_prev_quarter(quarter):
 
     return str(year) + str(prev_q_num)
 
+
 @delayed
 @wrap_non_picklable_objects
 def calculate_positions(quarterly_holding, number_of_threads=8):

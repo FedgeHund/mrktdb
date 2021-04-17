@@ -696,7 +696,7 @@ class HoldingsScraper:
                 QuarterlySecurityHolding(
                     securityId = map.get(cusiplist[i]),
                     quarterlyHoldingId = quarterlyHoldingObject,
-                    marketvalue = infoTableData[i]['value'],
+                    marketvalue = int(infoTableData[i]['value']) * 1000,
                     quantity = infoTableData[i]['sshPrnamt'], 
                     holdingType = infoTableData[i]['sshPrnamtType'],
                     investmentDiscretion = infoTableData[i]['investmentDiscretion'],

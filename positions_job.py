@@ -7,8 +7,6 @@ import time
 import django
 
 from joblib import Parallel, delayed, wrap_non_picklable_objects
-from django.core.exceptions import MultipleObjectsReturned
-from django.db import transaction
 from django.db.models import Sum
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
@@ -22,16 +20,15 @@ logger = logging.getLogger("holdings_job")
 
 
 def get_prev_quarter(quarter):
-    q_num = int(quarter[0])
-    year = int(quarter[1:])
+    year = int(quarter[0:4])
+    q_num = int(quarter[4])
 
     prev_q_num = q_num - 1
     if prev_q_num <= 0:
         prev_q_num = 4
         year = year - 1
 
-    return str(prev_q_num) + str(year)
-
+    return str(year) + str(prev_q_num)
 
 @delayed
 @wrap_non_picklable_objects
@@ -39,8 +36,7 @@ def calculate_positions(quarterly_holding, number_of_threads=8):
     filer = quarterly_holding.filerId
     logger.info("Starting positions calculation for filer: %0s quarter: %1s", filer.filerId, quarterly_holding.quarter)
 
-    quarterly_security_holdings = QuarterlySecurityHolding.objects.select_related("quarterlyHoldingId").filter(
-        quarterlyHoldingId=quarterly_holding)
+    quarterly_security_holdings = QuarterlySecurityHolding.objects.filter(quarterlyHoldingId=quarterly_holding)
 
     distinct_securities_in_qtrly_sec_holdings = set()
     for quarterly_security_holding in quarterly_security_holdings.select_related("securityId"):
@@ -71,8 +67,10 @@ def calculate_positions(quarterly_holding, number_of_threads=8):
     # START: Calculate previous quarter #
     #####################################
 
-    qtrly_sec_holdings_for_prev_qtrly_holding = quarterly_security_holdings.filter(
-        quarterlyHoldingId__quarter=get_prev_quarter(quarterly_holding.quarter))
+    prev_quarter = get_prev_quarter(quarterly_holding.quarter)
+    prev_quarterly_holding = QuarterlyHolding.objects.get(filerId=filer, quarter=prev_quarter)
+    qtrly_sec_holdings_for_prev_qtrly_holding = QuarterlySecurityHolding.objects.filter(
+        quarterlyHoldingId=prev_quarterly_holding)
     prev_total_market_value = qtrly_sec_holdings_for_prev_qtrly_holding.aggregate(
         Sum("marketvalue")).get("marketvalue__sum", 0)
     if prev_total_market_value is None:
@@ -98,7 +96,6 @@ def calculate_positions(quarterly_holding, number_of_threads=8):
     logger.info("Bulk writing %0s positions for filer: %1s quarter: %2s", len(positions_to_create), filer.filerId,
                 quarterly_holding.quarter)
     Position.objects.bulk_create(positions_to_create)
-    # bulk_get_or_create(positions_to_create)
 
     ###################
     # END: Bulk write #
@@ -200,19 +197,6 @@ def calculate_positions_per_sec(filer, security, total_market_value,
     # START: Create position object #
     #################################
 
-    ## Need to think about investmentDiscretion. Different rows in quaterly holding for same security can have the different investmentDiscretion
-    # position_to_create = {"securityId": security, "quarterId": quarterly_holding, "filerId": filer,
-    #                      "quarter": quarterly_holding.quarter, "securityName": security.securityName,
-    #                      "filerName": filer.companyId.name, "cusip": security.cusip,
-    #                      "cik": filer.companyId.cik,
-    #                      "quarterFirstOwned": first_qtrly_holding_by_sec_id.get(security.securityId),
-    #                      "quantity": total_quantity_of_sec, "marketValue": total_market_value_of_sec,
-    #                      "weightPercent": weight_percent_of_sec,
-    #                      "previousWeightPercent": prev_weight_percent_of_sec, "lastPrice": last_price,
-    #                      "changeInShares": change_in_shares, "changeInPositionPercent": position_change,
-    #                      "sourceType": filer.fileType, "sourcedOn": quarterly_holding.filedOn,
-    #                      "positionType": position_type}
-    # return position_to_create
     return Position(securityId=security, quarterId=quarterly_holding, filerId=filer,
                     quarter=quarterly_holding.quarter, securityName=security.securityName,
                     filerName=filer.companyId.name, cusip=security.cusip,
@@ -234,7 +218,7 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv, "n:f:", ["numThreads=", "filerStartId="])
     except getopt.GetoptError:
-        print('holdings.py -n <numberOfThreads>')
+        print('positions_job.py -n <numberOfThreads>')
         sys.exit(2)
     n_jobs = 2
     filer_start_id = None
@@ -250,7 +234,6 @@ def main(argv):
     else:
         quarterly_holdings = quarterly_holdings.filter(filerId__filerId__gt=filer_start_id)
 
-    # filers = Filer.objects.filter(filerId__gt=filer_start_id).prefetch_related("companyId")
     start_time = time.time()
     Parallel(n_jobs=n_jobs, backend="multiprocessing")(
         calculate_positions(quarterly_holding=quarterly_holding, number_of_threads=n_jobs) for quarterly_holding in

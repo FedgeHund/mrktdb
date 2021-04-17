@@ -16,7 +16,7 @@ from edgar.models import QuarterlyHolding, QuarterlySecurityHolding
 from holdings.models import Position
 from security.models import Price
 
-logger = logging.getLogger("holdings_job")
+logger = logging.getLogger("positions_job")
 
 
 def get_prev_quarter(quarter):

@@ -4,20 +4,31 @@ import sys
 import django
 import logging
 
+from joblib import Parallel, delayed, wrap_non_picklable_objects
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
 django.setup()
 
 from django.db.models import Sum
+from django.db import transaction
 from edgar.models import QuarterlySecurityHolding, Security
+from security.models import Price
 
 logger = logging.getLogger("positions_job")
 
 
-def bulk_get_or_create(prices):
-    logger.info("%1s", prices)
+@transaction.atomic
+def bulk_get_or_create(prices_dict_to_create):
+    for price_dict in prices_dict_to_create:
+        Price.objects.get_or_create(securityId=price_dict.get('securityId'), value=price_dict.get('value'),
+                                    quarter=price_dict.get('quarter'), cusip=price_dict.get('cusip'),
+                                    name=price_dict.get('name'))
 
 
+@delayed
+@wrap_non_picklable_objects
 def calculate_price(security):
+    logger.info("Starting price calculation for security: %1s|%2s ", security.securityName, security.cusip)
     totals_per_quarter = QuarterlySecurityHolding.objects.filter(securityId=security).values(
         'quarterlyHoldingId__quarter').annotate(
         total_market_value=Sum('marketvalue'), total_quantity=Sum('quantity'))
@@ -53,5 +64,9 @@ def main(argv):
         if opt == '-n':
             n_jobs = int(arg)
 
-    for security in Security.objects.all():
-        calculate_price(security)
+    securities = Security.objects.all()
+    Parallel(n_jobs=n_jobs, backend="multiprocessing")(calculate_price(security=security) for security in securities)
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

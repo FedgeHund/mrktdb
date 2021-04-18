@@ -14,7 +14,7 @@ from django.db import transaction
 from edgar.models import QuarterlySecurityHolding, Security
 from security.models import Price
 
-logger = logging.getLogger("positions_job")
+logger = logging.getLogger("console_logger")
 
 
 @transaction.atomic

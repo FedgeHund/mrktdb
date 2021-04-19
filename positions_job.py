@@ -69,9 +69,9 @@ def calculate_positions(quarterly_holding, number_of_threads=8):
     #####################################
 
     prev_quarter = get_prev_quarter(quarterly_holding.quarter)
-    prev_quarterly_holding = QuarterlyHolding.objects.get(filerId=filer, quarter=prev_quarter)
+    prev_quarterly_holding = QuarterlyHolding.objects.filter(filerId=filer, quarter=prev_quarter)
     qtrly_sec_holdings_for_prev_qtrly_holding = QuarterlySecurityHolding.objects.filter(
-        quarterlyHoldingId=prev_quarterly_holding)
+        quarterlyHoldingId__in=prev_quarterly_holding)
     prev_total_market_value = qtrly_sec_holdings_for_prev_qtrly_holding.aggregate(
         Sum("marketvalue")).get("marketvalue__sum", 0)
     if prev_total_market_value is None:
@@ -167,8 +167,8 @@ def calculate_positions_per_sec(filer, security, total_market_value,
     position_change = None
     position_type = 'New'
     if prev_total_quantity_of_sec != 0:
-        position_change = (
-                            change_in_shares / prev_total_quantity_of_sec) * 100
+        position_change = abs((
+                                change_in_shares / prev_total_quantity_of_sec) * 100)
         # doubt: what happens when a security is added in this quarter
         if prev_total_quantity_of_sec > total_quantity_of_sec:
             position_type = 'Decreased'
@@ -206,7 +206,7 @@ def calculate_positions_per_sec(filer, security, total_market_value,
                     quantity=total_quantity_of_sec, marketValue=total_market_value_of_sec,
                     weightPercent=weight_percent_of_sec,
                     previousWeightPercent=prev_weight_percent_of_sec, lastPrice=last_price,
-                    changeInShares=abs(change_in_shares), changeInPositionPercent=abs(position_change),
+                    changeInShares=abs(change_in_shares), changeInPositionPercent=position_change,
                     sourceType=filer.fileType, sourcedOn=quarterly_holding.filedOn,
                     positionType=position_type)
 

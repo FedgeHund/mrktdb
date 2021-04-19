@@ -20,7 +20,7 @@ logger = logging.getLogger("console_logger")
 @wrap_non_picklable_objects
 def calculate_quarterly_filer_view(quarterly_holding):
     logger.info("Calculate quarterly filer view [Quarter: %1s | FilerId: %2s]", quarterly_holding.quarter,
-                quarterly_holding.filerId)
+                quarterly_holding.filerId.filerId)
     positions = Position.objects.filter(quarterId=quarterly_holding)
     if len(positions) <= 0:
         return
@@ -61,7 +61,7 @@ def calculate_quarterly_filer_view(quarterly_holding):
     for position in top10_positions_by_market_value:
         top10_holdings_market_value = top10_holdings_market_value + position.marketValue
 
-    if total_market_value is None or total_market_value < 0:
+    if total_market_value is None or total_market_value <= 0:
         return
     top10_holdings_percent = (top10_holdings_market_value / total_market_value) * 100
 
@@ -84,7 +84,7 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv, "n:", ["numThreads="])
     except getopt.GetoptError:
-        print('filerview.py -n <numberOfThreads>')
+        print('quarterly_filer_view_job.py -n <numberOfThreads>')
         sys.exit(2)
     n_jobs = 2
     for opt, arg in opts:

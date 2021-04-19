@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from fedgehund_profile.serializers import ProfileSerializer
 # file deepcode ignore E1003:
 
+
 class UserRegisterSerializer(RegisterSerializer):
     first_name = serializers.CharField(required=True, write_only=True)
     last_name = serializers.CharField(required=True, write_only=True)
@@ -17,9 +18,12 @@ class UserRegisterSerializer(RegisterSerializer):
             'password1': self.validated_data.get('password1', ''),
             'email': self.validated_data.get('email', ''),
         }
-# file deepcode ignore super~first~argument~should~be~the~enclosing~class: <RegisterSerializer is the parent class from which the fields are being inherited>
+# file deepcode ignore super~first~argument~should~be~the~enclosing~class:
+# <RegisterSerializer is the parent class from which the fields are being
+# inherited>
+
     def __init__(self, *args, **kwargs):
-	#  deepcode ignore E1003: <comment the reason here>
+        #  deepcode ignore E1003: <comment the reason here>
         super(RegisterSerializer, self).__init__(*args, **kwargs)
         self.fields["first_name"].error_messages["blank"] = u"All fields on this page are required"
         self.fields["last_name"].error_messages["blank"] = u"All fields on this page are required"
@@ -32,7 +36,7 @@ class UserLoginSerializer(LoginSerializer):
     email = serializers.EmailField(required=True)
 
     def __init__(self, *args, **kwargs):
-	#  deepcode ignore E1003: <comment the reason here>
+        #  deepcode ignore E1003: <comment the reason here>
         super(LoginSerializer, self).__init__(*args, **kwargs)
         self.fields["email"].error_messages["invalid"] = u"Enter a valid  address"
         self.fields["email"].error_messages["blank"] = u"Enter a valid email address"
@@ -43,7 +47,8 @@ class UserLoginSerializer(LoginSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-	profile = ProfileSerializer()
-	class Meta:
-		model = User
-		fields = ('id', 'email', 'first_name', 'last_name', 'profile')
+    profile = ProfileSerializer()
+
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'first_name', 'last_name', 'profile')

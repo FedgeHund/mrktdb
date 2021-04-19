@@ -1,13 +1,12 @@
+from edgar.models import FailsToDeliver
 import csv
 import os
 import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
 django.setup()
-from edgar.models import FailsToDeliver
 
 
-
-with open('static/admin/csv_files/Unique_Mappings.csv','rt')as f:
+with open('static/admin/csv_files/Unique_Mappings.csv', 'rt')as f:
     data = csv.reader(f)
 
     print('Start')

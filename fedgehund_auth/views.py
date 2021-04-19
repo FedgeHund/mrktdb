@@ -6,10 +6,12 @@ from .serializers import UserSerializer
 
 
 class UserRegistrationView(RegisterView):
-	serializer_class = UserRegisterSerializer
+    serializer_class = UserRegisterSerializer
+
 
 class UserLoginView(LoginView):
-	serializer_class = UserLoginSerializer
+    serializer_class = UserLoginSerializer
+
 
 class UserAPIView(APIView):
     def get(self, request, *args, **kwargs):

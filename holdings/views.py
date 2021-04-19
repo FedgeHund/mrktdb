@@ -7,6 +7,7 @@ class PositionList(generics.ListCreateAPIView):
     queryset = Position.objects.all()
     serializer_class = PositionSerializer
 
+
 class PositionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Position.objects.all()
     serializer_class = PositionSerializer

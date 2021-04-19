@@ -27,8 +27,14 @@ urlpatterns = [
     path('api/', include('holdings.urls')),
     path('api/', include('edgar.urls')),
     path('api/', include('filer.urls')),
-    #to rectify 'NoReverseMatch at /auth/registration/' issue
-    re_path(r'^account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'),
-	  re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(), name='account_confirm_email'),
+    # to rectify 'NoReverseMatch at /auth/registration/' issue
+    re_path(
+        r'^account-confirm-email/',
+        VerifyEmailView.as_view(),
+        name='account_email_verification_sent'),
+    re_path(
+        r'^account-confirm-email/(?P<key>[-:\w]+)/$',
+        VerifyEmailView.as_view(),
+        name='account_confirm_email'),
     path('', include('fedgehundui.urls')),
 ]

@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Company(models.Model):
     COMPANY_TYPES = (
         ('HF', 'Hedge Fund'),
@@ -12,11 +13,15 @@ class Company(models.Model):
     updatedAt = models.DateTimeField(default=None, blank=True)
     deletedAt = models.DateTimeField(default=None, blank=True)
     companyId = models.AutoField(primary_key=True)
-    address = models.TextField(max_length=120,blank=True)
-    companyType = models.CharField(max_length=2, choices=COMPANY_TYPES, default=None)
+    address = models.TextField(max_length=120, blank=True)
+    companyType = models.CharField(
+        max_length=2,
+        choices=COMPANY_TYPES,
+        default=None)
 
     class Meta:
         ordering = ['createdAt']
+
 
 class Filer(models.Model):
     FILE_TYPES = (
@@ -24,16 +29,18 @@ class Filer(models.Model):
         ('13G', '13G'),
         ('13D', '13D'),
     )
-    companyId = models.ForeignKey(Company, on_delete=models.CASCADE,blank=True)
-    fileNumber = models.CharField(max_length=10,blank=True)
+    companyId = models.ForeignKey(
+        Company, on_delete=models.CASCADE, blank=True)
+    fileNumber = models.CharField(max_length=10, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)
     deletedAt = models.DateTimeField(default=None, blank=True)
     filerId = models.AutoField(primary_key=True)
-    fileType = models.CharField(max_length=3, choices=FILE_TYPES,blank=True)
+    fileType = models.CharField(max_length=3, choices=FILE_TYPES, blank=True)
 
     class Meta:
         ordering = ['companyId']
+
 
 class QuarterlyHolding(models.Model):
     FILING_TYPES = (
@@ -53,16 +60,26 @@ class QuarterlyHolding(models.Model):
     totalEntry = models.FloatField()
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)
-    deletedAt = models.DateTimeField(  blank=True)
+    deletedAt = models.DateTimeField(blank=True)
     quarterlyHoldingId = models.AutoField(primary_key=True)
 
     class Meta:
         ordering = ['createdAt']
 
+
 class QuarterlyOtherManager(models.Model):
-    parentFilerId = models.ForeignKey(Filer, on_delete=models.CASCADE, related_name='parent_filer',blank=True)
-    childFilerId = models.ForeignKey(Filer, on_delete=models.CASCADE, related_name='child_filer',blank=True)
-    quarterlyHoldingId = models.ForeignKey(QuarterlyHolding, on_delete=models.CASCADE)
+    parentFilerId = models.ForeignKey(
+        Filer,
+        on_delete=models.CASCADE,
+        related_name='parent_filer',
+        blank=True)
+    childFilerId = models.ForeignKey(
+        Filer,
+        on_delete=models.CASCADE,
+        related_name='child_filer',
+        blank=True)
+    quarterlyHoldingId = models.ForeignKey(
+        QuarterlyHolding, on_delete=models.CASCADE)
     number = models.IntegerField()
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)
@@ -74,7 +91,8 @@ class QuarterlyOtherManager(models.Model):
 
 
 class Security(models.Model):
-    companyId = models.ForeignKey(Company, on_delete=models.CASCADE,blank=True)
+    companyId = models.ForeignKey(
+        Company, on_delete=models.CASCADE, blank=True)
     cusip = models.TextField()
     securityName = models.TextField(blank=True)
     securityType = models.TextField(blank=True)
@@ -89,20 +107,23 @@ class Security(models.Model):
     class Meta:
         ordering = ['securityName']
 
+
 class QuarterlySecurityHolding(models.Model):
-    
+
     DISCRETION_TYPES = (
         ('SOLE', 'SOLE'),
         ('DFND', 'DFND'),
         ('OTHR', 'OTHER'),
     )
-    uin=models.TextField()
+    uin = models.TextField()
     securityId = models.ForeignKey(Security, on_delete=models.CASCADE)
-    quarterlyHoldingId = models.ForeignKey(QuarterlyHolding, on_delete=models.CASCADE)
+    quarterlyHoldingId = models.ForeignKey(
+        QuarterlyHolding, on_delete=models.CASCADE)
     marketvalue = models.FloatField()
     quantity = models.FloatField()
     holdingType = models.TextField()
-    investmentDiscretion = models.CharField(max_length=4, choices=DISCRETION_TYPES)
+    investmentDiscretion = models.CharField(
+        max_length=4, choices=DISCRETION_TYPES)
     sole = models.IntegerField()
     shared = models.IntegerField()
     none = models.IntegerField()
@@ -114,9 +135,12 @@ class QuarterlySecurityHolding(models.Model):
     class Meta:
         ordering = ['quarterlyHoldingId']
 
+
 class QuarterlyOtherManagerDistribution(models.Model):
-    quarterlyOtherManagerId = models.ForeignKey(QuarterlyOtherManager, on_delete=models.CASCADE)
-    quarterlySecurityHoldingId = models.ForeignKey(QuarterlySecurityHolding, on_delete=models.CASCADE)
+    quarterlyOtherManagerId = models.ForeignKey(
+        QuarterlyOtherManager, on_delete=models.CASCADE)
+    quarterlySecurityHoldingId = models.ForeignKey(
+        QuarterlySecurityHolding, on_delete=models.CASCADE)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)
     deletedAt = models.DateTimeField(default=None, blank=True)
@@ -124,6 +148,7 @@ class QuarterlyOtherManagerDistribution(models.Model):
 
     class Meta:
         ordering = ['createdAt']
+
 
 class FailsToDeliver(models.Model):
     settlementDate = models.DateField()
@@ -135,6 +160,7 @@ class FailsToDeliver(models.Model):
 
     class Meta:
         ordering = ['createdAt']
+
 
 class CikCusipMapping(models.Model):
     cik = models.TextField()

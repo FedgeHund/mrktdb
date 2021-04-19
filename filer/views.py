@@ -7,6 +7,7 @@ class QuarterlyFilerViewList(generics.ListCreateAPIView):
     queryset = QuarterlyFilerView.objects.all()
     serializer_class = QuarterlyFilerViewSerializer
 
+
 class QuarterlyFilerViewDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = QuarterlyFilerView.objects.all()
     serializer_class = QuarterlyFilerViewSerializer

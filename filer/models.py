@@ -1,6 +1,7 @@
 from django.db import models
 from edgar.models import QuarterlyHolding, Filer
 
+
 class QuarterlyFilerView(models.Model):
     filerId = models.ForeignKey(Filer, on_delete=models.CASCADE)
     quarter = models.IntegerField(blank=True)
@@ -21,5 +22,6 @@ class QuarterlyFilerView(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)
     deletedAt = models.DateTimeField(default=None, blank=True)
+
     class Meta:
         ordering = ['createdAt']

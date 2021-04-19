@@ -60,7 +60,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env(
     'SECRET_KEY', default='f9y!yh1nb6lm5(o*)^(8+-dueu9_p=p$c$d-u8f(p=w+mtd%rx')
 
-ALLOWED_HOSTS = ['MrktDB.eba-brufwk2z.us-west-2.elasticbeanstalk.com', '127.0.0.1', 'www.mrktdb.com']
+ALLOWED_HOSTS = [
+    'MrktDB.eba-brufwk2z.us-west-2.elasticbeanstalk.com',
+    '127.0.0.1',
+    'www.mrktdb.com']
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

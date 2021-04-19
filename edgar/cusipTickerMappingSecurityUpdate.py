@@ -4,8 +4,11 @@ from edgar.models import FailsToDeliver, Security
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
 # file deepcode ignore C0325:
 
+
 class CusipTickerMappingSecurityUpdate(CronJobBase):
-    RUN_EVERY_MINS = 0.01 # we dont run this every minute, we will be using linux crontab to setup when the job will run
+    # we dont run this every minute, we will be using linux crontab to setup
+    # when the job will run
+    RUN_EVERY_MINS = 0.01
 
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
     code = 'edgar.cusipTickerMappingSecurityUpdate'    # a unique code
@@ -23,8 +26,8 @@ class CusipTickerMappingSecurityUpdate(CronJobBase):
             print("Item:", item_no)
             for security in security_items:
                 if(security.cusip == item.cusip):
-                    matched_items += 1 
+                    matched_items += 1
                     print("Matched:", matched_items)
                     security.ticker = item.ticker
-                    security.save()      
+                    security.save()
         print("Ticker mapping ended")

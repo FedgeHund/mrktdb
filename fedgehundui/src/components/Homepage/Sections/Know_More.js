@@ -39,7 +39,7 @@ function Know_More() {
 								</div>
 								<div className="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
 									We aggregate all of 13F data each quarter and bring out exclusive insights that
-									can help you make informed decisions about your investments. Here you’ll
+									can help you make informed decisions about your investments. Here you will
 									find metrics like:
 									1. Most popular stocks across all 13F filers and hedge funds
 									2. Emerging favorite stocks across all filers

@@ -1,12 +1,74 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { URL } from '../App.js';
 import { Link } from 'react-router-dom';
 import '../../../styles/navbar.css';
 import logo from '../../../static/homepage/logo.png';
+import { getCookie } from '../Helpers/getCookie';
 // file deepcode ignore no-mixed-spaces-and-tabs:
 
 function Navbar() {
 	const [navbar, setNavbar] = useState(false);
+	const [firstname, setFirstname] = useState();
+	const [errorMessage, seterrorMessage] = useState();
+
+	const checkUser = async () => {
+		await axios.get("http://" + URL + "/auth/user/", {
+		},
+			{
+				headers: {
+					"Content-Type": 'application/json'
+				}
+			}
+		)
+			.then(function (response) {
+				if (response.status == 200) {
+					// console.log(response);
+					setFirstname(response.data.first_name);
+				}
+				else {
+					//window.location = "http://127.0.0.1:8000/signin/"
+					// console.log(response);
+				}
+			}).catch(error => {
+				seterrorMessage(
+					error
+				)
+			}
+			)
+	};
+
+	useEffect(() => {
+		checkUser();
+	}, []);
+
+
+	const handleSubmit = async (e) => {
+
+		var csrftoken = getCookie('csrftoken');
+
+		await axios.post("http://" + URL + "/auth/logout/", {
+		},
+			{
+				headers: {
+					"Content-Type": 'application/json',
+					'X-CSRFToken': csrftoken
+				}
+			}
+		)
+			.then(function (response) {
+				if (response.status == 200) {
+					// console.log(response);
+				}
+				else {
+					//window.location = "http://127.0.0.1:8000/signin/"
+					// console.log(response);
+				}
+			}.bind(this))
+
+		window.location = "http://" + URL + "/signin/"
+	};
 
 	const changeNavbarBackground = () => {
 		if (window.scrollY >= 80) {
@@ -20,9 +82,9 @@ function Navbar() {
 
 	return (
 		<Fragment>
-			<nav className={navbar ? 'navbar active fixed-top' : 'navbar fixed-top'}>
+			<nav className={navbar ? 'navbar active fixed-top shadow-sm' : 'navbar fixed-top'}>
 
-				<Link to={"/"} className="offset-1"><img src={logo} alt="Logo" className="logo" /></Link>
+				<Link to={"/"} className="offset-1 mrktdb_nav_logo"><img src={logo} alt="Logo" className="logo" /></Link>
 				<Link to={"/"} className="MrktDB mr-auto">MrktDB</Link>
 
 				<form className="form-inline">
@@ -36,9 +98,44 @@ function Navbar() {
 					<a className="nav-item filers" href="#">13F Filers</a>
 				</div>
 
-				<div className="navbar-nav">
-					<a className="nav-item circle" href="#"><i className="fas fa-2x fa-circle"></i></a>
-				</div>
+				{
+					firstname ?
+						<span></span>
+						:
+						<Link to={"/signup"} className="signup_nav">Sign Up</Link>
+				}
+
+
+				{
+					firstname ?
+						<span></span>
+						:
+						<Link to={"/signin"} className="signin_nav">Sign In</Link>
+				}
+
+				{
+					firstname ?
+						<Link to={"/"} className="signup_nav mr-2">Hi, {firstname}</Link>
+						:
+						<span></span>
+				}
+
+				{
+					firstname ?
+						<div className="navbar-nav">
+							<a className="nav-item circle" href="#"><i className="fas fa-2x fa-circle"></i></a>
+						</div>
+						:
+						<span></span>
+				}
+
+
+				{
+					firstname ?
+						<Link to={"/signup"} onClick={handleSubmit} className="signin_nav">Sign out</Link>
+						:
+						<span></span>
+				}
 
 
 				<div className="navbar-nav">

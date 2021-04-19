@@ -2,7 +2,10 @@ import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from '../Layout/Navbar';
 import Footer from '../Layout/Footer';
-import '../../../styles/filer.css';
+import { URL } from '../App.js';
+import '../../../styles/Filer/filer.css';
+import SummaryTable from "./Figures/SummaryTable";
+import QuarterMarketValueChart from "./Figures/QuarterMarketValueChart";
 
 function Filer(props) {
 
@@ -14,7 +17,7 @@ function Filer(props) {
     // let securityName = thePath.substring(thePath.lastIndexOf('/') + 1);
 
     const getFilerData = async () => {
-        let particular_filer_url = 'http://www.mrktdb.com/api/company/?search=' + cik;
+        let particular_filer_url = 'http://' + URL + '/api/company/?search=' + cik;
 
         const particular_filer = await axios.get(particular_filer_url);
 
@@ -34,9 +37,12 @@ function Filer(props) {
                 <div className="filer">
                     <div className="row">
                         <div className="filer_heading col-6">{filerData ? filerData.name : null}</div>
-                        <div className="filer_cik col-5">CIK: {filerData ? filerData.cik : null}</div>
+                        <div className="filer_cik col-6">CIK: {filerData ? filerData.cik : null}</div>
                     </div>
                     <div className="filer_address">{filerData ? filerData.address : null}</div>
+
+                    <SummaryTable cik={filerData ? filerData.cik : null} />
+                    <QuarterMarketValueChart cik={filerData ? filerData.cik : null} />
                 </div>
             </div>
 

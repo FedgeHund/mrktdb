@@ -29,6 +29,7 @@ urlpatterns = [
     path('api/', include('filer.urls')),
     #to rectify 'NoReverseMatch at /auth/registration/' issue
     re_path(r'^account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'),
-	  re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(), name='account_confirm_email'),
+	re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(), name='account_confirm_email'),
+    re_path(r'^auth/', include('allauth.urls'), name='socialaccount_signup'),
     path('', include('fedgehundui.urls')),
 ]

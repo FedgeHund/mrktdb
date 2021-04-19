@@ -9,7 +9,7 @@
 }
 
 .filer_container {
-	height: 700px;
+	height: 1300px !important;
 	position: relative;
 	object-fit: cover;
 	overflow: hidden;
@@ -17,8 +17,8 @@
 
 .filer {
 	position: absolute;
-	top: 32%;
-	left: 55%;
+	top: 46%;
+	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 90%;
 	max-width: 1500px;

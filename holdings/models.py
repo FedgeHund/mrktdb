@@ -32,5 +32,3 @@ class Position(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(default=None, blank=True)
     deletedAt = models.DateTimeField(default=None, blank=True)
-    class Meta:
-        ordering = ['createdAt']

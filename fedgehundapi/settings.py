@@ -18,7 +18,7 @@ env = environ.Env()
 # reading .env file
 environ.Env.read_env()
 
-DJANGO_ENV = env("ENV", default="development")
+DJANGO_ENV = env("ENV", default="production")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if DJANGO_ENV == "production":
@@ -60,7 +60,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env(
     'SECRET_KEY', default='f9y!yh1nb6lm5(o*)^(8+-dueu9_p=p$c$d-u8f(p=w+mtd%rx')
 
-ALLOWED_HOSTS = ['MrktDB.eba-brufwk2z.us-west-2.elasticbeanstalk.com', '127.0.0.1', 'www.mrktdb.com']
+ALLOWED_HOSTS = ['MrktDB.eba-brufwk2z.us-west-2.elasticbeanstalk.com','127.0.0.1','www.mrktdb.com', 'localhost']
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -73,8 +73,11 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_WHITELIST = [
+    'http://www.mrktdb.com',
+    'http://mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com',
+    'http://localhost:8000',
     'http://127.0.0.1:8000',
-    'http://localhost:3000'
+    'http://localhost:3000',
 ]
 
 # Application definition
@@ -85,14 +88,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'allauth',
     'corsheaders',
-    'allauth.account',
+
+    # django rest framework
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    
+    # for social login
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
     'rest_auth.registration',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+
+    # Apps
     'fedgehund_auth',
     'fedgehund_profile.apps.FedgehundProfileConfig',
     'edgar.apps.EdgarConfig',
@@ -114,6 +126,29 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        "APP": {
+            "client_id": "697434274174-b3jeg526rn1da2vrn3si3d9or0t2c3to.apps.googleusercontent.com",
+            "secret": "oLkjadkLRhQppydlIDF856cS",
+            "key": ""
+        },
+        # These are provider-specific settings that can only be
+        # listed here:
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        }
+    }
+}
+
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
+SOCIALACCOUNT_EMAIL_REQUIRED = False
+SOCIALACCOUNT_QUERY_EMAIL = True
+
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`

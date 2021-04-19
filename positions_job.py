@@ -167,8 +167,8 @@ def calculate_positions_per_sec(filer, security, total_market_value,
     position_change = None
     position_type = 'New'
     if prev_total_quantity_of_sec != 0:
-        position_change = (
-                            change_in_shares / prev_total_quantity_of_sec) * 100
+        position_change = abs((
+                                change_in_shares / prev_total_quantity_of_sec) * 100)
         # doubt: what happens when a security is added in this quarter
         if prev_total_quantity_of_sec > total_quantity_of_sec:
             position_type = 'Decreased'
@@ -206,7 +206,7 @@ def calculate_positions_per_sec(filer, security, total_market_value,
                     quantity=total_quantity_of_sec, marketValue=total_market_value_of_sec,
                     weightPercent=weight_percent_of_sec,
                     previousWeightPercent=prev_weight_percent_of_sec, lastPrice=last_price,
-                    changeInShares=abs(change_in_shares), changeInPositionPercent=abs(position_change),
+                    changeInShares=abs(change_in_shares), changeInPositionPercent=position_change,
                     sourceType=filer.fileType, sourcedOn=quarterly_holding.filedOn,
                     positionType=position_type)
 

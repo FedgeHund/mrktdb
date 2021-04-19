@@ -16,7 +16,7 @@ from edgar.models import QuarterlyHolding, QuarterlySecurityHolding
 from holdings.models import Position
 from security.models import Price
 
-logger = logging.getLogger("positions_job")
+logger = logging.getLogger("console_logger")
 
 
 def get_prev_quarter(quarter):
@@ -29,6 +29,7 @@ def get_prev_quarter(quarter):
         year = year - 1
 
     return str(year) + str(prev_q_num)
+
 
 @delayed
 @wrap_non_picklable_objects
@@ -68,9 +69,9 @@ def calculate_positions(quarterly_holding, number_of_threads=8):
     #####################################
 
     prev_quarter = get_prev_quarter(quarterly_holding.quarter)
-    prev_quarterly_holding = QuarterlyHolding.objects.get(filerId=filer, quarter=prev_quarter)
+    prev_quarterly_holding = QuarterlyHolding.objects.filter(filerId=filer, quarter=prev_quarter)
     qtrly_sec_holdings_for_prev_qtrly_holding = QuarterlySecurityHolding.objects.filter(
-        quarterlyHoldingId=prev_quarterly_holding)
+        quarterlyHoldingId__in=prev_quarterly_holding)
     prev_total_market_value = qtrly_sec_holdings_for_prev_qtrly_holding.aggregate(
         Sum("marketvalue")).get("marketvalue__sum", 0)
     if prev_total_market_value is None:

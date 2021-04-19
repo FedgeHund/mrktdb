@@ -222,12 +222,12 @@ LOGGING = {
     },
     'loggers': {
         'root': {
-            'handlers': ['console'],
+            'handlers': ['file'],
             'level': 'INFO',
             'propagate': True
         },
-        'positions_job': {
-            'handlers': ['file'],
+        'console_logger': {
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': True
         }

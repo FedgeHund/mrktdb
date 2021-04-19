@@ -69,9 +69,9 @@ def calculate_positions(quarterly_holding, number_of_threads=8):
     #####################################
 
     prev_quarter = get_prev_quarter(quarterly_holding.quarter)
-    prev_quarterly_holding = QuarterlyHolding.objects.get(filerId=filer, quarter=prev_quarter)
+    prev_quarterly_holding = QuarterlyHolding.objects.filter(filerId=filer, quarter=prev_quarter)
     qtrly_sec_holdings_for_prev_qtrly_holding = QuarterlySecurityHolding.objects.filter(
-        quarterlyHoldingId=prev_quarterly_holding)
+        quarterlyHoldingId__in=prev_quarterly_holding)
     prev_total_market_value = qtrly_sec_holdings_for_prev_qtrly_holding.aggregate(
         Sum("marketvalue")).get("marketvalue__sum", 0)
     if prev_total_market_value is None:

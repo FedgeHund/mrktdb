@@ -12,8 +12,9 @@ class LatestQuarterData13FSummaryTable(generics.ListAPIView):
             cik = self.request.GET.get('cik', None)
             if cik is not None:
                 queryset = queryset.filter(cik=cik).order_by('-quarter')
-                latest_quarter = queryset[0].quarter
-                queryset = queryset.filter(quarter=latest_quarter)[:1]
+                if len(queryset) > 0:
+                    latest_quarter = queryset[0].quarter
+                    queryset = queryset.filter(quarter=latest_quarter)[:1]
                 print(queryset.query)
                 
             return queryset

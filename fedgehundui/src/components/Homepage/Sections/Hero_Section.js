@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import { BrowserRouter as Router, Route, Switch, Link, useHistory } from "react-router-dom";
 
 var securityNames = [{ securityName: "APPLE INC", ticker: "AAPL" }, { securityName: "AMAZON COM INC", ticker: "AMZN" }, { securityName: "MICROSOFT CORP.", ticker: "MSFT" }, { securityName: "FACEBOOK INC", ticker: "FB" }, { securityName: "TESLA INC", ticker: "TSLA" }];
-var companyNames = [{ name: "BERKSHIRE HATHAWAY INC", cik: "0001067983" }, { name: "TIGER GLOBAL MANAGEMENT LLC", cik: "0001167483" }, { name: "AMAZON COM INC", cik: "0001018724" }, { name: "BRIDGEWATER ASSOCIATES, LP", cik: "0001350694" }, { name: "MAN GROUP PLC", cik: "0001637460" }, { name: "RENAISSANCE TECHNOLOGIES LLC", cik: "0001037389" }, { name: "BLACKROCK INC.", cik: "0001364742" }];
+var companyNames = [{ name: "BERKSHIRE HATHAWAY INC", cik: "0001067983" }, { name: "TIGER GLOBAL MANAGEMENT LLC", cik: "0001167483" }, { name: "BRIDGEWATER ASSOCIATES, LP", cik: "0001350694" }, { name: "MAN GROUP PLC", cik: "0001637460" }, { name: "RENAISSANCE TECHNOLOGIES LLC", cik: "0001037389" }, { name: "BLACKROCK INC.", cik: "0001364742" }];
 var all_items = [];
 //var default_items = ["BERKSHIRE HATHAWAY INC", "BLACKROCK INC.", "AMAZON COM INC", "WAL MART STORES INC", "COCA COLA CO", "APPLE INC", "BRIDGEWATER ASSOCIATES, LP"];
 

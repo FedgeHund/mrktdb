@@ -24,6 +24,7 @@ class Position(models.Model):
     estimatedProfit = models.FloatField(blank=True)
     ranking = models.FloatField(blank=True)
     changeInShares = models.FloatField(blank=True)
+    changeOfValue = models.FloatField(blank=True, default=0)
     changeInPositionPercent = models.FloatField(blank=True)
     sourceType = models.TextField(blank=True)
     sourcedOn = models.DateTimeField(blank=True)

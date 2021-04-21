@@ -194,6 +194,12 @@ def calculate_positions_per_sec(filer, security, total_market_value,
     # END: Get last price #
     #######################
 
+    change_of_value = None
+
+    if last_price is not None:
+        if change_in_shares is not None:
+            change_of_value = (last_price)*(abs(change_in_shares))
+
     #################################
     # START: Create position object #
     #################################
@@ -206,7 +212,7 @@ def calculate_positions_per_sec(filer, security, total_market_value,
                     quantity=total_quantity_of_sec, marketValue=total_market_value_of_sec,
                     weightPercent=weight_percent_of_sec,
                     previousWeightPercent=prev_weight_percent_of_sec, lastPrice=last_price,
-                    changeInShares=abs(change_in_shares), changeOfValue=((last_price)*(abs(change_in_shares))), 
+                    changeInShares=abs(change_in_shares), changeOfValue=change_of_value, 
                     changeInPositionPercent=position_change,
                     sourceType=filer.fileType, sourcedOn=quarterly_holding.filedOn,
                     positionType=position_type)

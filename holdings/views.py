@@ -2,7 +2,7 @@ from .models import Position
 from holdings.serializers import PositionSerializer
 from rest_framework import generics, filters
 from rest_framework.pagination import PageNumberPagination
-from django.db.models import Count
+from django.db.models import Count, Q
 
 class StandardResultsSetPagination(PageNumberPagination):
     page_size = 100
@@ -42,8 +42,10 @@ class LatestQuarterTopBuys(generics.ListAPIView):
             queryset = Position.objects.all()
             cik = self.request.GET.get('cik', None)
             if cik is not None:
-                queryset = queryset.filter(cik=cik).order_by('-quarter', '-changeInShares')
+                queryset = queryset.filter(cik=cik).order_by('-quarter')
                 latest_quarter = queryset[0].quarter
+                queryset = queryset.filter(Q(positionType='New') | Q(positionType='Increased'))
+                queryset = queryset.order_by('-changeOfValue')
                 queryset = queryset.filter(quarter=latest_quarter)[:5]
                 print(queryset.query)
                 
@@ -57,8 +59,10 @@ class LatestQuarterTopSells(generics.ListAPIView):
             queryset = Position.objects.all()
             cik = self.request.GET.get('cik', None)
             if cik is not None:
-                queryset = queryset.filter(cik=cik).order_by('-quarter', 'changeInShares')
+                queryset = queryset.filter(cik=cik).order_by('-quarter')
                 latest_quarter = queryset[0].quarter
+                queryset = queryset.filter(positionType='Decreased')
+                queryset = queryset.order_by('-changeOfValue')
                 queryset = queryset.filter(quarter=latest_quarter)[:5]
                 print(queryset.query)
                 

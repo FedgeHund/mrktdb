@@ -4,16 +4,23 @@ import { URL } from '../../App.js';
 
 function QuarterMarketValueChart(props) {
     var cik = props.cik;
-    const [data, setData] = useState([]);
-    var quarterId = [];
+    var [oldCIK, setOldCIK] = useState(null);
+    var quarters = [];
     var marketValue = [];
+    if (cik !== oldCIK) {
+        setOldCIK(cik);
+    }
+
+    const [data, setData] = useState([]);
+    var URL = "http://www.mrktdb.com/api/quarterlymarketvaluechart/?cik=" + oldCIK;
 
     async function fetchUrl() {
-        fetch('http://' + URL + '/api/quarterlyfiler/', {
+        fetch(URL, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
+
         })
             .then(response => response.json())
             .then(data => setData(data));
@@ -21,32 +28,28 @@ function QuarterMarketValueChart(props) {
 
     useEffect(() => {
         fetchUrl();
-    }, [cik]);
-
-    console.log(data);
-
+    }, [oldCIK]);
 
     for (let i = 0; i < data.length; i++) {
-        if (data[i]["cik"] == cik) {
-            // console.log(data[i]);
-            let q = data[i]["quarter"].toString();
-            var quarterName = "".concat("Q", q.substring(0, 1), " ", q.substring(1, 5));
-            quarterId.push(quarterName);
-            marketValue.push(data[i]["marketValue"]);
-        }
+        let q = data[i]["quarter"].toString();
+        var quarterName = "".concat("Q", q.substring(4, 5), " ", q.substring(0, 4));
+        quarters.push(quarterName);
+        marketValue.push(data[i]["marketValue"]);
     }
 
     if (typeof marketValue !== 'undefined' && marketValue.length > 0) {
+        console.log(quarters);
         var chartData = {
-            labels: quarterId.reverse(),
+            labels: quarters,
             datasets: [
                 {
                     label: 'Market Value',
                     lineTension: 0,
-                    data: marketValue.reverse(),
+                    data: marketValue,
                     backgroundColor: [
                         '#12232E',
                     ],
+
                 }
             ],
         }
@@ -56,7 +59,6 @@ function QuarterMarketValueChart(props) {
         <div>
             {typeof marketValue !== 'undefined' && marketValue.length > 0 ?
                 <div>
-                    <p> {console.log(marketValue)}</p>
                     <Line
                         data={chartData}
                         width={700}

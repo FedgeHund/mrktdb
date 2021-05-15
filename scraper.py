@@ -17,6 +17,7 @@ import datetime
 import os
 import time
 import django
+from django.db.models import Max
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fedgehundapi.settings')
 django.setup()
 from edgar.models import Company, Filer, QuarterlyHolding, Security, QuarterlyOtherManagerDistribution, QuarterlySecurityHolding, QuarterlyOtherManager
@@ -33,6 +34,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+import requests
 import random
 SEC_LINK = "https://www.sec.gov/edgar/searchedgar/companysearch.html"
 CIK_SEARCH_URL = "https://www.sec.gov/cgi-bin/browse-edgar?CIK="
@@ -45,7 +47,6 @@ for se in Security.objects.all():
     securitymaster.append(se.cusip)
 
 print(securitymaster)
-print(len(securitymaster))
 # valuelist=[]
 # amountlist=[]
 # holdingTypelist=[]
@@ -70,9 +71,9 @@ class HoldingsScraper:
         #self.browser = webdriver.PhantomJS()
         #self.browser.set_window_size(1024, 768)
 
-        #Using chrome driver
+        #Using chrome driver headless
         options = Options()
-        options.headless = True
+        options.headless = False
         self.browser = webdriver.Chrome(options=options)
 
         self.cik = cik
@@ -83,40 +84,67 @@ class HoldingsScraper:
         url = CIK_SEARCH_URL + self.cik
         self.browser.get(url)
         soup = BeautifulSoup(self.browser.page_source, "html.parser")
-        wait = WebDriverWait(self.browser, 20)
+        # time.sleep(2)
+        # print("Start - \n", soup)
+        wait = WebDriverWait(self.browser, 10)
+        # try:
+        print('1')
+        # wait = WebDriverWait(self.browser, 40)
+        print('2')
+        # time.sleep(2)
+        # wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".tableFile2")))
+        print('3')
 
-        try:
-            wait = WebDriverWait(self.browser, 20)
-            wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".tableFile2")))
-
-            # Filter search results by '13F-HR' filings
-            search = self.browser.find_element_by_name('type')
-            filing_type = '13F-HR' or '13F-HR/A'
-            search.send_keys(filing_type)
-            search.send_keys(Keys.RETURN)
-            time.sleep(5)
-            self.retrieve_filings()
-        except:
-            sys.stdout.write('No results found for cik: %s\n' % self.cik)
+        # Filter search results by '13F-HR' filings
+        wait.until(EC.visibility_of_element_located((By.NAME, "type")))
+        search = self.browser.find_element_by_name('type')
+        print('4')
+        filing_type = '13F-HR' or '13F-HR/A'
+        search.send_keys(filing_type)
+        time.sleep(1)
+        search.send_keys(Keys.RETURN)
+        print('5')
+        time.sleep(1)
+        print('SLEEP 1')
+        self.retrieve_filings()
+        print('AFTER RETRIEVE')
+        # except:
+        #     sys.stdout.write('-------- EXCEPTION at 100 | No results found for cik: %s\n' % self.cik)
 
     def retrieve_filings(self):
         """Retrieve links for all 13F filing from search results."""
         sys.stdout.write('Retrieving filings for: %s\n' % self.cik)
         soup = BeautifulSoup(self.browser.page_source, "html.parser")
+        # time.sleep(3)
+        # print(soup, end='')
+        print("\n-- Adding links")
         self.links.extend(soup('a', id='documentsbutton'))
-        sys.stdout.write('13F filings found: %d\n' % len(self.links))
+        # time.sleep(2)
+        print(self.links)
+        sys.stdout.write('At 115 : 13F filings found: %d\n' % len(self.links))
+        print('120')
 
         # Comment out try/except lines below to run most recent filing only
         # Checks for more results and click next page
         try:
+            print('125')
             next = self.browser.find_element_by_xpath("//input[@value='Next 40']")
+            time.sleep(0.5)
+            print('127')
             next.click()
+            print('131')
             self.retrieve_filings()
+            print('133')
         except:
             # Otherwise loop through all filings found to get data
+            z=1
             for link in self.links:
+                print("LINK Number ---:> ", z)
                 url = DOMAIN + link.get('href', None)
+                print(url)
                 self.parse_filing(url)
+                z=z+1
+            print("-------- EXCEPTION in retrieve_filings")
         # Uncomment below to run most recent filing only
         # url = DOMAIN + self.links[0].get('href', None)
         # self.parse_filing(url)
@@ -127,48 +155,62 @@ class HoldingsScraper:
         Opens filing url, get filing and report end dates, and determine
         parsing by either XML or ASCII based on 2013 filing format change.
         """
+        print("156")
         self.browser.get(url)
+        print("158")
         soup = BeautifulSoup(self.browser.page_source, "html.parser")
+        print("160")
+        time.sleep(1)
 
         # Find report information for text file headers
-        filing_date_loc = soup.find("div", text="Filing Date")
-        filing_date = filing_date_loc.findNext('div').text
-        period_of_report_loc = soup.find("div", text="Period of Report")
-        period_of_report = period_of_report_loc.findNext('div').text
+        # filing_date_loc = soup.find("div", text="Filing Date")
+        # filing_date = filing_date_loc.findNext('div').text
+        # period_of_report_loc = soup.find("div", text="Period of Report")
+        # period_of_report = period_of_report_loc.findNext('div').text
 
-        # Prepare report header and file_name for each text file
-        report_detail = self.report_info(filing_date, period_of_report)
-        file_name = report_detail[0]
-        report_headers = report_detail[1]
+        # # Prepare report header and file_name for each text file
+        # report_detail = self.report_info(filing_date, period_of_report)
+        # file_name = report_detail[0]
+        # report_headers = report_detail[1]
 
         # Determine if xml file exists, if not look for ASCII text file
         try:
+            print(soup)
             xml = soup.find('td', text="2")
+            print("XML --- ", xml)
             xml2 = soup.find('td', text="1")
+            print("XML2 --- ", xml2)
+            time.sleep(4)
 
             xml_link = xml.findNext('a', text=re.compile("\.xml$"))
+            print("xml_link --- ", xml_link)
             xml_link2 = xml2.findNext('a', text=re.compile("\.xml$"))
+            print("xml_link2 --- ", xml_link2)
 
             xml_file = DOMAIN + xml_link.get('href', None)
             xml_file2 = DOMAIN + xml_link2.get('href', None)
 
-            print(xml_file)
-            print(xml_file2)
-
-            sys.stdout.write('Getting holdings from: %s\n' % xml_file)
+            sys.stdout.write('At 172 : Getting holdings from: %s\n' % xml_file)
+            print('8')
             holdings = self.infoTable(xml_file)
-            col_headers = holdings[0]
-            data = holdings[1]
+            print('9')
+            # col_headers = holdings[0]
+            # print('10')
+            # data = holdings[1]
 
-            sys.stdout.write('Getting holdings from: %s\n' % xml_file2)
+            sys.stdout.write('At 182 : Getting holdings from: %s\n' % xml_file2)
+            print('12')
             coverPage = self.primaryDoc(xml_file2)
-            col_headers2 = coverPage[0]
-            coverPageData = coverPage[1]
-            # self.save_holdings_xml(file_name, report_headers, col_headers, data, col_headers2, coverPageData)
+            print('13')
+            # col_headers2 = coverPage[0]
+            # coverPageData = coverPage[1]
+            # print('14')
+        # self.save_holdings_xml(file_name, report_headers, col_headers, data, col_headers2, coverPageData)
 
         except:
+            print('-------- EXCEPTION in parse_filing')
             pass
-            # ascii = soup.find('td', text="Complete submission text file")
+            soup.find('td', text="Complete submission text file")
             # ascii_link = ascii.findNext('a', text=re.compile("\.txt$"))
             # txt_file = DOMAIN + ascii_link.get('href', None)
             # sys.stdout.write('Getting holdings from (ascii): %s\n' % txt_file)
@@ -203,15 +245,23 @@ class HoldingsScraper:
 
         XML format for filings was required by SEC in 2013.
         """
+        print("Inside infoTable func")
+        print('228')
         self.browser.get(xml_file)
+        print('229')
         soup = BeautifulSoup(self.browser.page_source, "xml")
+        print('231')
+        # wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".tag")))
         infoTable = soup.find_all('infoTable')
+        print('232', len(infoTable))
         data = []
         objs=[]
         toBeSaved=[]
         cusiplist.clear()
         uinlist.clear()
+        infoTableData.clear()
         # Attempt retrieval of available attributes for 13F filings
+        infoTableRow = {}
         for i in range(len(infoTable)):
             infoTableRow = {}
             
@@ -273,10 +323,11 @@ class HoldingsScraper:
                     securitymaster.append(infoTableRow['cusip'])
                     toBeSaved.append(infoTableRow)
             except:
-                print("No new security to be saved")
+                print("-------- EXCEPTION at 278: No new security to be saved")
                 pass
 
-        try:        
+        try:       
+            print("Creating Security Objects") 
             securityObjects = [
                 Security(
                     cusip = toBeSaved[items]['cusip'],securityName = toBeSaved[items]['nameOfIssuer'] ,securityType = 'STOCK',titleOfClass = toBeSaved[items]['titleOfClass']
@@ -287,15 +338,15 @@ class HoldingsScraper:
             print("caught exception while creating security objects and appending them to the securityObjects list")
             pass
 
-        print("Bulk Save for Securities Started")
+        print("Bulk Save for Securities Started, len :", len(securityObjects))
         try:
-            Security.objects.bulk_create(securityObjects)
+            Security.objects.bulk_create(securityObjects, batch_size=500)
         except:
-            print("caught exception while saving securities")
+            print("-------- EXCEPTION while saving securities")
             pass
         print("Bulk Save for Securities Ended")
-        securityObjects.clear()
-        toBeSaved.clear()
+        securityObjects=[]
+        toBeSaved=[]
             
         col_headers = list(infoTableRow.keys())
         return(col_headers, data)
@@ -308,6 +359,7 @@ class HoldingsScraper:
         coverPageData = []
         
         filingtype=''
+        d2 = {}
         for i in range(len(coverPage)):
             d2 = {}
             try:
@@ -326,7 +378,7 @@ class HoldingsScraper:
                 d2['filing_manager_name'] = coverPage[i].find('filingManager').find('name').text
             except:
                 pass
-# =============================================================================================================================================
+            # =============================================================================================================================================
             try:
                 d2['filingManager_address1_street1'] = coverPage[i].find('filingManager').find('address').find('com:street1').text
             except:
@@ -336,7 +388,7 @@ class HoldingsScraper:
                 d2['filingManager_address1_street1'] = coverPage[i].find('filingManager').find('address').find('ns1:street1').text
             except:
                 pass
-# =============================================================================================================================================
+            # =============================================================================================================================================
             try:
                 d2['filingManager_address2_street2'] = coverPage[i].find('filingManager').find('address').find('com:street2').text
             except:
@@ -347,7 +399,7 @@ class HoldingsScraper:
             except:
                 pass
 
-# =============================================================================================================================================
+            # =============================================================================================================================================
             try:
                 d2['filingManager_address3_city'] = coverPage[i].find('filingManager').find('address').find('com:city').text
             except:
@@ -358,7 +410,7 @@ class HoldingsScraper:
             except:
                 pass
 
-# =============================================================================================================================================
+            # =============================================================================================================================================
             try:
                 d2['filingManager_address4_state-or-country'] = coverPage[i].find('filingManager').find('address').find('com:stateOrCountry').text
             except:
@@ -369,7 +421,7 @@ class HoldingsScraper:
             except:
                 pass
 
-# =============================================================================================================================================
+            # =============================================================================================================================================
             try:
                 d2['filingManager_address5_zipCode'] = coverPage[i].find('filingManager').find('address').find('com:zipCode').text
             except:
@@ -380,7 +432,7 @@ class HoldingsScraper:
             except:
                 pass
 
-# =============================================================================================================================================
+            # =============================================================================================================================================
             try:
                 d2['reportType'] = coverPage[i].find('reportType').text
             except:
@@ -401,7 +453,7 @@ class HoldingsScraper:
                 d2['provideInfoForInstruction5'] = coverPage[i].find('provideInfoForInstruction5').find('Sole').text
             except:
                 pass
-# ========================================================================================================================================
+            # ========================================================================================================================================
             coverPageData.append(d2)
             address=d2['filingManager_address1_street1']+', '+d2['filingManager_address3_city']+', '+d2['filingManager_address4_state-or-country']+', '+d2['filingManager_address5_zipCode']
             try:
@@ -429,7 +481,7 @@ class HoldingsScraper:
                 pass
             # =========================================================================================================================
             companyObject = Company.objects.get(cik=self.cik)
-            print(companyObject)
+            # print(companyObject)
 
             filerObject, created = Filer.objects.update_or_create(
                 fileNumber=finalfilenumber ,fileType='13F',
@@ -447,7 +499,7 @@ class HoldingsScraper:
                     otherparentfinalfilenumber=otherparentfilenumber[0:4]+'0'+otherparentfilenumber[4:10]
                 else:
                     otherparentfinalfilenumber=otherparentfilenumber
-                print(otherparentfinalfilenumber)
+                # print(otherparentfinalfilenumber)
             except:
                 pass
 
@@ -456,23 +508,29 @@ class HoldingsScraper:
                 parentFilerObject, created = Filer.objects.get_or_create(fileNumber=otherparentfinalfilenumber)
             except:
                 pass
-            print(coverPageData)
+            # print(coverPageData)
         col_headers2 = list(d2.keys())
-# ==================================================================================================      
-        signatureBlock = soup.find_all('signatureBlock')
+                # ==================================================================================================      
+        
         d7 = {}
         
         try:
+            signatureBlock = soup.find_all('signatureBlock')
             d7['signatureDate'] = signatureBlock[i].find('signatureDate').text
         except:
             print("FiledOn / Signature Date is not present for this filer")
             pass
+        
+        summaryPage = []
+        try:
+            summaryPage = soup.find_all('summaryPage')
+        except:
+            print("summaryPage is not present for this filer")
+            pass
 
-
-        summaryPage = soup.find_all('summaryPage')
         d3 = {}
         summaryPageData = []
-        otherManagerCount=0
+        # otherManagerCount=0
         try:
             d3['otherIncludedManagersCount'] = summaryPage[i].find('otherIncludedManagersCount').text
         except:
@@ -494,24 +552,30 @@ class HoldingsScraper:
             pass
  
         summaryPageData.append(d3)
-        otherManagerCount = d3['otherIncludedManagersCount']
+        # otherManagerCount = d3['otherIncludedManagersCount']
         
-        if d2['reportType']=='13F HOLDINGS REPORT':
-            filingtype='HR'
-        elif d2['reportType']=='13F COMBINATION REPORT':
-            filingtype='CR'
-        else:
-            filingtype='NT'
+        try:
+            if d2['reportType']=='13F HOLDINGS REPORT':
+                filingtype='HR'
+            elif d2['reportType']=='13F COMBINATION REPORT':
+                filingtype='CR'
+            else:
+                filingtype='NT'
+        except:
+            pass
        
-        Quarter=''
-        if(d2['reportCalendarOrQuarter'][:2]=='03'):
-            Quarter= d2['reportCalendarOrQuarter'][6:11] + '1'
-        elif(d2['reportCalendarOrQuarter'][:2]=='06'):
-            Quarter= d2['reportCalendarOrQuarter'][6:11] + '2'
-        elif(d2['reportCalendarOrQuarter'][:2]=='09'):
-            Quarter= d2['reportCalendarOrQuarter'][6:11] + '3'
-        else:
-            Quarter= d2['reportCalendarOrQuarter'][6:11] + '4'
+        try:
+            Quarter=''
+            if(d2['reportCalendarOrQuarter'][:2]=='03'):
+                Quarter= d2['reportCalendarOrQuarter'][6:11] + '1'
+            elif(d2['reportCalendarOrQuarter'][:2]=='06'):
+                Quarter= d2['reportCalendarOrQuarter'][6:11] + '2'
+            elif(d2['reportCalendarOrQuarter'][:2]=='09'):
+                Quarter= d2['reportCalendarOrQuarter'][6:11] + '3'
+            else:
+                Quarter= d2['reportCalendarOrQuarter'][6:11] + '4'
+        except:
+            pass
         
         try:
             if d2['isAmendment']=='true':
@@ -549,15 +613,15 @@ class HoldingsScraper:
             pass
         
         quarterlyHoldingObject = QuarterlyHolding.objects.get(filerId = filerObject,quarter=Quarter,totalValue =d3['tableValueTotal'])
-        print(quarterlyHoldingObject)
-# ===========================================================================================================
+        # print(quarterlyHoldingObject)
+                # ===========================================================================================================
         
         otherManager2 = soup.find_all('otherManager2')
         otherManager2Data = []
         childFilerObjectList= []
         sequenceNumberList = []
         childFilerObjectLists = []
-        print(len(otherManager2))
+        # print(len(otherManager2))
         for i in range(len(otherManager2)):
             d4 = {}
             try:
@@ -601,28 +665,30 @@ class HoldingsScraper:
                 pass
             
             try:
+                print("----------------- At 647")
                 QuarterlyOtherManager.objects.get_or_create(parentFilerId =parentFilerObject ,childFilerId =childFilerObject ,quarterlyHoldingId = quarterlyHoldingObject,number=d4['sequenceNumber'] )
             except:
+                print("Error in QuarterlyOtherManager creation 1")
                 pass
             
             try:
+                print("----------------- At 648")
                 QuarterlyOtherManager.objects.get_or_create(childFilerId =childFilerObject ,quarterlyHoldingId = quarterlyHoldingObject,number=d4['sequenceNumber'] )
             except:
+                print("Error in QuarterlyOtherManager creation 2")
                 pass
             try:
+                print("----------------- At 649")
                 QuarterlyOtherManager.objects.get_or_create(parentFilerId =parentFilerObject ,quarterlyHoldingId = quarterlyHoldingObject,number=d4['sequenceNumber'] )
             except:
+                print("Error in QuarterlyOtherManager creation 3")
                 pass
             # try:
             #     QuarterlyOtherManagerObject = QuarterlyOtherManager.objects.get(quarterlyHoldingId = quarterlyHoldingObject,number=otherManagerCount )
 
             # except:
             #     pass\
-            try:
-                print(d4['sequenceNumber'])
-            except:
-                print("Exception caught at line 611")
-                pass
+
             try:
                 childFilerObjectList.append(childFilerObject)
                 childFilerObjectLists=QuarterlyOtherManager.objects.filter(childFilerId__in=childFilerObjectList)
@@ -630,26 +696,26 @@ class HoldingsScraper:
                 sequenceNumberList.append(d4['sequenceNumber'])
                 otherManager2Data.append(d4)
             except:
-                print("Exception caught at line 614")
+                print("-------- EXCEPTION caught at line 656")
                 pass
-        try:
-            childFilerMap = {}
-            for i in range(len(sequenceNumberList)):
-                childFilerMap[sequenceNumberList[i]] = childFilerObjectLists[i]
+        # try:
+        childFilerMap = {}
+        for i in range(len(sequenceNumberList)):
+            childFilerMap[sequenceNumberList[i]] = childFilerObjectLists[i]
 
-            for i in range(len(childFilerObjectLists)):
-                correspondingsecurity = childFilerMap[childFilerObjectLists[i]]
-        except:
-            print("Exception caugth at line 624")
-            pass
-        print(childFilerMap)
+        for i in range(len(childFilerObjectLists)):
+            correspondingsecurity = childFilerMap[childFilerObjectLists[i]]
+        # except:
+        #     print("-------- EXCEPTION caught at line 666")
+        #     pass
+        # print(childFilerMap)
           
         QuarterlySecurityHoldingObjectstbs=[]
         QuarterlyOtherManagerObjectstbs=[]
         # sss=[]
-        print(quarterlyHoldingObject)
-        print(len(cusiplist))
-        print(len(infoTableData))
+        # print(quarterlyHoldingObject)
+        # print(len(cusiplist))
+        # print(len(infoTableData))
 
         # ===================================================================================================================
 
@@ -684,12 +750,8 @@ class HoldingsScraper:
 
         for i in range(len(unique_cusip_list)):
             correspondingsecurity = map[unique_cusip_list[i]]
-
-       
-
-
         
-        print(map)
+        print("QuarterlySecurityHolding len :",len(map))
        
         try:
             QuarterlySecurityHoldingObjectstbs = [
@@ -711,56 +773,65 @@ class HoldingsScraper:
             pass
         print("Bulk Save for QuarterlySecurityHolding Started")
         try:
-            QuarterlySecurityHolding.objects.bulk_create(QuarterlySecurityHoldingObjectstbs)
+            QuarterlySecurityHolding.objects.bulk_create(QuarterlySecurityHoldingObjectstbs, batch_size=1000)
         except:
             print("Exception caught while saving QuarterlySecurityHolding")
             pass
+
         print("Bulk Save for QuarterlySecurityHolding Ended")
-        try:
-            print(QuarterlyOtherManagerObject)
-        except:
-            pass
-        print(len(uinlist))
+
+        # print(len(uinlist))
         QuarterlyOtherManagerObjectsList=[]
         QuarterlyOtherManagerObjectsList.clear()
-        try:
-            for i in range(len(infoTableData)):
-                print(infoTableData[i]['otherManager'][0])                
-                print(childFilerMap.get(infoTableData[i]['otherManager'][0]))
-        except:
-            print("PRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOBBBBBBBBBBBBBLEM")
-            pass
+        # try:
+        #     for i in range(len(infoTableData)):
+        #         print(infoTableData[i]['otherManager'][0])                
+        #         print(childFilerMap.get(infoTableData[i]['otherManager'][0]))
+        # except:
+        #     print("PRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOBBBBBBBBBBBBBLEM at 732")
+        #     pass
         try:
             try:
-                QuarterlyOtherManagerObjectsList=QuarterlySecurityHolding.objects.filter(uin__in=uinlist)
-                print(len(QuarterlyOtherManagerObjectsList))
-                QuarterlySecurityHoldingOM=[]
-                QuarterlySecurityHoldingOM.clear()
-                sequenceList=[]
-                sequenceList.clear()
+                print("Filtering QuarterlyOtherManagerObjectsList")
+                queryset = QuarterlySecurityHolding.objects.order_by('-quarterlyHoldingId')
+                latest_quarterlyHoldingId = queryset[0].quarterlyHoldingId
+                print("LATEST -", latest_quarterlyHoldingId)
+                QuarterlyOtherManagerObjectsList=queryset.filter(quarterlyHoldingId=latest_quarterlyHoldingId)
+                # QuarterlyOtherManagerObjectsList=infoTableData
+                print("QuarterlyOtherManagerObjectsList len :", len(QuarterlyOtherManagerObjectsList))
             except:
-                print("Exception at 730")
+                print("PRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOBBBBBBBBBBBBBLEM at 742")
                 pass
+
+            # try:
+            #     print('OK at 746')
+            #     # print(infoTableData[0]['otherManager'].split(","))
+            # except:
+            #     print("Exception at 748")
+            #     pass
+
+            # print(infoTableData)
+
+            QuarterlySecurityHoldingOM=[]
+            sequenceList=[]
+
+            # print("781")
             k=0
-            try:
-                print(infoTableData[0]['otherManager'].split(","))
-            except:
-                print("Exception at 736")
-                pass
+            
             for item in QuarterlyOtherManagerObjectsList:
                 for items in infoTableData[k]['otherManager'].split(","):
-                    print(item)
-                    print(items)
                     sequenceList.append(items)
                     QuarterlySecurityHoldingOM.append(item)
                 k=k+1
-            print(len(QuarterlySecurityHoldingOM))
+            print("QuarterlySecurityHoldingOM len :", len(QuarterlySecurityHoldingOM))
+            print("sequenceList len :", len(sequenceList))
+            
             try:
                 QuarterlyOtherManagerObjectstbs = [
                     QuarterlyOtherManagerDistribution(
                         quarterlyOtherManagerId =childFilerMap.get(sequenceList[i]) ,
                         quarterlySecurityHoldingId = QuarterlySecurityHoldingOM[i]
-                        )for i in range(len(QuarterlySecurityHoldingOM))
+                        ) for i in range(len(QuarterlySecurityHoldingOM))
                 ]
             except:
                 print("Exception caught while creating QuarterlyOtherManagerObjectstbs list")
@@ -770,7 +841,7 @@ class HoldingsScraper:
             print("Bulk Save for QuarterlyOtherManagerDistribution Started")
             
             try:
-                QuarterlyOtherManagerDistribution.objects.bulk_create(QuarterlyOtherManagerObjectstbs)
+                QuarterlyOtherManagerDistribution.objects.bulk_create(QuarterlyOtherManagerObjectstbs, batch_size=500)
             except:
                 print("Exception caught while saving QuarterlyOtherManagerDistribution")
                 pass
@@ -779,14 +850,14 @@ class HoldingsScraper:
         except:
             print("No other managers for this holding/filer")
             pass
-        infoTableData.clear()
-        sss.clear()
-        cusiplist.clear()
-        uinlist.clear()
-        QuarterlyOtherManagerObjectsList.clear()
+
+        # infoTableData.clear()
+        # sss.clear()
+        # cusiplist.clear()
+        # uinlist.clear()
+        print('Ok at 810')
 
         return(col_headers2, coverPageData)
-
 
 
     def save_holdings_xml(self, file_name, report_headers, col_headers, data, col_headers2, coverPageData):

@@ -12,7 +12,7 @@ function CompanyProfile(props) {
     companyProfile.innerHTML = JSON.stringify({
       "symbol": ticker,
       "width": "100%",
-      "height": 560,
+      "height": 700,
       "colorTheme": "light",
       "isTransparent": true,
       "locale": "in"

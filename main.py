@@ -16,8 +16,8 @@ cikmaster=[]
 for companyobject in Company.objects.all():
     cikmaster.append(companyobject.cik)
 
-
-ciks = ["0001037389", "0001637460", "0001067983", "0001167483", "0001350694", "0001364742", "0001633376", "0001179392", "0001273087", "0001048445", "0001423053"]
+ciks = ["0001637460"]
+# ciks = ["0001037389", "0001637460", "0001364742", "0001067983", "0001167483", "0001350694", "0001179392", "0001273087", "0001048445", "0001423053"]
 
 
 # To find information about any 1 company uncomment line 14 -15 and comment line 19-20
@@ -27,12 +27,13 @@ ciks = ["0001037389", "0001637460", "0001067983", "0001167483", "0001350694", "0
 
 for cik in ciks:
     if cik not in cikmaster:
+        print("Currently running for CIK:", str(cik))
         ticker = cik
         sys.stdout.write('Scraping started at %s\n' % str(datetime.datetime.now()))
         holdings = HoldingsScraper(ticker)
         holdings.scrape()
     else:
-        print("holdings for",cik,"already present")
+        print("Holdings for",cik,"already present")
 
 try:
     holdings.remove_temp_file()

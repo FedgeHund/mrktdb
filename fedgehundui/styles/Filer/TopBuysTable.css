@@ -1,0 +1,15 @@
+.top_buys_left_table_head {
+	padding-top: 30px !important;
+	padding-left: 30px !important;
+	border-radius: 8px !important;
+}
+
+.top_buys_biggest_holdings_table_headers {
+	font-size: 0.9em;
+	padding-bottom: 25px !important;
+}
+
+.top_buys_right_table_head {
+	padding-right: 35px !important;
+	padding-top: 30px !important;
+}

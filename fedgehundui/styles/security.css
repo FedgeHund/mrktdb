@@ -8,8 +8,20 @@
 	--Lato: "Lato", sans-serif;
 }
 
+@media (max-width: 768px) {
+	.security.security {
+		width: 95%;
+	}
+}
+
+@media (max-width: 992px) {
+	.security_container.security_container {
+		height: 3700px;
+	}
+}
+
 .security_container {
-	height: 2700px;
+	height: 2450px;
 	position: relative;
 	object-fit: cover;
 	overflow: hidden;
@@ -20,7 +32,7 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 90%;
+	width: 85%;
 	max-width: 1500px;
 	font-size: 16px;
 }
@@ -54,11 +66,7 @@
 	padding: 0;
 }
 
-#CompanyProfile {
-	margin-top: 60px;
-}
-
-#CompanyProfile,
+/* #CompanyProfile,
 #TechnicalAnalysis {
 	margin-top: 60px;
-}
+} */

@@ -9,7 +9,7 @@
 }
 
 .filer_container {
-	height: 1300px !important;
+	height: 600px !important;
 	position: relative;
 	object-fit: cover;
 	overflow: hidden;
@@ -17,16 +17,16 @@
 
 .filer {
 	position: absolute;
-	top: 46%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 90%;
+	width: 85%;
 	max-width: 1500px;
 	font-size: 16px;
 }
 
 .filer_heading {
-	font-size: 3em;
+	font-size: 2.8em;
 	font-family: var(--Lato);
 	font-weight: 600;
 	color: #303030;
@@ -37,9 +37,9 @@
 	font-size: 1.5em;
 	font-family: var(--Lato);
 	font-weight: 600;
-	text-align: right;
+	text-align: left;
 	text-align: bottom;
-	margin-top: 25px;
+	margin-top: 26px;
 	color: #303030;
 }
 
@@ -49,4 +49,88 @@
 	font-weight: 500;
 	color: #303030;
 	text-transform: capitalize;
+}
+
+/* Market Value Graph */
+
+.market_value_graph_container {
+	height: 750px;
+	background: white;
+	position: relative;
+	overflow: hidden !important;
+	object-fit: cover;
+	z-index: 0 !important;
+}
+
+.market_value_graph {
+	font-family: var(--OpenSans);
+	position: relative;
+	top: 47%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 80%;
+	max-width: 1500px;
+	font-size: 16px;
+}
+
+.filer_page_section_heading {
+	background: #fcf4eb;
+	border-radius: 4px;
+}
+
+.total_market_value_heading {
+	font-family: var(--Roboto);
+	font-size: 1.2em;
+	color: #303030;
+	margin-left: 25px;
+}
+
+.filerName_in_marketValue_graph_head {
+	font-family: var(--Roboto);
+	font-size: 0.8em;
+	color: #777777;
+	margin-left: 25px;
+	text-transform: capitalize;
+}
+
+/* Biggest Holdings */
+.biggest_holdings_container {
+	height: 600px;
+	background: white;
+	position: relative;
+	overflow: hidden !important;
+	object-fit: cover;
+	z-index: 0 !important;
+}
+
+.biggest_holdings {
+	font-family: var(--OpenSans);
+	position: relative;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 80%;
+	max-width: 1500px;
+	font-size: 16px;
+}
+
+/* Top Buys */
+.top_buys_container {
+	height: 650px;
+	background: white;
+	position: relative;
+	overflow: hidden !important;
+	object-fit: cover;
+	z-index: 0 !important;
+}
+
+.top_buys {
+	font-family: var(--OpenSans);
+	position: relative;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 80%;
+	max-width: 1500px;
+	font-size: 16px;
 }

@@ -17,22 +17,23 @@ function Footer() {
 					</div>
 
 					<div className="row margin6">
-						<a href="#" className="filer_items offset-md-2 col-md-2 col-12 hover_effect hover_effect_row"><div className="margin_small6">Latest Filings&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
-						<a href="#" className="filer_items col-md-4 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Searching&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+						<a href="#" className="filer_items offset-md-2 col-md-2 col-12 hover_effect hover_effect_row"><div className="margin_small6">Latest Filings</div></a>
+						<a href="#" className="filer_items col-md-4 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Searching</div></a>
+						{/* <a href="#" className="filer_items col-md-4 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Searching&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a> */}
 					</div>
 
 					<div className="row">
-						<a href="#" className="filer_items offset-md-2 col-md-2 col-12 hover_effect hover_effect_row"><div className="margin_small6">Popular Stocks&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
-						<a href="#" className="filer_items col-md-4 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Fund Performance Search&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+						<a href="#" className="filer_items offset-md-2 col-md-2 col-12 hover_effect hover_effect_row"><div className="margin_small6">Popular Stocks</div></a>
+						<a href="#" className="filer_items col-md-4 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Fund Performance Search</div></a>
 					</div>
 
 					<div className="row">
-						<a href="#" className="filer_items offset-md-2 col-md-2 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Trends&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
-						<a href="#" className="filer_items col-md-4 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Stock Screener&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+						<a href="#" className="filer_items offset-md-2 col-md-2 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Trends</div></a>
+						<a href="#" className="filer_items col-md-4 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Stock Screener</div></a>
 					</div>
 
 					<div className="row">
-						<a href="#" className="filer_items offset-md-2 col-md-3 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Statistics&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+						<a href="#" className="filer_items offset-md-2 col-md-3 col-12 hover_effect hover_effect_row"><div className="margin_small6">13F Statistics</div></a>
 					</div>
 
 
@@ -50,28 +51,28 @@ function Footer() {
 						</div>
 
 						<div className="row hover_effect_row margin6">
-							<a href="#" className="filer_items offset-2 col-2 hover_effect"><div>Our offerings&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
-							<a href="#" className="filer_items col-2 hover_effect"><div>Advertise with us&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
-							<a href="/contactus" className="filer_items col-2 hover_effect"><div>Contact Us&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
-							<a href="#" className="filer_items col-2 hover_effect"><div>Email Newsletter&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+							<a href="#" className="filer_items offset-2 col-2 hover_effect"><div>Our offerings</div></a>
+							<a href="#" className="filer_items col-2 hover_effect"><div>Advertise with us</div></a>
+							<a href="/contactus" className="filer_items col-2 hover_effect"><div>Contact Us</div></a>
+							<a href="#" className="filer_items col-2 hover_effect"><div>Email Newsletter</div></a>
 						</div>
 
 						<div className="row hover_effect_row">
-							<a href="#" className="filer_items offset-2 col-2 hover_effect"><div>How MrktDB works?&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
-							<a href="#" className="filer_items col-2 hover_effect"><div>Business Resources&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
-							<a href="#" className="filer_items col-2 hover_effect"><div>Report a Bug&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
-							<a href="#" className="filer_items col-2 hover_effect"><div>Upcoming events&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+							<a href="#" className="filer_items offset-2 col-2 hover_effect"><div>How MrktDB works?</div></a>
+							<a href="#" className="filer_items col-2 hover_effect"><div>Business Resources</div></a>
+							<a href="#" className="filer_items col-2 hover_effect"><div>Report a Bug</div></a>
+							<a href="#" className="filer_items col-2 hover_effect"><div>Upcoming events</div></a>
 						</div>
 
 						<div className="row hover_effect_row">
-							<a href="#" className="filer_items offset-2 col-2 hover_effect"><div>Getting started&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+							<a href="#" className="filer_items offset-2 col-2 hover_effect"><div>Getting started</div></a>
 							<a href="#" className="filer_items col-2 hover_effect"><div></div></a>
-							<a href="#" className="filer_items col-2 hover_effect"><div>Sign in&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+							<a href="#" className="filer_items col-2 hover_effect"><div>Sign in</div></a>
 							<a href="#" className="filer_items col-2 hover_effect"><div></div></a>
 						</div>
 
 						<div className="row hover_effect_row">
-							<a href="/faq" className="filer_items offset-2 col-2 hover_effect"><div>FAQ&nbsp; <i className="fas fa-arrow-right link_arrow"></i></div></a>
+							<a href="/faq" className="filer_items offset-2 col-2 hover_effect"><div>FAQ</div></a>
 							<a href="#" className="filer_items col-2 hover_effect"><div></div></a>
 							<a href="#" className="filer_items col-2 hover_effect"><div></div></a>
 							<a href="#" className="filer_items col-2 hover_effect"><div></div></a>

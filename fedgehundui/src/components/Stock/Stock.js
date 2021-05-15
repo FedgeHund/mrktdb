@@ -11,7 +11,6 @@ import CompanyProfile from "./TradingView/CompanyProfile"
 import FundamentalData from "./TradingView/FundamentalData"
 import AdvancedChart from "./TradingView/AdvancedChart"
 import SymbolOverview from "./TradingView/SymbolOverview"
-import MiniChart from "./TradingView/MiniChart"
 
 function Stock(props) {
 
@@ -50,29 +49,36 @@ function Stock(props) {
                     <div className="security_type">{securityData ? securityData.securityType : null}</div> */}
 
                     <div className="row">
-                        <div className="col-9">
-                            <SymbolInfo ticker={ticker} />
+                        <div className="col-12 col-lg-8">
+                            <div className="row">
+                                <div className="col-12 col-lg-8">
+                                    <SymbolInfo ticker={ticker} />
+                                </div>
+                                <div className="col-12 col-lg-12 mt-5">
+                                    <AdvancedChart ticker={ticker} />
+                                </div>
+                            </div>
                         </div>
-                        <div className="col-3">
-                            <MiniChart ticker={ticker} />
-                        </div>
-                    </div>
-                    <div className="row mt-3">
-                        <div className="col-6">
+                        <div className="col-12 col-lg-4 mt-lg-0 mt-5">
                             <CompanyProfile ticker={ticker} />
                         </div>
-                        <div className="offset-1 col-5">
-                            <TechnicalAnalysis ticker={ticker} />
-                        </div>
                     </div>
-                    <div className="row mb-5">
-                        <AdvancedChart ticker={ticker} />
-                    </div>
+
                     <div className="row mt-5">
-                        <div className="col-5">
+                        <div className="col-12 col-lg-8 mt-5">
+                            <div className="row">
+                                <div className="offset-2 col-8">
+                                    <TechnicalAnalysis ticker={ticker} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-12 col-lg-4 mt-5">
                             <FundamentalData ticker={ticker} />
                         </div>
-                        <div className="col-7">
+                    </div>
+
+                    <div className="row mt-5">
+                        <div className="col-12 mt-5">
                             <SymbolOverview ticker={ticker} />
                         </div>
                     </div>

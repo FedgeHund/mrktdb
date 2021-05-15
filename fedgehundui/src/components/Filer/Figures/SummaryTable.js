@@ -43,9 +43,9 @@ function SummaryTable(props) {
     return (
         <div>
             {typeof newFilerArray !== 'undefined' && newFilerArray.length > 0 ?
-                <div className="row">
-                    <div className="offset-9 col-3">
-                        <table className="table table-sm table-borderless table-condensed summaryTable">
+                <div className="row mt-4">
+                    <div className="offset-2 col-11">
+                        <table className="table table-sm table-borderless table-condensed summaryTable pl-3 pr-3">
                             <thead>
                                 <tr>
                                     <td className="summaryTableHeading pt-3 pl-3" colSpan="2">13F Summary</td>

@@ -1,0 +1,28 @@
+.BiggestHoldings {
+	border-collapse: collapse;
+}
+
+.left_table_head {
+	padding-top: 30px !important;
+	padding-left: 40px !important;
+	border-radius: 8px !important;
+}
+
+.biggest_holdings_table_headers {
+	padding-bottom: 25px !important;
+}
+
+.right_table_head {
+	padding-right: 35px !important;
+	padding-top: 30px !important;
+}
+
+.table_col {
+	border: 2px solid #303030;
+	background: #fcf4eb;
+	border-radius: 8px !important;
+}
+
+td {
+	color: #303030;
+}

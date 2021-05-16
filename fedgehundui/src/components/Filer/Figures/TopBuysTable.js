@@ -39,37 +39,37 @@ function TopBuysTable(props) {
         var topBuySecurityName1 = data[0]["securityName"];
         var topBuySecurityType1 = data[0]["type1"];
         var topBuyMarketValue1 = data[0]["marketValue"];
-        var topBuychangePercent1 = data[0]["changeInPositionPercent"];
+        var topBuychangePercent1 = data[0]["changeInPositionPercent"].toFixed(2) + " %";;
 
         var topBuySymbol2 = data[1]["ticker"];
         var topBuySecurityName2 = data[1]["securityName"];
         var topBuySecurityType2 = data[1]["type1"];
         var topBuyMarketValue2 = data[1]["marketValue"];
-        var topBuychangePercent2 = data[1]["changeInPositionPercent"];
+        var topBuychangePercent2 = data[1]["changeInPositionPercent"].toFixed(2) + " %";;
 
         var topBuySymbol3 = data[2]["ticker"];
         var topBuySecurityName3 = data[2]["securityName"];
         var topBuySecurityType3 = data[2]["type1"];
         var topBuyMarketValue3 = data[2]["marketValue"];
-        var topBuychangePercent3 = data[2]["changeInPositionPercent"];
+        var topBuychangePercent3 = data[2]["changeInPositionPercent"].toFixed(2) + " %";;
 
         var topBuySymbol4 = data[3]["ticker"];
         var topBuySecurityName4 = data[3]["securityName"];
         var topBuySecurityType4 = data[3]["type1"];
         var topBuyMarketValue4 = data[3]["marketValue"];
-        var topBuychangePercent4 = data[3]["changeInPositionPercent"];
+        var topBuychangePercent4 = data[3]["changeInPositionPercent"].toFixed(2) + " %";;
 
         var topBuySymbol5 = data[4]["ticker"];
         var topBuySecurityName5 = data[4]["securityName"];
         var topBuySecurityType5 = data[4]["type1"];
         var topBuyMarketValue5 = data[4]["marketValue"];
-        var topBuychangePercent5 = data[4]["changeInPositionPercent"];
+        var topBuychangePercent5 = data[4]["changeInPositionPercent"].toFixed(2) + " %";;
     }
 
     return (
         <div>
             <div className="row">
-                <div className="col-6 table_col p-0 m-0">
+                <div className="col-11 table_col p-0 m-0">
                     <table className="table table-borderless table-hover BiggestHoldings">
                         <thead>
                             <tr>
@@ -80,7 +80,7 @@ function TopBuysTable(props) {
                                 <th className="top_buys_right_table_head top_buys_biggest_holdings_table_headers">Value Change%</th>
                             </tr>
                         </thead>
-                        <tbody >
+                        <tbody className="top_buys_cells_content">
                             <tr>
                                 <td>{topBuySymbol1}</td>
                                 <td>{topBuySecurityName1}</td>

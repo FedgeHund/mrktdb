@@ -84,7 +84,7 @@ function BiggestHoldingsTable(props) {
                                 <th className="right_table_head biggest_holdings_table_headers">% Weight</th>
                             </tr>
                         </thead>
-                        <tbody >
+                        <tbody className="biggest_holdings_content">
                             <tr>
                                 <td>{symbol1}</td>
                                 <td>{securityName1}</td>

@@ -516,7 +516,7 @@ class HoldingsScraper:
         
         try:
             signatureBlock = soup.find_all('signatureBlock')
-            d7['signatureDate'] = signatureBlock[i].find('signatureDate').text
+            d7['signatureDate'] = signatureBlock[0].find('signatureDate').text
         except:
             print("FiledOn / Signature Date is not present for this filer")
             pass
@@ -532,22 +532,22 @@ class HoldingsScraper:
         summaryPageData = []
         # otherManagerCount=0
         try:
-            d3['otherIncludedManagersCount'] = summaryPage[i].find('otherIncludedManagersCount').text
+            d3['otherIncludedManagersCount'] = summaryPage[0].find('otherIncludedManagersCount').text
         except:
             pass
 
         try:
-            d3['tableEntryTotal'] = summaryPage[i].find('tableEntryTotal').text
+            d3['tableEntryTotal'] = summaryPage[0].find('tableEntryTotal').text
         except:
             pass
 
         try:
-            d3['tableValueTotal'] = summaryPage[i].find('tableValueTotal').text
+            d3['tableValueTotal'] = summaryPage[0].find('tableValueTotal').text
         except:
             pass
 
         try:
-            d3['isConfidentialOmitted'] = summaryPage[i].find('isConfidentialOmitted').text
+            d3['isConfidentialOmitted'] = summaryPage[0].find('isConfidentialOmitted').text
         except:
             pass
  

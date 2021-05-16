@@ -8,6 +8,7 @@ import SummaryTable from "./Figures/SummaryTable";
 import QuarterMarketValueChart from "./Figures/QuarterMarketValueChart";
 import BiggestHoldingsTable from "./Figures/BiggestHoldingsTable";
 import TopBuysTable from "./Figures/TopBuysTable";
+import TopSellsTable from "./Figures/TopSellsTable";
 
 function Filer(props) {
 
@@ -85,14 +86,27 @@ function Filer(props) {
             <div className="top_buys_container">
                 <div className="top_buys">
                     <div className="row mt-5 mb-5">
-                        <div className="col-5 shadow-sm mt-4 mb-4 p-3 filer_page_section_heading">
+                        <div className="col-4 shadow-sm mt-4 mb-4 p-3 filer_page_section_heading">
                             <div className="total_market_value_heading">
                                 Top Buys of the Quarter
                             </div>
                             <div className="row filerName_in_marketValue_graph_head">{filerData ? filerData.name : null}</div>
                         </div>
+                        <div className="offset-2 col-4 shadow-sm mt-4 mb-4 p-3 filer_page_section_heading">
+                            <div className="total_market_value_heading">
+                                Top Sells of the Quarter
+                            </div>
+                            <div className="row filerName_in_marketValue_graph_head">{filerData ? filerData.name : null}</div>
+                        </div>
                     </div>
-                    <TopBuysTable cik={filerData ? filerData.cik : null} />
+                    <div className="row mt-5 mb-5">
+                        <div className="col-6">
+                            <TopBuysTable cik={filerData ? filerData.cik : null} />
+                        </div>
+                        <div className="col-6">
+                            <TopSellsTable cik={filerData ? filerData.cik : null} />
+                        </div>
+                    </div>
                 </div>
             </div>
 

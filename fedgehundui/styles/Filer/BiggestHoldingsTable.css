@@ -18,11 +18,15 @@
 }
 
 .table_col {
-	border: 2px solid #303030;
+	border: 2px solid #616161;
 	background: #fcf4eb;
 	border-radius: 8px !important;
 }
 
 td {
 	color: #303030;
+}
+
+.biggest_holdings_content > tr > td {
+	font-size: 0.9em;
 }

@@ -792,13 +792,18 @@ class HoldingsScraper:
         #     pass
         try:
             try:
-                print("Filtering QuarterlyOtherManagerObjectsList")
-                queryset = QuarterlySecurityHolding.objects.order_by('-quarterlyHoldingId')
-                latest_quarterlyHoldingId = queryset[0].quarterlyHoldingId
-                print("LATEST -", latest_quarterlyHoldingId)
-                QuarterlyOtherManagerObjectsList=queryset.filter(quarterlyHoldingId=latest_quarterlyHoldingId)
-                # QuarterlyOtherManagerObjectsList=infoTableData
-                print("QuarterlyOtherManagerObjectsList len :", len(QuarterlyOtherManagerObjectsList))
+                # print("Filtering QuarterlyOtherManagerObjectsList")
+                # queryset = QuarterlySecurityHolding.objects.order_by('-quarterlyHoldingId')
+                # latest_quarterlyHoldingId = queryset[0].quarterlyHoldingId
+                # print("LATEST -", latest_quarterlyHoldingId)
+                # QuarterlyOtherManagerObjectsList=queryset.filter(quarterlyHoldingId=latest_quarterlyHoldingId)
+                # # QuarterlyOtherManagerObjectsList=infoTableData
+                # print("QuarterlyOtherManagerObjectsList len :", len(QuarterlyOtherManagerObjectsList))
+                QuarterlyOtherManagerObjectsList=QuarterlySecurityHolding.objects.filter(uin__in=uinlist)
+                QuarterlySecurityHoldingOM=[]
+                QuarterlySecurityHoldingOM.clear()
+                sequenceList=[]
+                sequenceList.clear()
             except:
                 print("PRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOBBBBBBBBBBBBBLEM at 742")
                 pass

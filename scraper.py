@@ -73,7 +73,7 @@ class HoldingsScraper:
 
         #Using chrome driver headless
         options = Options()
-        options.headless = False
+        options.headless = True
         self.browser = webdriver.Chrome(options=options)
 
         self.cik = cik

@@ -73,7 +73,7 @@ class HoldingsScraper:
 
         #Using chrome driver headless
         options = Options()
-        options.headless = True
+        options.headless = False
         self.browser = webdriver.Chrome(options=options)
 
         self.cik = cik
@@ -180,7 +180,7 @@ class HoldingsScraper:
             print("XML --- ", xml)
             xml2 = soup.find('td', text="1")
             print("XML2 --- ", xml2)
-            time.sleep(4)
+            time.sleep(1)
 
             xml_link = xml.findNext('a', text=re.compile("\.xml$"))
             print("xml_link --- ", xml_link)
@@ -248,8 +248,10 @@ class HoldingsScraper:
         print("Inside infoTable func")
         print('228')
         self.browser.get(xml_file)
+        # infoTable_xml = requests.get(xml_file)
         print('229')
         soup = BeautifulSoup(self.browser.page_source, "xml")
+        # soup = BeautifulSoup(infoTable_xml.text, "xml")
         print('231')
         # wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".tag")))
         infoTable = soup.find_all('infoTable')

@@ -18,7 +18,7 @@ env = environ.Env()
 # reading .env file
 environ.Env.read_env()
 
-DJANGO_ENV = env("ENV", default="development")
+DJANGO_ENV = env("ENV", default="production")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if DJANGO_ENV == "production":
@@ -226,8 +226,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
 
 CRON_CLASSES = [
-    "edgar.cikCusipCronJob.CikCusipCronJob",
-    "edgar.securityLinkCompanyCronJob.SecurityLinkCompanyCronJob",
+    # "edgar.cikCusipCronJob.CikCusipCronJob",
+    # "edgar.securityLinkCompanyCronJob.SecurityLinkCompanyCronJob",
     "edgar.cusipTickerMappingSecurityUpdate.CusipTickerMappingSecurityUpdate"
 ]
 

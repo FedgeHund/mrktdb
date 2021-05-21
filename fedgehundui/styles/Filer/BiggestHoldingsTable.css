@@ -8,6 +8,10 @@
 	border-radius: 8px !important;
 }
 
+.left_table_symbol {
+	padding-left: 40px !important;
+}
+
 .biggest_holdings_table_headers {
 	padding-bottom: 25px !important;
 }

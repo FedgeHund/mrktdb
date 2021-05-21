@@ -4,6 +4,10 @@
 	border-radius: 8px !important;
 }
 
+.top_buys_left_table_symbol {
+	padding-left: 30px !important;
+}
+
 .top_buys_biggest_holdings_table_headers {
 	font-size: 0.85em;
 	padding-bottom: 25px !important;

@@ -60,7 +60,7 @@ def calculate_positions(quarterly_holding, number_of_threads=8):
     # END: Ignore securities we have already calculated position for #
     ##################################################################
 
-    total_market_value = quarterly_security_holdings.aggregate(Sum("marketvalue"),allowDiskUse=True).get("marketvalue__sum", 0)
+    total_market_value = quarterly_security_holdings.aggregate(Sum("marketvalue")).get("marketvalue__sum", 0)
     if total_market_value is None:
         total_market_value = 0
 
@@ -73,7 +73,7 @@ def calculate_positions(quarterly_holding, number_of_threads=8):
     qtrly_sec_holdings_for_prev_qtrly_holding = QuarterlySecurityHolding.objects.filter(
         quarterlyHoldingId__in=prev_quarterly_holding)
     prev_total_market_value = qtrly_sec_holdings_for_prev_qtrly_holding.aggregate(
-        Sum("marketvalue"), allowDiskUse=True).get("marketvalue__sum", 0)
+        Sum("marketvalue")).get("marketvalue__sum", 0)
     if prev_total_market_value is None:
         prev_total_market_value = 0
 
@@ -117,7 +117,7 @@ def calculate_positions_per_sec(filer, security, total_market_value,
     ##########################################
 
     totals_of_sec = quarterly_security_holdings.filter(securityId=security).aggregate(
-        totalMarketValue=Sum("marketvalue"), totalQuantity=Sum("quantity"), allowDiskUse=True)
+        totalMarketValue=Sum("marketvalue"), totalQuantity=Sum("quantity"))
     total_market_value_of_sec = totals_of_sec.get("totalMarketValue", 0)
     if total_market_value_of_sec is None:
         total_market_value_of_sec = 0
@@ -143,7 +143,7 @@ def calculate_positions_per_sec(filer, security, total_market_value,
     if qtrly_sec_holdings_for_prev_qtrly_holding is not None:
         prev_totals_of_sec = qtrly_sec_holdings_for_prev_qtrly_holding.filter(securityId=security).aggregate(
             totalMarketValue=Sum("marketvalue"),
-            totalQuantity=Sum("quantity"), allowDiskUse=True)
+            totalQuantity=Sum("quantity"))
         prev_total_market_value_of_sec = prev_totals_of_sec.get("totalMarketValue", 0)
         if prev_total_market_value_of_sec is None:
             prev_total_market_value_of_sec = 0

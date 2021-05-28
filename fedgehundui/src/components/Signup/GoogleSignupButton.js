@@ -64,6 +64,7 @@ function GoogleSignupButton() {
                 onFailure={onFailure}
                 cookiePolicy={'single_host_origin'}
                 isSignedIn={false}
+                disabled
             />
         </div>
     );

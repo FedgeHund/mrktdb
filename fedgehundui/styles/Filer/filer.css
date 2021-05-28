@@ -134,3 +134,24 @@
 	max-width: 1500px;
 	font-size: 16px;
 }
+
+/* Ownership History */
+.ownership_history_container {
+	height: 1000px;
+	background: white;
+	position: relative;
+	overflow: hidden !important;
+	object-fit: cover;
+	z-index: 0 !important;
+}
+
+.ownership_history {
+	font-family: var(--OpenSans);
+	position: relative;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 85%;
+	max-width: 1500px;
+	font-size: 16px;
+}

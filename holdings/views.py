@@ -1,8 +1,8 @@
 from .models import Position
-from holdings.serializers import PositionSerializer
+from holdings.serializers import PositionSerializer, NumberOfFilersHoldingTheStockSerializer, TotalNumberOfSharesHeldSerializer, NetBuysSerializer, NetSellsSerializer
 from rest_framework import generics, filters
 from rest_framework.pagination import PageNumberPagination
-from django.db.models import Count, Q
+from django.db.models import Count, Q, Sum
 
 class StandardResultsSetPagination(PageNumberPagination):
     page_size = 100
@@ -93,5 +93,68 @@ class OwnershipHistory(generics.ListAPIView):
 
             if cik is not None:
                 queryset = queryset.filter(cik=cik, cusip=cusip)
+                
+            return queryset
+
+# Single stock dashboard
+class NumberOfFilersHoldingTheStock(generics.ListAPIView):
+    serializer_class = NumberOfFilersHoldingTheStockSerializer
+
+    def get_queryset(self):
+        if self.request.method == 'GET':
+            queryset = Position.objects.all()
+            ticker = self.request.GET.get('ticker', None)
+
+            if ticker is not None:
+                queryset = queryset.filter(ticker=ticker)
+                queryset = queryset.values("quarter").annotate(numberHolding=Count("quarter", distinct=True))
+                queryset = queryset.order_by("quarter")
+                
+            return queryset
+
+class TotalNumberOfSharesHeld(generics.ListAPIView):
+    serializer_class = TotalNumberOfSharesHeldSerializer
+
+    def get_queryset(self):
+        if self.request.method == 'GET':
+            queryset = Position.objects.all()
+            ticker = self.request.GET.get('ticker', None)
+
+            if ticker is not None:
+                queryset = queryset.filter(ticker=ticker)
+                queryset = queryset.values("quarter").annotate(totalSharesHeld=Sum("quantity", distinct=True))
+                queryset = queryset.order_by("quarter")
+                
+            return queryset
+
+class NetBuys(generics.ListAPIView):
+    serializer_class = NetBuysSerializer
+
+    def get_queryset(self):
+        if self.request.method == 'GET':
+            queryset = Position.objects.all()
+            ticker = self.request.GET.get('ticker', None)
+
+            if ticker is not None:
+                queryset = queryset.filter(ticker=ticker)
+                queryset = queryset.filter(Q(positionType='New') | Q(positionType='Increased'))
+                queryset = queryset.values("quarter").annotate(netBuys=Sum("changeInShares", distinct=True))
+                queryset = queryset.order_by("quarter")
+                
+            return queryset
+
+class NetSells(generics.ListAPIView):
+    serializer_class = NetSellsSerializer
+
+    def get_queryset(self):
+        if self.request.method == 'GET':
+            queryset = Position.objects.all()
+            ticker = self.request.GET.get('ticker', None)
+
+            if ticker is not None:
+                queryset = queryset.filter(ticker=ticker)
+                queryset = queryset.filter(positionType='Decreased')
+                queryset = queryset.values("quarter").annotate(netSells=Sum("changeInShares", distinct=True))
+                queryset = queryset.order_by("quarter")
                 
             return queryset

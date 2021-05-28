@@ -9,6 +9,7 @@ import QuarterMarketValueChart from "./Figures/QuarterMarketValueChart";
 import BiggestHoldingsTable from "./Figures/BiggestHoldingsTable";
 import TopBuysTable from "./Figures/TopBuysTable";
 import TopSellsTable from "./Figures/TopSellsTable";
+import OwnedSecurities from "./Figures/OwnedSecurities"
 
 function Filer(props) {
 
@@ -109,6 +110,21 @@ function Filer(props) {
                     </div>
                 </div>
             </div>
+
+            <div className="ownership_history_container">
+                <div className="ownership_history">
+                    <div className="row mt-5 mb-5">
+                        <div className="col-5 shadow-sm mt-4 mb-4 p-3 filer_page_section_heading">
+                            <div className="total_market_value_heading">
+                                Ownership History
+                            </div>
+                            <div className="row filerName_in_marketValue_graph_head">{filerData ? filerData.name : null}</div>
+                        </div>
+                    </div>
+                    <OwnedSecurities cik={filerData ? filerData.cik : null} />
+                </div>
+            </div>
+
 
             <Footer />
 

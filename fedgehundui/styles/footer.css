@@ -158,6 +158,16 @@
 	color: #a9a9a9;
 }
 
+a[disabled] {
+	color: gray;
+}
+
+a[disabled]:hover {
+	color: gray;
+	animation: none;
+	cursor: not-allowed;
+}
+
 .horizontal_line {
 	height: 1px;
 	background-color: #707070;

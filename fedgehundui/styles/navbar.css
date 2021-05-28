@@ -27,11 +27,11 @@
 		max-width: 100vw !important;
 	}
 
-	#menuToggle#menuToggle#menuToggle {
+	#menuToggle#menuToggle#menuToggle#menuToggle {
 		right: 15px;
 	}
 
-	#menu#menu#menu {
+	#menu#menu#menu#menu#menu {
 		right: -75px;
 	}
 
@@ -111,6 +111,14 @@
 @media (max-width: 1000px) {
 	.hamburger_white_logo {
 		display: none;
+	}
+
+	#menuToggle#menuToggle#menuToggle {
+		right: 15px;
+	}
+
+	#menu#menu#menu {
+		right: -75px;
 	}
 }
 
@@ -519,34 +527,15 @@ a {
 	font-weight: 700;
 }
 
-.toggler:checked
-	+ .hamburger
-	+ #menu
-	> .hamburger_container
-	> .menu_box
-	> div
-	> .logo_div {
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div > .logo_div {
 	animation: slide_down 1.2s ease-out;
 }
 
-.toggler:checked
-	+ .hamburger
-	+ #menu
-	> .hamburger_container
-	> .menu_box
-	> div
-	> .mrktdb_white {
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div > .mrktdb_white {
 	animation: slide_down 1.2s ease-out;
 }
 
-.toggler:checked
-	+ .hamburger
-	+ #menu
-	> .hamburger_container
-	> .menu_box
-	> div
-	> .mrktdb_white
-	+ .signup_left {
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div > .mrktdb_white + .signup_left {
 	animation: slide_left 1.6s ease-in;
 }
 
@@ -562,13 +551,7 @@ a {
 	animation: slide_left 1.6s ease-in;
 }
 
-.toggler:checked
-	+ .hamburger
-	+ #menu
-	> .hamburger_container
-	> .menu_box
-	> div
-	+ .up_13f {
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div + .up_13f {
 	animation: slide_down 1.7s ease-in;
 }
 
@@ -600,15 +583,7 @@ a {
 	animation: slide_right 2s ease-in;
 }
 
-.toggler:checked
-	+ .hamburger
-	+ #menu
-	> .hamburger_container
-	> .menu_box
-	> div
-	+ .up_13f
-	+ div
-	+ .quick_links {
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div + .up_13f + div + .quick_links {
 	animation: slide_up 2s ease-in;
 }
 

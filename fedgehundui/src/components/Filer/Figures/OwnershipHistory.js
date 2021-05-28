@@ -42,10 +42,6 @@ function Ownershiphistory(props) {
             marketValues.push(data[i]["marketValue"])
         }
 
-        quarters.reverse();
-        quantities.reverse();
-        marketValues.reverse();
-
         if (typeof marketValues !== 'undefined' && marketValues.length > 0) {
             var chartData = {
                 datasets: [

@@ -8,6 +8,16 @@
 	--Lato: "Lato", sans-serif;
 }
 
+@media (max-width: 500px) {
+	.summaryTableData.summaryTableData {
+		font-size: 0.8em;
+	}
+
+	.summaryTableValue.summaryTableValue {
+		font-size: 0.8em;
+	}
+}
+
 .summaryTable {
 	border: 2px solid #303030;
 	border-collapse: separate;

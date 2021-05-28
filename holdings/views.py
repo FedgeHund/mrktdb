@@ -92,7 +92,7 @@ class OwnershipHistory(generics.ListAPIView):
             cusip = self.request.GET.get('cusip', None)
 
             if cik is not None:
-                queryset = queryset.filter(cik=cik, cusip=cusip)
+                queryset = queryset.filter(cik=cik, cusip=cusip).order_by('quarter')
                 
             return queryset
 

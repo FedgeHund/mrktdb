@@ -21,3 +21,10 @@
 .top_buys_cells_content > tr > td {
 	font-size: 0.8em;
 }
+
+.table_head_col {
+	background: rgb(245, 245, 245);
+	border: 2px solid #616161;
+	border-radius: 8px !important;
+	padding: 0 !important;
+}

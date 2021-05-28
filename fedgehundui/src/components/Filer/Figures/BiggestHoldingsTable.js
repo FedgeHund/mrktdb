@@ -72,8 +72,8 @@ function BiggestHoldingsTable(props) {
     return (
         <div>
             <div className="row">
-                <div className="col-10 table_col p-0 m-0">
-                    <table className="table table-borderless table-hover BiggestHoldings">
+                <div className="col-lg-9 col-md-11 table_col p-0 m-0">
+                    <table className="table table-borderless table-hover table-responsive BiggestHoldings">
                         <thead>
                             <tr>
                                 <th className="left_table_head biggest_holdings_table_headers">Symbol</th>

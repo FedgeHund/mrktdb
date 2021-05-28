@@ -69,8 +69,8 @@ function TopBuysTable(props) {
     return (
         <div>
             <div className="row">
-                <div className="col-11 table_col p-0 m-0">
-                    <table className="table table-borderless table-hover BiggestHoldings">
+                <div className="col-11 table_head_col p-0 m-0">
+                    <table className="table table-borderless table-hover table-responsive BiggestHoldings">
                         <thead>
                             <tr>
                                 <th className="top_buys_left_table_head top_buys_biggest_holdings_table_headers">Symbol</th>

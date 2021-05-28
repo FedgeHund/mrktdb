@@ -20,10 +20,8 @@ function Ownershiphistory(props) {
 
     const [data, setData] = useState([]);
     var URL = "http://www.mrktdb.com/api/ownershiphistory/?cik=" + oldCIK + "&cusip=" + oldCusip;
-    console.log(URL);
 
     async function fetchUrl() {
-        // console.log(cik)
         fetch(URL, {
             headers: {
                 'Content-Type': 'application/json',
@@ -34,8 +32,7 @@ function Ownershiphistory(props) {
             .then(response => response.json())
             .then(data => setData(data));
     }
-    console.log("This is CUSIP data:");
-    console.log(data);
+
     if (typeof data !== 'undefined' && data.length > 0) {
         for (let i = 0; i < data.length; i++) {
             let q = data[i]["quarter"].toString();
@@ -45,6 +42,9 @@ function Ownershiphistory(props) {
             marketValues.push(data[i]["marketValue"])
         }
 
+        quarters.reverse();
+        quantities.reverse();
+        marketValues.reverse();
 
         if (typeof marketValues !== 'undefined' && marketValues.length > 0) {
             var chartData = {
@@ -55,7 +55,7 @@ function Ownershiphistory(props) {
                         lineTension: 0,
                         data: marketValues,
                         backgroundColor: [
-                            '#12232E',
+                            '#bab78c',
                         ],
                         yAxisID: 'y-axis-2',
                     },
@@ -65,7 +65,7 @@ function Ownershiphistory(props) {
                         lineTension: 0,
                         data: quantities,
                         backgroundColor: [
-                            '#12232E',
+                            '#e5e5e5',
                         ],
                         yAxisID: 'y-axis-1',
                     }
@@ -124,7 +124,7 @@ function Ownershiphistory(props) {
 
     useEffect(() => {
         fetchUrl();
-    }, [oldCIK]);
+    }, [oldCusip]);
 
 
     return (

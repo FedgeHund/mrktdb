@@ -38,7 +38,6 @@ function QuarterMarketValueChart(props) {
     }
 
     if (typeof marketValue !== 'undefined' && marketValue.length > 0) {
-        console.log(quarters);
         var chartData = {
             labels: quarters,
             datasets: [

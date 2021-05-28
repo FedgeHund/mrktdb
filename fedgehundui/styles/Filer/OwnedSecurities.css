@@ -1,0 +1,15 @@
+.allOwnedSecuritiesDropdown {
+	padding: 5px;
+	border-radius: 3px;
+	color: #303030;
+}
+
+.allOwnedSecuritiesDropdown:focus {
+	color: #fe6f7d;
+	outline: #fe6f7d;
+}
+
+.allOwnedSecuritiesDropdown:hover {
+	color: #fe6f7d;
+	outline: #fe6f7d;
+}

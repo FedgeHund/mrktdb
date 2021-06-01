@@ -1,0 +1,67 @@
+.FundsHoldingStockTable {
+	border-collapse: collapse;
+}
+
+.biggest_holdings_table_headers {
+	padding-bottom: 25px !important;
+}
+
+/* .funds_holding_stock_head {
+	border-bottom: 1px solid #616161;
+} */
+
+.funds_holding_stock_div {
+	border: 2px solid #616161;
+	background: #fcf4eb;
+	border-radius: 6px !important;
+	padding-left: 28px !important;
+	padding-right: 25px !important;
+	padding-top: 30px !important;
+	padding-bottom: 10px !important;
+}
+
+td {
+	color: #303030;
+}
+
+.funds_holding_stock_content > tr > td {
+	font-size: 0.85em;
+}
+
+.fundsHoldingStockName {
+	text-transform: capitalize;
+}
+
+.shares_increased {
+	color: rgb(80, 173, 80);
+}
+
+.shares_decreased {
+	color: rgb(209, 0, 0);
+}
+
+.table_previous_btn,
+.table_next_btn,
+.table_nav_btn {
+	background-color: #fe6f7d !important;
+	font-size: 0.9em;
+	color: #fff !important;
+	border: none !important;
+	outline: none !important;
+}
+
+.table_previous_btn:focus,
+.table_next_btn:focus,
+.table_nav_btn:focus {
+	border: none !important;
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+.table_previous_btn:active,
+.table_next_btn:active,
+.table_nav_btn:active {
+	border: none !important;
+	outline: none !important;
+	box-shadow: none !important;
+}

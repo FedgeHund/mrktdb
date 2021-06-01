@@ -11,6 +11,7 @@ import CompanyProfile from "./TradingView/CompanyProfile"
 import FundamentalData from "./TradingView/FundamentalData"
 import AdvancedChart from "./TradingView/AdvancedChart"
 import SymbolOverview from "./TradingView/SymbolOverview"
+import FundsHoldingStockTable from "./FundsHoldingStockTable"
 
 function Stock(props) {
 
@@ -86,6 +87,23 @@ function Stock(props) {
                 </div>
             </div>
 
+            <div className="fundsHoldingStockTable_container ">
+                <div className="fundsHoldingStockTable_box">
+                    <div className="row">
+                        <div className="col-lg-5 col-md-7 shadow-sm p-3 fundsHoldingStockTable_section_heading">
+                            <div className="funds_holding_stock_heading">
+                                Funds Holding {ticker}
+                            </div>
+                            <div className="row via_13f_filings_heading">Via 13F Filings</div>
+                        </div>
+                    </div>
+                    <div className="row mt-5">
+                        <div className="col-12 mt-4">
+                            <FundsHoldingStockTable ticker={ticker} />
+                        </div>
+                    </div>
+                </div>
+            </div>
             {/* <div>
                 <SymbolInfo ticker={ticker} />
                 <MiniChart ticker={ticker} />

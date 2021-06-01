@@ -70,3 +70,46 @@
 #TechnicalAnalysis {
 	margin-top: 60px;
 } */
+
+@media (max-width: 1160px) {
+	.fundsHoldingStockTable_container.fundsHoldingStockTable_container {
+		height: 1350px;
+	}
+}
+
+.fundsHoldingStockTable_container {
+	height: 1100px;
+	position: relative;
+	object-fit: cover;
+	overflow: hidden;
+}
+
+.fundsHoldingStockTable_box {
+	position: absolute;
+	top: 43%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 85%;
+	max-width: 1500px;
+	font-size: 16px;
+}
+
+.fundsHoldingStockTable_section_heading {
+	background: #303030;
+	border-radius: 4px;
+}
+
+.funds_holding_stock_heading {
+	font-family: var(--Roboto);
+	font-size: 1.2em;
+	color: #dbd9d9;
+	margin-left: 25px;
+}
+
+.via_13f_filings_heading {
+	font-family: var(--Roboto);
+	font-size: 0.8em;
+	color: #b1b0b0;
+	margin-left: 25px;
+	text-transform: capitalize;
+}

@@ -14,6 +14,7 @@ urlpatterns = [
     path('totalnumberofsharesheld/', views.TotalNumberOfSharesHeld.as_view()),
     path('netbuys/', views.NetBuys.as_view()),
     path('netsells/', views.NetSells.as_view()),
+    path('fundsholdingstock/', views.FundsHoldingStock.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

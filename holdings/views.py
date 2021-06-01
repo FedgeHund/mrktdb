@@ -158,3 +158,17 @@ class NetSells(generics.ListAPIView):
                 queryset = queryset.order_by("quarter")
                 
             return queryset
+
+class FundsHoldingStock(generics.ListAPIView):
+    serializer_class = PositionSerializer
+
+    def get_queryset(self):
+        if self.request.method == 'GET':
+            queryset = Position.objects.all()
+            ticker = self.request.GET.get('ticker', None)
+
+            if ticker is not None:
+                queryset = queryset.filter(ticker=ticker)
+                queryset = queryset.order_by("-quarter")
+                
+            return queryset

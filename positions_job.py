@@ -34,14 +34,21 @@ def get_prev_quarter(quarter):
 @delayed
 @wrap_non_picklable_objects
 def calculate_positions(quarterly_holding, number_of_threads=8):
+    print(1)
     filer = quarterly_holding.filerId
+    print(2)
     logger.info("Starting positions calculation for filer: %0s quarter: %1s", filer.filerId, quarterly_holding.quarter)
 
-    quarterly_security_holdings = QuarterlySecurityHolding.objects.filter(quarterlyHoldingId=quarterly_holding).order_by('securityId')
+    print(3)
+    quarterly_security_holdings = QuarterlySecurityHolding.objects.filter(quarterlyHoldingId=quarterly_holding)
+    print(4)
 
     distinct_securities_in_qtrly_sec_holdings = set()
+    print(5)
     for quarterly_security_holding in quarterly_security_holdings.select_related("securityId"):
+        print(6)
         distinct_securities_in_qtrly_sec_holdings.add(quarterly_security_holding.securityId)
+        print(7)
 
     ####################################################################
     # START: Ignore securities we have already calculated position for #
@@ -50,9 +57,12 @@ def calculate_positions(quarterly_holding, number_of_threads=8):
     for position in Position.objects.select_related("securityId", "quarterId").filter(filerId=filer,
                                                                                       quarterId=quarterly_holding,
                                                                                       quarter=quarterly_holding.quarter):
+        print(8)
         distinct_securities_in_qtrly_sec_holdings.remove(position.securityId)
+        print(9)
 
     if len(distinct_securities_in_qtrly_sec_holdings) == 0:
+        print(10)
         logger.info("All done for filer: %0s quarter: %1s", filer.filerId, quarterly_holding.quarter)
         return
 

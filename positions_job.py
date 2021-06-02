@@ -40,7 +40,7 @@ def calculate_positions(quarterly_holding, number_of_threads=8):
     quarterly_security_holdings = QuarterlySecurityHolding.objects.filter(quarterlyHoldingId=quarterly_holding)
 
     distinct_securities_in_qtrly_sec_holdings = set()
-    for quarterly_security_holding in quarterly_security_holdings.select_related("securityId"):
+    for quarterly_security_holding in quarterly_security_holdings.select_related("securityId", allowDisk=True):
         distinct_securities_in_qtrly_sec_holdings.add(quarterly_security_holding.securityId)
 
     ####################################################################

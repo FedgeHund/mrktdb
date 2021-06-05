@@ -29,8 +29,9 @@ class LatestQuarterBiggestHoldings(generics.ListAPIView):
             cik = self.request.GET.get('cik', None)
             if cik is not None:
                 queryset = queryset.filter(cik=cik).order_by('-quarter', '-marketValue')
-                latest_quarter = queryset[0].quarter
-                queryset = queryset.filter(quarter=latest_quarter)[:5]
+                if len(queryset):
+                    latest_quarter = queryset[0].quarter
+                    queryset = queryset.filter(quarter=latest_quarter)[:5]
                 
             return queryset
 
@@ -43,10 +44,11 @@ class LatestQuarterTopBuys(generics.ListAPIView):
             cik = self.request.GET.get('cik', None)
             if cik is not None:
                 queryset = queryset.filter(cik=cik).order_by('-quarter')
-                latest_quarter = queryset[0].quarter
-                queryset = queryset.filter(Q(positionType='New') | Q(positionType='Increased'))
-                queryset = queryset.order_by('-changeOfValue')
-                queryset = queryset.filter(quarter=latest_quarter)[:5]
+                if len(queryset):
+                    latest_quarter = queryset[0].quarter
+                    queryset = queryset.filter(Q(positionType='New') | Q(positionType='Increased'))
+                    queryset = queryset.order_by('-changeOfValue')
+                    queryset = queryset.filter(quarter=latest_quarter)[:5]
                 print(queryset.query)
                 
             return queryset
@@ -60,10 +62,11 @@ class LatestQuarterTopSells(generics.ListAPIView):
             cik = self.request.GET.get('cik', None)
             if cik is not None:
                 queryset = queryset.filter(cik=cik).order_by('-quarter')
-                latest_quarter = queryset[0].quarter
-                queryset = queryset.filter(positionType='Decreased')
-                queryset = queryset.order_by('-changeOfValue')
-                queryset = queryset.filter(quarter=latest_quarter)[:5]
+                if len(queryset):
+                    latest_quarter = queryset[0].quarter
+                    queryset = queryset.filter(positionType='Decreased')
+                    queryset = queryset.order_by('-changeOfValue')
+                    queryset = queryset.filter(quarter=latest_quarter)[:5]
                 print(queryset.query)
                 
             return queryset
@@ -78,7 +81,8 @@ class AllOwnedSecurities(generics.ListAPIView):
 
             if cik is not None:
                 queryset = queryset.filter(cik=cik)
-                queryset = queryset.annotate(unique_cusips=Count('cusip', distinct=True))
+                if len(queryset):
+                    queryset = queryset.annotate(unique_cusips=Count('cusip', distinct=True))
                 
             return queryset
 
@@ -107,8 +111,10 @@ class NumberOfFilersHoldingTheStock(generics.ListAPIView):
 
             if ticker is not None:
                 queryset = queryset.filter(ticker=ticker)
-                queryset = queryset.values("quarter").annotate(numberHolding=Count("quarter", distinct=True))
-                queryset = queryset.order_by("quarter")
+                if len(queryset):
+                    queryset = queryset.values("quarter").annotate(numberHolding=Count("quarter", distinct=True))
+                    if len(queryset):
+                        queryset = queryset.order_by("quarter")
                 
             return queryset
 
@@ -122,8 +128,9 @@ class TotalNumberOfSharesHeld(generics.ListAPIView):
 
             if ticker is not None:
                 queryset = queryset.filter(ticker=ticker)
-                queryset = queryset.values("quarter").annotate(totalSharesHeld=Sum("quantity", distinct=True))
-                queryset = queryset.order_by("quarter")
+                if len(queryset):
+                    queryset = queryset.values("quarter").annotate(totalSharesHeld=Sum("quantity", distinct=True))
+                    queryset = queryset.order_by("quarter")
                 
             return queryset
 
@@ -137,9 +144,10 @@ class NetBuys(generics.ListAPIView):
 
             if ticker is not None:
                 queryset = queryset.filter(ticker=ticker)
-                queryset = queryset.filter(Q(positionType='New') | Q(positionType='Increased'))
-                queryset = queryset.values("quarter").annotate(netBuys=Sum("changeInShares", distinct=True))
-                queryset = queryset.order_by("quarter")
+                if len(queryset):
+                    queryset = queryset.filter(Q(positionType='New') | Q(positionType='Increased'))
+                    queryset = queryset.values("quarter").annotate(netBuys=Sum("changeInShares", distinct=True))
+                    queryset = queryset.order_by("quarter")
                 
             return queryset
 
@@ -153,9 +161,10 @@ class NetSells(generics.ListAPIView):
 
             if ticker is not None:
                 queryset = queryset.filter(ticker=ticker)
-                queryset = queryset.filter(positionType='Decreased')
-                queryset = queryset.values("quarter").annotate(netSells=Sum("changeInShares", distinct=True))
-                queryset = queryset.order_by("quarter")
+                if len(queryset):
+                    queryset = queryset.filter(positionType='Decreased')
+                    queryset = queryset.values("quarter").annotate(netSells=Sum("changeInShares", distinct=True))
+                    queryset = queryset.order_by("quarter")
                 
             return queryset
 

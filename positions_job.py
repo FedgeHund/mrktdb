@@ -40,63 +40,69 @@ def calculate_positions(quarterly_holding, number_of_threads=8):
     quarterly_security_holdings = QuarterlySecurityHolding.objects.filter(quarterlyHoldingId=quarterly_holding)
 
     distinct_securities_in_qtrly_sec_holdings = set()
-    for quarterly_security_holding in quarterly_security_holdings.select_related("securityId"):
-        distinct_securities_in_qtrly_sec_holdings.add(quarterly_security_holding.securityId)
 
-    ####################################################################
-    # START: Ignore securities we have already calculated position for #
-    ####################################################################
+    try:
+        for quarterly_security_holding in quarterly_security_holdings.select_related("securityId"):
+            distinct_securities_in_qtrly_sec_holdings.add(quarterly_security_holding.securityId)
 
-    for position in Position.objects.select_related("securityId", "quarterId").filter(filerId=filer,
-                                                                                      quarterId=quarterly_holding,
-                                                                                      quarter=quarterly_holding.quarter):
-        distinct_securities_in_qtrly_sec_holdings.remove(position.securityId)
+        ####################################################################
+        # START: Ignore securities we have already calculated position for #
+        ####################################################################
 
-    if len(distinct_securities_in_qtrly_sec_holdings) == 0:
-        logger.info("All done for filer: %0s quarter: %1s", filer.filerId, quarterly_holding.quarter)
-        return
+        for position in Position.objects.select_related("securityId", "quarterId").filter(filerId=filer,
+                                                                                        quarterId=quarterly_holding,
+                                                                                        quarter=quarterly_holding.quarter):
+            distinct_securities_in_qtrly_sec_holdings.remove(position.securityId)
 
-    ##################################################################
-    # END: Ignore securities we have already calculated position for #
-    ##################################################################
+        if len(distinct_securities_in_qtrly_sec_holdings) == 0:
+            logger.info("All done for filer: %0s quarter: %1s", filer.filerId, quarterly_holding.quarter)
+            return
 
-    total_market_value = quarterly_security_holdings.aggregate(Sum("marketvalue")).get("marketvalue__sum", 0)
-    if total_market_value is None:
-        total_market_value = 0
+        ##################################################################
+        # END: Ignore securities we have already calculated position for #
+        ##################################################################
 
-    #####################################
-    # START: Calculate previous quarter #
-    #####################################
+        total_market_value = quarterly_security_holdings.aggregate(Sum("marketvalue")).get("marketvalue__sum", 0)
+        if total_market_value is None:
+            total_market_value = 0
 
-    prev_quarter = get_prev_quarter(quarterly_holding.quarter)
-    prev_quarterly_holding = QuarterlyHolding.objects.filter(filerId=filer, quarter=prev_quarter)
-    qtrly_sec_holdings_for_prev_qtrly_holding = QuarterlySecurityHolding.objects.filter(
-        quarterlyHoldingId__in=prev_quarterly_holding)
-    prev_total_market_value = qtrly_sec_holdings_for_prev_qtrly_holding.aggregate(
-        Sum("marketvalue")).get("marketvalue__sum", 0)
-    if prev_total_market_value is None:
-        prev_total_market_value = 0
+        #####################################
+        # START: Calculate previous quarter #
+        #####################################
 
-    ###################################
-    # END: Calculate previous quarter #
-    ###################################
+        prev_quarter = get_prev_quarter(quarterly_holding.quarter)
+        prev_quarterly_holding = QuarterlyHolding.objects.filter(filerId=filer, quarter=prev_quarter)
+        qtrly_sec_holdings_for_prev_qtrly_holding = QuarterlySecurityHolding.objects.filter(
+            quarterlyHoldingId__in=prev_quarterly_holding)
+        prev_total_market_value = qtrly_sec_holdings_for_prev_qtrly_holding.aggregate(
+            Sum("marketvalue")).get("marketvalue__sum", 0)
+        if prev_total_market_value is None:
+            prev_total_market_value = 0
 
-    positions_to_create = Parallel(n_jobs=number_of_threads, prefer="threads")(
-        calculate_positions_per_sec(filer=filer, security=security, total_market_value=total_market_value,
-                                    prev_total_market_value=prev_total_market_value,
-                                    quarterly_holding=quarterly_holding,
-                                    quarterly_security_holdings=quarterly_security_holdings,
-                                    qtrly_sec_holdings_for_prev_qtrly_holding=qtrly_sec_holdings_for_prev_qtrly_holding)
-        for security in
-        distinct_securities_in_qtrly_sec_holdings)
+        ###################################
+        # END: Calculate previous quarter #
+        ###################################
+
+        positions_to_create = Parallel(n_jobs=number_of_threads, prefer="threads")(
+            calculate_positions_per_sec(filer=filer, security=security, total_market_value=total_market_value,
+                                        prev_total_market_value=prev_total_market_value,
+                                        quarterly_holding=quarterly_holding,
+                                        quarterly_security_holdings=quarterly_security_holdings,
+                                        qtrly_sec_holdings_for_prev_qtrly_holding=qtrly_sec_holdings_for_prev_qtrly_holding)
+            for security in
+            distinct_securities_in_qtrly_sec_holdings)
 
     #####################
     # START: Bulk write #
     #####################
 
-    logger.info("Bulk writing %0s positions for filer: %1s quarter: %2s", len(positions_to_create), filer.filerId,
+        logger.info("Bulk writing %0s positions for filer: %1s quarter: %2s", len(positions_to_create), filer.filerId,
                 quarterly_holding.quarter)
-    Position.objects.bulk_create(positions_to_create)
+    
+        Position.objects.bulk_create(positions_to_create)
+
+    except django.db.utils.DatabaseError:
+        logger.error("-------- EXCEPTION caused due to MongoDB: Sort exceeded memory limit of 104857600 bytes, but did not opt in to external sorting.")
 
     ###################
     # END: Bulk write #

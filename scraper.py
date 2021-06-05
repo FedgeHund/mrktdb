@@ -142,8 +142,12 @@ class HoldingsScraper:
                 print("LINK Number ---:> ", z)
                 url = DOMAIN + link.get('href', None)
                 print(url)
-                self.parse_filing(url)
                 z=z+1
+
+                parse_return = self.parse_filing(url)
+
+                if parse_return == -1:
+                    return
             print("-------- EXCEPTION in retrieve_filings")
         # Uncomment below to run most recent filing only
         # url = DOMAIN + self.links[0].get('href', None)
@@ -160,7 +164,13 @@ class HoldingsScraper:
         print("158")
         soup = BeautifulSoup(self.browser.page_source, "html.parser")
         print("160")
-        time.sleep(1)
+
+        filing_date_loc = soup.find("div", text="Filing Date")
+        filing_date = filing_date_loc.findNext('div').text
+
+        if(filing_date.startswith("2013")):
+            return -1
+        # time.sleep(1)
 
         # Find report information for text file headers
         # filing_date_loc = soup.find("div", text="Filing Date")
@@ -202,6 +212,8 @@ class HoldingsScraper:
             print('12')
             coverPage = self.primaryDoc(xml_file2)
             print('13')
+
+            return 0
             # col_headers2 = coverPage[0]
             # coverPageData = coverPage[1]
             # print('14')
@@ -209,8 +221,8 @@ class HoldingsScraper:
 
         except:
             print('-------- EXCEPTION in parse_filing')
-            pass
-            soup.find('td', text="Complete submission text file")
+            return 0
+            # soup.find('td', text="Complete submission text file")
             # ascii_link = ascii.findNext('a', text=re.compile("\.txt$"))
             # txt_file = DOMAIN + ascii_link.get('href', None)
             # sys.stdout.write('Getting holdings from (ascii): %s\n' % txt_file)

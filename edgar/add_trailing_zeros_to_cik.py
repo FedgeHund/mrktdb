@@ -3,7 +3,7 @@ import csv
 old_file = open("../static/admin/csv_files/cik_cusip_mapping.csv", 'r')
 reader = csv.reader(old_file)
 
-print("Chaliye suru karte hn!")
+print("START : Adding trailing zeros to CIKs")
 new_rows = []
 for row in reader:
     row[0] = str(row[0])
@@ -14,4 +14,4 @@ with open("../static/admin/csv_files/final_cik_cusip_mapping.csv", 'a+', newline
     writer = csv.writer(write_obj)
     writer.writerows(new_rows)
 
-print("Ho gya bhai! Check Krle")
+print("FINISHED Successfully")

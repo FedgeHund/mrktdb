@@ -30,6 +30,7 @@ function Filer(props) {
 
     useEffect(() => {
         getFilerData();
+        fetchUrl();
     }, [cik]);
 
 
@@ -47,20 +48,17 @@ function Filer(props) {
             .then(data => setAum(data));
     }
 
-    useEffect(() => {
-        fetchUrl();
-    }, [cik]);
-
     for (let i = 0; i < aum.length; i++) {
-        if (aum[i]["cik"] == cik) {
+        if (aum[i]["cik"] === cik) {
             newFilerArray.push(aum[i]);
         }
     }
 
-    if (typeof newFilerArray !== 'undefined' && newFilerArray.length > 0) {
-        var currentAUM = newFilerArray[0]["marketValue"];
-    }
+    var currentAUM;
 
+    if (typeof newFilerArray !== 'undefined' && newFilerArray.length > 0) {
+        currentAUM = newFilerArray[0]["marketValue"];
+    }
 
     return (
         <Fragment>
@@ -78,7 +76,7 @@ function Filer(props) {
                                 <div className="filer_address p-0">{filerData ? filerData.address : null}</div>
                             </div>
                             <div className="row filer_desc mt-5 d-inline-block">
-                                <span className="filer_description">{filerData ? filerData.name : null}</span> is a Hedge Fund located out of <span className="filer_description">{filerData ? filerData.address : null}</span>. Their latest 13F filings show that they have at least {currentAUM} AUM (Assets Under Management).
+                                <span className="filer_description">{filerData ? filerData.name : null}</span> is a Hedge Fund located out of <span className="filer_description">{filerData ? filerData.address : null}</span>. Their latest 13F filings show that they have at least ${currentAUM} AUM (Assets Under Management).
                             </div>
                         </div>
                         {/* <div className="filer_cik col-2">CIK: {filerData ? filerData.cik : null}</div> */}

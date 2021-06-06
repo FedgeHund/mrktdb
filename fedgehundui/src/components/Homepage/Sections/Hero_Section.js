@@ -3,8 +3,9 @@ import axios from 'axios';
 import { withRouter } from 'react-router';
 import { BrowserRouter as Router, Route, Switch, Link, useHistory } from "react-router-dom";
 
-var securityNames = [{ securityName: "APPLE INC", ticker: "AAPL" }, { securityName: "AMAZON COM INC", ticker: "AMZN" }, { securityName: "MICROSOFT CORP.", ticker: "MSFT" }, { securityName: "FACEBOOK INC", ticker: "FB" }, { securityName: "TESLA INC", ticker: "TSLA" }];
-var companyNames = [{ name: "BERKSHIRE HATHAWAY INC", cik: "0001067983" }, { name: "TIGER GLOBAL MANAGEMENT LLC", cik: "0001167483" }, { name: "BRIDGEWATER ASSOCIATES, LP", cik: "0001350694" }, { name: "MAN GROUP PLC", cik: "0001637460" }, { name: "RENAISSANCE TECHNOLOGIES LLC", cik: "0001037389" }];
+var securityNames = [{ securityName: "APPLE INC", ticker: "AAPL" }, { securityName: "TESLA INC", ticker: "TSLA" }, { securityName: "AMAZON COM INC", ticker: "AMZN" }, { securityName: "MICROSOFT CORP.", ticker: "MSFT" }, { securityName: "FACEBOOK INC", ticker: "FB" }];
+// var companyNames = [{ name: "ANGELO GORDON & CO., L.P.", cik: "0000860662" }, { name: "CANYON CAPITAL ADVISORS LLC", cik: "0001074034" }, { name: "DAVIDSON KEMPNER CAPITAL MANAGEMENT LP", cik: "0001595082" }, { name: "GRAHAM CAPITAL MANAGEMENT, L.P.", cik: "0001315421" }, { name: "TIGER GLOBAL MANAGEMENT LLC", cik: "0001167483" }, { name: "BRIDGEWATER ASSOCIATES, LP", cik: "0001350694" }, { name: "BENEFIT STREET PARTNERS LLC", cik: "0001543160" }, { name: "CAXTON ASSOCIATES L.P.", cik: "0000872573" }, { name: "MKP CAPITAL MANAGEMENT, LLC", cik: "0001534949" }];
+var companyNames = [{ name: "ANGELO GORDON & CO., L.P.", cik: "0000860662" }, { name: "BRIDGEWATER ASSOCIATES, LP", cik: "0001350694" }, { name: "CANYON CAPITAL ADVISORS LLC", cik: "0001074034" }, { name: "DAVIDSON KEMPNER CAPITAL MANAGEMENT LP", cik: "0001595082" }, { name: "TIGER GLOBAL MANAGEMENT LLC", cik: "0001167483" }];
 var all_items = [];
 //var default_items = ["BERKSHIRE HATHAWAY INC", "BLACKROCK INC.", "AMAZON COM INC", "WAL MART STORES INC", "COCA COLA CO", "APPLE INC", "BRIDGEWATER ASSOCIATES, LP"];
 

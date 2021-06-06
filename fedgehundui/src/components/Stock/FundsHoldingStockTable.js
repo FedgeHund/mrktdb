@@ -14,7 +14,7 @@ function FundsHoldingStockTable(props) {
 
     const [data, setData] = useState([]);
 
-    var URL = "http://127.0.0.1:8000/api/fundsholdingstock/?ticker=" + oldTicker;
+    var URL = "http://www.mrktdb.com/api/fundsholdingstock/?ticker=" + oldTicker;
 
     async function fetchUrl() {
         fetch(URL, {

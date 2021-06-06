@@ -16,12 +16,24 @@
 
 @media (max-width: 992px) {
 	.security_container.security_container {
-		height: 3700px;
+		height: 1350px;
+	}
+
+	.security.security {
+		top: 63%;
+	}
+
+	.stock_charts_container.stock_charts_container {
+		height: 2600px;
+	}
+
+	.stock_charts_container_box.stock_charts_container_box {
+		top: 48%;
 	}
 }
 
 .security_container {
-	height: 2450px;
+	height: 1000px;
 	position: relative;
 	object-fit: cover;
 	overflow: hidden;
@@ -29,10 +41,10 @@
 
 .security {
 	position: absolute;
-	top: 50%;
+	top: 51%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 85%;
+	width: 86%;
 	max-width: 1500px;
 	font-size: 16px;
 }
@@ -71,9 +83,72 @@
 	margin-top: 60px;
 } */
 
+/*
+Charts
+*/
+
+.stock_charts_container {
+	height: 1250px;
+	position: relative;
+	object-fit: cover;
+	overflow: hidden;
+}
+
+.stock_charts_container_box {
+	position: absolute;
+	top: 47%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 86%;
+	max-width: 1500px;
+	font-size: 16px;
+}
+
+.stock_chart_wrapper {
+	background: #fff;
+	padding: 30px;
+	border-radius: 5px;
+}
+
+.stock_chart_heading {
+	background: #fcf4eb;
+	padding: 15px;
+	margin-top: -8px;
+	margin-bottom: 30px;
+	border-radius: 4px;
+}
+
+.ticker_in_chart_head_box {
+	background: #303030 !important;
+	border-radius: 4px;
+	padding: 10px;
+	font-size: 1.1em;
+}
+
+.ticker_in_chart_head {
+	font-family: var(--Lato);
+	color: rgb(219, 219, 219);
+}
+
+.chart_heading {
+	font-family: var(--Lato);
+	font-size: 1.4em;
+	color: rgb(43, 42, 42);
+}
+
+.number_of_filer_holding_chart_heading {
+	font-size: 1.35em;
+}
+
 @media (max-width: 1160px) {
 	.fundsHoldingStockTable_container.fundsHoldingStockTable_container {
 		height: 1350px;
+	}
+}
+
+@media (max-width: 1050px) {
+	.fundsHoldingStockTable_box.fundsHoldingStockTable_box {
+		top: 47%;
 	}
 }
 
@@ -89,7 +164,7 @@
 	top: 43%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 85%;
+	width: 84%;
 	max-width: 1500px;
 	font-size: 16px;
 }

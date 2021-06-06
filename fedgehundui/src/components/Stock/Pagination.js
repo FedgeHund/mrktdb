@@ -46,20 +46,44 @@ function Pagination({ rowsPerPage, totalRows, paginate, currentPage }) {
                         <span class="sr-only">Previous</span>
                     </a>
                 </li>
-                {pageNumbers.map(number => (
-                    <li key={number} className="page-item">
-                        <a onClick={() => paginate(number)} href="javascript:void(0);" className="page-link table_nav_btn">
-                            {number}
-                        </a>
-                    </li>
-                ))}
+                {pageNumbers.map(function (number) {
+                    if (number === pageNumbers[0]) {
+                        return (
+                            <li key={number} className="page-item">
+                                < a onClick={() => paginate(number)} href="javascript:void(0);" className="page-link table_nav_btn">
+                                    {currentPage}
+                                </a>
+                            </li>
+                        )
+                    }
+                    else if (number === pageNumbers[pageNumbers.length - 1]) {
+                        return (
+                            <li key={number} className="page-item">
+                                < a onClick={() => paginate(number)} href="javascript:void(0);" className="page-link table_nav_btn">
+                                    {number}
+                                </a>
+                            </li>
+                        )
+                    }
+                    else if (number === pageNumbers[1]) {
+                        return (
+                            <li key={number} className="page-item">
+                                < a onClick={() => paginate(number)} href="javascript:void(0);" className="page-link table_nav_btn">
+                                    ...
+                                </a>
+                            </li>
+                        )
+                    }
+                    else
+                        return
+                })}
                 <li class="page-item">
                     <a class="page-link table_next_btn" href="javascript:void(0);" aria-label="Next" onClick={() => paginate(currentPage + 1)} >
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                     </a>
                 </li>
-            </ul>
+            </ul >
         </nav >
     )
 }

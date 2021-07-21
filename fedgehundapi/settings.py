@@ -18,7 +18,7 @@ env = environ.Env()
 # reading .env file
 environ.Env.read_env()
 
-DJANGO_ENV = env("ENV", default="development")
+DJANGO_ENV = env("ENV", default="production")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if DJANGO_ENV == "production":
@@ -60,7 +60,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env(
     'SECRET_KEY', default='f9y!yh1nb6lm5(o*)^(8+-dueu9_p=p$c$d-u8f(p=w+mtd%rx')
 
-ALLOWED_HOSTS = ['MrktDB.eba-brufwk2z.us-west-2.elasticbeanstalk.com','127.0.0.1','www.mrktdb.com', 'localhost']
+ALLOWED_HOSTS = ['ec2-18-117-150-33.us-east-2.compute.amazonaws.com','127.0.0.1','www.mrktdb.com', 'localhost']
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -75,6 +75,7 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = [
     'http://www.mrktdb.com',
     'http://mrktdb.eba-brufwk2z.us-west-2.elasticbeanstalk.com',
+    'http://ec2-18-117-150-33.us-east-2.compute.amazonaws.com',
     'http://localhost:8000',
     'http://127.0.0.1:8000',
     'http://localhost:3000',

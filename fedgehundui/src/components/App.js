@@ -11,6 +11,7 @@ import Stock from "./Stock/Stock";
 import Filer from "./Filer/Filer";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import "../../templates/fedgehundui/global.css";
+import ModalOnPageLoad from "./Helpers/modal";
 // file deepcode ignore no-mixed-spaces-and-tabskey: "value",
 // file deepcode ignore no-mixed-spaces-and-tabs: "Tabs and space"
 
@@ -20,6 +21,7 @@ class App extends Component {
 
 		return (
 			<Fragment>
+				<ModalOnPageLoad />
 				<Router>
 					<Switch>
 						<Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} />

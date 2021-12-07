@@ -4,10 +4,12 @@ from rest_framework import generics, filters
 from rest_framework.pagination import PageNumberPagination
 from django.db.models import Count
 
+
 class StandardResultsSetPagination(PageNumberPagination):
     page_size = 100
     page_size_query_param = 'page_size'
     max_page_size = 200
+
 
 class PositionList(generics.ListAPIView):
     search_fields = ['^cik']
@@ -16,9 +18,11 @@ class PositionList(generics.ListAPIView):
     pagination_class = StandardResultsSetPagination
     serializer_class = PositionSerializer
 
+
 class PositionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Position.objects.all()
     serializer_class = PositionSerializer
+
 
 class LatestQuarterBiggestHoldings(generics.ListAPIView):
     serializer_class = PositionSerializer
@@ -28,11 +32,14 @@ class LatestQuarterBiggestHoldings(generics.ListAPIView):
             queryset = Position.objects.all()
             cik = self.request.GET.get('cik', None)
             if cik is not None:
-                queryset = queryset.filter(cik=cik).order_by('-quarter', '-marketValue')
+                queryset = queryset.filter(
+                    cik=cik).order_by(
+                    '-quarter', '-marketValue')
                 latest_quarter = queryset[0].quarter
                 queryset = queryset.filter(quarter=latest_quarter)[:5]
-                
+
             return queryset
+
 
 class LatestQuarterTopBuys(generics.ListAPIView):
     serializer_class = PositionSerializer
@@ -42,12 +49,15 @@ class LatestQuarterTopBuys(generics.ListAPIView):
             queryset = Position.objects.all()
             cik = self.request.GET.get('cik', None)
             if cik is not None:
-                queryset = queryset.filter(cik=cik).order_by('-quarter', '-changeInShares')
+                queryset = queryset.filter(
+                    cik=cik).order_by(
+                    '-quarter', '-changeInShares')
                 latest_quarter = queryset[0].quarter
                 queryset = queryset.filter(quarter=latest_quarter)[:5]
                 print(queryset.query)
-                
+
             return queryset
+
 
 class LatestQuarterTopSells(generics.ListAPIView):
     serializer_class = PositionSerializer
@@ -57,12 +67,15 @@ class LatestQuarterTopSells(generics.ListAPIView):
             queryset = Position.objects.all()
             cik = self.request.GET.get('cik', None)
             if cik is not None:
-                queryset = queryset.filter(cik=cik).order_by('-quarter', 'changeInShares')
+                queryset = queryset.filter(
+                    cik=cik).order_by(
+                    '-quarter', 'changeInShares')
                 latest_quarter = queryset[0].quarter
                 queryset = queryset.filter(quarter=latest_quarter)[:5]
                 print(queryset.query)
-                
+
             return queryset
+
 
 class AllOwnedSecurities(generics.ListAPIView):
     serializer_class = PositionSerializer
@@ -74,9 +87,12 @@ class AllOwnedSecurities(generics.ListAPIView):
 
             if cik is not None:
                 queryset = queryset.filter(cik=cik)
-                queryset = queryset.annotate(unique_cusips=Count('cusip', distinct=True))
-                
+                queryset = queryset.annotate(
+                    unique_cusips=Count(
+                        'cusip', distinct=True))
+
             return queryset
+
 
 class OwnershipHistory(generics.ListAPIView):
     serializer_class = PositionSerializer
@@ -89,5 +105,5 @@ class OwnershipHistory(generics.ListAPIView):
 
             if cik is not None:
                 queryset = queryset.filter(cik=cik, cusip=cusip)
-                
+
             return queryset

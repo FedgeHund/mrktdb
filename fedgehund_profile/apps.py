@@ -5,4 +5,4 @@ class FedgehundProfileConfig(AppConfig):
     name = 'fedgehund_profile'
 
     def ready(self):
-    	from fedgehund_profile import signals
+        from fedgehund_profile import signals

@@ -1,10 +1,17 @@
 from django.db import models
 from edgar.models import QuarterlyHolding, Security, Filer
 
+
 class Position(models.Model):
     securityId = models.ForeignKey(Security, on_delete=models.CASCADE)
-    quarterId = models.ForeignKey(QuarterlyHolding, on_delete=models.CASCADE, related_name='quarter_Id')
-    filerId = models.ForeignKey(Filer, on_delete=models.CASCADE, related_name='filer_id')
+    quarterId = models.ForeignKey(
+        QuarterlyHolding,
+        on_delete=models.CASCADE,
+        related_name='quarter_Id')
+    filerId = models.ForeignKey(
+        Filer,
+        on_delete=models.CASCADE,
+        related_name='filer_id')
     quarter = models.IntegerField(blank=True)
     securityName = models.TextField(blank=True)
     filerName = models.TextField(blank=True)
@@ -13,7 +20,10 @@ class Position(models.Model):
     ticker = models.TextField(blank=True)
     type1 = models.TextField(blank=True)
     type2 = models.TextField(blank=True)
-    quarterFirstOwned = models.ForeignKey(QuarterlyHolding, on_delete=models.CASCADE, related_name='quarterFirstOwned_Id')
+    quarterFirstOwned = models.ForeignKey(
+        QuarterlyHolding,
+        on_delete=models.CASCADE,
+        related_name='quarterFirstOwned_Id')
     investmentDiscretion = models.TextField(blank=True)
     quantity = models.FloatField(blank=True)
     marketValue = models.FloatField(blank=True)

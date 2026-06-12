@@ -20,9 +20,8 @@ logger = logging.getLogger("console_logger")
 @transaction.atomic
 def bulk_get_or_create(prices_dict_to_create):
     for price_dict in prices_dict_to_create:
-        Price.objects.get_or_create(securityId=price_dict.get('securityId'), value=price_dict.get('value'),
-                                    quarter=price_dict.get('quarter'), cusip=price_dict.get('cusip'),
-                                    name=price_dict.get('name'))
+        Price.objects.get_or_create(securityId=price_dict.get('securityId'),
+                                    quarter=price_dict.get('quarter'), defaults=price_dict)
 
 
 @delayed
